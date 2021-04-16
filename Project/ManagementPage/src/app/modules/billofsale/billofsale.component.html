@@ -1,0 +1,130 @@
+
+<div class="container" >
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword" class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+      <nav class="navbar navbar-expand-md navbar-light">
+
+
+        <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+          <ul class="navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect" (change)="SearchByOption($event)" >
+                  <option class="item" selected disabled  value="">Tìm kiếm</option>
+                  <option class="item" value = "Mới nhất" >Mới nhất</option>
+                  <option class="item" value = "Cũ nhất" >Cũ nhất</option>
+                </select>
+            </li>
+            <!-- <li >
+              <button type="button" class="btn them_khach_hang_button" (click)="open(content)" data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                + Thêm hóa đơn bán hàng
+               </button>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+   <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            <h5>THÔNG TIN HÓA ĐƠN BÁN HÀNG</h5>
+          </div>
+
+          <div class="card-header button" id="divbutton">
+            <button class="controlcheckbox">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+
+       <div class="card ds">
+         <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Mã hóa đơn</th>
+                <th class="align-middle">Nhân viên lập</th>
+                <th class="align-middle">Thông tin sản phẩm</th>
+                <th class="align-middle">Khách hàng</th>
+                <th class="align-middle">Họ tên</th>
+                <th class="align-middle">Số điện thoại</th>
+                <th class="align-middle">Địa chỉ</th>
+                <th class="align-middle">Hình thức vận chuyển</th>
+                <th class="align-middle">Phương thức thanh toán</th>
+                <th class="align-middle">Tổng tiền</th>
+                <th class="align-middle">Ngày lập</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let eachHoaDon of dshoadonban; let i = index;" >
+
+                <td class="content">{{i + 1}}</td>
+                <td class="content">{{eachHoaDon._id}}</td>
+                <td class="content">{{eachHoaDon.NhanVien_id}}</td>
+                <td class="d-flex justify-content-center">
+                  <div class="form-group d-flex align-items-center">
+
+                    <div class="card dssanpham">
+                      <div class="card-body">
+                       <table class="table table-bordered table-hover">
+                         <thead>
+                           <tr class="content">
+                             <th class="align-middle">STT</th>
+                             <th class="align-middle">Sản phẩm</th>
+                             <th class="align-middle">Số lượng</th>
+                             <th class="align-middle">Giá BÁN</th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                           <tr  *ngFor="let eachSanPham of thongtinsanpham[i]; let j = index" >
+                             <td class="content">{{j + 1}}</td>
+                             <td class="content">{{eachSanPham.Ten_san_pham}}</td>
+                             <td class="content">{{eachHoaDon.San_Pham[j].So_luong}}</td>
+                             <td class="content">{{eachHoaDon.San_Pham[j].Gia_ban}}</td>
+                           </tr>
+                         </tbody>
+                       </table>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+                <td class="content">{{eachHoaDon.KhachHang_id}}</td>
+                <td class="content">{{eachHoaDon.Ho_ten}}</td>
+                <td class="content">{{eachHoaDon.So_dien_thoai}}</td>
+                <td >{{arrdiachi[i].Xa_Phuong}}, {{arrdiachi[i].Huyen_Quan}}, {{arrdiachi[i].Tinh_ThanhPho}}</td>
+                <td class="content">{{thongtinvanchuyen[i]?.Ten_hinh_thuc}}</td>
+                <td class="content">{{thongtinthanhtoan[i]?.Ten_phuong_thuc}}</td>
+                <td class="content">{{eachHoaDon.Tong_tien}}</td>
+                <td class="content">{{eachHoaDon.Ngay_lap | date:'shortDate'}}</td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<p class="tong_hoa_don_ban">Tổng số hóa đơn bán hàng: {{dshoadonban.length}}</p>

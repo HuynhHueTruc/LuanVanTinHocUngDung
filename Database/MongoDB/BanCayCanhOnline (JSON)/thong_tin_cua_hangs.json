@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "5f7d897f7cc2cc2a04b15744"
+  },
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "6054abbce6f2c116ac5aaa7f"
+      },
+      "Xa_Phuong": "Xã Trường Khánh",
+      "Huyen_Quan": "Huyện Long Phú",
+      "Tinh_ThanhPho": "Tỉnh Sóc Trăng"
+    }
+  ],
+  "So_dien_thoai": "0964452406",
+  "Banner": [
+    {
+      "_id": {
+        "$oid": "60045dc2a4bba087ab5d268c"
+      },
+      "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Mon%20Mar%2022%202021%2016%3A14%3A23%20GMT%2B0700%20(Indochina%20Time)-2.jpeg?alt=media&token=b773b5a5-bb62-4240-9cc1-4c76ecc5050a",
+      "Mo_ta": " Chào mừng bạn đã đến với Green Life!"
+    },
+    {
+      "_id": {
+        "$oid": "60045dd4a4bba087ab5d268d"
+      },
+      "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Mon%20Mar%2022%202021%2016%3A14%3A23%20GMT%2B0700%20(Indochina%20Time)-3.jpg?alt=media&token=96a36c54-2a92-4c69-bbad-bdb0e402032d",
+      "Mo_ta": "Green Life sẽ giúp cho bạn có một không gian sống như bạn mơ ước."
+    },
+    {
+      "_id": {
+        "$oid": "60045ddca4bba087ab5d268e"
+      },
+      "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Mon%20Mar%2022%202021%2016%3A14%3A23%20GMT%2B0700%20(Indochina%20Time)-4.jpg?alt=media&token=1c316b41-01f0-46c7-aeee-ce77ac183e45",
+      "Mo_ta": "Green Life sẽ mang đến cho bạn một trãi nghiệm hoàn toàn thú vị."
+    }
+  ],
+  "Ten_cua_hang": "Green Life Shop",
+  "Anh_dai_dien": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Mon%20Mar%2022%202021%2015%3A35%3A51%20GMT%2B0700%20(Indochina%20Time)-1.png?alt=media&token=68ff1b41-a071-495c-9022-9004c856726c",
+  "Gioi_thieu": "<p style=\"text-align:center\"><strong>Green Life !!!</strong></p>\n"
+}]

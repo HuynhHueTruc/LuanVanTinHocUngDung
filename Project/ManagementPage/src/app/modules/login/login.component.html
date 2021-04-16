@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Official Signup Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+</head>
+<body>
+<h1 class="w3ls">GreenLife xin chào!</h1>
+<div class="content-w3ls">
+	<div class="content-agile1">
+		<h2 class="agileits1">Green Life </h2>
+		<p class="agileits2">Hãy tận hưởng trọn vẹn cuộc sống của bạn!</p>
+	</div>
+	<div class="content-agile2">
+    <p class="wthree w3l">Đăng nhập</p>
+		<form #loginForm="ngForm" id="form" method="post" >
+
+      <div class="login">
+        <div class="group">
+          <input type="text" [(ngModel)]="tendangnhap" #firstname="ngModel" id="firstname" name="firstname" placeholder="Nhập họ tên của bạn!" required="">
+        </div>
+        <div class="group">
+          <input type="password" [(ngModel)]="matkhau" #password="ngModel" class="lock" name="password" placeholder="Nhập mật khẩu của bạn!"  id="password1" required="">
+        </div>
+        <div class="group">
+          <input type="checkbox" id="hienthimatkhau" required  [checked]="checkboxstate" (change)="An_HienMatKhau()">
+          <label class="contentcheckbox">Hiển thị mật khẩu</label>
+       </div>
+    </div>
+
+			<input type="submit" class="register" value="Đăng nhập" (click)="LoginNhanVien()">
+		</form>
+  <div class="group">
+    <a id="forgetpass" routerLinkActive="list-item-active" routerLink="/forgotpassword" ><u>Quên mật khẩu?</u></a>
+  </div>
+	</div>
+	<div class="clear"></div>
+</div>
+<p class="copyright w3l"></p>
+<app-error  [message]="errorMessage" ></app-error>
+</body>
+</html>

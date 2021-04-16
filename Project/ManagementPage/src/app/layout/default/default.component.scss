@@ -1,0 +1,25 @@
+// div.scrollable{
+//   padding: 0px !important;
+// }
+// .sidebar{
+//   padding: 0px;
+// }
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+mat-drawer{
+  width: 20%;
+}
+
+mat-drawer-container{
+  height: 100%;
+}
+
+mat-drawer-content{
+}
+.mat-icon-button{
+  background-color: transparent;
+}
+

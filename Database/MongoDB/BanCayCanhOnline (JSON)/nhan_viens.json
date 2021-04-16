@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "5f7d8af97cc2cc2a04b1574e"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "SanPham_id": {
+        "$oid": "60687971d956b41cccafee51"
+      },
+      "So_luong": 100,
+      "Gia_nhap": 15000
+    },
+    {
+      "SanPham_id": {
+        "$oid": "60687de956bec7202863bfdc"
+      },
+      "So_luong": 300,
+      "Gia_nhap": 100000
+    },
+    {
+      "SanPham_id": {
+        "$oid": "60687de956bec7202863bfdc"
+      },
+      "So_luong": 300,
+      "Gia_nhap": 100000
+    },
+    {
+      "SanPham_id": {
+        "$oid": "60687de956bec7202863bfdc"
+      },
+      "So_luong": 300,
+      "Gia_nhap": 100000
+    }
+  ],
+  "Chu_thich": "Không",
+  "Tong_tien": 4500000,
+  "Ngay_nhap": {
+    "$date": "2020-09-30T17:00:00Z"
+  }
+}]

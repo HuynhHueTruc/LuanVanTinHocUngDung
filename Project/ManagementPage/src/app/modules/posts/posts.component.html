@@ -1,0 +1,224 @@
+<div class="container">
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword"
+          class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+        <nav class="navbar navbar-expand-md navbar-light">
+
+
+          <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+            <ul class="navbar-nav nav-flex-icons ml-auto">
+              <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect"
+                  (change)="SearchByOption($event)">
+                  <option class="item" selected disabled value="">Tìm kiếm</option>
+                  <option class="item" value="Mới nhất">Mới nhất</option>
+                  <option class="item" value="Cũ nhất">Cũ nhất</option>
+                </select>
+              </li>
+
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <!-- Dialog tạo  -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 ">
+        <div class="row d-flex justify-content-center ">
+          <h4>THÊM TIN TỨC</h4>
+        </div>
+        <div class="row d-flex justify-content-center title">
+          <form #shipFormCreate="ngForm" id="tintucform">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <label class="col-sm-3 pr-1">Tiêu đề:</label>
+                  <div class="col-sm-8">
+                    <input placeholder="Chưa có tiêu đề!" [class.is-invalid]="tieu_de.invalid && tieu_de.touched"
+                      #tieu_de="ngModel" class="form-control " id="tieu_de" [(ngModel)]="tintuc.Tieu_de" name="tieu_de"
+                      required>
+                    <div class="mess-err" *ngIf="tieu_de.errors && (tieu_de.invalid || tieu_de.touched)">
+                      <small class="err text-danger" *ngIf="tieu_de.errors.required"> Tiêu đề không được trống! </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <label class="col-sm-3 ml-0 pl-0">Ảnh mô tả:</label>
+                  <div class="col-sm-8 ">
+                    <input type="file" id="photo" (change)="chooseFile('create')">
+                    <div class="mess-err ">
+                      <small class="err text-danger" id="err_upload">Bạn chưa chọn hình ảnh! </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-sm-4">Nội dung:</label>
+            </div>
+          </form>
+        </div>
+        <div class="row ckeditor">
+          <ckeditor [(ngModel)]="Noi_dung" [config]="{
+            height: '200px',
+            extraPlugins:'filebrowser',
+            filebrowserBrowseUrl:'/list',
+            filebrowserUploadMethod: 'form',
+            filebrowserUploadUrl:'/admin/dashboard/upload'
+          }">
+          </ckeditor>
+        </div>
+        <div class="mess-err d-flex justify-content-center">
+          <small class="err text-danger" id="err_content">Bạn chưa viết nội dung! </small>
+        </div>
+        <div class="row m-2">
+          <div class="col-sm-6 d-flex justify-content-end ">
+            <button type="button" class="btn btn-secondary" (click)="uploadImage('create')">Lưu</button>
+          </div>
+          <div class="col-sm-6 d-flex justify-content-start ">
+            <button type="button" class="btn btn-secondary" (click)="open_cancel(content_cancel)"
+              data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false">Hủy</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 ">
+
+        <div class="row d-flex justify-content-center ">
+          <h4>DANH SÁCH TIN TỨC</h4>
+        </div>
+
+        <div class="card ds">
+          <div class="card-body">
+            <div class="row contentpost">
+              <div class="col-sm-12" *ngFor="let eachTinTuc of dstintuc; let i = index;">
+                <button id="buttoncard">
+                  <nb-card accent="danger" (click)="open_update(content_update, eachTinTuc)">
+                    <nb-card-header>
+
+                      <label>{{eachTinTuc.Tieu_de}}</label>
+                    </nb-card-header>
+                    <nb-card-body>
+                      <div class="row">
+                        <div class="col-sm-3">
+
+                          <img id="img" src={{eachTinTuc.Anh_dai_dien}} alt="">
+                        </div>
+                        <div class="col-sm-9">
+                          <p [innerHTML]="eachTinTuc.Noi_dung"></p>
+                        </div>
+                      </div>
+                    </nb-card-body>
+                  </nb-card>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="tong_tin_tuc">Tổng số tin tức: {{dstintuc.length}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog cập nhật -->
+<div class="container" id="modals_update">
+  <ng-template #content_update let-modal>
+    <div class="modal-header container-fluid pd-0 ">
+      <div class="row">
+        <div class="col-sm-5  d-flex justify-content-end">
+          <img id="image2" src={{tintuc.Anh_dai_dien}}>
+        </div>
+        <div class="col-sm-7">
+          <div class="row">
+            <input class="align-self-center ml-2" id="changename" type="text" [(ngModel)]="tintuc.Tieu_de">
+            <div class="modal-header d-flex justify-content-center" id="updateimg">
+              <div class="row choosefile">
+                <input type="file" id="photoupdate" (change)="chooseFile('update')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row  title">
+        <label class="col-sm-4">Nội dung:</label>
+      </div>
+      <div class="row ckeditor mr-2">
+        <ckeditor [(ngModel)]="Noi_dung" [config]="{
+          height: '200px',
+          extraPlugins:'filebrowser',
+          filebrowserBrowseUrl:'/list',
+          filebrowserUploadMethod: 'form',
+          filebrowserUploadUrl:'/admin/dashboard/upload'
+        }">
+        </ckeditor>
+      </div>
+      <div class="mess-err d-flex justify-content-center">
+        <small class="err text-danger" id="err_content">Bạn chưa viết nội dung! </small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="uploadImage('update')">Cập nhật</button>
+        <button type="button" class="btn btn-secondary" (click)="open_delete(content_delete)"
+          data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false">Xóa</button>
+        <button type="button" class="btn btn-secondary" (click)="open_cancel(content_cancel)">Hủy</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+
+
+<!-- Dialog xác nhận hủy  -->
+<div class="container" id="modals_delete">
+  <ng-template #content_cancel let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn hủy chỉnh sửa?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="Huy()"
+        ng-disabled="!form.$dirty || (form.$dirty && form.$invalid)">Xác nhận</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Dialog xác nhận xóa tài khoản -->
+<div class="container" id="modals_delete">
+  <ng-template #content_delete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn xóa tin tức này không?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="XacNhanXoa()">Xóa</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>

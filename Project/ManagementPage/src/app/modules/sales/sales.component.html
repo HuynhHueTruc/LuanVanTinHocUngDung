@@ -1,0 +1,355 @@
+
+<div class="container" >
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword" class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+      <nav class="navbar navbar-expand-md navbar-light">
+
+
+        <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+          <ul class="navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect" (change)="SearchByOption($event)" >
+                  <option class="item" selected disabled  value="">Tìm kiếm</option>
+                  <option class="item" value = "Mới nhất" >Mới nhất</option>
+                  <option class="item" value = "Cũ nhất" >Cũ nhất</option>
+                </select>
+            </li>
+            <li >
+              <button type="button" class="btn them_khach_hang_button" (click)="open(content)" data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                + Thêm khuyến mãi
+               </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+   <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            <h5>THÔNG TIN KHUYẾN MÃI</h5>
+          </div>
+
+          <div class="card-header button" id="divbutton">
+            <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+
+       <div class="card ds">
+         <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault" (change)="KTCheckedAll()">
+                    <!-- <p>{{checkAll}}</p> -->
+                  </div>
+                </th>
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Mã số</th>
+                <th class="align-middle">Tên khuyễn mãi</th>
+                <th class="align-middle">Giá trị</th>
+                <th class="align-middle">Danh mục khuyến mãi</th>
+                <th class="align-middle">Ngày bắt đầu</th>
+                <th class="align-middle">Ngày kết thúc</th>
+                <th class="align-middle">Thời gian tạo</th>
+                <th class="align-middle">Thời gian chỉnh sửa</th>
+                <th class="align-middle">Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let eachKhuyenMai of dskhuyenmai; let i = index;" >
+                <td class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck">
+                  </div>
+                </td>
+                <td class="content">{{i + 1}}</td>
+                <td class="content">{{eachKhuyenMai._id}}</td>
+                <td>{{eachKhuyenMai.Ten_khuyen_mai}}</td>
+                <td>{{eachKhuyenMai.Gia_tri}}</td>
+                <td class="d-flex justify-content-center">
+                  <div class="form-group d-flex align-items-center">
+                    <!-- (change)="ChangeDMN()" -->
+                    <select class="form-control " id="DMNSelect" >
+                      <option *ngFor="let eachDanhMucKM of thongtindanhmucnho[i]; let i = index;" value={{eachDanhMucKM.DMN_id}}>{{eachDanhMucKM.Ten_danh_muc_nho}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td class="content">{{eachKhuyenMai.Ngay_bat_dau | date:'shortDate'}}</td>
+                <td class="content">{{eachKhuyenMai.Ngay_ket_thuc | date:'shortDate'}}</td>
+                <td class="content">{{eachKhuyenMai.Thoi_gian_tao | date:'shortDate'}}</td>
+                <td class="content">{{eachKhuyenMai.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
+
+                <td class="content d-flex justify-content-center">
+                  <span class="action">
+                    <button class="buttonicon" (click)="open_update(content_update, eachKhuyenMai)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                      <i class="far fa-edit m-1"></i>
+                    </button>
+                    <button class="buttonicon" (click)="open_delete(content_delete, eachKhuyenMai._id)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
+                      <i class="far fa-trash-alt m-1"></i>
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<p class="tong_khuyen_mai">Tổng số khuyến mãi: {{dskhuyenmai.length}}</p>
+
+
+<!-- Dialog tạo -->
+<div class="container" id="modals" >
+  <ng-template #content let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TẠO KHUYẾN MÃI</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm" >
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên khuyến mãi:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_khuyen_mai.invalid && Ten_khuyen_mai.touched" #Ten_khuyen_mai="ngModel"  class="form-control " id="Ten_khuyen_mai"  [(ngModel)]="khuyenmai.Ten_khuyen_mai" name="Ten_khuyen_mai" placeholder=" Enter name sales" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_khuyen_mai.errors && (Ten_khuyen_mai.invalid || Ten_khuyen_mai.touched)">
+            <small class="err text-danger"*ngIf="Ten_khuyen_mai.errors.required"> Tên khuyến mãi không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá trị:</label>
+          <div class="col-sm-8">
+            <input type="number" [class.is-invalid]="Gia_tri.invalid && Gia_tri.touched" #Gia_tri="ngModel"  class="form-control " id="Gia_tri"  [(ngModel)]="khuyenmai.Gia_tri" name="Gia_tri" placeholder=" Enter name discount" required >
+          </div>
+          <div class="mess-err" *ngIf="Gia_tri.errors && (Gia_tri.invalid || Gia_tri.touched)">
+            <small class="err text-danger"*ngIf="Gia_tri.errors.required"> Giá không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            (onSelect)="onItemSelect($event, 0)"
+            (onSelectAll)="onSelectAll($event, 0)"
+            (onDeSelect)="onItemDeSelect($event, 0)"
+            (onDeSelectAll)="onDeSelectAll($event, 0)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="errTaoDanhMuc" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Ngày bắt đầu:</label>
+          <div class="col-sm-8">
+            <input type="date" [class.is-invalid]="Ngay_BD.invalid && Ngay_BD.touched" #Ngay_BD="ngModel"  class="form-control " id="Ngay_BD"  [(ngModel)]="khuyenmai.Ngay_bat_dau" name="Ngay_BD" placeholder=" Enter name start date" (change)="ChangeDate($event)" >
+          </div>
+          <div class="mess-err" >
+            <small id="errNgayBatDau" class="err text-danger"> Bạn chưa chọn ngày bắt đầu! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Ngày kết thúc:</label>
+          <div class="col-sm-8">
+            <input type="date" [class.is-invalid]="Ngay_KT.invalid && Ngay_KT.touched" #Ngay_KT="ngModel"  class="form-control " id="Ngay_KT"  [(ngModel)]="khuyenmai.Ngay_ket_thuc" name="Ngay_KT" placeholder=" Enter name end date" (change)="ChangeDate($event)" >
+          </div>
+          <div class="mess-err" >
+            <div class="mess-err">
+              <small id="errNgayKetThuc" class="err text-danger"> Ngày kết thúc không được trước ngày bắt đầu! </small>
+              <small id="errNgayKetThuc2" class="err text-danger">  Bạn chưa chọn ngày kết thúc! </small>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemKhuyenMai()">Lưu</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog cập nhật  -->
+<div class="container" id="modals_update" >
+  <ng-template #content_update let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT KHUYẾN MÃI</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm" >
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên khuyến mãi:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_khuyen_mai.invalid && Ten_khuyen_mai.touched" #Ten_khuyen_mai="ngModel"  class="form-control " id="Ten_khuyen_mai"  [(ngModel)]="khuyenmai.Ten_khuyen_mai" name="Ten_khuyen_mai" placeholder=" Enter name sales" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_khuyen_mai.errors && (Ten_khuyen_mai.invalid || Ten_khuyen_mai.touched)">
+            <small class="err text-danger"*ngIf="Ten_khuyen_mai.errors.required"> Tên khuyến mãi không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá trị:</label>
+          <div class="col-sm-8">
+            <input type="number" [class.is-invalid]="Gia_tri.invalid && Gia_tri.touched" #Gia_tri="ngModel"  class="form-control " id="Gia_tri"  [(ngModel)]="khuyenmai.Gia_tri" name="Gia_tri" placeholder=" Enter name discount" required >
+          </div>
+          <div class="mess-err" *ngIf="Gia_tri.errors && (Gia_tri.invalid || Gia_tri.touched)">
+            <small class="err text-danger"*ngIf="Gia_tri.errors.required"> Giá không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục khuyến mãi:</label>
+          <div class="col-sm-8">
+
+            <div class="form-group d-flex align-items-center" >
+              <div class="container">
+                <div class="row d-flex justify-content-end plus ">
+                  <button class="them_danh_muc" (click)="open_category_plus(content_info_category_plus)" data-controls-modal="modals_category" data-backdrop="static" data-keyboard="false">
+                   <i class="fas fa-plus">
+                     Thêm danh mục
+                   </i>
+                 </button>
+               </div>
+               <div class="row plus danhmucnho ">
+                 <span class="DMN" *ngFor="let eachDMN of DMN; let i = index">
+                   <input disabled class="emails" type="text" value={{eachDMN.Ten_danh_muc_nho}}>
+                   <sup>
+                     <button class="iconbutton controlcheckbox" (click)="XoaDanhMucNho(eachDMN)">
+                       <i class="fas fa-times"></i>
+                     </button>
+                   </sup>
+                 </span>
+               </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Ngày bắt đầu:</label>
+          <div class="col-sm-8">
+            <input type="date" [class.is-invalid]="Ngay_BD.invalid && Ngay_BD.touched" #Ngay_BD="ngModel"  class="form-control " id="Ngay_BD"  [(ngModel)]="khuyenmai.Ngay_bat_dau" name="Ngay_BD" placeholder=" Enter name start date" required >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Ngày kết thúc:</label>
+          <div class="col-sm-8">
+            <!-- <date-input date="{{date}}" timezone="[[timezone]]"></date-input> -->
+            <input type="date" [class.is-invalid]="Ngay_KT.invalid && Ngay_KT.touched" #Ngay_KT="ngModel"  class="form-control " id="Ngay_KT"  [(ngModel)]="khuyenmai.Ngay_ket_thuc" name="Ngay_KT" placeholder=" Enter name end date" required >
+          </div>
+          <div class="mess-err">
+            <small id="errNgayKetThuc" class="err text-danger"> Ngày kết thúc không được trước ngày bắt đầu! </small>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="CapNhatKhuyenMai()">Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="DongModal()">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog xác nhận xóa -->
+<div class="container" id="modals_delete" >
+  <ng-template #content_delete let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn xóa khuyến mãi này không?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="XacNhan()" >Xóa</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+</div>
+
+
+<!-- Dialog thêm danh mục-->
+<div class="container" id="modals_category" >
+  <ng-template #content_info_category_plus let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-info-mail-plus">THÊM DANH MỤC</h4>
+    </div>
+    <div class="modal-body">
+      <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên danh mục:</label>
+          <div class="col-sm-8">
+            <!-- <select id="danhmuc" class="form-control form-control-sm border-non setwidth" >
+              <option class="item" selected disabled  value="">-- Category --</option>
+              <option class="item" *ngFor="let eachdanhmuc of subdanhmuc" value = {{eachdanhmuc.DMN_id}} >{{eachdanhmuc.Ten_danh_muc_nho}}</option>
+            </select> -->
+            <ng-multiselect-dropdown
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            (onSelect)="onItemSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelect)="onItemDeSelect($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="DanhMucNho" class="err text-danger">Bạn chưa chọn danh mục! </small>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemDanhMucNho(content_update)">Thêm</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+

@@ -1,0 +1,389 @@
+
+<div class="container" >
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword" class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+      <nav class="navbar navbar-expand-md navbar-light">
+
+
+        <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+          <ul class="navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect" (change)="SearchByOption($event)" >
+                  <option class="item" selected disabled  value="">Tìm kiếm</option>
+                  <option class="item" value = "Mới nhất" >Mới nhất</option>
+                  <option class="item" value = "Cũ nhất" >Cũ nhất</option>
+                </select>
+            </li>
+            <li >
+              <button type="button" class="btn them_khach_hang_button" (click)="open(content)" data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                + Thêm sản phẩm
+               </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+   <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            <h5>THÔNG TIN SẢN PHẨM</h5>
+          </div>
+
+          <div class="card-header button" id="divbutton">
+            <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+
+       <div class="card ds">
+         <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault" (change)="KTCheckedAll()">
+                    <!-- <p>{{checkAll}}</p> -->
+                  </div>
+                </th>
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Mã số</th>
+                <th class="align-middle">Tên sản phẩm</th>
+                <th class="align-middle">Danh mục sản phẩm</th>
+                <th class="align-middle">Giá</th>
+                <th class="align-middle">Số lượng</th>
+                <th class="align-middle">Hình ảnh</th>
+                <th class="align-middle">Mô tả</th>
+                <th class="align-middle">Thời gian tạo</th>
+                <th class="align-middle">Thời gian chỉnh sửa</th>
+                <th class="align-middle">Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let eachSanPham of dssanpham; let i = index;" >
+                <td class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck">
+                  </div>
+                </td>
+                <td class="content">{{i + 1}}</td>
+                <td class="content">{{eachSanPham._id}}</td>
+                <td>{{eachSanPham.Ten_san_pham}}</td>
+               <td>
+                <div class="form-group d-flex align-items-center">
+                  <select class="form-control " id="DMNSelect" >
+                    <option *ngFor="let eachDanhMucKM of thongtindanhmucnho[i]; let i = index;" value={{eachDanhMucKM.DMN_id}}>{{eachDanhMucKM.Ten_danh_muc_nho}}</option>
+                  </select>
+                </div>
+               </td>
+                <td>{{eachSanPham.Gia}}</td>
+                <td>{{eachSanPham.So_luong}}</td>
+                <div class="form-group d-flex align-items-center file">
+                  <div class="col-sm-12 choosefile">
+                    <img id="image2" src={{eachSanPham.Hinh_anh}} class="avatar">
+                  </div>
+                </div>
+                <td [innerHTML]="eachSanPham.Mo_ta"></td>
+                <td class="content">{{eachSanPham.Thoi_gian_tao | date:'shortDate'}}</td>
+                <td class="content">{{eachSanPham.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
+
+                <td class="content d-flex justify-content-center">
+                  <span class="action">
+                    <button class="buttonicon" (click)="open_update(content_update, eachSanPham)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                      <i class="far fa-edit m-1"></i>
+                    </button>
+                    <button class="buttonicon" (click)="open_delete(content_delete, eachSanPham._id)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
+                      <i class="far fa-trash-alt m-1"></i>
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<p class="tong_san_pham">Tổng số sản phẩm: {{dssanpham.length}}</p>
+
+
+<!-- Dialog tạo -->
+<div class="container" id="modals" >
+  <ng-template #content let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TẠO SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm" >
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên sản phẩm:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_san_pham.invalid && Ten_san_pham.touched" #Ten_san_pham="ngModel"  class="form-control " id="Ten_san_pham"  [(ngModel)]="sanpham.Ten_san_pham" name="Ten_san_pham" placeholder=" Enter name product" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_san_pham.errors && (Ten_san_pham.invalid || Ten_san_pham.touched)">
+            <small class="err text-danger"*ngIf="Ten_san_pham.errors.required"> Tên sản phẩm không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraSoNguyen()"  #Gia="ngModel"  class="form-control " id="Gia"  [(ngModel)]="sanpham.Gia" name="Gia" placeholder=" Enter name discount"  >
+          </div>
+          <div class="mess-err" >
+            <small id="errGia" class="err text-danger"> Giá phải lớn hơn 0! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            [(ngModel)]="danhmuctmp"
+            (onSelect)="onItemSelect($event, 0)"
+            (onDeSelect)="onItemDeSelect($event, 0)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="errTaoDanhMuc" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Hình ảnh:</label>
+          <div class="col-sm-8">
+            <input type="file" id="photo" (change)="chooseFile()">
+          </div>
+          <div class="mess-err d-flex justify-content-center" >
+            <small class="err text-danger" id="err_upload">Bạn chưa chọn hình ảnh! </small>
+          </div>
+        </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Mô tả:</label>
+      </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <ckeditor
+            [(ngModel)]="noi_dung"
+            name="noi_dung"
+            [config]="{
+              extraPlugins: 'uploadimage',
+              filebrowserBrowseUrl : '/browser/browse/type/all',
+              filebrowserUploadUrl : '/browser/upload/type/all',
+              filebrowserImageBrowseUrl : '/browser/browse/type/image',
+              filebrowserImageUploadUrl : '/browser/upload/type/image',
+              filebrowserWindowWidth  : 800,
+              filebrowserWindowHeight : 500
+            }"
+          ></ckeditor>
+        </div>
+        </div>
+
+
+      </form>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="uploadImageandSave()">Lưu</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog cập nhật  -->
+<div class="container" id="modals_update" >
+  <ng-template #content_update let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm" >
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên sản phẩm:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_san_pham.invalid && Ten_san_pham.touched" #Ten_san_pham="ngModel"  class="form-control " id="Ten_san_pham"  [(ngModel)]="sanpham.Ten_san_pham" name="Ten_san_pham" placeholder=" Enter name product" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_san_pham.errors && (Ten_san_pham.invalid || Ten_san_pham.touched)">
+            <small class="err text-danger" *ngIf="Ten_san_pham.errors.required"> Tên sản phẩm không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá:</label>
+          <div class="col-sm-8">
+            <input type="number"  (keyup)="KiemTraSoNguyen()" #Gia="ngModel"  class="form-control " id="Gia"  [(ngModel)]="sanpham.Gia" name="Gia" placeholder=" Enter name discount"  >
+          </div>
+          <div class="mess-err" >
+            <small id="errGia" class="err text-danger"> Giá phải lớn hơn 0! </small>
+          </div>
+        </div>
+
+        <!-- <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục:</label>
+          <div class="col-sm-8">
+
+            <select class="form-control " id="DMNSelect" [(ngModel)]="sanpham.Danh_Muc[0].DMN_id" name="DMNSelect" #DMNSelect="ngModel">
+              <option *ngFor="let eachDanhMucKM of subdanhmuc; let i = index;" value={{eachDanhMucKM.DMN_id}}>{{eachDanhMucKM.Ten_danh_muc_nho}}</option>
+            </select>
+          </div>
+          <div class="mess-err" >
+            <small id="errTaoDanhMuc" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div> -->
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            [(ngModel)]="danhmuctmp"
+            (onSelect)="onItemSelect($event, 0)"
+            (onDeSelect)="onItemDeSelect($event, 0)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="errTaoDanhMuc" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Hình ảnh:</label>
+          <div class="col-sm-8 choosefile" >
+              <img id="image2" src={{sanpham.Hinh_anh}} class="avatar">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label"></label>
+          <div class="col-sm-8 " >
+            <input type="file" id="photo">
+          </div>
+          <div class="mess-err d-flex justify-content-center" >
+            <small class="err text-danger" id="err_upload">Bạn chưa chọn hình ảnh! </small>
+          </div>
+        </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Mô tả:</label>
+      </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <ckeditor
+            [(ngModel)]="noi_dung"
+            name="noi_dung"
+            [config]="{
+              extraPlugins: 'uploadimage',
+              filebrowserBrowseUrl : '/browser/browse/type/all',
+              filebrowserUploadUrl : '/browser/upload/type/all',
+              filebrowserImageBrowseUrl : '/browser/browse/type/image',
+              filebrowserImageUploadUrl : '/browser/upload/type/image',
+              filebrowserWindowWidth  : 800,
+              filebrowserWindowHeight : 500
+            }"
+          ></ckeditor>
+        </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="uploadImageandSave(1)">Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="DongModal()">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog xác nhận xóa -->
+<div class="container" id="modals_delete" >
+  <ng-template #content_delete let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn xóa sản phẩm này không?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="XacNhan()" >Xóa</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+</div>
+
+
+<!-- Dialog thêm danh mục-->
+<div class="container" id="modals_category" >
+  <ng-template #content_info_category_plus let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-info-mail-plus">THÊM DANH MỤC</h4>
+    </div>
+    <div class="modal-body">
+      <!-- <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên danh mục:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            (onSelect)="onItemSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelect)="onItemDeSelect($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="DanhMucNho" class="err text-danger">Bạn chưa chọn danh mục! </small>
+          </div>
+
+        </div>
+
+      </form> -->
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemDanhMucNho(content_update)">Thêm</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+

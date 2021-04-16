@@ -1,0 +1,349 @@
+<div class="container">
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword"
+          class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+            <ul class="navbar-nav nav-flex-icons ml-auto">
+              <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect"
+                  (change)="SearchByOption($event)">
+                  <option class="item" selected disabled value="">Tìm kiếm</option>
+                  <option class="item" value="Mới nhất">Mới nhất</option>
+                  <option class="item" value="Cũ nhất">Cũ nhất</option>
+                </select>
+              </li>
+              <li>
+                <button type="button" class="btn them_khach_hang_button" (click)="open(content)"
+                  data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                  + Thêm hóa đơn nhập hàng
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card">
+            <div class="card-header text-center font-weight-bold">
+              <h5>THÔNG TIN HÓA ĐƠN NHẬP HÀNG</h5>
+            </div>
+
+            <div class="card-header button" id="divbutton">
+              <button class="controlcheckbox">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+
+            <div class="card ds">
+              <div class="card-body">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr class="content">
+
+                      <th class="align-middle">STT</th>
+                      <th class="align-middle">Nhân viên lập</th>
+                      <th class="align-middle">Mã hóa đơn</th>
+                      <th class="align-middle">
+                        Thông tin sản phẩm
+                        <!-- <div class="row titlesanpham d-flex justify-content-center">Sản phẩm</div>
+                  <hr>
+                  <div class="row titlesanpham d-flex justify-content-center">
+                    <div class="col-sm-3">STT</div>
+                    <div class="col-sm-3">Sản phẩm</div>
+                    <div class="col-sm-3">Số lượng</div>
+                    <div class="col-sm-3">Giá nhập</div>
+                  </div> -->
+                      </th>
+                      <th class="align-middle">Chú thích</th>
+                      <th class="align-middle">Tổng tiền</th>
+                      <th class="align-middle">Ngày nhập</th>
+                      <!-- <th class="align-middle">Tác vụ</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let eachHoaDon of dshoadonnhap; let i = index;">
+
+                      <td class="content">{{i + 1}}</td>
+                      <td class="content">{{eachHoaDon.NhanVien_id}}</td>
+                      <td class="content">{{eachHoaDon._id}}</td>
+                     <td class="d-flex justify-content-center">
+                      <div class="form-group d-flex align-items-center">
+
+                        <div class="card dssanpham">
+                          <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                                <tr class="content">
+                                  <th class="align-middle">STT</th>
+                                  <th class="align-middle">Sản phẩm</th>
+                                  <th class="align-middle">Số lượng</th>
+                                  <th class="align-middle">Giá nhập</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let eachSanPham of thongtinsanpham[i]; let j = index">
+                                  <td class="content">{{j + 1}}</td>
+                                  <td class="content">{{eachSanPham.Ten_san_pham}}</td>
+                                  <td class="content">{{eachHoaDon.San_Pham[j].So_luong}}</td>
+                                  <td class="content">{{eachHoaDon.San_Pham[j].Gia_nhap}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                      </div>
+                     </td>
+                      <td class="content">{{eachHoaDon.Chu_thich}}</td>
+                      <td class="content">{{eachHoaDon.Tong_tien}}</td>
+                      <td class="content">{{eachHoaDon.Ngay_nhap | date:'shortDate'}}</td>
+
+                      <!-- <td class="content d-flex justify-content-center">
+                  <span class="action">
+                    <button class="buttonicon" (click)="open_update(content_update, eachHoaDon)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                      <i class="far fa-edit m-1"></i>
+                    </button>
+                    <button class="buttonicon" (click)="open_delete(content_delete, eachHoaDon._id)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
+                      <i class="far fa-trash-alt m-1"></i>
+                    </button>
+                  </span>
+                </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="tong_hoa_don_nhap">Tổng số hóa đơn nhập hàng: {{dshoadonnhap.length}}</p>
+
+<!-- Dialog tạo -->
+<div class="container" id="modals">
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TẠO HÓA ĐƠN NHẬP HÀNG</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Thông tin sản phẩm:</label>
+        </div>
+
+        <div class="form-group row">
+          <button class="them_hoa_don" (click)="open_product_plus(content_product_plus)">
+            <i class="fas fa-plus">
+              Thêm hóa đơn
+            </i>
+          </button>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <div class="card addsanpham">
+              <div class="card-body">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr class="content">
+
+                      <th class="align-middle">STT</th>
+                      <th class="align-middle">Sản phẩm</th>
+                      <th class="align-middle">Số lượng</th>
+                      <th class="align-middle">Giá nhập</th>
+                      <th class="align-middle">Tác vụ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let eachSP of lstsanpham; let i = index;">
+
+                      <td class="content">{{i + 1}}</td>
+                      <td class="content">{{eachSP.Ten_san_pham}}</td>
+                      <td class="content">{{eachSP.So_luong}}</td>
+                      <td class="content">{{eachSP.Gia_nhap}}</td>
+                      <td class="content d-flex justify-content-center">
+                        <span class="action">
+                          <button class="buttonicon" (click)="open_product_update(content_product_update, eachSP, i)"
+                            data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                            <i class="far fa-edit m-1"></i>
+                          </button>
+                          <button class="buttonicon" (click)="Xoa(content, eachSP.SanPham_id)"
+                            data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false">
+                            <i class="far fa-trash-alt m-1"></i>
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- <ng2-smart-table [settings]="settings" [source]="dshoadonnhap"></ng2-smart-table> -->
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Chú thích:</label>
+          <div class="col-sm-8">
+            <input type="text" #Chu_thich="ngModel" class="form-control " id="Chu_thich" [(ngModel)]="hoadon.Chu_thich"
+              name="Chu_thich" placeholder=" Enter name note" required>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tổng tiền:</label>
+          <div class="col-sm-8">
+            <input disabled type="text" [class.is-invalid]="Tong_tien.invalid && Tong_tien.touched" #Tong_tien="ngModel"
+              class="form-control " id="Tong_tien" [(ngModel)]="hoadon.Tong_tien" name="Tong_tien"
+              placeholder=" Enter name money" required>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="ThemHoaDon()">Lưu</button>
+        <button type="button" class="btn btn-secondary" (click)="Huy()">Hủy</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog thêm sản phẩm -->
+<div class="container" id="modals_mails">
+  <ng-template #content_product_plus let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-product-plus">THÊM SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body">
+      <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Sản phẩm:</label>
+          <div class="col-sm-8">
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+              [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 1)"
+              (onSelectAll)="onSelectAll($event, 1)" (onDeSelect)="onItemDeSelect($event, 1)"
+              (onDeSelectAll)="onDeSelectAll($event, 1)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err">
+            <small id="SanPham" class="err text-danger">Bạn chưa chọn sản phẩm! </small>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Số lượng:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraGiaTri()" #so_luong="ngModel" class="form-control " id="so_luong"
+              [(ngModel)]="So_luong" name="so_luong">
+          </div>
+          <div class="mess-err">
+            <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
+
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá nhập:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraGiaTri()" #gia_nhap="ngModel" class="form-control " id="gia_nhap"
+              [(ngModel)]="Gia_nhap" name="gia_nhap">
+          </div>
+          <div class="mess-err">
+            <small id="errGiaNhap" class="err text-danger">Giá nhập phải lớn hơn 0</small>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemSanPham(content)">Thêm</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog chỉnh sửa sản phẩm -->
+<div class="container" id="modals_mails">
+  <ng-template #content_product_update let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-product-update">CHỈNH SỬA SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body">
+      <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Sản phẩm:</label>
+          <div class="col-sm-8">
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+              [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 0)"
+              (onSelectAll)="onSelectAll($event, 0)" (onDeSelect)="onItemDeSelect($event, 0)"
+              (onDeSelectAll)="onDeSelectAll($event, 0)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err">
+            <small id="errSanPham" class="err text-danger">Bạn chưa chọn sản phẩm! </small>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Số lượng:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraGiaTri()" #so_luong="ngModel" class="form-control " id="so_luong"
+              [(ngModel)]="So_luong" name="so_luong">
+          </div>
+          <div class="mess-err">
+            <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
+
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Giá nhập:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraGiaTri()" #gia_nhap="ngModel" class="form-control " id="gia_nhap"
+              [(ngModel)]="Gia_nhap" name="gia_nhap">
+          </div>
+          <div class="mess-err">
+            <small id="errGiaNhap" class="err text-danger">Giá nhập phải lớn hơn 0</small>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ChinhSuaSanPham(content)">Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>

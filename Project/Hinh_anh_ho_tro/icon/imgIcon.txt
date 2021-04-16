@@ -1,0 +1,11 @@
+https://icons8.com/icons/set/icon-cart
+chèn vào file index <a href="https://icons8.com/icon/23419/user-account">User Account icon by Icons8</a>
+
+icon giỏ hàng: 
+<img src="https://img.icons8.com/ios/24/000000/shopping-cart.png"/>
+icon tài khoản:
+<img src="https://img.icons8.com/windows/32/000000/user-group-man-man.png"/>
+icon thông báo:
+<img src="https://img.icons8.com/fluent-systems-regular/50/000000/appointment-reminders.png"/>
+icon theo dõi đơn hàng
+<img src="https://img.icons8.com/wired/64/000000/track-order.png"/>

@@ -1,0 +1,115 @@
+[{
+  "_id": {
+    "$oid": "60700228e1915b27d990233e"
+  },
+  "KhachHang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "So_dien_thoai": "0964452409",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "607415ee53d92b02646d5521"
+      },
+      "Xa_Phuong": "Xã Liên Minh",
+      "Huyen_Quan": "Huyện Đức Thọ",
+      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Trang_thai": "Đã hủy",
+  "Tong_tien": 6940000,
+  "Ngay_nhan": {
+    "$date": "2020-01-17T00:00:00Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2020-10-09T17:00:00Z"
+  },
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8d"
+      },
+      "SanPham_id": "60687971d956b41cccafee51",
+      "So_luong": 10,
+      "Gia_ban": 50000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8e"
+      },
+      "SanPham_id": "60687de956bec7202863bfdc",
+      "So_luong": 11,
+      "Gia_ban": 40000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8f"
+      },
+      "SanPham_id": "6068882056bec7202863bfdd",
+      "So_luong": 12,
+      "Gia_ban": 500000
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60755a2f8deb84436c81cca6"
+  },
+  "KhachHang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "So_dien_thoai": "0964452409",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "607415ee53d92b02646d5521"
+      },
+      "Xa_Phuong": "Xã Liên Minh",
+      "Huyen_Quan": "Huyện Đức Thọ",
+      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Trang_thai": "Xuất kho",
+  "Tong_tien": 6940000,
+  "Ngay_nhan": {
+    "$date": "2020-04-13T00:00:00Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2020-04-12T17:00:00Z"
+  },
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8d"
+      },
+      "SanPham_id": "60687971d956b41cccafee51",
+      "So_luong": 10,
+      "Gia_ban": 50000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8e"
+      },
+      "SanPham_id": "60687de956bec7202863bfdc",
+      "So_luong": 11,
+      "Gia_ban": 40000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8f"
+      },
+      "SanPham_id": "6068882056bec7202863bfdd",
+      "So_luong": 12,
+      "Gia_ban": 500000
+    }
+  ]
+}]

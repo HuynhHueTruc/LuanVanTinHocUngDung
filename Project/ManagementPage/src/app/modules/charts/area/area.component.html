@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group row p-3 quy">
+            <label class="col-sm-4 col-form-label">Quý:</label>
+            <div class="col-sm-8">
+              <select class="form-control form-control-sm border-non setwidth" id="Quy" [(ngModel)]="quy" name="chonquy" #chonquy="ngModel" (change)="ChonQuy()">
+                <option class="item" value="1">1</option>
+                <option class="item" value="2">2</option>
+                <option class="item" value="3">3</option>
+                <option class="item" value="4">4</option>
+
+              </select>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="col-sm-6 nam">
+          <div class="form-group row p-3">
+            <label class="col-sm-4 col-form-label">Năm:</label>
+            <div class="col-sm-8">
+              <select class="form-control form-control-sm border-non setwidth" name="Nam" #Nam="ngModel" [(ngModel)]="nam" id="Nam" (change)="ChonNam()">
+                <option class="item" *ngFor="let eachNam of arrnam" value= "{{eachNam}}">{{eachNam}}</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="ng-container">
+        <div class="align-self-center">
+          <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <!-- Đỗ dữ liệu vào bảng -->
+      <div class="container p-3">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card">
+                <div class="card-header text-center font-weight-bold">
+                  <h5>THÔNG TIN SẢN PHẨM</h5>
+                </div>
+
+                <div class="card ds">
+                  <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr class="content">
+                          <th class="align-middle ">STT</th>
+                          <!-- <th class="align-middle">Mã sản phẩm</th> -->
+                          <th class="align-middle">Tên sản phẩm</th>
+                          <th class="align-middle">Tổng số lượng</th>
+                          <th class="align-middle">Giá bán</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let eachSanPham of dataHighcharts let i = index;">
+                          <td class="content d-flex justify-content-center">{{i + 1}}</td>
+                          <!-- <td class="content">{{eachSanPham._id}}</td> -->
+                          <td class="content">{{eachSanPham.name}}</td>
+                          <td class="d-flex justify-content-center">{{(eachSanPham.y*sumAmount)/100}}</td>
+                          <td class="content" >{{eachSanPham.Gia}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="row">
+                      <div class="col-sm-6"></div>
+                      <div class="col-sm-6">
+                        Tổng doanh thu: {{tong_doanh_thu}} VNĐ
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+.hp-pc-lift-nav {
+    position: fixed;
+    width: 40px;
+    bottom: 40px;
+    left: 0.5rem;
+    z-index: 100;
+    background-color: #f5f5f5;
+}
+
+.hp-pc-lift-nav-text {
+    position: relative;
+    width: 2.5rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+// .hp-pc-lift-nav,
+// .scroll-to-top-box {
+//     visibility: hidden;
+// }
+
+.hp-pc-lift-nav-text .hovered-text {
+    visibility: hidden;
+    position: absolute;
+    right: -140px;
+    width: 130px;
+    top: -8px;
+    color: darkcyan;
+    text-align: left;
+    z-index: -1;
+    line-height: 30px;
+    left: 3rem;
+    text-align: center;
+ }
+
+.hp-pc-lift-nav-text:hover .hovered-text {
+    visibility: visible;
+    background-color: #f5f5f5;
+}
+.container{
+  padding-left: 0;
+  padding-right: 0;
+}
+//Desktop
+@media only screen and (min-width : 1224px) {
+
+}
+//ipad
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+
+  .container{
+    height: 135px;
+    top: 200px;
+  }
+
+
+
+}

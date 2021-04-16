@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"BanCayCanhOnline.NHAN_VIEN"}],"uuid":"7d6db08cc32247cfaefc09a9eac06f08"}

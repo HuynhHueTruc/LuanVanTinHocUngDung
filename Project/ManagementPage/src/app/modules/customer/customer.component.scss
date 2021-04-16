@@ -1,0 +1,288 @@
+.them_khach_hang_button:hover{
+  background-color: cadetblue;
+}
+a.navbar-brand:hover{
+  color: chartreuse;
+}
+
+.imgid{
+height: 20px;
+width: 20px;
+font-size: 100%;
+margin-left: 10px;
+}
+
+.btn-outline-dark {
+border-color: #FFF;
+color: #FFF;
+}
+
+.btn-outline-dark:hover {
+border-color: #343a40;
+}
+
+.navbar-brand{
+text-decoration: none;
+color: black;
+font-family: "Brush Script MT";
+font-size: 30px;
+}
+
+.form-control{
+width: 100%;
+border: 2px solid #BDBDBD;
+height: 100%;
+}
+
+.search{
+  width: 70%!important;
+}
+
+.navbar{
+background-color: transparent;
+}
+
+.nav-link{
+  text-decoration: none;
+font-weight: bold;
+color: black !important;
+}
+
+.navbar-toggler-icon{
+background-color: black;
+}
+
+.btn-outline-dark{
+color: black;
+}
+
+.account{
+  font-weight: bold;
+  color:black;
+  font-size: 100%;
+  padding-left: 5%;
+}
+
+.dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #f5f5f5;
+  z-index: 1;
+  list-style: none;
+}
+
+a{
+  color:black;
+  text-decoration: none;
+}
+
+.navbar-nav .dropdown-menu{
+  background-color: white;
+  margin-top: 5%;
+}
+
+ul li{
+  list-style: none;
+}
+
+span{
+  margin-left: 1%;
+  margin-right: 2%;
+  // font-family: "Brush Script MT";
+}
+
+
+.dropdown:hover .dropdown-menu  {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.mat-icon-button{
+  background-color: transparent;
+}
+
+button{
+  background-color: darkcyan;
+  font-weight: bold;
+}
+
+
+
+.nav-item{
+  border: 2px solid #BDBDBD;
+  border-radius: 10%;
+  margin-right: 2%;
+}
+
+.mr-2{
+  color: #696969;
+}
+
+.action{
+  display: flex;
+
+}
+
+.content{
+ text-align: center;
+}
+
+.container{
+  padding: 0px;
+}
+.card-body{
+  padding: 0px;
+}
+
+i{
+  margin-left: 1%;
+}
+
+.border-non{
+  border-radius: 0px;
+}
+
+h5{
+  font-weight: bold;
+  margin: 0px;
+}
+
+.form-control-sm{
+  border: 1px solid #BDBDBD;
+}
+
+.checkboxgroup{
+  border: 1px solid #BDBDBD;
+}
+
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.iconbutton{
+  margin-left: 1%;
+}
+
+.random{
+  padding: 1%;
+}
+
+#MatKhau{
+  padding-left: 1%;
+}
+
+.setwidth{
+  width: 100% !important;
+}
+
+.button{
+  display: none;
+}
+
+.form-check-label{
+  padding-left: 2%;
+}
+
+.buttonicon{
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+}
+
+.err{
+  padding-left: 3%;
+}
+
+.mess-err{
+  width: 100%;
+}
+
+.errdiachi{
+  height: fit-content;
+}
+
+.controlcheckbox{
+  background-color: transparent;
+  border: none;
+}
+
+.nguoinhan{
+  border: 1px solid #BDBDBD;
+  orientation: inherit;
+  height: 45px;
+  padding: 0px;
+  overflow-x:auto;
+  overflow-y:auto;
+
+}
+
+
+.emails{
+  // border: 1px solid #BDBDBD;
+  // border-radius: 20% 20% 20%;
+  border: none;
+  width: inherit;
+}
+
+span.To{
+  width: 70%;
+  margin: 0px;
+  margin-left: 2%;
+}
+
+.them_mail{
+  border: none;
+  background-color: transparent;
+  margin-left: 65%;
+}
+
+.plus{
+  text-align: right;
+}
+
+.fa-plus{
+  width: max-content;
+}
+
+.ds{
+  height: 567.4px;
+  overflow-x:auto;
+  overflow-y:auto;
+
+}
+
+.tong_khach_hang{
+  margin: 5px 0px 0px 0px;
+}
+
+.searchicon{
+  background-color: transparent;
+  border: none;
+}
+
+.spansearch{
+  margin: 0px;
+  background-color: transparent;
+}
+
+.searchbar{
+  width: max-content;
+  padding: 0px !important;
+}
+
+.searchselect{
+  border: none;
+  padding-left: 0px;
+  margin-right: 5px
+}
+

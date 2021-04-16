@@ -1,0 +1,56 @@
+.pt-4 {
+    margin-top: 2rem !important;
+    padding-top: 15px !important;
+    background-color:#202020;
+}
+
+.btn-floating i {
+    font-size: 1.25rem;
+    line-height: 47px;
+}
+
+.btn-floating.btn-fb {
+    color: #fff;
+    background-color: #3b5998 !important;
+}
+p{
+  color: white;
+  font-size: 12px;
+}
+h5.mb-1{
+  font-size: 15px;
+  color: white;
+}
+h5{
+  color: white;
+}
+h5.font-weight-bold.mt-3.mb-4.title{
+  font-size: 50px ;
+  font-family: "Brush Script MT";
+}
+h5.font-weight-bold.text-uppercase.mt-3.mb-4{
+  font-size: 20px;
+  text-align: center;
+
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+
+}
+.image{
+  height: 80px;
+  width: 90px;
+  margin-bottom: 10px;
+  margin-left: 25px;
+}
+
+.text{
+  font-size: 15px;
+  color: #a4a4a4;
+}
+a{
+  color: white;
+}
+
+.img{
+  background-color: #fff;
+}

@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "60687971d956b41cccafee51"
+  },
+  "Ten_san_pham": "Hoa hồng",
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60687971f61f251ccc8815cd"
+      },
+      "DMN_id": "5f7d86ff8bec9df446bcb509"
+    }
+  ],
+  "Gia": 50000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sat%20Apr%2003%202021%2021%3A19%3A27%20GMT%2B0700%20(Indochina%20Time)-3.%20H%E1%BB%93ng%20t%E1%BB%B7%20mu%E1%BB%99i.jpg?alt=media&token=b1137118-505f-4914-88f6-83fe71cd892e",
+  "Mo_ta": "<p>- Hoa hồng Việt Nam</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-03T14:19:29Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-03T15:18:57Z"
+  },
+  "Danh_gia": [],
+  "__v": 0,
+  "So_luong": 10
+},{
+  "_id": {
+    "$oid": "60687de956bec7202863bfdc"
+  },
+  "Ten_san_pham": "Cây sen đá Đà Lạt",
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60687de9cb3a6920288686e9"
+      },
+      "DMN_id": "5f7d86b88bec9df446bcb4f4"
+    }
+  ],
+  "Gia": 50000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sat%20Apr%2003%202021%2021%3A38%3A31%20GMT%2B0700%20(Indochina%20Time)-6.jpg?alt=media&token=2cffb6e9-ab6c-49a1-b6a8-0acff6ebbc7d",
+  "Mo_ta": "<p>- Sen đ&aacute;</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-03T14:38:33Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-03T15:19:06Z"
+  },
+  "Danh_gia": [],
+  "So_luong": 11,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6068882056bec7202863bfdd"
+  },
+  "Ten_san_pham": "Hoa hồng môn",
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60688820cb3a6920288686f1"
+      },
+      "DMN_id": "5f7d86768bec9df446bcb4dc"
+    }
+  ],
+  "Gia": 500000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sat%20Apr%2003%202021%2022%3A22%3A07%20GMT%2B0700%20(Indochina%20Time)-3.jpg?alt=media&token=23f6321f-d95a-400c-8eb3-65e920ad9910",
+  "Mo_ta": "<p>- K&egrave;n hồng</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-03T15:22:08Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-03T15:22:08Z"
+  },
+  "Danh_gia": [],
+  "__v": 0,
+  "So_luong": 12
+},{
+  "_id": {
+    "$oid": "60700b83b7530601080b49d4"
+  },
+  "Ten_san_pham": "Cây đôla",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60700b832004b901082ec76f"
+      },
+      "DMN_id": "5f7d863e8bec9df446bcb4d0"
+    },
+    {
+      "_id": {
+        "$oid": "60700b832004b901082ec770"
+      },
+      "DMN_id": "5f7d863e8bec9df446bcb4d0"
+    }
+  ],
+  "Gia": 120000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Fri%20Apr%2009%202021%2015%3A07%3A24%20GMT%2B0700%20(Indochina%20Time)-1.jpg?alt=media&token=c5c86672-ac4a-4790-b06f-507f93abe0d3",
+  "Mo_ta": "",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-09T08:08:35Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-09T08:08:35Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60700babb7530601080b49d5"
+  },
+  "Ten_san_pham": "Cây đôla",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60700bab2004b901082ec771"
+      },
+      "DMN_id": "5f7d863e8bec9df446bcb4d0"
+    }
+  ],
+  "Gia": 150000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Fri%20Apr%2009%202021%2015%3A09%3A12%20GMT%2B0700%20(Indochina%20Time)-1.jpg?alt=media&token=5f1988d4-d625-45e7-be37-1843e5fa938f",
+  "Mo_ta": "",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-09T08:09:15Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-09T08:09:15Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+}]

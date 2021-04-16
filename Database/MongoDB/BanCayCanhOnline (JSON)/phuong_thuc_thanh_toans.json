@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Ten_phuong_thuc": "Chuyển khoản ngân hàng/Internet Banking",
+  "Ngay_cap_nhat": {
+    "$date": "2021-03-23T17:00:00Z"
+  },
+  "Ngay_tao": {
+    "$date": "2021-03-23T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f7d89bd7cc2cc2a04b15746"
+  },
+  "Ten_phuong_thuc": "Ví Momo",
+  "Ngay_cap_nhat": {
+    "$date": "2021-03-23T17:00:00Z"
+  },
+  "Ngay_tao": {
+    "$date": "2021-03-23T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f7d89c87cc2cc2a04b15747"
+  },
+  "Ten_phuong_thuc": "Thanh toán trực tiếp",
+  "Ngay_cap_nhat": {
+    "$date": "2021-03-23T17:00:00Z"
+  },
+  "Ngay_tao": {
+    "$date": "2021-03-23T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f7d89d47cc2cc2a04b15748"
+  },
+  "Ten_phuong_thuc": "Thanh toán online qua thẻ ATM",
+  "Ngay_cap_nhat": {
+    "$date": "2021-03-23T17:00:00Z"
+  },
+  "Ngay_tao": {
+    "$date": "2021-03-23T17:00:00Z"
+  }
+}]

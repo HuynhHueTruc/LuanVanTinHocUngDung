@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "5f7d8a847cc2cc2a04b1574a"
+  },
+  "Ten_hinh_thuc": "Ship code",
+  "Gia": 50000,
+  "Thoi_gian_tao": {
+    "$date": "2021-03-21T17:00:00Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-21T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f7d8a8c7cc2cc2a04b1574b"
+  },
+  "Ten_hinh_thuc": "Chuyển phát nhanh",
+  "Gia": 80000,
+  "Thoi_gian_tao": {
+    "$date": "2021-03-21T17:00:00Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-21T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f7d8a937cc2cc2a04b1574c"
+  },
+  "Ten_hinh_thuc": "Bưu điện",
+  "Gia": 30000,
+  "Thoi_gian_tao": {
+    "$date": "2021-03-21T17:00:00Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-21T17:00:00Z"
+  }
+}]

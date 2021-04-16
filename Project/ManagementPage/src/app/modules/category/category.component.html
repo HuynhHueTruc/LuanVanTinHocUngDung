@@ -1,0 +1,217 @@
+
+<div class="container" id="NhaCungCapMainContent"  >
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword" class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+      <nav class="navbar navbar-expand-md navbar-light">
+
+
+        <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+          <ul class="navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect" (change)="SearchByOption($event)" >
+                  <option class="item" selected disabled  value="">Tìm kiếm</option>
+                  <option class="item" value = "Mới nhất" >Mới nhất</option>
+                  <option class="item" value = "Cũ nhất" >Cũ nhất</option>
+
+                </select>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+   <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            <h5>THÔNG TIN DANH MỤC</h5>
+          </div>
+
+       <div class="card ds">
+         <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Mã số</th>
+                <th class="align-middle">Tên danh mục</th>
+                <th class="align-middle">Thông tin danh mục nhỏ</th>
+                <th class="align-middle">Ngày tạo</th>
+                <th class="align-middle">Ngày chỉnh sửa</th>
+                <th class="align-middle">Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let eachDanhMuc of dsdanhmuc; let i = index;" >
+                <td class="content">{{i + 1}}</td>
+                <td class="content">{{eachDanhMuc._id}}</td>
+                <td>{{eachDanhMuc.Ten_danh_muc}}</td>
+                <td class="d-flex justify-content-center">
+                  <div class="form-group d-flex align-items-center">
+
+                    <div class="card dssanpham" *ngIf="KiemTraDanhMucNho(i)">
+                      <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr class="content">
+                              <th class="align-middle">STT</th>
+                              <th class="align-middle">Mã số</th>
+                              <th class="align-middle">Tên danh mục nhỏ</th>
+                              <th class="align-middle" *ngIf="KiemTraLoaiCay(eachDanhMuc);">Loại cây</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let eachDMN of eachDanhMuc.Danh_muc_nho; let j = index">
+                              <td class="content">{{j + 1}}</td>
+                              <td class="content">{{eachDMN.DMN_id}}</td>
+                              <td class="content">{{eachDMN.Ten_danh_muc_nho}}</td>
+                              <td class="content" *ngIf="KiemTraLoaiCay_id(eachDMN)" >{{eachDMN.Loai_cay}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+                <td class="content">{{eachDanhMuc.Thoi_gian_tao | date:'shortDate'}}</td>
+                <td class="content">{{eachDanhMuc.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
+
+                <td class="content">
+                  <span class="action">
+                    <button class="buttonicon" (click)="open_update(content_update, eachDanhMuc)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                      <i class="far fa-edit m-1"></i>
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<p class="tong_danh_muc">Tổng số danh mục: {{dsdanhmuc.length}}</p>
+
+
+
+<!-- Dialog cập nhật tài khoản -->
+<div class="container" id="modals_update" >
+  <ng-template #content_update let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT DANH MỤC</h4>
+    </div>
+    <div class="modal-body">
+      <form #supplierFormCreate="ngForm" >
+
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Danh mục nhỏ:</label>
+          <div class="col-sm-8">
+
+            <div class="form-group d-flex align-items-center" >
+              <div class="container">
+                <div class="row d-flex justify-content-end plus ">
+                  <button class="them_danh_muc" (click)="open_category_plus(content_info_category_plus)" data-controls-modal="modals_category" data-backdrop="static" data-keyboard="false">
+                   <i class="fas fa-plus">
+                     Thêm danh mục nhỏ
+                   </i>
+                 </button>
+               </div>
+               <div class="row plus danhmucnho ">
+                 <span class="DMN" *ngFor="let eachDMN of danhmuc.Danh_muc_nho; let i = index">
+                   <input disabled class="emails" type="text" value={{eachDMN.Ten_danh_muc_nho}}>
+                   <sup>
+                     <button class="iconbutton controlcheckbox" (click)="XoaDanhMucNho(eachDMN, i, content_delete)">
+                       <i class="fas fa-times"></i>
+                     </button>
+                   </sup>
+                 </span>
+               </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="CapNhatDanhMuc()" >Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="DongModal()">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+
+<!-- Dialog thêm danh mục-->
+<div class="container" id="modals_category" >
+  <ng-template #content_info_category_plus let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-info-mail-plus">THÊM DANH MỤC NHỎ</h4>
+    </div>
+    <div class="modal-body">
+      <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên danh mục nhỏ:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="ten_danh_muc_nho.invalid && ten_danh_muc_nho.touched" #ten_danh_muc_nho="ngModel"  class="form-control " id="ten_danh_muc_nho"  [(ngModel)]="subdanhmucnho.Ten_danh_muc_nho" name="ten_danh_muc_nho" placeholder=" Enter name category" required >
+          </div>
+          <div class="mess-err" *ngIf="ten_danh_muc_nho.errors && (ten_danh_muc_nho.invalid || ten_danh_muc_nho.touched)">
+            <small class="err text-danger"*ngIf="ten_danh_muc_nho.errors.required"> Tên sản phẩm không được trống! </small>
+          </div>
+          <div class="mess-err" >
+            <small id="errSubCategory" class="err text-danger"> Danh mục nhỏ này đã tồn tại trong một danh mục lớn! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Loại cây (nếu có):</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+
+            name="ngDMNSelect"
+            [placeholder]="'--- Category ---'"
+            [settings]="dropdownSettings"
+            [data]="dsloaicay"
+            [(ngModel)]="loaicaytmp"
+            >
+          </ng-multiselect-dropdown>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemDanhMucNho(content_update)">Thêm</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+

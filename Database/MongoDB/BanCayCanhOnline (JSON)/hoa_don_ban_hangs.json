@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "5f7d8b3b7cc2cc2a04b1574f"
+  },
+  "San_Pham": [
+    {
+      "SanPham_id": {
+        "$oid": "5f7d83507cc2cc2a04b15734"
+      },
+      "So_luong": 1,
+      "Gia_ban": 15000
+    },
+    {
+      "SanPham_id": {
+        "$oid": "5f7d83c47cc2cc2a04b15735"
+      },
+      "So_luong": 3,
+      "Gia_ban": 195000
+    }
+  ],
+  "KhachHang_id": "Huynh_Hue_Truc",
+  "Ho_ten": "Huỳnh Diễm My",
+  "So_dien_thoai": "987654321",
+  "Dia_chi": {
+    "Xa_Phuong": "Xã Song Phụng",
+    "Huyen_Quan": "Huyện Long Phú",
+    "Tinh_ThanhPho": "Tỉnh Sóc Trăng"
+  },
+  "VanChuyen_id": {
+    "$oid": "5f7d8a847cc2cc2a04b1574a"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Tong_tien": "195000",
+  "Ngay_lap": {
+    "$date": "2020-09-30T17:00:00Z"
+  },
+  "NhanVien_id": "HuynhKhanhDuy"
+}]

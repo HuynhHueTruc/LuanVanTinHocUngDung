@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "5f7d8baf7cc2cc2a04b15750"
+  },
+  "San_Pham": [
+    {
+      "SanPham_id": {
+        "$oid": "5f7d83507cc2cc2a04b15734"
+      },
+      "So_luong": 1,
+      "Gia_ban": 15000
+    },
+    {
+      "SanPham_id": {
+        "$oid": "5f7d83c47cc2cc2a04b15735"
+      },
+      "So_luong": 3,
+      "Gia_ban": 195000
+    }
+  ],
+  "KhachHang_id": "HuynhHueTruc",
+  "Tong_tien": 630000
+}]

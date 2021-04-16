@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "5f7d895f7cc2cc2a04b15743"
+  },
+  "Tieu_de": "Sản phẩm mới",
+  "NhanVien_id": {
+    "$oid": "5f7d828e7cc2cc2a04b15732"
+  },
+  "Noi_dung": "Hoa phong lan mặt khỉ: Loài hoa có nguồn gốc từ Peru và Ecuador này có hình dáng giống mặt khỉ một cách khó tin. Mỗi gói hạt giống phong lan mặt khỉ (khoảng 160 hạt) nhập khẩu khoảng 1,5 triệu đồng (khoảng 10.000 đồng/hạt). Tuy nhiên, khách hàng thường phải đặt nhà vườn để nhập hạt giống về vì hạt không có bán sẵn trên thị trường Việt.",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-06T17:00:00Z"
+  },
+  "Thơi_gian_tao": {
+    "$date": "2020-09-30T17:00:00Z"
+  },
+  "Anh_dai_dien": "E:\\HOC_TAP\\NAM4\\Nien_luan_nganh\\Project\\Pictures\\Tin_tuc\\1"
+}]

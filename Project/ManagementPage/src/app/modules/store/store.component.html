@@ -1,0 +1,154 @@
+<div class="container">
+   <div class="sub container">
+    <div class="form-gap"></div>
+    <div class="row">
+      <div class="col-sm-2" >
+        <img id="image" src={{thongtincuahang.Anh_dai_dien}} class="avatar">
+      </div>
+      <div class="col-sm-10 d-flex align-items-center" id="shopname">
+        <h1>{{thongtincuahang.Ten_cua_hang}}</h1>
+        <button id="updateavartar" (click)="open_dialog(content_update)"><sub><i class="fas fa-pencil-alt fa-1x"></i></sub></button>
+      </div>
+    </div>
+    <div class="form-gap"></div>
+   </div>
+   <br>
+   <!-- <div class="divtab"></div> -->
+   <div class="sub2 container">
+     <div class="row">
+       <div class="col-sm-3">
+         <div class="row thongtin">
+           <div class="col-sm-11 sub">
+            <form id="form_info">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Số điện thoại</label>
+                <input type="text" class="form-control" id="sdt" pattern="^0[0-9\s.-]{9}" name="So_dien_thoai" #So_dien_thoai="ngModel" [(ngModel)]="thongtincuahang.So_dien_thoai" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched" required>
+                <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
+                  <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
+                  <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern">  Chưa đúng định dạng! </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Tỉnh/Thành phố</label>
+                <select class="form-control" id="tinh_thanhpho" name="provinces" #provinces="ngModel" [(ngModel)]="thongtincuahang.Dia_chi.Tinh_ThanhPho" (change)="ThanhPho($event, null)">
+                  <option class="item" disabled value="">-- Provinces --</option>
+                  <option class="item" *ngFor="let eachThanhPho of thanhphos" value= "{{eachThanhPho.name}}">{{eachThanhPho.name}}</option>
+                </select>
+                <div class="mess-err"  >
+                  <small id="mes_tinh_thanhpho" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Huyện/Quận</label>
+                <select class="form-control" id="huyen_quan" name="district" #district="ngModel" [(ngModel)]="thongtincuahang.Dia_chi.Huyen_Quan" (change)="HienThiQuanHuyen_XaPhuong($event,thongtincuahang.Dia_chi)">
+                  <option class="item" disabled value="">-- District --</option>
+                  <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" value= "{{eachQuanHuyen.name}}">{{eachQuanHuyen.name}}</option>
+                </select>
+                <div class="mess-err"  >
+                  <small id="mes_huyen_quan" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Xã/Phường</label>
+                <select class="form-control" id="xa_phuong"  name="ward" #ward="ngModel" [(ngModel)]="thongtincuahang.Dia_chi.Xa_Phuong"  (change)="XaPhuong(thongtincuahang.Dia_chi[0])">
+                  <option class="item" disabled value="">-- Ward --</option>
+              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" value= "{{eachXaPhuong.name}}">{{eachXaPhuong.name}}</option>
+                </select>
+                <div class="mess-err"  >
+                  <small id="mes_xa_phuong" class="errdiachi text-danger" style="display: none;"> Bạn chưa chọn Xã/Phường! </small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Banner</label>
+                <input type="file" class="form-control-file" id="banner" name='files[]' multiple="multiple" (change)="UpdateImg()">
+                <div class="mess-err" >
+                  <small class="err text-danger"> Vui lòng chọn ít hơn 3 tập tin!</small>
+                </div>
+              </div>
+
+              <div class="form-group" >
+                <div class="row imgbanner">
+                  <div class="col-sm-4 imgbanner" *ngFor="let eachbanner of arrbanner">
+                    <img id="imgbanner" src={{eachbanner.Hinh_anh}} alt="">
+                  </div>
+                </div>
+              </div>
+            </form>
+           <div class="row">
+             <div class="col-sm-6 control_update">
+              <div class="col-auto d-flex justify-content-end">
+                <button type="submit" class="btn btn-color mb-2 " (click)="CapNhat()">Lưu</button>
+              </div>
+             </div>
+             <div class="col-sm-6 control_update">
+              <div class="col-auto d-flex justify-content-start">
+                <button type="submit" class="btn btn-color mb-2 " (click)=" open_cancel(content_cancel)">Hủy</button>
+              </div>
+             </div>
+           </div>
+           </div>
+           <div class="col-sm-1"></div>
+         </div>
+       </div>
+       <div class="col-sm-9 sub thongtin">
+        <ckeditor
+        [(ngModel)]="thongtincuahang.Gioi_thieu"
+        name="noi_dung"
+        [config]="{
+          height: '350px',
+          extraPlugins: 'uploadimage',
+          filebrowserBrowseUrl : '/browser/browse/type/all',
+          filebrowserUploadUrl : '/browser/upload/type/all',
+          filebrowserImageBrowseUrl : '/browser/browse/type/image',
+          filebrowserImageUploadUrl : '/browser/upload/type/image',
+          filebrowserWindowWidth  : 800,
+          filebrowserWindowHeight : 500
+        }"
+      ></ckeditor>
+       </div>
+     </div>
+   </div>
+</div>
+<br>
+
+<!-- Dialog đổi ảnh đại diện và tên -->
+<div class="container" id="modals_update" >
+  <ng-template #content_update let-modal >
+    <div class="d-flex justify-content-center ">
+      <img id="image2" src={{thongtincuahang.Anh_dai_dien}} class="avatar">
+      <input class="align-self-center" id="changename" type="text" value={{thongtincuahang.Ten_cua_hang}}>
+    </div>
+    <div class="mess-err d-flex justify-content-center">
+      <small class="err text-danger" id="err_message">Tên cửa hàng đang trống! </small>
+    </div>
+    <div class="row file">
+      <div class="col-sm-12 choosefile">
+        <input type="file" id="photo" (change)="chooseFile()">
+      </div>
+    </div>
+    <div class="mess-err d-flex justify-content-center" >
+      <small class="err text-danger" id="err_upload">Bạn chưa chọn hình ảnh! </small>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="uploadImage()">Lưu</button>
+      <button type="button" class="btn btn-secondary" (click)="Huy()">Hủy</button>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Dialog xác nhận hủy  -->
+<div class="container" id="modals_delete">
+  <ng-template #content_cancel let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn hủy chỉnh sửa?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="HuyCapNhat()"
+        ng-disabled="!form.$dirty || (form.$dirty && form.$invalid)">Xác nhận</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "5f7ee20940ef33aeebb07088"
+  },
+  "Ten_khuyen_mai": "Khuyến mãi nhân dịp khai trương",
+  "Gia_tri": 0.2,
+  "Ngay_bat_dau": {
+    "$date": "2020-08-09T17:00:00Z"
+  },
+  "Ngay_ket_thuc": {
+    "$date": "2020-10-09T17:00:00Z"
+  },
+  "San_Pham": [
+    {
+      "SanPham_id": {
+        "$oid": "5f7d83507cc2cc2a04b15734"
+      }
+    }
+  ],
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-24T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-24T17:00:00Z"
+  }
+}]

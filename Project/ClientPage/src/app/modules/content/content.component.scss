@@ -1,0 +1,159 @@
+
+@media all and (max-width: 415px) {
+    .navbar-toggler {
+        padding: .2rem .4rem;
+        font-size: 175rem !important
+    }
+}
+@media (min-width: 576px){
+.col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+}
+}
+.giangcach {
+    margin-left: 5rem!important;
+    margin-right: 5rem!important;
+}
+
+.row{
+  margin-left: 0cm;
+  margin-right: 0cm;
+}
+.p-hr{
+  width: 10% !important ;
+  margin-top: 0%;
+  text-align: "center";
+  background-color: black;
+}
+
+@-webkit-keyframes my {
+  0% { color: cadetblue; }
+  50% { color: #F8CD0A;  }
+  100% { color: cadetblue;  }
+}
+@-moz-keyframes my {
+  0% { color:cadetblue;  }
+  50% { color: #F8CD0A;  }
+  100% { color: cadetblue;  }
+}
+@-o-keyframes my {
+  0% { color:cadetblue; }
+  50% { color: #F8CD0A; }
+  100% { color: cadetblue;  }
+}
+@keyframes my {
+  0% { color:cadetblue;  }
+  50% { color: #F8CD0A;  }
+  100% { color: cadetblue;  }
+}
+
+.title-gt{
+  margin-top: 5%;
+  font-family: "Calibri";
+  font-size: 20px;
+  text-align: center;
+  color: cadetblue;
+
+}
+
+.subtitle{
+  font-family: "Calibri";
+  font-size: 20px;
+  text-align: center;
+  color: cadetblue;
+}
+
+.title-khuyenmai{
+  margin-top: 5%;
+  font-family: "Calibri";
+  font-size: 20px;
+  text-align: center;
+  // color: cadetblue;
+  font-weight:bold;
+	 -webkit-animation: my 700ms infinite;
+	 -moz-animation: my 700ms infinite;
+	 -o-animation: my 700ms infinite;
+	 animation: my 700ms infinite;
+}
+.image{
+  width: 100%;
+  height: 100%;
+}
+
+.title{
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+button{
+  background-color: cadetblue;
+  color: white;
+  border: none;
+  height: 30px;
+}
+.wrapper {
+  text-align: center;
+}
+.gt{
+  margin-left: 5%;
+}
+
+.sp{
+  height: 100%;
+  margin-bottom: 7%;
+  margin: 2%;
+}
+
+.container{
+  height: auto;
+}
+.div-sp{
+height: 50%;
+margin-bottom: 7px;
+}
+
+
+.title-goiy{
+  font-size: 40px;
+  text-align: center;
+}
+
+.goiy{
+margin-left: 1%;
+margin-right: 1%;
+height: auto;
+overflow: hidden;
+border: 1px solid #e5e5e5;
+}
+
+.goiy img {
+  width: 100%;
+  height: 100%;
+  transition-duration: 0.3s;
+}
+
+.goiy img:hover {
+  transform: scale(1.2);
+}
+.col-wrap {
+display: table;
+width: 100%;
+}
+
+.col {
+display: table-cell;
+padding: 1rem
+}
+.textcase{
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.card{
+  border: none;
+}
+.wapper{
+  margin-top: 3%;
+}

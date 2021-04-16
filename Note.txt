@@ -1,0 +1,14 @@
+1. Sử dụng guard để không thể truy cập trực tiếp localhost:4200/default mà phải buộc thông qua Login
+2. Đăng nhập theo chức năng (Admin, nhân viên, khách hàng)
+3. Đăng ký của khách hàng, nhân viên
+4. Chỉ cho thao tác trên giỏ hàng sau khi đăng nhập 
+5. Random mật khẩu khi Admin tạo tài khoản nhân viên và khách hàng
+6. Thêm đối tượng mới từ Admin sẽ tự động gửi mail cho nhân viên hoặc khách hàng mới đó
+7. Xóa theo nhu cầu (1, nhiều, tất cả)
+8. Cập nhật thông tin
+(không thành công)9. Sử dụng Two-Factor Authentication trên Nodejs để làm OTP
+10. Tìm kiếm theo từ khóa và theo danh mục
+11. Nhân viên có thể thay đổi thông tin tài khoản cá nhân của mình trong phần thông tin riêng
+12. Đăng xuất
+
+Chưa fix được: ckfinder, update banner, số lượng của sản phẩm, khi nhập số lượng sản phẩm trong hóa đơn nhập hoặc duyệt phiếu đặt thì cập nhật lại số lượng sản phẩm bên collection SanPham

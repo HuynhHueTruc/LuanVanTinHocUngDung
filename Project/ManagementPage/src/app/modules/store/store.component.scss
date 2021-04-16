@@ -1,0 +1,108 @@
+.sub{
+  // width: 900px;
+  background-color: aliceblue;
+}
+
+.avatar{
+  vertical-align: middle;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid darkcyan;
+}
+
+.form-gap {
+  padding-top: 10px;
+}
+
+.avartar{
+  padding-left: 4%;
+  padding-bottom: 2%;
+}
+
+#shopname{
+  padding: 0px;
+}
+
+sub{
+  margin-left: 1%;
+}
+
+#updateavartar{
+  background-color: transparent;
+  border:  none;
+}
+
+.choosefile{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 0px;
+  padding-left: 12%;
+}
+
+#image2{
+  margin-top: 2%;
+}
+
+#changename{
+  border: none;
+  height: 50%;
+  font-size: 25px;
+  margin-left: 2%;
+}
+
+#changename:focus{
+  outline: none;
+}
+
+.thongtin{
+ padding: 0px;
+}
+
+.divtab{
+  // width: 10px;
+  background-color: white;
+  height: auto;
+}
+
+.edit{
+  padding: 0px;
+}
+
+.rowthongtin{
+  margin: 0px;
+}
+
+.btn-color{
+  background-color: darkcyan;
+}
+
+.control_update{
+  padding: 0px;
+}
+
+#err_upload{
+display: none;
+}
+
+#form_info{
+  padding-top: 5%;
+}
+
+.file{
+  margin: 0px;
+}
+
+#imgbanner{
+  height: 50px;
+  width: 75px;
+}
+
+.imgbanner{
+  padding: 0px;
+  margin: 0px;
+}
+
+#err_message{
+  display: none;
+}

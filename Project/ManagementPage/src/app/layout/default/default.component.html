@@ -1,0 +1,15 @@
+<!-- <app-header (toggleSideBarForMe)="toggleSideBar($event)"></app-header> Bắt sự kiện ẩn hiện sidebar (Vào default.ts đổi sideBarOpen = false) -->
+
+<app-header></app-header>
+
+<mat-drawer-container style="background-color: white;">
+  <!-- <mat-drawer mode="side" [opened]="sideBarOpen"> -->
+
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidebar style="height: max-content;"></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content style="background-color: white;">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<!-- <app-footer></app-footer> -->

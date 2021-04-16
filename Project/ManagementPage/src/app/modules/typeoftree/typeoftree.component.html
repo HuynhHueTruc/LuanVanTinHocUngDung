@@ -1,0 +1,203 @@
+
+<div class="container" >
+  <mat-toolbar>
+
+    <mat-toolbar-row>
+
+      <div class="input-group rounded">
+        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword" class="form-control search rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+      <nav class="navbar navbar-expand-md navbar-light">
+
+
+        <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+
+          <ul class="navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                <select class="form-control form-control-sm border-non setwidth searchselect" (change)="SearchByOption($event)" >
+                  <option class="item" selected disabled  value="">Tìm kiếm</option>
+                  <option class="item" value = "Mới nhất" >Mới nhất</option>
+                  <option class="item" value = "Cũ nhất" >Cũ nhất</option>
+                </select>
+            </li>
+            <li >
+              <button type="button" class="btn them_khach_hang_button" (click)="open(content)" data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                + Thêm loại cây
+               </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+   <!-- Đỗ dữ liệu vào bảng -->
+  <div class="container" >
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            <h5>THÔNG TIN LOẠI CÂY</h5>
+          </div>
+
+          <div class="card-header button" id="divbutton">
+            <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+
+       <div class="card ds">
+         <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault" (change)="KTCheckedAll()">
+                    <!-- <p>{{checkAll}}</p> -->
+
+                  </div>
+                </th>
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Mã số</th>
+                <th class="align-middle">Tên loại cây</th>
+                <th class="align-middle">Ngày tạo</th>
+                <th class="align-middle">Ngày chỉnh sửa</th>
+                <th class="align-middle">Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let eachloaicay of dsloaicay; let i = index;" >
+                <td class="align-middle">
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck" >
+                  </div>
+                </td>
+                <td class="content">{{i + 1}}</td>
+                <td class="content">{{eachloaicay._id}}</td>
+                <td>{{eachloaicay.Ten_loai_cay}}</td>
+                <td class="content">{{eachloaicay.Thoi_gian_tao | date:'shortDate'}}</td>
+                <td class="content">{{eachloaicay.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
+
+                <td class="content d-flex justify-content-center">
+                  <span class="action">
+                    <button class="buttonicon" (click)="open_update(content_update, eachloaicay)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                      <i class="far fa-edit m-1"></i>
+                    </button>
+                    <button class="buttonicon" (click)="open_delete(content_delete, eachloaicay._id)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
+                      <i class="far fa-trash-alt m-1"></i>
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<p class="tong_loai_cay">Tổng số loại cây: {{dsloaicay.length}}</p>
+
+
+<!-- Dialog tạo tài khoản -->
+<div class="container" id="modals" >
+  <ng-template #content let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TẠO LOẠI CÂY</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm" >
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên loại cây:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_loai_cay.invalid && Ten_loai_cay.touched" #Ten_loai_cay="ngModel"  class="form-control " id="Ten_loai_cay"  [(ngModel)]="loaicay.Ten_loai_cay" name="Ten_loai_cay" placeholder=" Enter name shippingtype" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_loai_cay.errors && (Ten_loai_cay.invalid || Ten_loai_cay.touched)">
+            <small class="err text-danger"*ngIf="Ten_loai_cay.errors.required"> Tên loại cây không được trống! </small>
+          </div>
+
+        </div>
+
+      </form>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="ThemLoaiCay()">Lưu</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog cập nhật tài khoản -->
+<div class="container" id="modals_update" >
+  <ng-template #content_update let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT LOẠI CÂY</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormUpdate="ngForm" >
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Mã số:</label>
+          <div class="col-sm-8" >
+            <input disabled type="text" [class.is-invalid]="Ma_so.invalid && Ma_so.touched" #Ma_so="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ma_so"  [(ngModel)]="loaicay._id"  name="Ma_so" placeholder=" Enter code" required >
+          </div>
+          <div class="mess-err" *ngIf="Ma_so.errors && (Ma_so.invalid || Ma_so.touched)">
+            <small class="err text-danger"*ngIf="Ma_so.errors.required"> Mã số không được trống! </small>
+            <small class="err text-danger"*ngIf="Ma_so.errors.pattern">  Mã số không được có dấu.  Độ dài mã só trong khoảng 8 đến 32 ký tự! </small>
+          </div>
+       </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên loại cây:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Ten_loai_cay.invalid && Ten_loai_cay.touched" #Ten_loai_cay="ngModel" class="form-control " id="Ho_ten"  [(ngModel)]="loaicay.Ten_loai_cay" name="Ten_loai_cay" placeholder=" Enter name shippingtype" required >
+          </div>
+          <div class="mess-err" *ngIf="Ten_loai_cay.errors && (Ten_loai_cay.invalid || Ten_loai_cay.touched)">
+            <small class="err text-danger"*ngIf="Ten_loai_cay.errors.required"> Tên loại cây không được trống! </small>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="CapNhatLoaiCay()">Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="DongModal()">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Dialog xác nhận xóa -->
+<div class="container" id="modals_delete" >
+  <ng-template #content_delete let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn xóa loại cây này không?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="XacNhan()" >Xóa</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+
+
+
+

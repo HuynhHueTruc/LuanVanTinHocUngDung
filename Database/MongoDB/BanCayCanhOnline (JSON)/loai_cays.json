@@ -1,0 +1,122 @@
+[{
+  "_id": {
+    "$oid": "60030069c5c7b25212bab46d"
+  },
+  "Ten_loai_cay": "Cây ban công",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3d7e0c8c6941c440be4d"
+  },
+  "Ten_loai_cay": "Cây dây leo",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3eb10c8c6941c440be4f"
+  },
+  "Ten_loai_cay": "Cây để bàn",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3eba0c8c6941c440be50"
+  },
+  "Ten_loai_cay": "Cây phong thủy",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3ec30c8c6941c440be51"
+  },
+  "Ten_loai_cay": "Cây nội thất",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3eca0c8c6941c440be52"
+  },
+  "Ten_loai_cay": "Cây thủy sinh",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3ed10c8c6941c440be53"
+  },
+  "Ten_loai_cay": "Cây ngoại thất",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c3ed80c8c6941c440be54"
+  },
+  "Ten_loai_cay": "Cây công trình",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c43200c8c6941c440be55"
+  },
+  "Ten_loai_cay": "Terrarium",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c4cec0c8c6941c440be56"
+  },
+  "Ten_loai_cay": "Cây sen đá",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "600c4cf90c8c6941c440be57"
+  },
+  "Ten_loai_cay": "Cây sen",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-30T17:00:00Z"
+  },
+  "Thoi_gian_tao": {
+    "$date": "2021-03-30T17:00:00Z"
+  }
+}]
