@@ -224,7 +224,7 @@ export class AreaComponent implements OnInit {
         }
       },
       series: [{
-        name: 'Chiếm', // các thức thể hiện ví dụ: bán ..., chiếm ...
+        name: 'Tỷ lệ', // các thức thể hiện ví dụ: bán ..., chiếm ...
         data: this.dataHighcharts
 
       }]
