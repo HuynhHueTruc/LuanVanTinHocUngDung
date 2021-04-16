@@ -30,6 +30,7 @@ export class AreaComponent implements OnInit {
   quy: number = 1
   arrnam = []
   nam = new Date().getFullYear();
+  canam = false
   constructor(private hoadonbanhangService: HoadonbanhangService, private sanphamService: SanphamService) { }
 
   ngOnInit(): void {
@@ -59,13 +60,18 @@ export class AreaComponent implements OnInit {
       }
 
       for (const i in this.sanphams) {
-        if (new Date(this.sanphams[i].Thoi_gian_ban).getFullYear() === this.nam) {
-          let month = new Date(this.sanphams[i].Thoi_gian_ban).getMonth() + 1
-          // console.log(month)
-          if (this.XacDinhQuy(month) === this.quy) {
+
+          if (new Date(this.sanphams[i].Thoi_gian_ban).getFullYear() === this.nam) {
+            if (!this.canam){
+            let month = new Date(this.sanphams[i].Thoi_gian_ban).getMonth() + 1
+            if (this.XacDinhQuy(month) === this.quy) {
+              this.sanphambanduoc.push(this.sanphams[i])
+            }
+          }else{
             this.sanphambanduoc.push(this.sanphams[i])
           }
         }
+
       }
 
       for (const count in this.sanphambanduoc) {
@@ -174,7 +180,12 @@ export class AreaComponent implements OnInit {
   }
 
   ChonQuy() {
-    this.quy = Number.parseInt(this.quy.toString())
+    if (this.quy.toString() === 'all'){
+      this.canam = true
+    }else{
+      this.canam = false
+      this.quy = Number.parseInt(this.quy.toString())
+    }
     this.sanphams = []
     this.sanphambanduoc = []
     this.dataHighcharts = []
@@ -185,6 +196,12 @@ export class AreaComponent implements OnInit {
 
   ChonNam() {
     this.nam = Number.parseInt(this.nam.toString())
+    if (this.quy.toString() === 'all'){
+      this.canam = true
+    }else{
+      this.canam = false
+      this.quy = Number.parseInt(this.quy.toString())
+    }
     this.sanphams = []
     this.sanphambanduoc = []
     this.dataHighcharts = []
