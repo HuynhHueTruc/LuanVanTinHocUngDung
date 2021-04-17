@@ -79,7 +79,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor="let eachSanPham of dssanpham; let i = index;" >
+              <tr  *ngFor="let eachSanPham of dssanpham; let i = index;" class="infsanpham">
                 <td class="align-middle">
                   <div class="form-check d-flex justify-content-center">
                     <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck">
@@ -102,7 +102,12 @@
                     <img id="image2" src={{eachSanPham.Hinh_anh}} class="avatar">
                   </div>
                 </div>
-                <td [innerHTML]="eachSanPham.Mo_ta"></td>
+                <!-- <td [innerHTML]="eachSanPham.Mo_ta" ></td> -->
+                <td>
+                  <div class="container">
+                    <p [innerHTML]="eachSanPham.Mo_ta" class="infsanpham"></p>
+                  </div>
+                </td>
                 <td class="content">{{eachSanPham.Thoi_gian_tao | date:'shortDate'}}</td>
                 <td class="content">{{eachSanPham.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
 
