@@ -5,6 +5,7 @@ let NhanVienSchema = new mongoose.Schema({
     Nhan_vien_id: String,
     Ma_so: String,
     Ho_ten: String,
+    Ngay_sinh: Date,
     Dia_chi: [{
         Xa_Phuong: String,
         Huyen_Quan: String,

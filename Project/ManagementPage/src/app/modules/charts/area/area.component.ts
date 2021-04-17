@@ -216,13 +216,14 @@ export class AreaComponent implements OnInit {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
+        height: 300,
         type: 'pie'
       },
       title: {
-        text: 'Thống kê sản phẩm bán được theo quý'
+        text: 'Biểu đồ thể hiện sản phẩm bán được theo quý'
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' // series là mảng đối tượng cần hiển thị được khai báo bên dưới
+        pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>' // series là mảng đối tượng cần hiển thị được khai báo bên dưới
       },
       accessibility: {
         point: {
@@ -235,7 +236,7 @@ export class AreaComponent implements OnInit {
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            format: '<b>{point.name}</b>: {point.percentage:.2f} %',
             connectorColor: 'silver'
           }
         }

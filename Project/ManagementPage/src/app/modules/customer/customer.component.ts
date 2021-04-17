@@ -10,6 +10,7 @@ import { NguoiNhanModel } from './../../../models/KhachHang/nguoinhan';
 import { ThongTinTaiKhoanEmailModel } from './../../../models/KhachHang/thongtinemail';
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-customer',
@@ -73,7 +74,7 @@ export class CustomerComponent implements OnInit {
 
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
-  constructor(private modalService: NgbModal,private KHService: KhachhangService, private diachiService: DiachiService) { }
+  constructor(private modalService: NgbModal,private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getdskhachhang();
@@ -418,8 +419,11 @@ export class CustomerComponent implements OnInit {
     this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu cho khachang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
+    khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
     this.khachhang = khachhangUpdate;
     this.khachhang.Dia_chi = khachhangUpdate.Dia_chi[0];
+    document.getElementById('errNgaySinh').style.display = 'none'
+
     this.ThanhPho(null, this.khachhang.Dia_chi);
 
   }
@@ -504,6 +508,7 @@ export class CustomerComponent implements OnInit {
     // Hàm kiểm tra thông tin
   KTNull(khachhang: KhachHangModel){
     const hoten = khachhang.Ho_ten;
+    const ngaysinh = khachhang.Ngay_sinh;
     const KHId = khachhang.Khach_hang_id;
     const diachi = khachhang.Dia_chi;
     const gioitinh = khachhang.Gioi_tinh;
@@ -512,7 +517,7 @@ export class CustomerComponent implements OnInit {
     const cmnd = khachhang.CMND_CCCD;
     const matkhau = khachhang.Mat_khau;
     const thongtinkhachhang = [];
-    thongtinkhachhang.push(hoten, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
+    thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
       diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
     for (const i in thongtinkhachhang){
       if (thongtinkhachhang.hasOwnProperty(i)){
@@ -546,7 +551,7 @@ export class CustomerComponent implements OnInit {
 
     this.KTNull(this.khachhang);
 
-    if (this.KiemTraThongTin){
+    if (this.KiemTraThongTin  && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)){
       this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
         if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"'){
           this.ThongTinGuiEmailTaiKhoan.push({Khach_hang_id: this.khachhang.Khach_hang_id, Email: this.khachhang.Email,
@@ -587,7 +592,7 @@ export class CustomerComponent implements OnInit {
   // Hàm thực hiện cập nhật thông tin nhân viên
   CapNhatKhachHang(){
     this.KTNull(this.khachhang);
-    if (this.KiemTraThongTin){
+    if (this.KiemTraThongTin  && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)){
       this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
         if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"'){
           this.DongModal();
@@ -660,5 +665,28 @@ SearchByOption(value){
       });
     }
   }
+}
+
+// Bắt sự kiện chọn ngày
+ChangeDate(e) {
+  e.preventDefault();
+  const target = e.target;
+  if (target.id === 'NgaySinh') {
+    document.getElementById('errNgaySinh').style.display = 'none'
+  }
+  this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
+}
+
+
+KiemTraNgaySinh(ngaysinh) {
+  if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
+    document.getElementById('errNgaySinh2').style.display = 'block'
+    document.getElementById('errNgaySinh').style.display = 'none'
+    return false
+  } else {
+    document.getElementById('errNgaySinh2').style.display = 'none'
+    return true
+  }
+
 }
 }

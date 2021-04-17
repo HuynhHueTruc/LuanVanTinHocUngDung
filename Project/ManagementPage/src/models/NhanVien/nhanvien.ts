@@ -2,6 +2,7 @@ export class NhanVienModel{
      Ho_ten: string;
      Ma_so: string;
      Nhan_vien_id: string;
+     Ngay_sinh: Date;
      Dia_chi: {
       Xa_Phuong: string,
       Huyen_Quan: string,

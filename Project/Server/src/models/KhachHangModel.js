@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 let KhachHangSchema = new mongoose.Schema({
     Khach_hang_id: String,
     Ho_ten: String,
+    Ngay_sinh: Date,
     Dia_chi: [{
         Xa_Phuong: String,
         Huyen_Quan: String,

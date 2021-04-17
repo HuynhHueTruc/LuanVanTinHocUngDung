@@ -14,6 +14,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { data, each, event } from 'jquery';
 import {Router} from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 // import * as $ from 'jquery';
 // import * as bootstrap from 'bootstrap';
@@ -81,7 +82,7 @@ export class StaffComponent implements OnInit {
   // Đối tượng nhân viên update
   NhanVienUpdate: NhanVienModel[] = [];
   constructor(private modalService: NgbModal, private httpClient: HttpClient, private NVService: NhanvienService,
-              private diachiService: DiachiService, private formBuilder: FormBuilder){}
+              private diachiService: DiachiService, private formBuilder: FormBuilder, private datePipe: DatePipe){}
 
   ngOnInit(): void {
     this.getdsnhanvien();
@@ -345,9 +346,10 @@ export class StaffComponent implements OnInit {
     this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
     this.nhanvien = new NhanVienModel();
+    nhanvienUpdate.Ngay_sinh = this.datePipe.transform(nhanvienUpdate.Ngay_sinh, 'yyyy-MM-dd');
     this.nhanvien = nhanvienUpdate;
     this.nhanvien.Dia_chi = nhanvienUpdate.Dia_chi[0];
-    // console.log(this.nhanvien.Dia_chi)
+    document.getElementById('errNgaySinh').style.display = 'none'
     this.ThanhPho(null, this.nhanvien.Dia_chi);
 
   }
@@ -492,6 +494,7 @@ export class StaffComponent implements OnInit {
   // Hàm kiểm tra thông tin
   KTNull(nhanvien: NhanVienModel){
     const hoten = nhanvien.Ho_ten;
+    const ngaysinh = nhanvien.Ngay_sinh
     const NVId = nhanvien.Nhan_vien_id;
     const diachi = nhanvien.Dia_chi;
     const gioitinh = nhanvien.Gioi_tinh;
@@ -501,7 +504,7 @@ export class StaffComponent implements OnInit {
     const quyensd = nhanvien.Quyen_su_dung;
     const matkhau = nhanvien.Mat_khau;
     const thongtinnhanvien = [];
-    thongtinnhanvien.push(hoten, NVId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
+    thongtinnhanvien.push(hoten, ngaysinh, NVId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
       diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, quyensd, matkhau);
     for (const i in thongtinnhanvien){
       if (thongtinnhanvien.hasOwnProperty(i)){
@@ -535,7 +538,7 @@ export class StaffComponent implements OnInit {
 
     this.KTNull(this.nhanvien);
 
-    if (this.KiemTraThongTin){
+    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)){
       this.NVService.ThemNhanVien(this.nhanvien).subscribe(data_them => {
         if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"'){
           this.ThongTinGuiEmailTaiKhoan.push({Nhan_vien_id: this.nhanvien.Nhan_vien_id, Email: this.nhanvien.Email,
@@ -582,7 +585,7 @@ export class StaffComponent implements OnInit {
     this.nhanvien.Quyen_su_dung = this.QuyenSuDung;
 
     this.KTNull(this.nhanvien);
-    if (this.KiemTraThongTin){
+    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)){
       this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
         if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
           if (nv.Nhan_vien_id === this.nhanvien.Nhan_vien_id){
@@ -712,7 +715,28 @@ SearchByOption(value){
   }
 }
 
+  // Bắt sự kiện chọn ngày
+  ChangeDate(e) {
+    e.preventDefault();
+    const target = e.target;
+    if (target.id === 'NgaySinh') {
+      document.getElementById('errNgaySinh').style.display = 'none'
+    }
+    this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)
+  }
 
+
+  KiemTraNgaySinh(ngaysinh) {
+    if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
+      document.getElementById('errNgaySinh2').style.display = 'block'
+      document.getElementById('errNgaySinh').style.display = 'none'
+      return false
+    } else {
+      document.getElementById('errNgaySinh2').style.display = 'none'
+      return true
+    }
+
+  }
 
 }
 

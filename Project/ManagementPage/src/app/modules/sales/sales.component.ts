@@ -326,6 +326,7 @@ export class SalesComponent implements OnInit {
     }
   }
 
+
   KiemTraNgayKhuyenMai(ngaybatdau, ngayketthuc) {
     if ((new Date(ngaybatdau).getTime() > new Date(ngayketthuc).getTime())) {
       document.getElementById('errNgayKetThuc').style.display = 'block'

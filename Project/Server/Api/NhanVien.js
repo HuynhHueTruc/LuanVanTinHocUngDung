@@ -87,6 +87,7 @@ route.get('/nhanvien', async(req, res) => {
     NhanVienModel.find({}).select({
         Nhan_vien_id: 1,
         Ho_ten: 1,
+        Ngay_sinh: 1,
         Dia_chi: [{
             Xa_Phuong: 1,
             Huyen_Quan: 1,
@@ -118,8 +119,9 @@ route.get('/nhanvien', async(req, res) => {
 route.post('/nhanvien/dangky', async(req, res) => {
 
     const Nhan_vien_id = req.body.Nhan_vien_id;
-    const Secret_Key = generateUniqueSecret();
+    // const Secret_Key = generateUniqueSecret();
     const Ho_ten = req.body.Ho_ten;
+    const Ngay_sinh = req.body.Ngay_sinh;
     const Ma_so = getRndInteger(100001, 999999);
     // console.log(Ma_so)
     const Dia_chi = req.body.Dia_chi;
@@ -154,6 +156,7 @@ NhanVienModel.findOne({
                     Nhan_vien_id : Nhan_vien_id,
                     Ma_so: Ma_so,
                     Ho_ten : Ho_ten,
+                    Ngay_sinh: Ngay_sinh,
                     Dia_chi : Dia_chi,
                     Gioi_tinh : Gioi_tinh,
                     So_dien_thoai : So_dien_thoai,
@@ -225,7 +228,7 @@ route.delete('/nhanvien/xoanhanvien/:Nhan_vien_id', async(req, res) => {
 // Hàm cập nhật
 route.put('/nhanvien/capnhatnhanvien/:Nhan_vien_id', async(req, res) => {
     const Nhan_vien_id = req.params.Nhan_vien_id;
-    const {Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, CMND_CCCD, Mat_khau, Email, Quyen_su_dung} = req.body;
+    const {Ho_ten, Ngay_sinh, Dia_chi, Gioi_tinh, So_dien_thoai, CMND_CCCD, Mat_khau, Email, Quyen_su_dung} = req.body;
     const Ma_so = getRndInteger(100001, 999999);
     const Thoi_gian_cap_nhat = dateFormat();
   
@@ -242,6 +245,7 @@ route.put('/nhanvien/capnhatnhanvien/:Nhan_vien_id', async(req, res) => {
                          Nhan_vien_id: Nhan_vien_id
                      }, {
                         Ho_ten : Ho_ten,
+                        Ngay_sinh: Ngay_sinh,
                         Dia_chi : Dia_chi,
                         Gioi_tinh : Gioi_tinh,
                         So_dien_thoai : So_dien_thoai,

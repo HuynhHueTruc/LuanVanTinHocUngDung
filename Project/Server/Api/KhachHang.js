@@ -22,6 +22,7 @@ route.get('/khachhang', async(req, res) => {
     KhachHangModel.find({}).select({
         Khach_hang_id: 1,
         Ho_ten: 1,
+        Ngay_sinh: 1,
         CMND_CCCD: 1,
         Dia_chi: [{
             Xa_Phuong: 1,
@@ -54,6 +55,7 @@ route.post('/khachhang/dangky', async(req, res) => {
 
     var Khach_hang_id = req.body.Khach_hang_id;
     var Ho_ten = req.body.Ho_ten;
+    var Ngay_sinh = req.body.Ngay_sinh
     var CMND_CCCD = req.body.CMND_CCCD;
     var Dia_chi = req.body.Dia_chi;
     var Gioi_tinh = req.body.Gioi_tinh;
@@ -87,6 +89,7 @@ KhachHangModel.findOne({
                 return KhachHangModel.create({
                     Khach_hang_id : Khach_hang_id,
                     Ho_ten : Ho_ten,
+                    Ngay_sinh: Ngay_sinh,
                     Dia_chi : Dia_chi,
                     Gioi_tinh : Gioi_tinh,
                     CMND_CCCD: CMND_CCCD,
@@ -159,7 +162,7 @@ route.delete('/khachhang/xoakhachhang/:Khach_hang_id', async(req, res) => {
 // Hàm cập nhật
 route.put('/khachhang/capnhatkhachhang/:Khach_hang_id', async(req, res) => {
     const Khach_hang_id = req.params.Khach_hang_id;
-    const {Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, CMND_CCCD, Mat_khau, Email, Tich_diem} = req.body;
+    const {Ho_ten, Ngay_sinh, Dia_chi, Gioi_tinh, So_dien_thoai, CMND_CCCD, Mat_khau, Email, Tich_diem} = req.body;
     const Ma_so = getRndInteger(100001, 999999);
     const Thoi_gian_cap_nhat = dateFormat();
   
@@ -176,6 +179,7 @@ route.put('/khachhang/capnhatkhachhang/:Khach_hang_id', async(req, res) => {
                          Khach_hang_id: Khach_hang_id
                      }, {
                         Ho_ten : Ho_ten,
+                        Ngay_sinh: Ngay_sinh,
                         Dia_chi : Dia_chi,
                         Gioi_tinh : Gioi_tinh,
                         So_dien_thoai : So_dien_thoai,

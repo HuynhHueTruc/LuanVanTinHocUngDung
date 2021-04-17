@@ -2,6 +2,7 @@ export class KhachHangModel{
 
     public Khach_hang_id: string;
     public Ho_ten: string;
+    public Ngay_sinh: Date;
     public Dia_chi: {
       Xa_Phuong: string,
       Huyen_Quan: string,
