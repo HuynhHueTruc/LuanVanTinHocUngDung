@@ -249,6 +249,7 @@ export class ProductComponent implements OnInit {
   open(content) {
     this.choosefile = false
     this.danhmuctmp = []
+    this.noi_dung = ''
     this.UnChecked();
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu
