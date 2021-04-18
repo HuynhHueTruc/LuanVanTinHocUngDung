@@ -2649,7 +2649,7 @@
     "$oid": "607acdd0ccf14534746d2a9a"
   },
   "Ten_san_pham": "Cây cau đuôi chồn",
-  "So_luong": 10,
+  "So_luong": 0,
   "Danh_Muc": [
     {
       "_id": {
@@ -3189,7 +3189,7 @@
     "$oid": "607ad12accf14534746d2aae"
   },
   "Ten_san_pham": "Cây chuông vàng",
-  "So_luong": 20,
+  "So_luong": 0,
   "Danh_Muc": [
     {
       "_id": {
@@ -3756,7 +3756,7 @@
     "$oid": "607ad38cccf14534746d2ac3"
   },
   "Ten_san_pham": "Cây dạ yến thảo",
-  "So_luong": 10,
+  "So_luong": 0,
   "Danh_Muc": [
     {
       "_id": {
