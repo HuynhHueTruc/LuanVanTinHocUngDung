@@ -1,33 +1,33 @@
 [{
   "_id": {
-    "$oid": "5f7d8b3b7cc2cc2a04b1574f"
+    "$oid": "606d6a5161c5c18423d53196"
   },
   "San_Pham": [
     {
       "SanPham_id": {
-        "$oid": "5f7d83507cc2cc2a04b15734"
+        "$oid": "607b1fdfccf14534746d2c1e"
       },
       "So_luong": 1,
-      "Gia_ban": 15000
+      "Gia_ban": 78000
     },
     {
       "SanPham_id": {
-        "$oid": "5f7d83c47cc2cc2a04b15735"
+        "$oid": "607af830ccf14534746d2b67"
       },
-      "So_luong": 3,
-      "Gia_ban": 195000
+      "So_luong": 1,
+      "Gia_ban": 150000
     }
   ],
   "KhachHang_id": "Huynh_Hue_Truc",
   "Ho_ten": "Huỳnh Diễm My",
-  "So_dien_thoai": "987654321",
+  "So_dien_thoai": "0987654321",
   "Dia_chi": {
     "Xa_Phuong": "Xã Song Phụng",
     "Huyen_Quan": "Huyện Long Phú",
     "Tinh_ThanhPho": "Tỉnh Sóc Trăng"
   },
   "VanChuyen_id": {
-    "$oid": "5f7d8a847cc2cc2a04b1574a"
+    "$oid": "605b5aad7cab023368e36b27"
   },
   "ThanhToan_id": {
     "$oid": "5f7d89b47cc2cc2a04b15745"
@@ -37,4 +37,161 @@
     "$date": "2020-09-30T17:00:00Z"
   },
   "NhanVien_id": "HuynhKhanhDuy"
+},{
+  "_id": {
+    "$oid": "6075c1a77c6a602396c6c278"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "6075d6cec1b8060ed0329839"
+      },
+      "SanPham_id": {
+        "$oid": "607aeeeaccf14534746d2b41"
+      },
+      "So_luong": 2,
+      "Gia_ban": 5000
+    },
+    {
+      "_id": {
+        "$oid": "6075d6cec1b8060ed032983a"
+      },
+      "SanPham_id": {
+        "$oid": "607ae6c1ccf14534746d2b2b"
+      },
+      "So_luong": 3,
+      "Gia_ban": 170000
+    }
+  ],
+  "KhachHang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "So_dien_thoai": "0964452409",
+  "Dia_chi": [
+    {
+      "Xa_Phuong": "Xã Liên Minh",
+      "Huyen_Quan": "Huyện Đức Thọ",
+      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Tong_tien": 230000,
+  "Ngay_lap": {
+    "$date": "2021-04-13T17:29:32Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6075d7487c6a602396c6c284"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8d"
+      },
+      "SanPham_id": "607af880ccf14534746d2b69",
+      "So_luong": 1,
+      "Gia_ban": 700000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8e"
+      },
+      "SanPham_id": "607afca0ccf14534746d2b7d",
+      "So_luong": 2,
+      "Gia_ban": 400000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8f"
+      },
+      "SanPham_id": "607b2033ccf14534746d2c20",
+      "So_luong": 1,
+      "Gia_ban": 139000
+    }
+  ],
+  "KhachHang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "So_dien_thoai": "0964452409",
+  "Dia_chi": [
+    {
+      "Xa_Phuong": "Xã Liên Minh",
+      "Huyen_Quan": "Huyện Đức Thọ",
+      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Tong_tien": 6940000,
+  "Ngay_lap": {
+    "$date": "2020-06-01T17:00:00Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6075d8837c6a602396c6c286"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8d"
+      },
+      "SanPham_id": "607adca6ccf14534746d2b02",
+      "So_luong": 1,
+      "Gia_ban": 120000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8e"
+      },
+      "SanPham_id": "607ad8e8ccf14534746d2aee",
+      "So_luong": 3,
+      "Gia_ban": 350000
+    },
+    {
+      "_id": {
+        "$oid": "6074662d901ec828cc047d8f"
+      },
+      "SanPham_id": "607ad704ccf14534746d2ada",
+      "So_luong": 2,
+      "Gia_ban": 120000
+    },
+    {
+      "SanPham_id": "607ab54d62e0c41e48cb67d7",
+      "So_luong": 1,
+      "Gia_ban": 53000
+    }
+  ],
+  "KhachHang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "So_dien_thoai": "0964452409",
+  "Dia_chi": [
+    {
+      "Xa_Phuong": "Xã Liên Minh",
+      "Huyen_Quan": "Huyện Đức Thọ",
+      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Tong_tien": 6940000,
+  "Ngay_lap": {
+    "$date": "2021-01-31T17:00:00Z"
+  },
+  "__v": 0
 }]

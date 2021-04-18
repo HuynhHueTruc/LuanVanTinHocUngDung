@@ -174,7 +174,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   open_product_update(content_product_update, sp, index){
-    // console.log(sp)
+    console.log(this.sanphamtmp)
     this.flag = index
     this.sanphamtmp[0].Ten_san_pham = sp.Ten_san_pham
     this.sanphamtmp[0]._id = sp.SanPham_id

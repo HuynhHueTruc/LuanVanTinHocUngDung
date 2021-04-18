@@ -83,6 +83,7 @@ export class ProductComponent implements OnInit {
       this.sanpham = res.sanphams;
       this.dssanpham = res.sanphams;
 
+
       // hỗ trợ searchbykeywword và searchbysex
       this.dssanphamsearch = res.sanphams;
       // Lưu độ dài của danh sách  để làm checkbox
