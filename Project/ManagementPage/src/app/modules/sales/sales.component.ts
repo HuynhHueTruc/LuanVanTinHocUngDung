@@ -289,6 +289,7 @@ export class SalesComponent implements OnInit {
 
   // Hàm thực hiện thêm tài khoản nhân viên
   ThemKhuyenMai() {
+    console.log(this.danhmuctmp)
     if (this.danhmuctmp[0] === undefined) {
       document.getElementById('errTaoDanhMuc').style.display = 'block'
       this.KiemTraThongTin = false;
@@ -305,6 +306,7 @@ export class SalesComponent implements OnInit {
         }
         this.khuyenmaiService.ThemKhuyenMai(this.khuyenmai).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo khuyến mãi thành công!"') {
+
             this.DongModal();
           }
           else {
@@ -451,7 +453,6 @@ export class SalesComponent implements OnInit {
   // Hàm thực hiện xóa
   XoaKhuyenmai(_id: string) {
     this.khuyenmaiService.XoaKhuyenMai(_id).subscribe(data_xoa => {
-      window.alert(data_xoa);
       location.reload();
     });
   }
