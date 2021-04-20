@@ -1,3 +1,4 @@
+import { ForgotpasswordComponent } from './../../modules/forgotpassword/forgotpassword.component';
 import { StoreComponent } from './../../modules/store/store.component';
 import { ProductComponent } from './../../modules/product/product.component';
 import { CartComponent } from './../../modules/cart/cart.component';
@@ -21,6 +22,7 @@ import { LoginComponent } from 'src/app/modules/login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
     ChangepasswordComponent,
     CartComponent,
     ProductComponent,
-    StoreComponent
+    StoreComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    NgOtpInputModule
     // BackButtonDisableModule.forRoot({
     //   preserveScrollPosition: true
     // })

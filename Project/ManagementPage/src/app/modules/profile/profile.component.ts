@@ -264,14 +264,12 @@ LuuThayDoi(){
   this.KTNull(this.nhanvien);
   if (this.KiemTraThongTin){
     this.datalogin.Dia_chi = [this.nhanvien.Dia_chi];
-    // console.log(this.datalogin)
     this.datalogin = this.nhanvien;
     this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
 
       if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
 
         localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
-        // console.log( localStorage.getItem('loggedInAcount'))
         location.reload();
       } else {
           window.alert(data_capnhat);

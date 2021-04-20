@@ -1,3 +1,4 @@
+import { ForgotpasswordComponent } from './modules/forgotpassword/forgotpassword.component';
 import { StoreComponent } from './modules/store/store.component';
 import { ProductComponent } from './modules/product/product.component';
 import { CartComponent } from './modules/cart/cart.component';
@@ -23,9 +24,10 @@ const routes: Routes = [
     children: [
       { path: '', component: ProfileComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'changepassword', component: ChangepasswordComponent },
+      { path: 'changepassword', component: ChangepasswordComponent }
     ]
   },
+  { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'cart', component: CartComponent },
   { path: 'product', component: ProductComponent },
   { path: 'store', component: StoreComponent },

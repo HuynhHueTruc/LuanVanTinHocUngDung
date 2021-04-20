@@ -79,6 +79,10 @@ export class NhanvienService {
   GetOTP(nhanvien: NhanVienModel): Observable<NhanVienModel[]>{
     return this.http.post<NhanVienModel[]>('http://localhost:3000/nhanvien/guiOTP', nhanvien).pipe();
   }
+
+  TimKiemNhanVien(nhanvien:NhanVienModel): Observable<NhanVienModel[]>{
+    return this.http.post<NhanVienModel[]>('http://localhost:3000/nhanvien/timkiemnhanvien', nhanvien).pipe();
+  }
   // `${'http://localhost:3000/nhanvien/kiemtrasecretkey'}/${secret_key}`
   // XacNhanKey(secrect_key, nhanvien){
   //   return this.http.post('http://localhost:3000/nhanvien/kiemtrasecretkey', {'secret_key': secrect_key, nhanvien}).pipe();

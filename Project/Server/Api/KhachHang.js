@@ -173,8 +173,8 @@ route.put('/khachhang/capnhatkhachhang/:Khach_hang_id', async(req, res) => {
             KhachHangModel.findOne({
                 Email: Email
             }).then(data => {
+
                 if (data === null || data.Khach_hang_id === Khach_hang_id){
-                // res.json(data)
                      KhachHangModel.updateOne({
                          Khach_hang_id: Khach_hang_id
                      }, {
@@ -201,6 +201,26 @@ route.put('/khachhang/capnhatkhachhang/:Khach_hang_id', async(req, res) => {
         }
     })
 })
+
+//Tìm kiếm 
+route.post('/khachhang/timkiemkhachhang', async(req, res) =>{
+    const Khach_hang_id = req.body.Khach_hang_id
+    KhachHangModel.findOne({
+        Khach_hang_id: Khach_hang_id,
+    })
+    .then(data => {
+        if(data){
+            res.json(data.Ma_so);
+        }else{
+            res.json(false);
+        }
+    })
+    .catch(err => {
+        res.status(500).json('Lỗi server!')
+
+    })
+})
+
 
 // Hàm xóa nhiều đối tượng 
 route.post('/khachhang/xoakhachhang', async(req, res) => {
@@ -326,7 +346,7 @@ route.post('/khachhang/guiOTP', async(req, res) => {
            }).then (d =>{
                console.log(arrThongTin.Ma_so)
            })
-        }, 15000)
+        }, 45000)
         
         const key = getRndInteger(100001, 999999)
         arrThongTin.Ma_so = key

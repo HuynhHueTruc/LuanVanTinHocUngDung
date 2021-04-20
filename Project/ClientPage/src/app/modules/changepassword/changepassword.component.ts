@@ -111,7 +111,7 @@ export class ChangepasswordComponent implements OnInit {
           this.khachhang.Mat_khau = this.mat_khau_moi;
           this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
 
-            if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"') {
+            if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
               localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
               window.alert('Thay đổi mật khẩu thành công!');
               location.reload();

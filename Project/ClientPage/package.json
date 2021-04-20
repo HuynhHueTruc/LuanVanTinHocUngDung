@@ -42,6 +42,7 @@
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "mongodb": "^3.6.2",
+    "ng-otp-input": "^1.7.1",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.3",

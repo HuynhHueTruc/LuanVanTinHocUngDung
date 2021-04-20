@@ -56,7 +56,20 @@ export class KhachhangService {
   }
 
   CapNhatKhachHang(khachhang: KhachHangModel): Observable<KhachHangModel[]> {
-    return this.http.put<KhachHangModel[]>(`${'http://localhost:3000/nhanvien/capnhatnhanvien'}/${khachhang.Khach_hang_id}`, khachhang).pipe(
+    console.log(khachhang)
+    return this.http.put<KhachHangModel[]>(`${'http://localhost:3000/khachhang/capnhatkhachhang'}/${khachhang.Khach_hang_id}`, khachhang).pipe(
     );
+  }
+
+  // GuiEmailKhachHang(thongtinemail, noidung, chude): Observable<ThongTinTaiKhoanEmailModel[]>{
+  //   return this.http.post<ThongTinTaiKhoanEmailModel[]>('http://localhost:3000/khachhang/guiemail', {thongtinemail, noidung, chude}).pipe();
+  // }
+
+  GetOTP(khachhang: KhachHangModel): Observable<KhachHangModel[]>{
+    return this.http.post<KhachHangModel[]>('http://localhost:3000/khachhang/guiOTP', khachhang).pipe();
+  }
+
+  TimKiemKhachHang(khachhang:KhachHangModel): Observable<KhachHangModel[]>{
+    return this.http.post<KhachHangModel[]>('http://localhost:3000/khachhang/timkiemkhachhang', khachhang).pipe();
   }
 }

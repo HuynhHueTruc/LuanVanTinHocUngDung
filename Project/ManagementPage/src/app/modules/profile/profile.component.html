@@ -2,12 +2,12 @@
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Tên đăng nhập:</label>
           <div class="col-sm-8">
-            <input class="manipulation" type="text" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
+            <input class="manipulation" disabled type="text" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
           </div>
-          <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
+          <!-- <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
             <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không được trống! </small>
             <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.pattern">  Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
-          </div>
+          </div> -->
        </div>
           <div class="form-group row">
           <label class="col-sm-4 col-form-label">Họ và tên:</label>

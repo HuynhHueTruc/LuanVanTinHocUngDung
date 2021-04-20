@@ -1,7 +1,6 @@
-import { NhanvienService } from './../../../services/NhanVien/nhanvien.service';
-import { NhanVienModel } from './../../../models/NhanVien/nhanvien';
+import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
+import { KhachHangModel } from './../../../models/KhachHang/khachhang';
 import { Component, OnInit } from '@angular/core';
-
 
 @Component({
   selector: 'app-forgotpassword',
@@ -11,25 +10,25 @@ import { Component, OnInit } from '@angular/core';
 export class ForgotpasswordComponent implements OnInit {
 
   diachiEmail: any;
-  nhanvien: NhanVienModel;
+  khachhang: KhachHangModel;
   datalogin: any;
   key: string;
   mat_khau_moi = null;
   xac_nhan_mat_khau_moi = null;
-  constructor(private NVService: NhanvienService) { }
+  constructor(private KHService: KhachhangService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
-    this.nhanvien = new NhanVienModel();
-    this.nhanvien = this.datalogin;
+    this.khachhang = new KhachHangModel();
+    this.khachhang = this.datalogin;
   }
 
   // Kiểm tra Email có đúng không
   XacNhanEmail(){
-    if (this.diachiEmail === this.nhanvien.Email){
+    if (this.diachiEmail === this.khachhang.Email){
       document.getElementById('code').style.display = 'block';
       document.getElementById('emailaddress').style.display = 'none';
-      // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
+      // this.NVService.GuiEmailLayOTP(this.khachhang).subscribe();
       this.LayMaXacNhan();
 
     }else {
@@ -50,11 +49,8 @@ export class ForgotpasswordComponent implements OnInit {
 
   // Hàm xử lý khi click button
   LayMaXacNhan(){
-    this.NVService.GetOTP(this.nhanvien).subscribe( dt => {
-      // console.log(dt)
+    this.KHService.GetOTP(this.khachhang).subscribe( dt => {
       const data = dt;
-      // const tmp = JSON.stringify(dt);
-      // const data = JSON.parse(tmp);
       localStorage.setItem('loggedInAcount', JSON.stringify(data));
       document.getElementById('title-forgot').style.display = 'none';
       document.getElementById('sub-title-forgot').style.display = 'none';
@@ -68,7 +64,8 @@ export class ForgotpasswordComponent implements OnInit {
   }
   // Kiểm tra Secret Key
   XacNhanKey(){
-    this.NVService.TimKiemNhanVien(this.nhanvien).subscribe(dt => {
+
+    this.KHService.TimKiemKhachHang(this.khachhang).subscribe(dt => {
       if (dt.toString() !== this.key || this.key === undefined){
       document.getElementById('err_secretkey').style.display = 'block';
 
@@ -166,8 +163,8 @@ AnPass(idevent){
   DoiMatKhau(){
     if (this.KiemTraUniCode()){
       if (this.XacNhanMatKhauMoi()){
-        this.nhanvien.Mat_khau = this.mat_khau_moi;
-        this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
+        this.khachhang.Mat_khau = this.mat_khau_moi;
+        this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
 
           if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
             localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
@@ -188,7 +185,7 @@ AnPass(idevent){
 
       document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'none';
 
-      this.nhanvien.Mat_khau = this.mat_khau_moi;
+      this.khachhang.Mat_khau = this.mat_khau_moi;
       return true;
 
     }else{

@@ -268,6 +268,26 @@ route.put('/nhanvien/capnhatnhanvien/:Nhan_vien_id', async(req, res) => {
     })
 })
 
+//Tìm kiếm nhân viên
+route.post('/nhanvien/timkiemnhanvien', async(req, res) =>{
+    const Nhan_vien_id = req.body.Nhan_vien_id
+    NhanVienModel.findOne({
+        Nhan_vien_id: Nhan_vien_id,
+    })
+    .then(data => {
+        if(data){
+            res.json(data.Ma_so);
+        }else{
+            res.json(false);
+        }
+    })
+    .catch(err => {
+        res.status(500).json('Lỗi server!')
+
+    })
+})
+
+
 // Hàm xóa nhiều đối tượng 
 route.post('/nhanvien/xoanhanvien', async(req, res) => {
     const arrNhanVien = req.body;
@@ -393,7 +413,7 @@ route.post('/nhanvien/guiOTP', async(req, res) => {
            }).then (d =>{
                console.log(arrThongTin.Ma_so)
            })
-        }, 15000)
+        }, 45000)
         
         // const secret_key = generateUniqueSecret();
         // const otpAuth = generateOTPToken(arrThongTin.Nhan_vien_id, 'GreenLifeShop.com', secret_key);
