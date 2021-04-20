@@ -101,10 +101,10 @@ KhachHangModel.findOne({
                     Thoi_gian_tao : Thoi_gian_tao,
                     Thoi_gian_cap_nhat : Thoi_gian_cap_nhat,
                 })
+                .then(data => { // ĐỐi tượng nếu tạo thành công sẽ được return về và lưu trong data, sau đó thông báo thành công
+                    res.json('Tạo tài khoản thành công!');
+                })
             }
-        })
-        .then(data => { // ĐỐi tượng nếu tạo thành công sẽ được return về và lưu trong data, sau đó thông báo thành công
-            res.json('Tạo tài khoản thành công!');
         })
         .catch(err => { //Ngược lại sẽ thông báo thất bại
             res.status(500).json('Không tạo được tài khoản!')

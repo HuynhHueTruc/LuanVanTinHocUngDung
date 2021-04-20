@@ -544,7 +544,6 @@ export class CustomerComponent implements OnInit {
 
   // Hàm thực hiện thêm tài khoản nhân viên
   ThemKhachHang(){
-    console.log(this.khachhang.Dia_chi)
     this.ThongTinGuiEmailTaiKhoan = [];
     // let thongtin;
     this.khachhang.Mat_khau = this.text;

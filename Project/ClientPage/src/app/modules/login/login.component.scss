@@ -437,6 +437,10 @@ color: #3970b0 !important;
 input:hover:-ms-input-placeholder {
 color: #3970b0 !important;
 }
+select#Gioi_tinh:hover, select#provinces:hover, select#districts:hover, select#ward:hover, input#NgaySinh:hover{
+color:  #3970b0;
+}
+
 input.register {
     width: 335px;
     margin: 30px auto;
@@ -745,4 +749,24 @@ p.copyright {
 .contentcheckbox{
   color: white;
   padding-left: 2%;
+}
+
+small{
+  font-size: 12px;
+}
+
+#err_khong_trung_mat_khau_moi{
+  display: none;
+}
+
+#errNgaySinh2{
+  display: none;
+}
+
+#err_mat_khau_moi{
+  display: none;
+}
+
+#err_xac_nhan_mat_khau{
+  display: none;
 }
