@@ -20,7 +20,7 @@ export class KhachhangService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  setLoggedIn(value: boolean, data: any){
+  setLoggedIn(value: boolean, data: any) {
 
     this.loggedInStatus = value;
     localStorage.setItem('loggedIn', 'true');
@@ -30,28 +30,33 @@ export class KhachhangService {
 
   }
 
-  get isLoggedIn(){
+  get isLoggedIn() {
     return JSON.parse(localStorage.getItem('loggedIn')
-    || this.loggedInStatus && JSON.parse(localStorage.getItem('loggedInAcoount')) || this.loggedInAccount);
+      || this.loggedInStatus && JSON.parse(localStorage.getItem('loggedInAcoount')) || this.loggedInAccount);
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('loggedInAcount');
     this.router.navigate(['login']);
   }
 
-// Tạo biến gửi trùng tên với biến nhận bên server
-  DangNhapKhachHang(Khach_hang_id, Mat_khau){
-   return this.http.post('http://localhost:3000/khachhang/dangnhap', {Khach_hang_id, Mat_khau});
+  // Tạo biến gửi trùng tên với biến nhận bên server
+  DangNhapKhachHang(Khach_hang_id, Mat_khau) {
+    return this.http.post('http://localhost:3000/khachhang/dangnhap', { Khach_hang_id, Mat_khau });
   }
 
-  DangKyKhachHang(Khach_hang_id, Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, Mat_khau, Email){
+  DangKyKhachHang(Khach_hang_id, Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, Mat_khau, Email) {
     return this.http.post('http://localhost:3000/khachhang/dangky',
-    {Khach_hang_id, Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, Mat_khau, Email});
+      { Khach_hang_id, Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, Mat_khau, Email });
   }
 
-  ThemKhachHang(khachhang: KhachHangModel): Observable<KhachHangModel[]>{
+  ThemKhachHang(khachhang: KhachHangModel): Observable<KhachHangModel[]> {
     return this.http.post<KhachHangModel[]>('http://localhost:3000/khachhang/dangky', khachhang);
-   }
+  }
+
+  CapNhatKhachHang(khachhang: KhachHangModel): Observable<KhachHangModel[]> {
+    return this.http.put<KhachHangModel[]>(`${'http://localhost:3000/nhanvien/capnhatnhanvien'}/${khachhang.Khach_hang_id}`, khachhang).pipe(
+    );
+  }
 }

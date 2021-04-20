@@ -23,7 +23,7 @@ import { DefautGuard } from './../guard/defaut.guard';
 import { DefaultComponent } from './layout/default/default.component';
 import { LoginComponent } from './modules/login/login.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { StaffComponent } from './modules/staff/staff.component';
 import { StoreComponent } from './modules/store/store.component';
 

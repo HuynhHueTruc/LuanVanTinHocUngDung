@@ -1,12 +1,10 @@
 export class GioHang{
-  constructor(
-    public id: string,
-    public SanPham: [
+    public _id: string;
+    public San_Pham: [{
       SanPham_id: string,
-      SoLuong: number,
-      GiaBan: number
-    ],
-    public IDKhachHang: string,
-    public TongTien: number
-  ){}
+      So_luong: number,
+      Gia_ban: number
+    }];
+    public KhachHang_id: string;
+    public Tong_tien: number;
 }

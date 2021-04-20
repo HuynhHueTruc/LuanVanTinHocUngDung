@@ -1,16 +1,18 @@
 export class NhaCungCap{
-  constructor(
-    public id: string,
-    public TenNCC: string,
-    public DiaChi: [
-      Xa_Phuong: string,
-      Quan_Huyen: string,
-      Tinh_ThanhPho: string
-    ],
-    public Email: string,
-    public SDT: number,
-    public SanPhamCC: [
-      SanPham_id: string
-    ]
-  ){}
+  _id: string;
+  Ten: string;
+  Dia_chi: {
+      Tinh_ThanhPho: string,
+      Huyen_Quan: string,
+      Xa_Phuong: string
+  };
+  Email: string;
+  So_dien_thoai: string;
+  Danh_muc_cung_cap: [
+      {
+          DMN_id: string
+      }
+  ];
+  Thoi_gian_tao: Date;
+  Thoi_gian_chinh_sua: Date;
 }

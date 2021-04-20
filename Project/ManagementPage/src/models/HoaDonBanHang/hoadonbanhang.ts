@@ -16,7 +16,7 @@ export class HoaDonBanHangModel{
     };
     VanChuyen_id: string;
     ThanhToan_id: string;
-    Tong_tien: Number;
+    Tong_tien: number;
     Ngay_lap: Date
 
 }

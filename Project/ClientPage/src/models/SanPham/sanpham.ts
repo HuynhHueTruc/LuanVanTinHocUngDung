@@ -1,22 +1,19 @@
 export class SanPham{
-  constructor(
-    public id: string,
-    public TenSanPham: string,
-    public DanhMuc: [
-      DML_id: string,
+  _id: string;
+  Ten_san_pham: string;
+  So_luong: number;
+  Danh_Muc: [{
       DMN_id: string
-    ],
-    public Gia: number,
-    public SoLuong: number,
-    public HinhAnh: string,
-    public MoTa: string,
-    public BaoHanh: string,
-    public DanhGia: [
+  }];
+  Gia: number;
+  Hinh_anh: string;
+  Mo_ta: string;
+  Bao_hanh: string;
+  Danh_gia: [{
       KhachHang_id: string,
-      NoiDung: string,
-      SoDiem: number,
-      NgayDanhGia: Date,
-      NgayCapNhat: Date
-    ]
-  ){}
+      Noi_dung: string,
+      So_diem: number,
+      Ngay_danh_gia: Date,
+      Ngay_cap_nhat: Date
+  }];
 }

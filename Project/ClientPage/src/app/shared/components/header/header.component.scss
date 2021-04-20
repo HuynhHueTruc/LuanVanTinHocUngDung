@@ -63,7 +63,7 @@ color: black;
   position: relative;
   display: inline-block;
 }
-.dropdown-content{
+.content{
   display: none;
   position: absolute;
   background-color: #f5f5f5;
@@ -76,4 +76,5 @@ a{
 }
 .navbar-nav .dropdown-menu{
   background-color: black;
+
 }

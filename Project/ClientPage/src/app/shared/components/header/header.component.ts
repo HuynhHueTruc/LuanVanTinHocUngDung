@@ -194,4 +194,9 @@ export class HeaderComponent implements OnInit {
     Logout(){
       this.KHService.logout();
     }
+
+// Mở loại cây
+    OpenLoaiCay(){
+
+    }
 }

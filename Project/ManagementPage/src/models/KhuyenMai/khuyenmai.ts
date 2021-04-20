@@ -1,7 +1,7 @@
 export class KhuyenMaiModel{
   _id: string;
   Ten_khuyen_mai: string;
-  Gia_tri: Number;
+  Gia_tri: number;
   Ngay_bat_dau: Date;
   Ngay_ket_thuc: Date;
   Danh_muc_nho: [{

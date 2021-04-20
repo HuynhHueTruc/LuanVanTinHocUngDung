@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
   gioitinh: string;
   thanhpho: string;
   quanhuyen: string;
-  xaphuonh: string;
-
+  checkboxstate = false;
   ngOnInit(): void {
     this.geteachDiaDiem();
 
@@ -154,5 +153,14 @@ export class LoginComponent implements OnInit {
     this.diachiService.getListDiaChi().subscribe((res: any) => {
       this.thanhphos = res;
     });
+  }
+
+  An_HienMatKhau(){
+    this.checkboxstate = !this.checkboxstate;
+    if (this.checkboxstate){
+      document.getElementById('password1').setAttribute('type', 'text');
+    }else {
+      document.getElementById('password1').setAttribute('type', 'password');
+    }
   }
 }

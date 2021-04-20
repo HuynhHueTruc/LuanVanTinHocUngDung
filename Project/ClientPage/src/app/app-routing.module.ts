@@ -1,39 +1,40 @@
+import { StoreComponent } from './modules/store/store.component';
+import { ProductComponent } from './modules/product/product.component';
+import { CartComponent } from './modules/cart/cart.component';
+import { ChangepasswordComponent } from './modules/changepassword/changepassword.component';
+import { ProfileComponent } from './modules/profile/profile.component';
+import { CustomerinfoComponent } from './modules/customerinfo/customerinfo.component';
 import { DefautGuard } from './../guard/defaut.guard';
 import { LoginComponent } from 'src/app/modules/login/login.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+// import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-// const routes: Routes = [{
-//   path: '',
-//   component: DefaultComponent,
-//   children: [{
-//     path: '',
-//     component: DashboardComponent
-//   },
-//   {
-//     path: 'posts',
-//     component: PostsComponent
-//   }]
-// }];
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-   // Tự động chuyển sang trang Login khi load, set pathMatch: 'full' để tránh vòng lặp tìm path vô hạn
+  // Tự động chuyển sang trang Login khi load, set pathMatch: 'full' để tránh vòng lặp tìm path vô hạn
   { path: '', redirectTo: '/default', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  // { path: 'default', component: DefaultComponent, canActivate: [DefautGuard] }
-  { path: 'default', component: DefaultComponent },
+  { path: 'default', component: DefaultComponent},
+  { path: 'customerinfo', component: CustomerinfoComponent,
+    children: [
+      { path: '', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'changepassword', component: ChangepasswordComponent },
+    ]
+  },
+  { path: 'cart', component: CartComponent },
+  { path: 'product', component: ProductComponent },
+  { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent }
 
 ];
 
 @NgModule({
-  imports: [CommonModule,
-    [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })]
-  ],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

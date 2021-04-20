@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/app/modules/login/login.component';
 import { DanhmucService } from '../services/DanhMuc/danhmuc.service';
 import { SharedModule } from './shared/shared.module';
@@ -35,7 +36,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     ReactiveFormsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    RouterModule
   ],
   // Các dịch vụ, mà các component khác có thể sử dụng
   providers: [

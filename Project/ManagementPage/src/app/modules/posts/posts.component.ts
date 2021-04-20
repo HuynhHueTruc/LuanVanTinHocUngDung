@@ -65,6 +65,7 @@ export class PostsComponent implements OnInit {
       this.dstintucsearch = res.tintucs;
     })
   }
+
   // Kiểm tra file có được upload hay không
   chooseFile(status) {
     let f;

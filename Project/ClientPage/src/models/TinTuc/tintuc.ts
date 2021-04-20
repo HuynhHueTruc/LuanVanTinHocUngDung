@@ -1,11 +1,9 @@
 export class TinTuc{
-  constructor(
-    public id: string,
-    public TieuDe: string,
-    public TomTatND: string,
-    public IDNhanVien: string,
-    public NoiDung: string,
-    public HinhAnh: string,
-    public NgayDang: Date
-  ){}
+  _id: string;
+  Tieu_de: string;
+  NhanVien_id: string;
+  Noi_dung: string;
+  Anh_dai_dien: string;
+  Thoi_gian_tao: Date;
+  Thoi_gian_cap_nhat: Date;
 }

@@ -1,25 +1,22 @@
 export class PhieuDat{
-  constructor(
-    public id: string,
-    public SanPham: [
+  _id: string;
+  San_Pham: [{
       SanPham_id: string,
-      SoLuong: number,
-      GiaBan: number
-    ],
-    public IDKhachHang: string,
-    public HoTen: string,
-    public SDT: string,
-    public DiaChi: [
+      So_luong: number,
+      Gia_ban: number
+  }];
+  KhachHang_id: string;
+  Ho_ten: string;
+  So_dien_thoai: string;
+  Dia_chi: {
       Xa_Phuong: string,
-      Quan_Huyen: string,
+      Huyen_Quan: string,
       Tinh_ThanhPho: string
-    ],
-    public VAT: string,
-    public IDVanChuyen: string,
-    public IDThanhToan: string,
-    public TrangThai: string,
-    public TongTien: number,
-    public NgayLap: Date,
-    public NgayCapNhat: Date
-  ){}
+  };
+  Trang_thai: string;
+  VanChuyen_id: string;
+  ThanhToan_id: string;
+  Tong_tien: number;
+  Ngay_nhan: Date;
+  Ngay_cap_nhat: Date;
 }
