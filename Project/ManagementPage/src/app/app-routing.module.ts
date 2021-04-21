@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { ScatterPlotComponent } from './modules/charts/scatter-plot/scatter-plot.component';
 import { AreaComponent } from './modules/charts/area/area.component';
 import { CategoryComponent } from './modules/category/category.component';
@@ -59,7 +60,9 @@ const routes: Routes = [
                       {path: 'scatter_plot', component: ScatterPlotComponent}
 
                     ]
-  }
+  },
+  { path: '404', component: NotFoundComponent },
+    { path: '**', redirectTo: '404' }
 
 ];
 

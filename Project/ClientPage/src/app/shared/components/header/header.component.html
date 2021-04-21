@@ -27,7 +27,7 @@
                   Cây cảnh
                 </a>
                 <div class=" dropdown-menu dropdown-content" aria-labelledby="navbardrop">
-                    <a class="dropdown-item" (click)="LoaiCay(eachLoaiCay)" href="#" *ngFor="let eachLoaiCay of loaicays">{{eachLoaiCay.Ten_loai_cay}}</a>
+                    <a class="dropdown-item" [routerLink]="['typetree', eachLoaiCay._id]" routerLinkActive="router-link-active" *ngFor="let eachLoaiCay of loaicays">{{eachLoaiCay.Ten_loai_cay}}</a>
                     <br>
                 </div>
             </li>
@@ -118,3 +118,4 @@
 
     </div>
 </nav>
+

@@ -1,3 +1,5 @@
+import { NotFoundComponent } from './../../modules/not-found/not-found.component';
+import { TypetreeComponent } from './../../modules/typetree/typetree.component';
 import { ForgotpasswordComponent } from './../../modules/forgotpassword/forgotpassword.component';
 import { StoreComponent } from './../../modules/store/store.component';
 import { ProductComponent } from './../../modules/product/product.component';
@@ -40,7 +42,9 @@ import { NgOtpInputModule } from 'ng-otp-input';
     CartComponent,
     ProductComponent,
     StoreComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    TypetreeComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +54,8 @@ import { NgOtpInputModule } from 'ng-otp-input';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    RouterModule
     // BackButtonDisableModule.forRoot({
     //   preserveScrollPosition: true
     // })

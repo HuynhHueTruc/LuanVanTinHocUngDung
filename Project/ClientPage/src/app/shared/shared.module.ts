@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -36,7 +38,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NbActionsModule,
     NbSidebarModule,
     NbSearchModule,
-    NbToastrModule.forRoot()
+    NbToastrModule.forRoot(),
+    MatListModule,
+    RouterModule
+
   ],
   exports: [
     HeaderComponent,

@@ -1,3 +1,6 @@
+import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { ContentComponent } from './modules/content/content.component';
+import { TypetreeComponent } from './modules/typetree/typetree.component';
 import { ForgotpasswordComponent } from './modules/forgotpassword/forgotpassword.component';
 import { StoreComponent } from './modules/store/store.component';
 import { ProductComponent } from './modules/product/product.component';
@@ -17,9 +20,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   // Tự động chuyển sang trang Login khi load, set pathMatch: 'full' để tránh vòng lặp tìm path vô hạn
-  { path: '', redirectTo: '/default', pathMatch: 'full' },
+  { path: '', redirectTo: '/default', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
-  { path: 'default', component: DefaultComponent},
+  { path: 'default', component: DefaultComponent, children: [
+    {path: '', component: ContentComponent},
+    { path: 'typetree/:id', component: TypetreeComponent }
+  ]},
   { path: 'customerinfo', component: CustomerinfoComponent,
     children: [
       { path: '', component: ProfileComponent },
@@ -31,7 +37,10 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'product', component: ProductComponent },
   { path: 'store', component: StoreComponent },
-  { path: 'posts', component: PostsComponent }
+  { path: 'posts', component: PostsComponent },
+    { path: '404', component: NotFoundComponent },
+    { path: '**', redirectTo: '404' }
+  // { path: 'typefree', component: TypetreeComponent }
 
 ];
 

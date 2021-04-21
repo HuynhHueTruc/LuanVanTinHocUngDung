@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './../../modules/not-found/not-found.component';
 import { ScatterPlotComponent } from './../../modules/charts/scatter-plot/scatter-plot.component';
 import { AreaComponent } from './../../modules/charts/area/area.component';
 import { CategoryComponent } from './../../modules/category/category.component';
@@ -72,7 +73,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     OrderComponent,
     CategoryComponent,
     AreaComponent,
-    ScatterPlotComponent
+    ScatterPlotComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

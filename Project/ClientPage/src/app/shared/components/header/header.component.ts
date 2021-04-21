@@ -6,6 +6,7 @@ import { DanhMucNhoModel } from '../../../../models/DanhMuc/DanhMucNho';
 import { DanhmucService } from '../../../../services/DanhMuc/danhmuc.service';
 import { Component, OnInit } from '@angular/core';
 import { DanhMucModel } from '../../../../models/DanhMuc/danhmuc';
+import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -49,10 +50,14 @@ export class HeaderComponent implements OnInit {
     dsdungcu: TenDanhMucNhoModel[] = [];
     dshotro: TenDanhMucNhoModel[] = [];
 
+    name = '';
+
     // Khi chạy constructor thì khởi tạo luôn DanhmucService
-    constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService){}
+    constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
+      private router: Router){}
 
     ngOnInit(): void{
+
       this.getLoaiCay();
       this.geteachDanhMuc();
       // console.log(this.KHService.loggedInStatus, JSON.parse(this.KHService.loggedInStatus));
@@ -195,8 +200,7 @@ export class HeaderComponent implements OnInit {
       this.KHService.logout();
     }
 
-// Mở loại cây
-    OpenLoaiCay(){
-
+    onSelect(eachLoaiCay){
+      this.router.navigate(['/typetree', eachLoaiCay._id]);
     }
 }

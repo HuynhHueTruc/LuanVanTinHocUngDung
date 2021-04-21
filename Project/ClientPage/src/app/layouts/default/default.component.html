@@ -2,9 +2,19 @@
 
 <app-intro></app-intro>
 
-<app-content> </app-content>
+<router-outlet> </router-outlet>
 
 <app-footer></app-footer>
 
 <app-liftnav></app-liftnav>
-<!-- <router-outlet> </router-outlet> -->
+
+<!-- <mat-drawer-container>
+
+<mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-header></app-header>
+    <app-intro></app-intro>
+  </mat-drawer>
+  <mat-drawer-content  style="background-color: aqua;">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container> -->
