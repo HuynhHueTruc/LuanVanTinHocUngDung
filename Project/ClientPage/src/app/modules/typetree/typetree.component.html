@@ -1,1 +1,44 @@
-<p>typetree works!</p>
+
+<div class="container">
+<div class="container">
+  <div class="row">
+      <div class="col-6">
+        <br>
+        <img class="image" src="{{loaicay?.Hinh_anh}}"  class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col-6 ">
+        <p class="title-gt">Giới thiệu</p>
+        <hr class="p-hr">
+        <p class="title">Green Life</p>
+        <p class="gt">   &nbsp;&nbsp;&nbsp;&nbsp;
+        Green Life không chỉ mang lại cho bạn một không gian sống trong lành mà còn sang trọng với những loài cây đẹp
+        mắt với giá trị phong thủy cao. </p>
+        <p class="gt"> &nbsp;&nbsp;&nbsp;&nbsp; Có Green Life bạn không cần phải đau đầu trong việc lựa chọn sản phẩm trang trí cho cảnh quan của mình.</p>
+        <p class="gt" > &nbsp;&nbsp;&nbsp;&nbsp; Với dịch vụ chăm sóc khách hàng trực tuyến hiện đại và gần gũi. Green Life chắc chắn sẽ tạo cho bạn cảm giác
+        thoải mái và tin tưởng khi sử dụng dịch vụ của Green Life. </p>
+        <div class="wapper d-flex justify-content-center col-sm-12">
+          <button name="button" type="button">Xem thêm</button>
+        </div>
+      </div>
+  </div>
+</div>
+<br>
+<div>
+  <div class="row">
+    <div class="col-sm-3 "  *ngFor="let eachSP of dscaycanh; let i = index">
+      <div class="container">
+        <div class="card d-flex justify-content-center">
+          <img class="card-img-top" src="{{eachSP.Hinh_anh}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{eachSP.Ten_san_pham}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+<br>
+    </div>
+  </div>
+</div>
+</div>
+

@@ -51,10 +51,12 @@ export class HeaderComponent implements OnInit {
     dshotro: TenDanhMucNhoModel[] = [];
 
     name = '';
+    loaicay_id = '';
+    href = '';
 
     // Khi chạy constructor thì khởi tạo luôn DanhmucService
     constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
-      private router: Router){}
+      private router: Router, private route: ActivatedRoute){}
 
     ngOnInit(): void{
 
@@ -201,6 +203,9 @@ export class HeaderComponent implements OnInit {
     }
 
     onSelect(eachLoaiCay){
-      this.router.navigate(['/typetree', eachLoaiCay._id]);
+      this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
+      // this.href = this.router.url;
+      // this.loaicay_id = this.href.replace('/default/typetree/', '');
+      // console.log(this.loaicay_id)
     }
 }

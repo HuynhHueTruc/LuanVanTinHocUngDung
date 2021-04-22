@@ -1,0 +1,61 @@
+.title-gt{
+  margin-top: 5%;
+  font-family: "Calibri";
+  font-size: 20px;
+  text-align: center;
+  color: cadetblue;
+}
+
+.title{
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 3%;
+}
+.gt{
+  margin-left: 5%;
+}
+
+.wapper{
+  margin-top: 3%;
+}
+
+.row{
+  margin-left: 0cm;
+  margin-right: 0cm;
+}
+
+button{
+  background-color: cadetblue;
+  color: white;
+  border: none;
+  height: 30px;
+}
+
+// h5{
+//   font-size: 18px !important;
+//   max-width: 210px;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+// }
+h5 {
+  font-size: 18px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.row{
+  margin: 0px;
+  padding: 0px;
+}
+
+// .card{
+//   height: 200px !important;
+// }
+.card-img-top{
+  vertical-align: middle;
+  width: 215px;
+  height: 215px;
+  object-fit: cover;
+}

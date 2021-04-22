@@ -2,6 +2,9 @@ import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
 import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/analytics';
 
 @Component({
   selector: 'app-typeoftree',
@@ -23,13 +26,33 @@ export class TypeoftreeComponent implements OnInit {
   arrLoaiCay_ID = [];
   arrTenLoaiCay = [];
   lengthchecked = 0;
+  choosefile = false;
+  url: any
+  firebaseConfig = {
+    apiKey: "AIzaSyB5XhGTH_qmY-E5SKq0x9xvvadjtqPeXQQ",
+    authDomain: "managementimagesgreenlife.firebaseapp.com",
+    projectId: "managementimagesgreenlife",
+    storageBucket: "managementimagesgreenlife.appspot.com",
+    messagingSenderId: "206299427924",
+    appId: "1:206299427924:web:63b6f139ee2c4d059f69c1",
+    measurementId: "G-QZHVZRPBCT"
+  };
+
   constructor(private modalService: NgbModal, private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
     this.getdsloaicay();
+      // Initialize Firebase
+      if (!firebase.apps.length) {
+        firebase.initializeApp(this.firebaseConfig);
+        firebase.analytics();
+      } else {
+        firebase.app(); // if already initialized, use that one
+      }
+
   }
 
-    // Hàm lấy danh sách nhân viên
+    // Hàm lấy danh sách
     getdsloaicay(){
       this.loaicayService.getListLoaiCay().subscribe((res: any) => {
         this.dsloaicay = res.loaicays;
@@ -149,6 +172,7 @@ SearchByOption(value){
 
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
+    this.choosefile = false
     this.UnChecked();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
@@ -170,6 +194,7 @@ SearchByOption(value){
 
     // Hàm mở Dialog Cập nhật tài khoản
   open_update(content_update, loaicayUpdate) {
+    this.choosefile = true
     this.UnChecked();
     this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
@@ -185,8 +210,9 @@ SearchByOption(value){
     // Hàm kiểm tra thông tin
     KTNull(loaicay: LoaiCayModel){
       const Ten_loai_cay = loaicay.Ten_loai_cay;
+      const Hinh_anh = loaicay.Hinh_anh
       const thongtinloaicay = [];
-      thongtinloaicay.push( Ten_loai_cay);
+      thongtinloaicay.push( Ten_loai_cay, Hinh_anh);
       for (const i in thongtinloaicay){
         if (thongtinloaicay.hasOwnProperty(i)){
           if (thongtinloaicay[i] === undefined || thongtinloaicay[i] === '' || thongtinloaicay[i] === null){
@@ -200,8 +226,44 @@ SearchByOption(value){
       }
     }
 
+      //upload lên firebase và gọi hàm lưu vào csdl
+  uploadImageandSave(flag?: number) {
+    if (this.choosefile) {
+      const ref = firebase.storage().ref();
+      const f = document.querySelector('#photo') as HTMLInputElement;
+      const file = f.files[0];
+
+      if (file === undefined) {
+        this.CapNhatLoaiCay(this.loaicay.Hinh_anh)
+      } else {
+        const name = new Date() + '-' + file.name;
+        const metadata = {
+          contentType: file.type
+        };
+        const task = ref.child(name).put(file, metadata);
+        task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            // console.log(url),
+            this.url = url;
+            // alert("Image upload succesful")
+            if (flag === 1) {
+              this.CapNhatLoaiCay(this.url)
+            } else {
+              this.ThemLoaiCay(this.url);
+            }
+          }
+          );
+      }
+    } else {
+      this.ThemLoaiCay(null);
+    }
+
+  }
+
     // Hàm thực hiện thêm tài khoản nhân viên
-    ThemLoaiCay(){
+    ThemLoaiCay(url){
+      this.loaicay.Hinh_anh = url
       // console.log(this.loaicay)
       this.KTNull(this.loaicay);
 
@@ -219,8 +281,8 @@ SearchByOption(value){
     }
 
     // Hàm thực hiện cập nhật thông tin nhân viên
-    CapNhatLoaiCay(){
-
+    CapNhatLoaiCay(url){
+      this.loaicay.Hinh_anh = url
     this.KTNull(this.loaicay);
     if (this.KiemTraThongTin){
       this.loaicayService.CapNhatLoaiCay(this.loaicay).subscribe(data_capnhat => {
@@ -261,7 +323,7 @@ SearchByOption(value){
   }
 
    // Hàm thực hiện xóa nhân viên
-   XoaNhanVien(_id: string){
+   XoaLoaiCay(_id: string){
     this.loaicayService.XoaLoaiCay(_id).subscribe(data_xoa => {
       window.alert(data_xoa);
       location.reload();
@@ -273,8 +335,21 @@ SearchByOption(value){
     if (this.flag === true){
       this.XoaNhieuLoaiCay();
     }else {
-      this.XoaNhanVien(this.loaicayID);
+      this.XoaLoaiCay(this.loaicayID);
     }
     this.modalService.dismissAll();
+  }
+
+   // Kiểm tra file có được upload hay không
+   chooseFile() {
+    const f = document.querySelector('#photo') as HTMLInputElement;
+    const file = f.files[0];
+    if (file !== undefined) {
+      document.getElementById('err_upload').style.display = 'none';
+      this.choosefile = true;
+    } else {
+      document.getElementById('err_upload').style.display = 'block';
+      this.choosefile = false
+    }
   }
 }

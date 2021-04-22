@@ -222,8 +222,12 @@ nb-card-body{
 .content{
   height: 110px;
   width: 388px;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
+  // overflow: hidden;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 #buttoncard{

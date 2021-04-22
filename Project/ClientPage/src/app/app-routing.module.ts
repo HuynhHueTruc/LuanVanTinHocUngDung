@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/default', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'default', component: DefaultComponent, children: [
-    {path: '', component: ContentComponent},
-    { path: 'typetree/:id', component: TypetreeComponent }
+    { path: '', component: ContentComponent},
+    { path: 'typetree/:_id', component: TypetreeComponent }
   ]},
   { path: 'customerinfo', component: CustomerinfoComponent,
     children: [
@@ -38,9 +38,9 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
-    { path: '404', component: NotFoundComponent },
-    { path: '**', redirectTo: '404' }
-  // { path: 'typefree', component: TypetreeComponent }
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '404' },
+  // { path: 'tree/:id', component: TypetreeComponent }
 
 ];
 
@@ -49,3 +49,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+// export const routingComponent = [DefaultComponent,
+// TypetreeComponent];

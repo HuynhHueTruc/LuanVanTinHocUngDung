@@ -24,7 +24,6 @@ export class SanphamService {
    }
 
    CapNhatSoLuongSanPham(arrSanPham): Observable<SanPhamModel[]>{
-     console.log(arrSanPham)
     return this.http.post<SanPhamModel[]>('http://localhost:3000/sanpham/capnhatsanpham/soluong', arrSanPham).pipe();
    }
 

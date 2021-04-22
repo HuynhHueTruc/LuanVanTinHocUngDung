@@ -23,11 +23,12 @@ export class CategoryComponent implements OnInit {
   subdanhmucnho: DanhMucNhoModel
   dropdownSettings: IDropdownSettings;
   loaicaytmp = []
+  Ten_loai_cay = ''
   constructor(private danhmucService: DanhmucService, private modalService: NgbModal, private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
     this.getdsdanhmuc()
-    this.getdsloaicay()
+
     this.dropdownSettings = {
       singleSelection: true,
       idField: '_id',
@@ -43,6 +44,7 @@ export class CategoryComponent implements OnInit {
     this.danhmucService.getListDanhMuc().subscribe((res: any) => {
       this.dsdanhmuc = res.danhmucs;
       this.dsdanhmucsearch = res.danhmucs;
+      this.getdsloaicay()
     })
   }
 
@@ -168,6 +170,11 @@ export class CategoryComponent implements OnInit {
     if (eachDMN.Loai_cay === undefined) {
       return false
     } else {
+      for (const i in this.dsloaicay){
+        if (this.dsloaicay[i]._id === eachDMN.Loai_cay){
+          this.Ten_loai_cay = this.dsloaicay[i].Ten_loai_cay
+        }
+      }
       return true
     }
   }

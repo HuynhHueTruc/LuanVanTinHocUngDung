@@ -13,6 +13,7 @@ route.get('/loaicay/thongtin', async(req, res) => {
     LoaiCayModel.find({}).select({
         _id: 1,
         Ten_loai_cay: 1,
+        Hinh_anh: 1,
         Thoi_gian_tao: 1,
         Thoi_gian_cap_nhat: 1
     }).exec((err, loaicays) => {
@@ -32,6 +33,7 @@ route.get('/loaicay/thongtin', async(req, res) => {
 route.post('/loaicay/taomoi', async(req, res) => {
     var _id = new ObjectID()
     var Ten_loai_cay = req.body.Ten_loai_cay;
+    var Hinh_anh = req.body.Hinh_anh;
     var Thoi_gian_cap_nhat = dateFormat();
     var Thoi_gian_tao = dateFormat();
 // Kiểm tra m có tồn tại chưa
@@ -46,6 +48,7 @@ LoaiCayModel.findOne({
        return LoaiCayModel.create({
             _id: _id,
             Ten_loai_cay: Ten_loai_cay,
+            Hinh_anh: Hinh_anh,
             Thoi_gian_tao: Thoi_gian_tao,
             Thoi_gian_cap_nhat: Thoi_gian_cap_nhat
         })
@@ -64,7 +67,7 @@ LoaiCayModel.findOne({
 route.put('/loaicay/capnhatloaicay/:_id', async(req, res) => {
     // console.log(req.body)
     const _id = req.params._id;
-    const {Ten_loai_cay} = req.body;
+    const {Ten_loai_cay, Hinh_anh} = req.body;
     const Thoi_gian_cap_nhat = dateFormat();
   
     LoaiCayModel.findOne({
@@ -74,6 +77,7 @@ route.put('/loaicay/capnhatloaicay/:_id', async(req, res) => {
                 _id: _id
             }, {
                 Ten_loai_cay: Ten_loai_cay,
+                Hinh_anh: Hinh_anh,
                 Thoi_gian_cap_nhat : Thoi_gian_cap_nhat,
                 })
                

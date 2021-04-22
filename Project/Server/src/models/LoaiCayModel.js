@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 let LoaiCaySchema = new mongoose.Schema({
     _id: mongoose.Schema.ObjectId,
     Ten_loai_cay: String,
+    Hinh_anh: String,
     Thoi_gian_tao: Date,
     Thoi_gian_cap_nhat: Date
 });

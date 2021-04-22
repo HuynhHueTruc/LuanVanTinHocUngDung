@@ -122,6 +122,7 @@ export class ProductComponent implements OnInit {
       document.getElementById('err_upload').style.display = 'none';
       this.choosefile = true;
     } else {
+      document.getElementById('err_upload').style.display = 'block';
       this.choosefile = false
     }
   }
@@ -158,7 +159,6 @@ export class ProductComponent implements OnInit {
     } else {
       this.ThemSanPham(null);
     }
-
   }
 
   //  // Tìm đối tượng danh mục nhỏ trong DANH MỤC khớp DMN_id với DMN_id trong KHUYẾN MÃI
