@@ -7,7 +7,7 @@ import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { SanphamService } from './../../../services/SanPham/sanpham.service';
 import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
 import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AfterViewInit } from '@angular/core';
@@ -36,8 +36,10 @@ export class TypetreeComponent implements  AfterViewInit  {
   giatrikhuyenmai = 0;
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
+
   constructor(private router: Router, private loaicayService: LoaicayService, private route: ActivatedRoute,
-    private sanphamService: SanphamService, private danhmucService: DanhmucService, private khuyenmaiService: KhuyenmaiService) { }
+              private sanphamService: SanphamService, private danhmucService: DanhmucService,
+              private khuyenmaiService: KhuyenmaiService) { }
 
   // ngOnInit(): void {
 
@@ -46,7 +48,6 @@ export class TypetreeComponent implements  AfterViewInit  {
   ngAfterViewInit(): void{
     this.href = this.router.url;
     this.loaicay_id = this.href.replace('/default/typetree/', '');
-
     this.getLoaiCay();
   }
 
@@ -97,6 +98,7 @@ export class TypetreeComponent implements  AfterViewInit  {
     });
   }
 
+  // Lấy danh sách khuyến mãi
   getdskhuyenmai() {
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
@@ -105,7 +107,7 @@ export class TypetreeComponent implements  AfterViewInit  {
     });
   }
 
-
+// Lấy sản phẩm theo id được chọn
   SoKhopLoaiCay(loaicay_id) {
     // console.log(loaicay_id)
     // console.log(this.dsdmcaycanh);
@@ -118,7 +120,7 @@ export class TypetreeComponent implements  AfterViewInit  {
     // console.log(this.dsloaicaycanh)
   }
 
-
+// Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraKhuyeMai(eachSP) {
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
