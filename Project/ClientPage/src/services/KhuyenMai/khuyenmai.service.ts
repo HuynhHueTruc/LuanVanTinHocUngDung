@@ -1,3 +1,6 @@
+import { KhuyenMaiModel } from './../../models/KhuyenMai/khuyenmai';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class KhuyenmaiService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getListKhuyenMai(): Observable<KhuyenMaiModel[]>{
+    return this.http.get<KhuyenMaiModel[]>('http://localhost:3000/khuyenmai/thongtin').pipe();
+  }
+
 }

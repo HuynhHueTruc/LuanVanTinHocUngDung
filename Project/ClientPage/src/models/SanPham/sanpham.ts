@@ -1,4 +1,4 @@
-export class SanPham{
+export class SanPhamModel{
   _id: string;
   Ten_san_pham: string;
   So_luong: number;

@@ -1,4 +1,4 @@
-export class KhuyenMai{
+export class KhuyenMaiModel{
   _id: string;
   Ten_khuyen_mai: string;
   Gia_tri: number;
