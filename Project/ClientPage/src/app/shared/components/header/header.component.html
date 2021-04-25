@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Cây cảnh
                 </a>
                 <div class=" dropdown-menu dropdown-content" aria-labelledby="navbardrop">
@@ -33,7 +33,7 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hạt giống
               </a>
               <div class="dropdown-menu dropdown-content" aria-labelledby="navbardrop">
@@ -41,49 +41,51 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chậu cây
               </a>
               <div class="dropdown-menu  dropdown-content" aria-labelledby="navbardrop">
-                <a class="dropdown-item" href="#" *ngFor="let eachChauCay of dschaucay">{{eachChauCay}}</a>
+                <a class="dropdown-item" (click)="onSelectProduct(eachChauCay)" *ngFor="let eachChauCay of dschaucay">{{eachChauCay.Ten_danh_muc_nho}}</a>
               </div>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Phân bón
               </a>
               <div class="dropdown-menu dropdown-content" aria-labelledby="navbardrop">
-                <a class="dropdown-item" href="#" *ngFor="let eachPhanBon of dsphanbon ">{{eachPhanBon}}</a>
+                <a class="dropdown-item" (click)="onSelectProduct(eachPhanBon)" *ngFor="let eachPhanBon of dsphanbon ">{{eachPhanBon.Ten_danh_muc_nho}}</a>
               </div>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dịch vụ
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dụng cụ
               </a>
               <div class="dropdown-menu  dropdown-content" aria-labelledby="navbardrop">
-                <a class="dropdown-item" href="#" *ngFor="let eachDichVu of dsdichvu">{{eachDichVu}}</a>
+                <a class="dropdown-item" (click)="onSelectProduct(eachDungCu)" *ngFor="let eachDungCu of dsdungcu">{{eachDungCu.Ten_danh_muc_nho}}</a>
               </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" [routerLink]="['service']" routerLinkActive="router-link-active"  id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dịch vụ
+              </a>
+              <!-- <div class="dropdown-menu  dropdown-content" aria-labelledby="navbardrop">
+                <a class="dropdown-item" (click)="onSelectProduct(eachDichVu)" *ngFor="let eachDichVu of dsdichvu">{{eachDichVu.Ten_danh_muc_nho}}</a>
+              </div> -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Phụ kiện</a>
+              <a class="nav-link"   [routerLink]="['product', '5f7d88277cc2cc2a04b1573d']"  routerLinkActive="router-link-active">Phụ kiện</a>
             </li>
+
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dịch vụ
-              </a>
-              <div class="dropdown-menu  dropdown-content" aria-labelledby="navbardrop">
-                <a class="dropdown-item" href="#" *ngFor="let eachDungCu of dsdungcu">{{eachDungCu}}</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link " [routerLink]="['supports']"  routerLinkActive="router-link-active" id="navbarDropdownXL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hỗ trợ
               </a>
-              <div class="dropdown-menu  dropdown-content" aria-labelledby="lienhe">
-                <a class="dropdown-item" href="#" *ngFor="let eachHoTro of dshotro">{{eachHoTro}}</a>
-              </div>
+              <!-- <div class="dropdown-menu  dropdown-content" aria-labelledby="lienhe">
+                <a class="dropdown-item" href="#" *ngFor="let eachHoTro of dshotro">{{eachHoTro.Ten_danh_muc_nho}}</a>
+              </div> -->
             </li>
 
               <li class="nav-item dropdown notifications-nav pr-md-3">

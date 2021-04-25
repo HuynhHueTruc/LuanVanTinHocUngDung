@@ -1,3 +1,5 @@
+import { ServiceComponent } from './../../modules/service/service.component';
+import { SupportsComponent } from './../../modules/supports/supports.component';
 import { NotFoundComponent } from './../../modules/not-found/not-found.component';
 import { TypetreeComponent } from './../../modules/typetree/typetree.component';
 import { ForgotpasswordComponent } from './../../modules/forgotpassword/forgotpassword.component';
@@ -25,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { NgOtpInputModule } from 'ng-otp-input';
     StoreComponent,
     ForgotpasswordComponent,
     TypetreeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SupportsComponent,
+    ServiceComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +60,12 @@ import { NgOtpInputModule } from 'ng-otp-input';
     HttpClientModule,
     NgxPaginationModule,
     NgOtpInputModule,
-    RouterModule
+    RouterModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbTabsetModule,
+    NbInputModule,
+    NbCardModule
     // BackButtonDisableModule.forRoot({
     //   preserveScrollPosition: true
     // })

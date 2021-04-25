@@ -126,7 +126,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
           // console.log(this.dmnchaucay);
           for (const item in this.dmnchaucay[0]) {
             if (this.dmnchaucay[0].hasOwnProperty(item)) {
-              this.dschaucay.push(this.dmnchaucay[0][item].Ten_danh_muc_nho);
+              this.dschaucay.push(this.dmnchaucay[0][item]);
               // console.log(this.dschaucay);
             }
           }
@@ -139,7 +139,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
           //  console.log(this.dmnphanbon);
           for (const item in this.dmnphanbon[0]) {
             if (this.dmnphanbon[0].hasOwnProperty(item)) {
-              this.dsphanbon.push(this.dmnphanbon[0][item].Ten_danh_muc_nho);
+              this.dsphanbon.push(this.dmnphanbon[0][item]);
               // console.log(this.dsphanbon);
             }
           }
@@ -151,7 +151,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
           //  console.log(this.dmndichvu);
           for (const item in this.dmndichvu[0]) {
             if (this.dmndichvu[0].hasOwnProperty(item)) {
-              this.dsdichvu.push(this.dmndichvu[0][item].Ten_danh_muc_nho);
+              this.dsdichvu.push(this.dmndichvu[0][item]);
               // console.log(this.dsdichvu);
             }
           }
@@ -164,7 +164,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
           // console.log(this.dmndungcu);
           for (const item in this.dmndungcu[0]) {
             if (this.dmndungcu[0].hasOwnProperty(item)) {
-              this.dsdungcu.push(this.dmndungcu[0][item].Ten_danh_muc_nho);
+              this.dsdungcu.push(this.dmndungcu[0][item]);
               // console.log(this.dsdungcu);
             }
           }
@@ -177,7 +177,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
           //  console.log(this.dmnhotro);
           for (const item in this.dmnhotro[0]) {
             if (this.dmnhotro[0].hasOwnProperty(item)) {
-              this.dshotro.push(this.dmnhotro[0][item].Ten_danh_muc_nho);
+              this.dshotro.push(this.dmnhotro[0][item]);
               // console.log(this.dshotro);
             }
           }
@@ -206,8 +206,13 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.isLoading = false;
   }
 
-  onSelectProduct(eachHatGiong){
-    this.router.navigateByUrl(`/default/product/${eachHatGiong.DMN_id}`);
-    this.isLoading = true;
+  onSelectProduct(eachSP?){
+    if (eachSP !== undefined){
+      this.router.navigateByUrl(`/default/product/${eachSP.DMN_id}`);
+      this.isLoading = true;
+    }else{
+          this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
+
+    }
   }
 }

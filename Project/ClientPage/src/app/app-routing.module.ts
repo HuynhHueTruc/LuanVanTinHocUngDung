@@ -1,3 +1,5 @@
+import { ServiceComponent } from './modules/service/service.component';
+import { SupportsComponent } from './modules/supports/supports.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { ContentComponent } from './modules/content/content.component';
 import { TypetreeComponent } from './modules/typetree/typetree.component';
@@ -27,6 +29,8 @@ const routes: Routes = [
     { path: 'typetree/:_id', component: TypetreeComponent },
     { path: 'posts', component: PostsComponent},
     { path: 'product/:_id', component: ProductComponent },
+    { path: 'supports', component: SupportsComponent },
+    { path: 'service', component: ServiceComponent },
 
   ]},
   { path: 'customerinfo', component: CustomerinfoComponent,
