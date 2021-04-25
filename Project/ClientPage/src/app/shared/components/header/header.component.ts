@@ -4,7 +4,7 @@ import { KhachhangService } from './../../../../services/KhachHang/khachhang.ser
 import { TenDanhMucNhoModel } from '../../../../models/DanhMuc/TenDanhMucNho';
 import { DanhMucNhoModel } from '../../../../models/DanhMuc/DanhMucNho';
 import { DanhmucService } from '../../../../services/DanhMuc/danhmuc.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { DanhMucModel } from '../../../../models/DanhMuc/danhmuc';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterContentChecked {
 
   // Link image và Tên người dùng
   linkImgAccount: string;
@@ -114,8 +114,7 @@ export class HeaderComponent implements OnInit {
           // console.log(this.dmnhatgiong);
           for (const item in this.dmnhatgiong[0]) {
             if (this.dmnhatgiong[0].hasOwnProperty(item)) {
-              this.dshatgiong.push(this.dmnhatgiong[0][item].Ten_danh_muc_nho);
-              // console.log(this.dshatgiong);
+              this.dshatgiong.push(this.dmnhatgiong[0][item]);
             }
           }
         }
@@ -191,17 +190,24 @@ export class HeaderComponent implements OnInit {
     this.KHService.logout();
   }
 
-  onSelect(eachLoaiCay) {
+  onSelectLTypeTree(eachLoaiCay) {
+    // this.router.navigate(['/default/typetree', eachLoaiCay._id], { state: { _id: `${eachLoaiCay._id}` }});
     this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
+    // this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
     this.isLoading = true;
   }
 
   ngAfterContentChecked(): void {
-    //Called after every check of the component's or directive's content.
-    //Add 'implements AfterContentChecked' to the class.
-    if (this.isLoading){
+    // Called after every check of the component's or directive's content.
+    // Add 'implements AfterContentChecked' to the class.
+    if (this.isLoading) {
       window.location.reload();
     }
     this.isLoading = false;
+  }
+
+  onSelectProduct(eachHatGiong){
+    this.router.navigateByUrl(`/default/product/${eachHatGiong.DMN_id}`);
+    this.isLoading = true;
   }
 }

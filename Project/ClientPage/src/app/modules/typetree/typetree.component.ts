@@ -1,3 +1,5 @@
+import { HoadonbanhangService } from './../../../services/HoaDonBanHang/hoadonbanhang.service';
+import { HoaDonBanHangModel } from './../../../models/HoaDonBanHang/hoadonbanhang';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
 import { KhuyenmaiService } from './../../../services/KhuyenMai/khuyenmai.service';
 import { DanhMucNhoModel } from './../../../models/DanhMuc/DanhMucNho';
@@ -16,7 +18,7 @@ import { AfterViewInit } from '@angular/core';
   templateUrl: './typetree.component.html',
   styleUrls: ['./typetree.component.scss']
 })
-export class TypetreeComponent implements  AfterViewInit  {
+export class TypetreeComponent implements AfterViewInit, OnInit {
 
   dsloaicay: LoaiCayModel;
   loaicay: LoaiCayModel;
@@ -33,22 +35,30 @@ export class TypetreeComponent implements  AfterViewInit  {
   dsloaicaycanh: DanhMucNhoModel[] = [];
   dscaycanh: SanPhamModel[] = [];
   dskhuyenmai: KhuyenMaiModel[] = [];
+  dshoadonban: HoaDonBanHangModel;
   giatrikhuyenmai = 0;
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
+  arrSoLuongBan = [];
 
   constructor(private router: Router, private loaicayService: LoaicayService, private route: ActivatedRoute,
               private sanphamService: SanphamService, private danhmucService: DanhmucService,
-              private khuyenmaiService: KhuyenmaiService) { }
+              private khuyenmaiService: KhuyenmaiService, private hoadonbanService: HoadonbanhangService) {
+    //this.tmp = this.router.getCurrentNavigation().extras.state._id;
+  }
 
-  // ngOnInit(): void {
+  ngOnInit(): void {
 
-  // }
+  }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
+
     this.href = this.router.url;
     this.loaicay_id = this.href.replace('/default/typetree/', '');
     this.getLoaiCay();
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.router.onSameUrlNavigation = 'reload';
+    // this.router.navigate([this.router.url]);
   }
 
   getLoaiCay() {
@@ -87,13 +97,16 @@ export class TypetreeComponent implements  AfterViewInit  {
           for (const j in this.dsloaicaycanh) {
             if (this.dsloaicaycanh.hasOwnProperty(j)) {
               if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.dsloaicaycanh[j].DMN_id) {
-                this.dscaycanh.push(this.dssanpham[i])
+                this.dscaycanh.push(this.dssanpham[i]);
               }
             }
           }
         }
       }
+
+
       this.getdskhuyenmai();
+      this.getdsHoaDonBanHang();
       // console.log(this.dscaycanh)
     });
   }
@@ -102,25 +115,43 @@ export class TypetreeComponent implements  AfterViewInit  {
   getdskhuyenmai() {
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
-      // console.log(this.dskhuyenmai)
-
     });
   }
 
-// Lấy sản phẩm theo id được chọn
+  getdsHoaDonBanHang() {
+    let count = 0;
+    this.hoadonbanService.getListHoaDonBan().subscribe((res: any) => {
+      this.dshoadonban = res.hoadonbanhangs;
+      for (const i in this.dscaycanh) {
+        if (this.dscaycanh.hasOwnProperty) {
+          for (const j in this.dshoadonban) {
+            if (this.dshoadonban.hasOwnProperty){
+              for (const h in this.dshoadonban[j].San_Pham){
+                if (this.dscaycanh[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id){
+                  count += this.dshoadonban[j].San_Pham[h].So_luong;
+                }
+              }
+            }
+          }
+          this.arrSoLuongBan.push({SanPham_id: this.dscaycanh[i]._id, So_luong_ban: count});
+          count = 0;
+        }
+      }
+    });
+  }
+
+
+  // Lấy sản phẩm theo id được chọn
   SoKhopLoaiCay(loaicay_id) {
-    // console.log(loaicay_id)
-    // console.log(this.dsdmcaycanh);
     for (const i in this.dsdmcaycanh) {
       if (this.dsdmcaycanh[i].Loai_cay === loaicay_id) {
         this.dsloaicaycanh.push(this.dsdmcaycanh[i]);
       }
     }
     this.getsanpham();
-    // console.log(this.dsloaicaycanh)
   }
 
-// Chọn khuyến mãi cao nhất của từng sản phẩm
+  // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraKhuyeMai(eachSP) {
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
@@ -132,9 +163,6 @@ export class TypetreeComponent implements  AfterViewInit  {
             if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
               if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
                 && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-                // this.giatrikhuyenmai = this.dskhuyenmai[i].Gia_tri;
-                // bool = true;
-                // return bool;
                 this.arrKhuyenMai.push(this.dskhuyenmai[i]);
               }
             } else {

@@ -35,29 +35,27 @@
                 <h5 class="card-title ">{{eachSP.Ten_san_pham }}</h5>
                 <div class="container p-0">
                   <div class="row" *ngIf="KiemTraKhuyeMai(eachSP)">
-                    <!-- <div class="col-sm-6 p-0"> -->
                       <small class="card-text khuyenmai">{{eachSP.Gia | currency: "VND"}}</small>
 
-                    <!-- </div>
-                    <div class="col-sm-6 p-0"> -->
                       &nbsp;
                       <small class="cart-text sale"> -{{giatrikhuyenmai*100}} %</small>
-                    <!-- </div> -->
                   </div>
                   <div class="row" *ngIf="!KiemTraKhuyeMai(eachSP)">
-                    <!-- <div class="col-sm-6 p-0"> -->
                       <small class="card-text khuyenmai"></small>
 
-                    <!-- </div>
-                    <div class="col-sm-6 p-0"> -->
                       &nbsp;
                       <small class="cart-text sale"></small>
-                    <!-- </div> -->
                   </div>
                 </div>
 
-                <p class="card-text" >{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <div class="row">
+                  <div class="col-sm-6 p-0">
+                    <p class="card-text" >{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                  </div>
+                  <div class="col-sm-6  p-0" >
+                    <p class="card-text daban"> Đã bán {{arrSoLuongBan[i]?.So_luong_ban}}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </a>

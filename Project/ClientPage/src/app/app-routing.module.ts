@@ -24,7 +24,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'default', component: DefaultComponent, children: [
     { path: '', component: ContentComponent},
-    { path: 'typetree/:_id', component: TypetreeComponent }
+    { path: 'typetree/:_id', component: TypetreeComponent },
+    { path: 'posts', component: PostsComponent},
+    { path: 'product/:_id', component: ProductComponent },
+
   ]},
   { path: 'customerinfo', component: CustomerinfoComponent,
     children: [
@@ -35,7 +38,6 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'product', component: ProductComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
   { path: '404', component: NotFoundComponent },
