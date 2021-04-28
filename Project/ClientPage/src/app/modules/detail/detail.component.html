@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<br>
+<div class="container" style="background-color: white;">
+  <div class="row">
+    <div class="col-sm-5">
+      <img class="card-img-top" src="{{sanphamdetail[0]?.Hinh_anh}}" alt="Card image cap">
+    </div>
+    <div class="col-sm-7 pl-5 ">
+      <div class="row d-flex justify-content-center">
+        <h4>{{sanphamdetail[0]?.Ten_san_pham}}</h4>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 pl-0">
+          <div class="row">
+            <i class="far fa-star" id="star-1"></i>
+            <i class="far fa-star" id="star-2"></i>
+            <i class="far fa-star" id="star-3"></i>
+            <i class="far fa-star" id="star-4"></i>
+            <i class="far fa-star" id="star-5"></i>
+          </div>
+          <!-- <div class="stars">
+            <form action="">
+              <input class="star star-5" id="star-5" type="radio" name="star"/>
+              <label class="star star-5" for="star-5" id="5"></label>
+              <input class="star star-4" id="star-4" type="radio" name="star"/>
+              <label class="star star-4" for="star-4" id="4"></label>
+              <input class="star star-3" id="star-3" type="radio" name="star"/>
+              <label class="star star-3" for="star-3" id="3"></label>
+              <input class="star star-2" id="star-2" type="radio" name="star"/>
+              <label class="star star-2" for="star-2" id="2"></label>
+              <input class="star star-1" id="star-1" type="radio" name="star"/>
+              <label class="star star-1" for="star-1" id="1"></label>
+            </form>
+          </div> -->
+        </div>
+        <div class="col-sm-2">{{SoLuongBan}} Đã Bán</div>
+        <div class="col-sm-2">{{SoLuongDanhGia}} Đánh giá</div>
+      </div>
+      <div class="row gia">
+        <h3>{{sanphamdetail[0]?.Gia | currency: "VND"}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer')
 var dateFormat = require('dateformat'); 
 var now = new Date();
 dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+const { ObjectID } = require('bson');
 
 // Dùng cho phương thức posts
 var bodyParser = require('body-parser');
@@ -51,6 +52,44 @@ route.get('/phieudat/thongtin', async(req, res) => {
         }
     })
 })
+
+
+route.post('/phieudat/taomoi', async(req, res) => {
+    var _id = new ObjectID()
+    var KhachHang_id = req.body.KhachHang_id;
+    var Ho_ten = req.body.Ho_ten;
+    var So_dien_thoai = req.body.So_dien_thoai;
+    var Dia_chi = req.body.Dia_chi;
+    var VanChuyen_id = req.body.VanChuyen_id;
+    var ThanhToan_id = req.body.ThanhToan_id;
+    var Trang_thai = req.body.Trang_thai;
+    var San_Pham = req.body.San_Pham;
+    var Tong_tien = req.body.Tong_tien;
+    var Ngay_nhan = dateFormat();
+    var Ngay_cap_nhat = dateFormat();
+
+        // Kiểm tra email đã tồn tại chưa
+       return PhieuDatModel.create({
+            _id: _id,
+            KhachHang_id: KhachHang_id,
+            Ho_ten: Ho_ten,
+            So_dien_thoai: So_dien_thoai,
+            Dia_chi: Dia_chi,
+            VanChuyen_id: VanChuyen_id, 
+            ThanhToan_id: ThanhToan_id,
+            Trang_thai: Trang_thai, 
+            San_Pham: San_Pham,
+            Tong_tien: Tong_tien,
+            Ngay_nhan: Ngay_nhan,
+            Ngay_cap_nhat: Ngay_cap_nhat
+        }).then(dt => {
+            res.json('Tạo phiếu đặt thành công!')
+        }).catch (err =>{
+            res.json(err)
+        })
+})
+
+
 
 // Hàm cập nhật
 route.put('/phieudat/capnhatphieudat/:_id', async(req, res) => {

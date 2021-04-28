@@ -12,6 +12,9 @@ export class SanPhamModel{
   Danh_gia: [{
       KhachHang_id: string,
       Noi_dung: string,
+      Hinh_anh: [{
+        url: string
+      }],
       So_diem: number,
       Ngay_danh_gia: Date,
       Ngay_cap_nhat: Date

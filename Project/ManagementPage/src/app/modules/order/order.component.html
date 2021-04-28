@@ -19,6 +19,12 @@
                   <option class="item" value="Cũ nhất">Cũ nhất</option>
                 </select>
               </li>
+              <li>
+                <button type="button" class="btn them_khach_hang_button" (click)="open(content)"
+                  data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                  + Thêm phiếu đặt
+                </button>
+              </li>
             </ul>
           </div>
         </nav>
@@ -158,6 +164,169 @@
   </div>
 </div>
 <p class="tong_phieu_dat">Tổng số phiếu đặt: {{dsphieudat.length}}</p>
+
+<!-- Dialog tạo -->
+<div class="container" id="modals">
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TẠO PHIẾU ĐẶT</h4>
+    </div>
+    <div class="modal-body">
+      <form #shipFormCreate="ngForm">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Thông tin sản phẩm:</label>
+        </div>
+
+        <div class="form-group row">
+          <button class="them_hoa_don" (click)="open_product_plus(content_info_product_plus)">
+            <i class="fas fa-plus">
+              Thêm sản phẩm
+            </i>
+          </button>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <div class="card addsanpham">
+              <div class="card-body">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr class="content">
+
+                      <th class="align-middle">STT</th>
+                      <th class="align-middle">Sản phẩm</th>
+                      <th class="align-middle">Số lượng</th>
+                      <th class="align-middle">Giá bán</th>
+                      <th class="align-middle">Tác vụ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let eachSP of arrSanPham; let i = index;">
+
+                      <td class="content">{{i + 1}}</td>
+                      <td class="content">{{eachSP.Ten_san_pham}}</td>
+                      <td class="content">{{eachSP.So_luong}}</td>
+                      <td class="content">{{eachSP.Gia}}</td>
+                      <td class="content d-flex justify-content-center">
+                        <span class="action">
+                          <button class="buttonicon" (click)="open_product_update2(content_product_update2, eachSP, i)"
+                            data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
+                            <i class="far fa-edit m-1"></i>
+                          </button>
+                          <button class="buttonicon" (click)="XoaDSSanPham(content, eachSP._id, i, 'new')"
+                            data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false">
+                            <i class="far fa-trash-alt m-1"></i>
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="mess-err">
+            <small id="errListSanPham" class="err text-danger">Chưa có sản phầm nào trong phiếu đặt! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tên khách hàng:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="Khach_hang.invalid && Khach_hang.touched" #Khach_hang="ngModel"  class="form-control " id="Khach_hang"  [(ngModel)]="phieudat.Ho_ten" name="Khach_hang" placeholder=" Enter name customer" required >
+          </div>
+          <div class="mess-err" *ngIf="Khach_hang.errors && (Khach_hang.invalid || Khach_hang.touched)">
+            <small class="err text-danger"*ngIf="Khach_hang.errors.required"> Tên khách hàng không được trống! </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Số điện thoại:</label>
+          <div class="col-sm-8">
+            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="phieudat.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone" required >
+          </div>
+          <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
+            <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
+            <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
+          </div>
+        </div>
+
+        <div class="form-group row" ngModelGroup="Dia_chi">
+          <label class="col-sm-4 col-form-label">Địa chỉ:</label>
+          <div class="col-sm-8">
+            <small>Thành phố</small>
+            <select id="provinces" [(ngModel)]="phieudat.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth" (change)="ThanhPho($event, null)" >
+              <option class="item" selected disabled  value="">-- Provinces --</option>
+              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value] = "eachThanhPho.name" >{{eachThanhPho.name}}</option>
+            </select>
+            <div class="mess-err"  >
+              <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+            </div>
+
+            <small>Huyện/Quận</small>
+            <select id="districts"  [(ngModel)]="phieudat.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="QuanHuyen($event)">
+              <option class="item" selected value="">-- District --</option>
+              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value] = "eachQuanHuyen.name">{{eachQuanHuyen.name}}</option>
+            </select>
+            <div class="mess-err"  >
+              <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
+            </div>
+
+            <small>Xã/Phường</small>
+            <select id="ward" [(ngModel)]="phieudat.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth" (change)="XaPhuong(null)">
+              <option class="item" selected  value="">-- Ward --</option>
+              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value] = "eachXaPhuong.name">{{eachXaPhuong.name}}</option>
+            </select>
+            <div class="mess-err"  >
+              <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Vận chuyển</label>
+          <div class="col-sm-8">
+            <ng-multiselect-dropdown name="ngShippingSelect" [placeholder]="'--- Product ---'"
+              [(ngModel)]="vanchuyentmp" [settings]="dropdownSettingsVanChuyen" [data]="dshinhthucvanchuyen"
+              (onSelect)="onItemSelectVanChuyen($event)" (onDeSelect)="onItemDeSelectVanChuyen($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err">
+            <small id="errVanChuyen" class="err text-danger">Bạn chưa chọn hình thức vận chuyển! </small>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Thanh toán:</label>
+          <div class="col-sm-8">
+            <ng-multiselect-dropdown name="ngPaymentSelect" [placeholder]="'--- Product ---'" [(ngModel)]="thanhtoantmp"
+              [settings]="dropdownSettingsThanhToan" [data]="dsphuongthucthanhtoan"
+              (onSelect)="onItemSelectThanhToan($event)" (onDeSelect)="onItemDeSelectThanhToan($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err">
+            <small id="errThanhToan" class="err text-danger">Bạn chưa chọn phương thức thanh toán! </small>
+          </div>
+        </div>
+
+
+        <!-- <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Tổng tiền:</label>
+          <div class="col-sm-8">
+            <input disabled type="text" [class.is-invalid]="Tong_tien.invalid && Tong_tien.touched" #Tong_tien="ngModel"
+              class="form-control " id="Tong_tien" [(ngModel)]="phieudat.Tong_tien" name="Tong_tien"
+              placeholder=" Enter name money" required>
+          </div>
+        </div> -->
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="ThemPhieuDat()">Lưu</button>
+        <button type="button" class="btn btn-secondary" (click)="DongModal()">Hủy</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
 
 <!-- Dialog cập nhật phiếu đặt -->
 <div class="container" id="modals_update">
@@ -396,14 +565,14 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="CapNhatDSSanPham(content_update)">Thêm</button>
+      <button type="button" class="btn btn-secondary" (click)="CapNhatDSSanPham(content)">Thêm</button>
       <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
     </div>
   </ng-template>
 
 </div>
 
-<!-- Dialog chỉnh sửa sản phẩm trong lstsanpham -->
+<!-- Dialog chỉnh sửa sản phẩm trong lstsanpham khi cập nhật-->
 <div class="container" id="modals_mails">
   <ng-template #content_product_update let-modal>
     <div class="modal-header">
@@ -451,6 +620,51 @@
 
 </div>
 
+<!-- Dialog chỉnh sửa sản phẩm trong lstsanpham khi thêm-->
+<div class="container" id="modals_mails">
+  <ng-template #content_product_update2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-product-update2">CHỈNH SỬA SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body">
+      <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Sản phẩm:</label>
+          <div class="col-sm-8">
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+              [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 0)" (onDeSelect)="onItemDeSelect($event, 0)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err">
+            <small id="errSanPham" class="err text-danger">Bạn chưa chọn sản phẩm! </small>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Số lượng:</label>
+          <div class="col-sm-8">
+            <input type="number" (keyup)="KiemTraGiaTri()" #so_luong="ngModel" class="form-control " id="so_luong"
+              [(ngModel)]="So_luong" name="so_luong">
+          </div>
+          <div class="mess-err">
+            <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
+            <small id="errKhongDuSoLuong" class="err text-danger">Số lượng sản phẩm trong kho không đủ</small>
+
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="CapNhatListSanPham(content)">Cập nhật</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
 
 <!-- Dialog xác nhận xóa -->
 <div class="container" id="modals_delete">

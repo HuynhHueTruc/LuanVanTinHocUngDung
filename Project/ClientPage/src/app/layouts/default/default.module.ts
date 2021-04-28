@@ -1,3 +1,4 @@
+import { DetailComponent } from './../../modules/detail/detail.component';
 import { ServiceComponent } from './../../modules/service/service.component';
 import { SupportsComponent } from './../../modules/supports/supports.component';
 import { NotFoundComponent } from './../../modules/not-found/not-found.component';
@@ -49,7 +50,8 @@ import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardMod
     TypetreeComponent,
     NotFoundComponent,
     SupportsComponent,
-    ServiceComponent
+    ServiceComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,

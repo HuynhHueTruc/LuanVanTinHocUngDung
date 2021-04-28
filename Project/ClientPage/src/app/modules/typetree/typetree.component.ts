@@ -12,13 +12,13 @@ import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { AfterViewInit } from '@angular/core';
+import { AfterViewInit, AfterContentChecked } from '@angular/core';
 @Component({
   selector: 'app-typetree',
   templateUrl: './typetree.component.html',
   styleUrls: ['./typetree.component.scss']
 })
-export class TypetreeComponent implements AfterViewInit, OnInit {
+export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChecked {
 
   dsloaicay: LoaiCayModel;
   loaicay: LoaiCayModel;
@@ -40,6 +40,7 @@ export class TypetreeComponent implements AfterViewInit, OnInit {
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
   arrSoLuongBan = [];
+  isLoading = false;
 
   constructor(private router: Router, private loaicayService: LoaicayService, private route: ActivatedRoute,
               private sanphamService: SanphamService, private danhmucService: DanhmucService,
@@ -185,5 +186,20 @@ export class TypetreeComponent implements AfterViewInit, OnInit {
     }
     // console.log(this.khuyenmai)
     return bool;
+  }
+
+
+  ProductDetail(eachSP){
+    this.router.navigateByUrl(`/detail/${eachSP._id}`);
+    this.isLoading = true;
+  }
+
+  ngAfterContentChecked(): void {
+    // Called after every check of the component's or directive's content.
+    // Add 'implements AfterContentChecked' to the class.
+    if (this.isLoading) {
+      window.location.reload();
+    }
+    this.isLoading = false;
   }
 }

@@ -12,13 +12,11 @@ let SanPhamSchema = new mongoose.Schema({
     Hinh_anh: String,
     Mo_ta: String,
     Danh_gia: [{
-        KhachHang_id: String
-        // {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'khach_hangs'
-        // }
-        ,
+        KhachHang_id: String,
         Noi_dung: String,
+        Hinh_anh: [{
+            url: String
+        }],
         So_diem: Number,
         Ngay_danh_gia: Date,
         Ngay_cap_nhat: Date

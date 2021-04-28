@@ -1,3 +1,4 @@
+import { DetailComponent } from './modules/detail/detail.component';
 import { ServiceComponent } from './modules/service/service.component';
 import { SupportsComponent } from './modules/supports/supports.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
@@ -44,6 +45,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
+  {
+    path: 'detail/:_id', component: DetailComponent,
+ },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '404' },
   // { path: 'tree/:id', component: TypetreeComponent }

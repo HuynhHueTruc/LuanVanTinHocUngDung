@@ -26,6 +26,9 @@ route.get('/sanpham/thongtin', async(req, res) => {
         Danh_gia: [{
             KhachHang_id: 1,
             Noi_dung: 1,
+            Hinh_anh: [{
+                url: 1
+            }],
             So_diem: 1,
             Ngay_danh_gia: 1,
             Ngay_cap_nhat: 1

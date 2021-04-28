@@ -114,4 +114,9 @@ export class ProductComponent implements OnInit {
     // console.log(this.khuyenmai)
     return bool;
   }
+
+  ProductDetail(eachSP){
+
+    console.log(eachSP)
+  }
 }
