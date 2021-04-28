@@ -304,6 +304,8 @@ export class OrderComponent implements OnInit {
     this.xaphuongs.splice(0, this.xaphuongs.length);
 
     if (e === null) {
+      document.getElementById('mes_tinh_thanhpho').style.display = 'none';
+
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
@@ -534,13 +536,16 @@ Huy(){
     this.phieudat.San_Pham = [{SanPham_id: '', So_luong: 0, Gia_ban: 0}]
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
 
+    // this.blockerrmessage();
+  }
+
+  blockerrmessage(){
     document.getElementById('mes_huyen_quan').style.display = 'block'
     document.getElementById('mes_xa_phuong').style.display = 'block'
     document.getElementById('errVanChuyen').style.display = 'block'
     document.getElementById('errThanhToan').style.display = 'block'
 
   }
-
 
   open_update(content_update, eachPhieuDat, index_update) {
     // this.lstsanpham = []
@@ -1168,6 +1173,7 @@ ThemPhieuDat(){
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
               this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+              // this.blockerrmessage();
             }
           }
         }

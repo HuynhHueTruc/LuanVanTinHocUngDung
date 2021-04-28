@@ -423,7 +423,9 @@
               <option class="item" *ngFor="let eachThanhPho of thanhphos" value="{{eachThanhPho.name}}">
                 {{eachThanhPho.name}}</option>
             </select>
-
+            <div class="mess-err">
+              <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+            </div>
             <small>Huyện/Quận</small>
             <select id="districts" [(ngModel)]="phieudat.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel"
               name="calc_shipping_district" class="form-control form-control-sm border-non setwidth"
