@@ -9,7 +9,10 @@ import { Injectable } from '@angular/core';
 export class ThongtincuahangService {
 
   constructor(private httpClient: HttpClient) { }
+
   getBanner(): Observable<ThongTinCuaHangModel[]>{
     return this.httpClient.get<ThongTinCuaHangModel[]>('http://localhost:3000/cuahang/thongtincuahang').pipe();
   }
+
+
 }

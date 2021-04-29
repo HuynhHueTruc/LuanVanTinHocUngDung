@@ -15,7 +15,6 @@ export class ThongtincuahangService {
   }
 
   updateThongTinCuaHang(thongtincuahang):Observable<ThongTinCuaHangModel[]>{
-    console.log(thongtincuahang)
     return this.http.put<ThongTinCuaHangModel[]>(`${'http://localhost:3000/cuahang/capnhatthongtincuahang'}/${thongtincuahang._id}`, thongtincuahang).pipe();
   }
 }

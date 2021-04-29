@@ -1,3 +1,5 @@
+import { ThongtincuahangService } from './../../../services/ThongTinCuaHang/thongtincuahang.service';
+import { ThongTinCuaHangModel } from './../../../models/ThongTinCuaHang/thongtincuahang';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
 import { KhuyenmaiService } from './../../../services/KhuyenMai/khuyenmai.service';
 import { HoaDonBanHangModel } from './../../../models/HoaDonBanHang/hoadonbanhang';
@@ -19,12 +21,16 @@ export class DetailComponent implements OnInit {
   dssanpham: SanPhamModel;
   sanphamdetail: SanPhamModel[] = [];
   dskhuyenmai: KhuyenMaiModel[] = [];
+  arrKhuyenMai: KhuyenMaiModel[] = [];
   dshoadonban: HoaDonBanHangModel;
+  khuyenmai: KhuyenMaiModel;
+  thongtincuahang: ThongTinCuaHangModel[] = [];
   SoLuongBan = 0;
   SoLuongDanhGia = 0;
   So_diem = 0;
+  giatrikhuyenmai = 0;
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
-              private khuyenmaiService: KhuyenmaiService) { }
+    private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
 
   ngOnInit(): void {
     this.href = this.router.url;
@@ -53,8 +59,22 @@ export class DetailComponent implements OnInit {
       for (let i = 0; i < this.So_diem; i++) {
         document.getElementById(`star-${i + 1}`).style.color = 'yellow';
       }
+      this.getthongtincuahang();
+      this.getdskhuyenmai();
       this.getdsHoaDonBanHang();
     });
+  }
+
+  SoDiemKhachHang(danhgia) {
+    console.log(danhgia.So_diem)
+    // for (const dg in danhgia) {
+    //   if (danhgia.hasOwnProperty(dg)) {
+    //     for (let i = 0; i < danhgia.So_diem; i++) {
+    //       document.getElementById(`star-customer${i + 1}`).style.color = 'yellow';
+    //     }
+    //     return true;
+    //   }
+    // }
   }
 
   getdsHoaDonBanHang() {
@@ -86,4 +106,44 @@ export class DetailComponent implements OnInit {
     });
   }
 
+  getthongtincuahang() {
+    this.thongtincuahangService.getBanner().subscribe((res: any) => {
+      this.thongtincuahang = res.cuahangs;
+    });
+  }
+  // Chọn khuyến mãi cao nhất của từng sản phẩm
+  KiemTraKhuyeMai(eachSP) {
+    this.arrKhuyenMai = [];
+    this.giatrikhuyenmai = 0;
+    let bool = false;
+    for (const i in this.dskhuyenmai) {
+      if (this.dskhuyenmai.hasOwnProperty(i)) {
+        for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+          if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+            if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+              if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                this.arrKhuyenMai.push(this.dskhuyenmai[i]);
+              }
+            } else {
+              bool = false;
+            }
+          }
+        }
+      }
+    }
+
+    for (const i in this.arrKhuyenMai) {
+      if (this.arrKhuyenMai.hasOwnProperty(i)) {
+        if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
+          this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
+          this.khuyenmai = this.arrKhuyenMai[i];
+          bool = true;
+        }
+      }
+
+    }
+    // console.log(this.khuyenmai)
+    return bool;
+  }
 }

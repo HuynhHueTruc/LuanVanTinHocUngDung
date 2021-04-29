@@ -1,25 +1,29 @@
 <app-header></app-header>
+<app-liftnav></app-liftnav>
+<div class="form-gap"></div>
 
-<br>
-<div class="container" style="background-color: white;">
-  <div class="row">
-    <div class="col-sm-5">
-      <img class="card-img-top" src="{{sanphamdetail[0]?.Hinh_anh}}" alt="Card image cap">
-    </div>
-    <div class="col-sm-7 pl-5 ">
-      <div class="row d-flex justify-content-center">
-        <h4>{{sanphamdetail[0]?.Ten_san_pham}}</h4>
+<div class=" container detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 p-0">
+        <img class="card-img-top" src="{{sanphamdetail[0]?.Hinh_anh}}" alt="Card image cap">
       </div>
-      <div class="row">
-        <div class="col-sm-2 pl-0">
-          <div class="row">
-            <i class="far fa-star" id="star-1"></i>
-            <i class="far fa-star" id="star-2"></i>
-            <i class="far fa-star" id="star-3"></i>
-            <i class="far fa-star" id="star-4"></i>
-            <i class="far fa-star" id="star-5"></i>
-          </div>
-          <!-- <div class="stars">
+      <div class="col-sm-7 pl-5 ">
+        <div class="row d-flex justify-content-center">
+          <h4 class="m-0">{{sanphamdetail[0]?.Ten_san_pham}}</h4>
+          <button class="icon btn btn-default btn-circle pl-3"><i class="far fa-heart"></i></button>
+          <button class="icon btn btn-default btn-circle pl-1"><i class="fas fa-share-alt"></i></button>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-2 pl-3">
+            <div class="row">
+              <i class="far fa-star" id="star-1"></i>
+              <i class="far fa-star" id="star-2"></i>
+              <i class="far fa-star" id="star-3"></i>
+              <i class="far fa-star" id="star-4"></i>
+              <i class="far fa-star" id="star-5"></i>
+            </div>
+            <!-- <div class="stars">
             <form action="">
               <input class="star star-5" id="star-5" type="radio" name="star"/>
               <label class="star star-5" for="star-5" id="5"></label>
@@ -33,12 +37,77 @@
               <label class="star star-1" for="star-1" id="1"></label>
             </form>
           </div> -->
+          </div>
+          <div class="col-sm-2 p-0">{{SoLuongBan}} Đã Bán</div>
+          <div class="col-sm-2 p-0">{{SoLuongDanhGia}} Đánh giá</div>
         </div>
-        <div class="col-sm-2">{{SoLuongBan}} Đã Bán</div>
-        <div class="col-sm-2">{{SoLuongDanhGia}} Đánh giá</div>
+        <div class="row gia mt-3">
+          <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center"
+            *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
+            <p class="giagoc mb-0">{{sanphamdetail[0]?.Gia | currency: "VND"}}</p>
+          </div>
+          <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center" *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
+            <p class="mb-0 khuyenmai"> Giảm {{giatrikhuyenmai*100}}%</p>
+          </div>
+          <div class="col-sm-8 p-0 d-flex  align-items-center">
+            <h3 class="mb-0 ml-3">{{sanphamdetail[0]?.Gia - sanphamdetail[0]?.Gia*giatrikhuyenmai | currency: "VND"}}</h3>
+          </div>
+
+        </div>
+
+        <div class="form-gap"></div>
+
+        <div class="row">
+          <div class="col-sm-3">Số lượng: </div>
+          <div class="col-sm-9">
+            <div class="buttons_added">
+              <input class="minus is-form" type="button" value="-">
+              <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="1">
+              <input class="plus is-form" type="button" value="+">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-4 p-0">
+            <button class="p-2 themsanpham"><i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i> Thêm Vào Giỏ Hàng</button>
+          </div>
+          <div class="col-sm-4 p-0">
+            <button class="p-2 themsanpham"><i class="fas fa-shopping-bag mr-1"></i> Mua Hàng</button>
+          </div>
+        </div>
       </div>
-      <div class="row gia">
-        <h3>{{sanphamdetail[0]?.Gia | currency: "VND"}}</h3>
+    </div>
+
+</div>
+</div>
+
+<div class="container mt-3 p-4 mota">
+  <div class="row m-0">
+    <h6 class="m-0">Mô tả sản phẩm: </h6>
+    <div class="mt-1" [innerHTML]="sanphamdetail[0]?.Mo_ta"></div>
+  </div>
+</div>
+
+<div class="container mota mt-3 p-4">
+  <div class="row m-0">
+    <h6 class="m-0">Đánh giá sản phẩm: </h6>
+
+  </div>
+  <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
+    <div class="col-sm-1 p-0 d-flex justify-content-end">
+      <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
+
+    </div>
+    <div class="col-sm-2 ">
+      <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
+      <!-- *ngIf="SoDiemKhachHang(eachdetail)" -->
+      <div class="row m-0"  >
+        <i class="far fa-star" id="star_customer-1"></i>
+        <i class="far fa-star" id="star_customer-2"></i>
+        <i class="far fa-star" id="star_customer-3"></i>
+        <i class="far fa-star" id="star_customer-4"></i>
+        <i class="far fa-star" id="star_customer-5"></i>
       </div>
     </div>
   </div>
