@@ -32,10 +32,12 @@ export class DetailComponent implements OnInit {
   url = '';
   img = '';
   index: any;
+  arr_index: any;
   display = 'none';
   arrSoDiemConLai = [];
   countStar = [];
   isDisplay = [];
+  arrHinhAnh = [];
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
 
@@ -47,6 +49,7 @@ export class DetailComponent implements OnInit {
 
   getdssanpham() {
     let sd = 0;
+    // const arrImg = [];
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
       for (const i in this.dssanpham) {
@@ -65,7 +68,9 @@ export class DetailComponent implements OnInit {
           // Đếm sao vàng
           this.countStar.push(Array(this.sanphamdetail[0].Danh_gia[j].So_diem).fill(this.sanphamdetail[0].Danh_gia[j].So_diem)
             .map((x, i) => i));
+          this.arrHinhAnh.push(this.sanphamdetail[0].Danh_gia[j].Hinh_anh);
           this.isDisplay.push('none');
+
         }
       }
       this.So_diem = sd / (this.sanphamdetail[0].Danh_gia.length);
@@ -150,16 +155,35 @@ export class DetailComponent implements OnInit {
     return bool;
   }
 
-  Zoom(url, index) {
+  Zoom(url, index, arr_index) {
     this.index = index;
-    this.url = url;
+    this.arr_index = arr_index;
+    this.url = this.arrHinhAnh[this.index][this.arr_index].url;
     for (let i = 0; i < this.isDisplay.length; i++) {
       if (i === index) {
         this.isDisplay[i] = 'block';
-      }else{
+      }
+      else {
         this.isDisplay[i] = 'none';
 
       }
     }
+  }
+
+  HinhAnhTruoc(){
+    if (this.arr_index > 0 ){
+      this.arr_index -= 1;
+      this.url = this.arrHinhAnh[this.index][this.arr_index].url;
+    }
+  }
+
+  HinhAnhSau(){
+    // console.log(this.arrHinhAnh[this.index].length - 1, this.arr_index)
+    if (this.arrHinhAnh[this.index].length - 1 > this.arr_index){
+      this.arr_index += 1;
+      this.url = this.arrHinhAnh[this.index][this.arr_index].url;
+
+    }
+
   }
 }
