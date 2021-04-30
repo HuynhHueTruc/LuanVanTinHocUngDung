@@ -29,6 +29,12 @@ export class DetailComponent implements OnInit {
   SoLuongDanhGia = 0;
   So_diem = 0;
   giatrikhuyenmai = 0;
+  url = '';
+  img = '';
+  index: any;
+  display = 'none';
+  arrSoDiemConLai = [];
+  countStar = [];
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
 
@@ -40,6 +46,7 @@ export class DetailComponent implements OnInit {
 
   getdssanpham() {
     let sd = 0;
+    let number;
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
       for (const i in this.dssanpham) {
@@ -53,29 +60,38 @@ export class DetailComponent implements OnInit {
       for (const j in this.sanphamdetail[0].Danh_gia) {
         if (this.sanphamdetail[0].Danh_gia.hasOwnProperty(j)) {
           sd += this.sanphamdetail[0].Danh_gia[j].So_diem;
+          this.arrSoDiemConLai.push(Array(5 - this.sanphamdetail[0].Danh_gia[j].So_diem)
+          .fill(5 - this.sanphamdetail[0].Danh_gia[j].So_diem).map(( x, i) => i));
+          // Đếm sao vàng
+          this.countStar.push(Array(this.sanphamdetail[0].Danh_gia[j].So_diem).fill(this.sanphamdetail[0].Danh_gia[j].So_diem)
+          .map(( x, i) => i));
+
         }
       }
+      console.log(this.countStar, this.arrSoDiemConLai)
       this.So_diem = sd / (this.sanphamdetail[0].Danh_gia.length);
       for (let i = 0; i < this.So_diem; i++) {
         document.getElementById(`star-${i + 1}`).style.color = 'yellow';
       }
+
       this.getthongtincuahang();
       this.getdskhuyenmai();
       this.getdsHoaDonBanHang();
     });
   }
 
-  SoDiemKhachHang(danhgia) {
-    console.log(danhgia.So_diem)
-    // for (const dg in danhgia) {
-    //   if (danhgia.hasOwnProperty(dg)) {
-    //     for (let i = 0; i < danhgia.So_diem; i++) {
-    //       document.getElementById(`star-customer${i + 1}`).style.color = 'yellow';
-    //     }
-    //     return true;
-    //   }
-    // }
-  }
+  // SoDiemKhachHang(danhgia) {
+  //   for (const dg in danhgia) {
+  //     if (danhgia.hasOwnProperty(dg)) {
+  //       for (let i = 0; i < danhgia.So_diem; i++) {
+  //         document.getElementById(`star_customer-${i + 1}`).style.color = 'yellow';
+  //       }
+  //       return true;
+  //     }else{
+  //       return false;
+  //     }
+  //   }
+  // }
 
   getdsHoaDonBanHang() {
     let count = 0;
@@ -146,4 +162,15 @@ export class DetailComponent implements OnInit {
     // console.log(this.khuyenmai)
     return bool;
   }
+
+  Zoom(url, index) {
+    this.index = index;
+    this.url = url;
+    this.display = 'block';
+    // document.getElementById(`zoom${{index}}`).style.display = 'block';
+  }
+  KT(i){
+    console.log(i)
+  }
+
 }

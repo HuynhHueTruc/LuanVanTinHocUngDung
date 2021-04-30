@@ -92,23 +92,41 @@
 <div class="container mota mt-3 p-4">
   <div class="row m-0">
     <h6 class="m-0">Đánh giá sản phẩm: </h6>
-
   </div>
-  <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
-    <div class="col-sm-1 p-0 d-flex justify-content-end">
-      <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
 
-    </div>
-    <div class="col-sm-2 ">
-      <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
-      <!-- *ngIf="SoDiemKhachHang(eachdetail)" -->
-      <div class="row m-0"  >
-        <i class="far fa-star" id="star_customer-1"></i>
-        <i class="far fa-star" id="star_customer-2"></i>
-        <i class="far fa-star" id="star_customer-3"></i>
-        <i class="far fa-star" id="star_customer-4"></i>
-        <i class="far fa-star" id="star_customer-5"></i>
+  <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
+   <div class="col-12">
+    <div class="row m-3" >
+      <div class="col-sm-1 p-0 d-flex justify-content-end">
+        <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
+      </div>
+
+      <div class="col-sm-11">
+        <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
+        <div class="row m-0">
+          <i class="far fa-star" id="star_customer_yellow"  *ngFor="let j of countStar[i]"></i>
+          <i class="far fa-star" id="star_customer"  *ngFor="let h of arrSoDiemConLai[i]"></i>
+        </div>
+        <br>
+        <div class="row m-0">
+          <div class="col-sm-1 p-0 " *ngFor="let hinhanh of eachdetail.Hinh_anh; let j = index">
+           <button id="buttonhinhanh" class="m-1" (click)="Zoom(hinhanh.url, i)"><img id="imagecomment" src={{hinhanh.url}} class="avatarcomment"></button>
+          </div>
+        </div>
+        <br>
+        <div class="row m-0" id="zoom{{i}}" >
+          <div class="col-sm-6">
+            <img id="imagezoom" src={{url}} class="avatarzoom" (click)="KT(i)">
+          </div>
+        </div>
+        <br>
+        <div class="row m-0">
+          <p>{{eachdetail.Noi_dung}}</p>
+        </div>
       </div>
     </div>
+   </div>
+   <hr  width="100%" size="10px" />
   </div>
 </div>
+
