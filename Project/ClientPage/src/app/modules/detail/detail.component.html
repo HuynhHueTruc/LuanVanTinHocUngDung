@@ -114,9 +114,9 @@
           </div>
         </div>
         <br>
-        <div class="row m-0" id="zoom{{i}}" >
+        <div class="row m-0" id="zoom" [ngStyle]="{'display': isDisplay[i]}">
           <div class="col-sm-6">
-            <img id="imagezoom" src={{url}} class="avatarzoom" (click)="KT(i)">
+            <img id="imagezoom" src={{url}} class="avatarzoom" >
           </div>
         </div>
         <br>
