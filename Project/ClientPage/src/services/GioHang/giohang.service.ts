@@ -1,3 +1,6 @@
+import { GioHangModel } from './../../models/GioHang/giohang';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,9 @@ import { Injectable } from '@angular/core';
 })
 export class GiohangService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getdsGioHang(): Observable<GioHangModel[]>{
+    return this.http.get<GioHangModel[]>('http://localhost:3000/giohang').pipe();
+  }
 }

@@ -61,9 +61,9 @@
           <div class="col-sm-3">Số lượng: </div>
           <div class="col-sm-9">
             <div class="buttons_added">
-              <input class="minus is-form" type="button" value="-">
-              <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="1">
-              <input class="plus is-form" type="button" value="+">
+              <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong()">
+              <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong()" (blur)="So_luong_mac_dinh()" [(ngModel)]="So_luong" #plus="ngModel" name="plus" value={{So_luong}}>
+              <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong()" >
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
 <div class="container mt-3 p-4 mota">
   <div class="row m-0">
     <h6 class="m-0">Mô tả sản phẩm: </h6>
-    <div class="mt-1" [innerHTML]="sanphamdetail[0]?.Mo_ta"></div>
+    <div class=" row mt-1" [innerHTML]="sanphamdetail[0]?.Mo_ta"></div>
   </div>
 </div>
 

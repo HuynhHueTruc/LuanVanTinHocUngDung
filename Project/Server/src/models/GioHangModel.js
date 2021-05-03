@@ -9,8 +9,6 @@ let GioHangSchema = new mongoose.Schema({
 
     }],
     KhachHang_id: String,
-    Tong_tien: Number
-    
 });
 
 const GioHangModel = mongoose.model('gio_hangs', GioHangSchema);

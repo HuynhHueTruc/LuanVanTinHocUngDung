@@ -116,7 +116,7 @@ export class ProductComponent implements OnInit {
   }
 
   ProductDetail(eachSP){
-
-    console.log(eachSP)
+    this.router.navigateByUrl(`/detail/${eachSP._id}`);
+    // this.isLoading = true;
   }
 }

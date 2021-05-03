@@ -1,1 +1,99 @@
-<p>cart works!</p>
+<app-header></app-header>
+<app-liftnav></app-liftnav>
+<div class="form-gap"></div>
+
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-12 text-center font-weight-bold">
+      <h5 class="title">Green Life | Giỏ Hàng</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-sm-4 d-flex justify-content-start p-0">
+      <div class="form-check ">
+        <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault"
+          (change)="KTCheckedAll()">
+      </div>
+      Sản Phẩm
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center p-0">
+      Đơn giá
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center p-0">
+      Số lượng
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center p-0">
+      Số Tiền
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center p-0">
+      Tác vụ
+    </div>
+  </div>
+
+  <div class="row mt-4" style="background-color: darkgrey;">
+    <div class="col-sm-12 d-flex align-items-center">
+      <p class="m-0 p-2">Green Life</p>
+    </div>
+  </div>
+  <hr  width="100%" size="10px" />
+  <div class="row mt-4" style="background-color: darkgrey;">
+    <div class="col-sm-4 d-flex justify-content-start pt-3 pb-3">
+      <div class="form-check d-flex align-items-center">
+        <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault"
+          (change)="KTCheckedAll()">
+      </div>
+      <div >
+        <img id="image" src="https://st.quantrimang.com/photos/image/2018/10/19/anh-hoa-dep-1.jpg" class="avatar">
+      </div>
+      <div class="ml-2">Tên sản phẩm</div>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <div class="col-sm-6 p-0">
+        Giá ban đầu
+      </div>
+      <div class="col-sm-6 p-0">
+        Giá sau khuyến mãi
+      </div>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <div class="buttons_added">
+        <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong()">
+        <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong()" (blur)="So_luong_mac_dinh()" [(ngModel)]="So_luong" #plus="ngModel" name="plus" value={{So_luong}}>
+        <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong()" >
+      </div>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+     0
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <button class="buttonicon" (click)="open_delete(content_delete, null)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
+        <i class="far fa-trash-alt m-1"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog xác nhận xóa-->
+<div class="container" id="modals_delete">
+  <ng-template #content_delete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
+    </div>
+    <div class="modal-body">
+      <h6>Bạn có thật sự muốn xóa các sản phẩm trong giỏ hàng không?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="XacNhan()">Xóa</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+    </div>
+  </ng-template>
+
+</div>
+

@@ -38,8 +38,9 @@ export class DetailComponent implements OnInit {
   countStar = [];
   isDisplay = [];
   arrHinhAnh = [];
+  So_luong = 1;
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
-    private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
+              private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
 
   ngOnInit(): void {
     this.href = this.router.url;
@@ -84,7 +85,6 @@ export class DetailComponent implements OnInit {
     });
   }
 
-
   getdsHoaDonBanHang() {
     let count = 0;
     this.hoadonbanService.getListHoaDonBan().subscribe((res: any) => {
@@ -119,6 +119,7 @@ export class DetailComponent implements OnInit {
       this.thongtincuahang = res.cuahangs;
     });
   }
+
   // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraKhuyeMai(eachSP) {
     this.arrKhuyenMai = [];
@@ -155,6 +156,7 @@ export class DetailComponent implements OnInit {
     return bool;
   }
 
+  // Phóng to hình ảnh bình luận
   Zoom(url, index, arr_index) {
     this.index = index;
     this.arr_index = arr_index;
@@ -170,6 +172,7 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  // Xem hình ảnh trước hình ảnh đang xem
   HinhAnhTruoc(){
     if (this.arr_index > 0 ){
       this.arr_index -= 1;
@@ -177,6 +180,7 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  // Xem hình ảnh sau hình ảnh đang xem
   HinhAnhSau(){
     // console.log(this.arrHinhAnh[this.index].length - 1, this.arr_index)
     if (this.arrHinhAnh[this.index].length - 1 > this.arr_index){
@@ -186,4 +190,40 @@ export class DetailComponent implements OnInit {
     }
 
   }
+
+  // Tăng số lượng sản phẩm đặt mua
+  ThemSoLuong(){
+    if (this.So_luong < this.sanphamdetail[0].So_luong){
+      this.So_luong += 1;
+    }else{
+      this.So_luong = this.sanphamdetail[0].So_luong;
+    }
+  }
+
+  // Giảm số lượng sản phẩm đặt mua
+  GiamSoLuong(){
+    if (this.So_luong !== 1){
+      this.So_luong -= 1;
+    }
+  }
+
+  // Kiểm tra số lượng nhập vào thẻ input
+  KiemTraSoLuong(){
+    if (this.So_luong <= 0){
+     const sl = document.getElementById('So_luong') as HTMLInputElement;
+     sl.value = '';
+    }
+  }
+
+  // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
+  So_luong_mac_dinh(){
+    if (this.So_luong === null){
+      this.So_luong = 1;
+    }
+    if (this.So_luong > this.sanphamdetail[0].So_luong){
+      this.So_luong = this.sanphamdetail[0].So_luong;
+    }
+  }
+
+
 }

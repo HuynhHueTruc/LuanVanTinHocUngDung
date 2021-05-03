@@ -1,5 +1,6 @@
 const express = require('express')
 const route = express()
+const { ObjectID } = require('bson');
 
 const GioHangModel = require('../src/models/GioHangModel');
 // Tạo API lấy dữ liệu từ MongoDB về
@@ -12,7 +13,6 @@ route.get('/giohang', async(req, res) => {
             Gia_ban: 1
         }],
     KhachHang_id: 1,
-    Tong_tien: 1
     }).exec((err, giohangs) => {
         if (err) {
             res.json({
