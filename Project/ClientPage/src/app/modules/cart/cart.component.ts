@@ -1,3 +1,5 @@
+
+
 import { GioHangModel } from './../../../models/GioHang/giohang';
 import { KhuyenmaiService } from 'src/services/KhuyenMai/khuyenmai.service';
 import { SanphamService } from './../../../services/SanPham/sanpham.service';
@@ -168,8 +170,9 @@ export class CartComponent implements OnInit {
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong(index) {
     if ( this.giohang[0].San_Pham[index].So_luong <= 0) {
-      const sl = document.getElementById('So_luong') as HTMLInputElement;
-      sl.value = '';
+      // const sl = document.getElementById('So_luong') as HTMLInputElement;
+      // sl.value = '';
+      this.giohang[0].San_Pham[index].So_luong = null;
     }
   }
 

@@ -1,22 +1,24 @@
+<div class="main">
 <app-header></app-header>
 <app-liftnav></app-liftnav>
 <div class="form-gap"></div>
 
-<div class="container">
-  <div class="row ">
-    <div class="col-sm-12 text-center font-weight-bold">
-      <h5 class="title">Green Life | Giỏ Hàng</h5>
+<div class="container ">
+  <div class="row setbackground ">
+    <div class="col-sm-12 text-center font-weight-bold  ">
+      <h5 class="title m-0 pt-3">Green Life | Giỏ Hàng</h5>
     </div>
   </div>
-  <div class="row">
+
+  <div class="row setbackground p-2">
     <div class="col-sm-12" id="divbutton">
       <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
         <i class="fas fa-trash"></i>
       </button>
     </div>
   </div>
-  <div class="row mt-2">
-    <div class="col-sm-4 d-flex justify-content-start p-0">
+  <div class="row mt-2 setbackground p-2">
+    <div class="col-sm-4 d-flex justify-content-start ">
       <div class="form-check ">
         <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault"
           (change)="KTCheckedAll()">
@@ -37,14 +39,14 @@
     </div>
   </div>
 
-  <div class="row mt-4" style="background-color: darkgrey;">
+  <!-- <div class="row mt-4" >
     <div class="col-sm-12 d-flex align-items-center">
       <p class="m-0 p-2">Green Life</p>
     </div>
-  </div>
+  </div> -->
   <hr  width="100%" size="10px" />
 
-  <div class="row mt-4" style="background-color: darkgrey;" *ngFor="let eachSP of arrSanPham; let i = index">
+  <div class="row mt-4 setbackground"  *ngFor="let eachSP of arrSanPham; let i = index">
     <div class="col-sm-4 d-flex justify-content-start pt-3 pb-3">
       <div class="form-check d-flex align-items-center">
         <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck" >
@@ -72,7 +74,7 @@
     <div class="col-sm-2 d-flex justify-content-center align-items-center">
       <div class="buttons_added">
         <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong(i)">
-        <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong(i)" (blur)="So_luong_mac_dinh(i)" [(ngModel)]="giohang[0].San_Pham[i].So_luong" #plus="ngModel" name="plus" >
+        <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong{{i}}" (keyup)="KiemTraSoLuong(i)" (blur)="So_luong_mac_dinh(i)" [(ngModel)]="giohang[0].San_Pham[i].So_luong" #plus="ngModel" name="plus" >
         <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong(i)" >
       </div>
     </div>
@@ -84,6 +86,8 @@
         <i class="far fa-trash-alt m-1"></i>
       </button>
     </div>
+    <!-- <hr  width="100%" size="10px" /> -->
+
   </div>
 </div>
 
@@ -104,3 +108,4 @@
 
 </div>
 
+</div>
