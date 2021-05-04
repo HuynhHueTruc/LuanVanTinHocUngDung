@@ -13,4 +13,8 @@ export class GiohangService {
   getdsGioHang(): Observable<GioHangModel[]>{
     return this.http.get<GioHangModel[]>('http://localhost:3000/giohang').pipe();
   }
+
+  getGioHang(KhachHang): Observable<GioHangModel[]>{
+    return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/thongtin', KhachHang).pipe();
+  }
 }

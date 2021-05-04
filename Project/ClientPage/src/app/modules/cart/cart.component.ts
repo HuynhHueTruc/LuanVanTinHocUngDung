@@ -1,3 +1,4 @@
+import { GioHangModel } from './../../../models/GioHang/giohang';
 import { KhuyenmaiService } from 'src/services/KhuyenMai/khuyenmai.service';
 import { SanphamService } from './../../../services/SanPham/sanpham.service';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
@@ -15,11 +16,15 @@ export class CartComponent implements OnInit {
 
   href = '';
   sanpham_id;
+  datalogin: any;
+
   dssanpham: SanPhamModel;
   sanphamdetail: SanPhamModel[] = [];
   dskhuyenmai: KhuyenMaiModel[] = [];
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
+  giohang: GioHangModel[] = [];
+  arrSanPham: SanPhamModel[] = [];
 
   checkAll = false;
   checked = [];
@@ -27,24 +32,41 @@ export class CartComponent implements OnInit {
   lengthchecked = 0;
   tong_tien = 0;
   So_luong = 0;
+  giatrikhuyenmai = 0;
+
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
-              private khuyenmaiService: KhuyenmaiService) { }
+    private khuyenmaiService: KhuyenmaiService) { }
 
   ngOnInit(): void {
+    this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.href = this.router.url;
     this.sanpham_id = this.href.replace('/detail/', '');
-    this.getdssanpham();
+    this.getgiohang();
   }
 
+  getgiohang() {
+    this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
+      this.giohang = dt;
+      this.lengthdssanpham = this.giohang[0].San_Pham.length;
+      for (const length in this.giohang[0].San_Pham) {
+        if (this.giohang[0].San_Pham.hasOwnProperty(length)) {
+          this.checked.push(false);
+        }
+      }
+      this.getdssanpham();
+    });
+  }
+
+
   getdssanpham() {
-    let sd = 0;
-    // const arrImg = [];
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
       for (const i in this.dssanpham) {
         if (this.dssanpham.hasOwnProperty(i)) {
-          if (this.dssanpham[i]._id === this.sanpham_id) {
-            this.sanphamdetail.push(this.dssanpham[i]);
+          for (const j in this.giohang[0].San_Pham) {
+            if (this.giohang[0].San_Pham[j].SanPham_id === this.dssanpham[i]._id) {
+              this.arrSanPham.push(this.dssanpham[i]);
+            }
           }
         }
       }
@@ -52,10 +74,11 @@ export class CartComponent implements OnInit {
     });
   }
 
-   // Lấy danh sách khuyến mãi
-   getdskhuyenmai() {
+  // Lấy danh sách khuyến mãi
+  getdskhuyenmai() {
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
+
     });
   }
 
@@ -126,38 +149,73 @@ export class CartComponent implements OnInit {
     }
   }
 
-    // Tăng số lượng sản phẩm đặt mua
-    ThemSoLuong(){
-      if (this.So_luong < this.sanphamdetail[0].So_luong){
-        this.So_luong += 1;
-      }else{
-        this.So_luong = this.sanphamdetail[0].So_luong;
+  // Tăng số lượng sản phẩm đặt mua
+  ThemSoLuong(index) {
+    if (this.giohang[0].San_Pham[index].So_luong < this.arrSanPham[index].So_luong) {
+      this.giohang[0].San_Pham[index].So_luong += 1;
+    } else {
+      this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
+    }
+  }
+
+  // Giảm số lượng sản phẩm đặt mua
+  GiamSoLuong(index) {
+    if ( this.giohang[0].San_Pham[index].So_luong !== 1) {
+      this.giohang[0].San_Pham[index].So_luong -= 1;
+    }
+  }
+
+  // Kiểm tra số lượng nhập vào thẻ input
+  KiemTraSoLuong(index) {
+    if ( this.giohang[0].San_Pham[index].So_luong <= 0) {
+      const sl = document.getElementById('So_luong') as HTMLInputElement;
+      sl.value = '';
+    }
+  }
+
+  // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
+  So_luong_mac_dinh(index) {
+    if ( this.giohang[0].San_Pham[index].So_luong === null) {
+      this.giohang[0].San_Pham[index].So_luong = 1;
+    }
+    if ( this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong) {
+      this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
+    }
+  }
+
+   // Chọn khuyến mãi cao nhất của từng sản phẩm
+   KiemTraKhuyeMai(eachSP) {
+    this.arrKhuyenMai = [];
+    this.giatrikhuyenmai = 0;
+    let bool = false;
+    for (const i in this.dskhuyenmai) {
+      if (this.dskhuyenmai.hasOwnProperty(i)) {
+        for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+          if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+            if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+              if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                this.arrKhuyenMai.push(this.dskhuyenmai[i]);
+              }
+            } else {
+              bool = false;
+            }
+          }
+        }
       }
     }
 
-    // Giảm số lượng sản phẩm đặt mua
-    GiamSoLuong(){
-      if (this.So_luong !== 1){
-        this.So_luong -= 1;
+    for (const i in this.arrKhuyenMai) {
+      if (this.arrKhuyenMai.hasOwnProperty(i)) {
+        if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
+          this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
+          this.khuyenmai = this.arrKhuyenMai[i];
+          bool = true;
+        }
       }
-    }
 
-    // Kiểm tra số lượng nhập vào thẻ input
-    KiemTraSoLuong(){
-      if (this.So_luong <= 0){
-       const sl = document.getElementById('So_luong') as HTMLInputElement;
-       sl.value = '';
-      }
     }
-
-    // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
-    So_luong_mac_dinh(){
-      if (this.So_luong === null){
-        this.So_luong = 1;
-      }
-      if (this.So_luong > this.sanphamdetail[0].So_luong){
-        this.So_luong = this.sanphamdetail[0].So_luong;
-      }
-    }
-
+    // console.log(this.khuyenmai)
+    return bool;
+  }
 }

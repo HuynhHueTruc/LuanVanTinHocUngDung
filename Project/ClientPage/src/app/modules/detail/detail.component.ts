@@ -217,13 +217,14 @@ export class DetailComponent implements OnInit {
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
   So_luong_mac_dinh(){
-    if (this.So_luong === null){
+    if (this.So_luong === null || this.So_luong === 0){
       this.So_luong = 1;
     }
     if (this.So_luong > this.sanphamdetail[0].So_luong){
       this.So_luong = this.sanphamdetail[0].So_luong;
     }
   }
+
 
 
 }

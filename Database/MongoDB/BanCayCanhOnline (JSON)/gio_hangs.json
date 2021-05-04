@@ -5,18 +5,18 @@
   "San_Pham": [
     {
       "SanPham_id": {
-        "$oid": "5f7d83507cc2cc2a04b15734"
+        "$oid": "607aaa4e62e0c41e48cb67ad"
       },
       "So_luong": 1,
-      "Gia_ban": 15000
+      "Gia_ban": 170000
     },
     {
       "SanPham_id": {
-        "$oid": "5f7d83c47cc2cc2a04b15735"
+        "$oid": "607ab14262e0c41e48cb67b4"
       },
       "So_luong": 3,
-      "Gia_ban": 195000
+      "Gia_ban": 109000
     }
   ],
-  "KhachHang_id": "HuynhHueTruc"
+  "KhachHang_id": "Huynh_Hue_TrucA"
 }]

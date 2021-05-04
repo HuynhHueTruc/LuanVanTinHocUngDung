@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" id="divbutton">
       <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
         <i class="fas fa-trash"></i>
       </button>
@@ -30,7 +30,7 @@
       Số lượng
     </div>
     <div class="col-sm-2 d-flex justify-content-center p-0">
-      Số Tiền
+    Tổng tiền
     </div>
     <div class="col-sm-2 d-flex justify-content-center p-0">
       Tác vụ
@@ -43,34 +43,41 @@
     </div>
   </div>
   <hr  width="100%" size="10px" />
-  <div class="row mt-4" style="background-color: darkgrey;">
+
+  <div class="row mt-4" style="background-color: darkgrey;" *ngFor="let eachSP of arrSanPham; let i = index">
     <div class="col-sm-4 d-flex justify-content-start pt-3 pb-3">
       <div class="form-check d-flex align-items-center">
-        <input class="form-check-input" value="{{checkAll}}" type="checkbox" [checked]="checkAll" id="flexCheckDefault"
-          (change)="KTCheckedAll()">
+        <input class="form-check-input" [id]="i" type="checkbox" value="{{checked[i]}}" [checked]="checked[i]" (change)="KTChecked(i)" name="itemcheck" >
       </div>
       <div >
-        <img id="image" src="https://st.quantrimang.com/photos/image/2018/10/19/anh-hoa-dep-1.jpg" class="avatar">
+        <img id="image" src={{eachSP.Hinh_anh}} class="avatar">
       </div>
-      <div class="ml-2">Tên sản phẩm</div>
+      <div class="ml-2 ">{{eachSP.Ten_san_pham}}</div>
     </div>
+
+    <!-- Hiển thị giá tiền ban đầu khi sản phẩm có khuyến mãi -->
     <div class="col-sm-2 d-flex justify-content-center align-items-center">
-      <div class="col-sm-6 p-0">
-        Giá ban đầu
+      <div class="col-sm-6 p-0 khuyenmai" *ngIf="KiemTraKhuyeMai(eachSP)">
+        {{eachSP.Gia | currency: "VND"}}
       </div>
-      <div class="col-sm-6 p-0">
-        Giá sau khuyến mãi
+      <!-- Hiển thị giá sau khi khuyến mãi -->
+      <div class="col-sm-6 p-0" *ngIf="KiemTraKhuyeMai(eachSP)">
+        {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
+      </div>
+      <!-- Hiển thị giá tiền cho sản phẩm không có khuyến mãi -->
+      <div class="col-sm-6 p-0" *ngIf="!KiemTraKhuyeMai(eachSP)">
+        {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
       </div>
     </div>
     <div class="col-sm-2 d-flex justify-content-center align-items-center">
       <div class="buttons_added">
-        <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong()">
-        <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong()" (blur)="So_luong_mac_dinh()" [(ngModel)]="So_luong" #plus="ngModel" name="plus" value={{So_luong}}>
-        <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong()" >
+        <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong(i)">
+        <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong(i)" (blur)="So_luong_mac_dinh(i)" [(ngModel)]="giohang[0].San_Pham[i].So_luong" #plus="ngModel" name="plus" >
+        <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong(i)" >
       </div>
     </div>
     <div class="col-sm-2 d-flex justify-content-center align-items-center">
-     0
+     {{(eachSP.Gia - eachSP.Gia*giatrikhuyenmai) *giohang[0].San_Pham[i].So_luong | currency: "VND"}}
     </div>
     <div class="col-sm-2 d-flex justify-content-center align-items-center">
       <button class="buttonicon" (click)="open_delete(content_delete, null)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >

@@ -27,5 +27,24 @@ route.get('/giohang', async(req, res) => {
     })
 })
 
+
+route.post('/giohang/thongtin', async(req, res) => {
+    var KhachHang_id = req.body.Khach_hang_id;
+    GioHangModel.findOne({
+        KhachHang_id: KhachHang_id,
+    }).then(data => {
+        if(data){
+        res.json([data]);
+        }else{
+        res.json(false);
+
+        }
+    })
+    .catch(err => {
+        res.status(500).json('Lỗi server!')
+
+    })
+})
+
 //Export biến route để server.js có thể gọi các api được viết
 module.exports = route;
