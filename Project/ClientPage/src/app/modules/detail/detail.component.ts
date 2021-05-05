@@ -237,9 +237,23 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  CapNhatSoLuongSanPhamTrung(sanpham){
+    let bool = false
+    for (const i in this.giohang[0].San_Pham){
+      if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id){
+        this.giohang[0].San_Pham[i].So_luong += this.So_luong
+       return true
+      }else{
+        bool = false
+      }
+    }
+    return bool
+  }
+
   ThemVaoGioHang(){
-    this.giohang[0].KhachHang_id = this.datalogin.Khach_hang_id;
-    this.giohang[0].San_Pham.push({SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong})
+    if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])){
+      this.giohang[0].San_Pham.push({SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong})
+    }
     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
     alert('Đã thêm vào giỏ hàng!')
   }
