@@ -34,4 +34,7 @@ export class GiohangService {
     );
    }
 
+   CapNhatSoLuong(giohang): Observable<GioHangModel[]>{
+    return this.http.put<GioHangModel[]>(`${'http://localhost:3000/giohang/capnhat/soluong'}/${giohang.KhachHang_id}`, giohang).pipe();
+   }
 }

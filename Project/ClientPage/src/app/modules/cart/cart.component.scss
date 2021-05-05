@@ -89,11 +89,44 @@ html{
   background-color: aqua;
 }
 
+#list{
+  height: 100%;
+}
 .main{
   background-color: whitesmoke;
-  height: 100%;
+  height: 120%;
 }
 
 .setbackground{
   background-color: white;
+}
+
+.themsanpham{
+  background-color: darkcyan;
+  color: white;
+  border: none;
+  width: 250px;
+  // height: 45px;
+}
+
+.themsanpham:hover{
+  background-color: crimson;
+}
+
+// #tong_tien{
+//   position:fixed;
+//   top:630px;
+//   bottom:50px;
+//   left:182px;
+//   right:182px;
+//   z-index: 100;
+// }
+
+.hp-pc-lift-nav {
+  position: fixed;
+  top:630px;
+  bottom: 40px;
+  left:182px;
+  z-index: 100;
+  background-color: #f5f5f5;
 }

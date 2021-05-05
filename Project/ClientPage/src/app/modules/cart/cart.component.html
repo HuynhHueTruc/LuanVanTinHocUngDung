@@ -3,7 +3,7 @@
 <app-liftnav></app-liftnav>
 <div class="form-gap"></div>
 
-<div class="container ">
+<div class="container " id="list">
   <div class="row setbackground ">
     <div class="col-sm-12 text-center font-weight-bold  ">
       <h5 class="title m-0 pt-3">Green Life | Giỏ Hàng</h5>
@@ -86,12 +86,12 @@
   </div>
 </div>
 
-<hr  width="100%" size="10px" />
 
-<div class="container">
-  <div class="row setbackground">
-    <div class="col-sm-12">
-      Tổng thanh toán ({{lengthchecked}} sản phẩm): {{tong_tien | currency: 'VND'}}
+<div class="container mt-3  hp-pc-lift-nav" id="tong_tien" >
+  <div class="row setbackground p-5" >
+    <div class="col-sm-12 d-flex justify-content-center align-items-center">
+     <h6 class="m-0"> Tổng thanh toán ({{lengthchecked}} sản phẩm): {{tong_tien | currency: 'VND'}}</h6>
+      <button class="p-2 ml-5 themsanpham"><i class="fas fa-shopping-bag mr-1"></i> Mua Hàng</button>
     </div>
   </div>
 </div>

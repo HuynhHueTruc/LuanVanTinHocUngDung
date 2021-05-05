@@ -83,7 +83,6 @@ route.post('/giohang/thongtin', async(req, res) => {
 
 // Hàm cập nhật
 route.put('/giohang/capnhat/:_id', async(req, res) => {
-    console.log(req.body)
     const KhachHang_id = req.params._id;
     const {San_Pham} = req.body;
     const Ngay_cap_nhat = dateFormat();
@@ -105,6 +104,28 @@ route.put('/giohang/capnhat/:_id', async(req, res) => {
     })
 })
 
+// Hàm cập nhật số lượng
+route.put('/giohang/capnhat/soluong/:_id', async(req, res) => {
+    const KhachHang_id = req.params._id;
+    const {San_Pham} = req.body;
+    const Ngay_cap_nhat = dateFormat();
+    GioHangModel.findOne({
+        KhachHang_id: KhachHang_id
+    }).then(data => {
+          return GioHangModel.updateOne({
+            KhachHang_id: KhachHang_id
+            }, {
+                San_Pham: San_Pham,
+                Ngay_cap_nhat : Ngay_cap_nhat,
+                }).then(data => {
+                    res.json('Cập nhật giỏ hàng thành công!')
+                })
+               
+    }).catch(err => {
+        res.json('Không tìm thấy giỏ hàng này!')
+
+    })
+})
 
 
 //Export biến route để server.js có thể gọi các api được viết
