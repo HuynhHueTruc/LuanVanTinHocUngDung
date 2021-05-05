@@ -17,10 +17,13 @@ export class LiftnavComponent implements OnInit {
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
-    this.giohangService.getRefeshPage().subscribe(() => {
+    if (this.datalogin !== null){
+      this.giohangService.getRefeshPage().subscribe(() => {
+        this.getgiohang();
+      })
       this.getgiohang();
-    })
-    this.getgiohang();
+
+    }
   }
 
   getgiohang() {
