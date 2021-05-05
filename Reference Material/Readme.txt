@@ -38,7 +38,7 @@ FireBase: https://console.firebase.google.com/u/0/project/managementimagesgreenl
 Timer trong nodejs: https://freetuts.net/timers-trong-nodejs-2216.html
 Thống kê truy cập: https://huongdan.haravan.com/blogs/tai-lieu-huong-dan/1000108610-huong-dan-them-code-thong-ke-truy-cap
 select multil: https://www.npmjs.com/package/ng-multiselect-dropdown
-Realtime database and change stream in mongodb: https://www.youtube.com/watch?v=n9Du-oESxCg
+Realtime database and change stream in mongodb: https://www.youtube.com/watch?v=n9Du-oESxCg; https://www.youtube.com/watch?v=DvnzeCfYg0s
 
 ckfinder:
 https://ckeditor.com/cke4/addon/popup

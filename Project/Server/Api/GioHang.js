@@ -1,5 +1,9 @@
 const express = require('express')
 const route = express()
+var dateFormat = require('dateformat'); 
+var now = new Date();
+dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+
 const { ObjectID } = require('bson');
 
 const GioHangModel = require('../src/models/GioHangModel');
@@ -45,6 +49,34 @@ route.post('/giohang/thongtin', async(req, res) => {
 
     })
 })
+
+
+// Hàm cập nhật
+route.put('/giohang/capnhat/:_id', async(req, res) => {
+    // console.log(req.body)
+    const _id = req.params._id;
+    const {San_Pham} = req.body;
+    const Ngay_cap_nhat = dateFormat();
+  
+    GioHangModel.findOne({
+        _id: _id
+    }).then(data => {
+          return GioHangModel.updateOne({
+                _id: _id
+            }, {
+                San_Pham: San_Pham,
+                Ngay_cap_nhat : Ngay_cap_nhat,
+                }).then(data => {
+                    res.json('Cập nhật giỏ hàng thành công!')
+                })
+               
+    }).catch(err => {
+        res.json('Không tìm thấy giỏ hàng này!')
+
+    })
+})
+
+
 
 //Export biến route để server.js có thể gọi các api được viết
 module.exports = route;

@@ -8,6 +8,7 @@ import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { Router } from '@angular/router';
 import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -26,6 +27,7 @@ export class CartComponent implements OnInit {
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
   giohang: GioHangModel[] = [];
+  sanphams: any;
   arrSanPham: SanPhamModel[] = [];
 
   checkAll = false;
@@ -38,17 +40,29 @@ export class CartComponent implements OnInit {
 
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
     private khuyenmaiService: KhuyenmaiService) { }
-
+    private updateSubscription: Subscription;
   ngOnInit(): void {
+//     this.updateSubscription = interval(1000).subscribe(
+//       (val) => { this.getgiohang()
+//     }
+// );
+
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.href = this.router.url;
     this.sanpham_id = this.href.replace('/detail/', '');
+    this.giohangService.getRefeshPage().subscribe(() => {
+      this.getgiohang();
+    })
     this.getgiohang();
   }
 
   getgiohang() {
+    this.giohang = []
+    this.checked = []
+
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
+      // console.log(this.sanphams)
       this.lengthdssanpham = this.giohang[0].San_Pham.length;
       for (const length in this.giohang[0].San_Pham) {
         if (this.giohang[0].San_Pham.hasOwnProperty(length)) {
@@ -61,6 +75,8 @@ export class CartComponent implements OnInit {
 
 
   getdssanpham() {
+    this.dssanpham = new SanPhamModel()
+    this.arrSanPham = []
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
       for (const i in this.dssanpham) {
@@ -78,6 +94,7 @@ export class CartComponent implements OnInit {
 
   // Lấy danh sách khuyến mãi
   getdskhuyenmai() {
+    this.dskhuyenmai = []
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
 
@@ -85,7 +102,13 @@ export class CartComponent implements OnInit {
   }
 
   // Mở Dialog xác nhận xóa giỏ hàng
-  open_delete(content_delete, sanpham_id) {
+  Xoa(index) {
+    this.arrSanPham.splice(index, 1);
+    this.giohang[0].San_Pham.splice(index, 1);
+    this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+  }
+
+  XoaTatCa(){
 
   }
 
