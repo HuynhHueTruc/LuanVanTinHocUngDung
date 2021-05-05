@@ -39,11 +39,6 @@
     </div>
   </div>
 
-  <!-- <div class="row mt-4" >
-    <div class="col-sm-12 d-flex align-items-center">
-      <p class="m-0 p-2">Green Life</p>
-    </div>
-  </div> -->
   <hr  width="100%" size="10px" />
 
   <div class="row mt-4 setbackground"  *ngFor="let eachSP of arrSanPham; let i = index">
@@ -91,21 +86,14 @@
   </div>
 </div>
 
-<!-- Dialog xác nhận xóa-->
-<!-- <div class="container" id="modals_delete">
-  <ng-template #content_delete let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-notification">XÁC NHẬN</h4>
-    </div>
-    <div class="modal-body">
-      <h6>Bạn có thật sự muốn xóa các sản phẩm trong giỏ hàng không?</h6>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="XacNhan()">Xóa</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
-    </div>
-  </ng-template>
+<hr  width="100%" size="10px" />
 
-</div> -->
-
+<div class="container">
+  <div class="row setbackground">
+    <div class="col-sm-12">
+      Tổng thanh toán ({{lengthchecked}} sản phẩm): {{tong_tien | currency: 'VND'}}
+    </div>
+  </div>
 </div>
+</div>
+

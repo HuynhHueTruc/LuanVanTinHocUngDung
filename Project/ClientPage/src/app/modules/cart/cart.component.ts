@@ -42,7 +42,7 @@ export class CartComponent implements OnInit {
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
     private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService) { }
 
-    // private updateSubscription: Subscription;
+  // private updateSubscription: Subscription;
 
   ngOnInit(): void {
     //     this.updateSubscription = interval(1000).subscribe(
@@ -136,11 +136,18 @@ export class CartComponent implements OnInit {
       }
     } else {
       this.checkAll = true;
+      this.TongTien()
       this.checked = [];
       for (let i = 0; i < this.lengthdssanpham; i++) {
         this.checked.push(true);
         document.getElementById('divbutton').style.display = 'block';
       }
+    }
+
+    if (this.checkAll){
+      this.TongTien()
+    }else{
+      this.tong_tien = 0;
     }
   }
 
@@ -154,6 +161,7 @@ export class CartComponent implements OnInit {
   // Hàm kiểm tra checked tại các item
   KTChecked(i: string) {
     this.lengthchecked = 0;
+    this.tong_tien = 0;
     this.checked[i] = !this.checked[i];
     if (this.checkAll) {
       this.checkAll = false;
@@ -180,12 +188,29 @@ export class CartComponent implements OnInit {
       document.getElementById('divbutton').style.display = 'block';
 
     }
+    this.TongTien()
+  }
+
+
+  TongTien() {
+    for (const i in this.arrSanPham) {
+      this.KiemTraKhuyeMai(this.arrSanPham[i])
+      this.tong_tien = this.tong_tien + (this.arrSanPham[i].Gia - this.arrSanPham[i].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[i].So_luong
+    }
+    for (const j in this.arrSanPham){
+      if (!this.checked[j]){
+        this.KiemTraKhuyeMai(this.arrSanPham[j])
+        this.tong_tien = this.tong_tien - (this.arrSanPham[j].Gia - this.arrSanPham[j].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[j].So_luong
+      }
+    }
+
   }
 
   // Tăng số lượng sản phẩm đặt mua
   ThemSoLuong(index) {
     if (this.giohang[0].San_Pham[index].So_luong < this.arrSanPham[index].So_luong) {
       this.giohang[0].San_Pham[index].So_luong += 1;
+      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
     } else {
       this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
     }
@@ -195,6 +220,7 @@ export class CartComponent implements OnInit {
   GiamSoLuong(index) {
     if (this.giohang[0].San_Pham[index].So_luong !== 1) {
       this.giohang[0].San_Pham[index].So_luong -= 1;
+      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
     }
   }
 

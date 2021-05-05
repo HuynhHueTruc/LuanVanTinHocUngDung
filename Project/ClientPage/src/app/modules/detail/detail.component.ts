@@ -207,6 +207,7 @@ export class DetailComponent implements OnInit {
   ThemSoLuong(){
     if (this.So_luong < this.sanphamdetail[0].So_luong){
       this.So_luong += 1;
+
     }else{
       this.So_luong = this.sanphamdetail[0].So_luong;
     }
@@ -237,6 +238,7 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  // Cập nhật số lượng sản phẩm nếu sản phẩm đang thêm đã tồn tại trong giỏ hàng
   CapNhatSoLuongSanPhamTrung(sanpham){
     let bool = false
     for (const i in this.giohang[0].San_Pham){
