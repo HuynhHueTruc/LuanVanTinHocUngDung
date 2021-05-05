@@ -1,3 +1,4 @@
+import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 
 
 import { GioHangModel } from './../../../models/GioHang/giohang';
@@ -39,21 +40,28 @@ export class CartComponent implements OnInit {
   giatrikhuyenmai = 0;
 
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
-    private khuyenmaiService: KhuyenmaiService) { }
-    private updateSubscription: Subscription;
-  ngOnInit(): void {
-//     this.updateSubscription = interval(1000).subscribe(
-//       (val) => { this.getgiohang()
-//     }
-// );
+    private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService) { }
 
-    this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
-    this.href = this.router.url;
-    this.sanpham_id = this.href.replace('/detail/', '');
-    this.giohangService.getRefeshPage().subscribe(() => {
+    // private updateSubscription: Subscription;
+
+  ngOnInit(): void {
+    //     this.updateSubscription = interval(1000).subscribe(
+    //       (val) => { this.getgiohang()
+    //     }
+    // );
+
+    if (this.KHService.isLoggedIn) {
+      this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
+      this.href = this.router.url;
+      this.sanpham_id = this.href.replace('/detail/', '');
+      this.giohangService.getRefeshPage().subscribe(() => {
+        this.getgiohang();
+      })
       this.getgiohang();
-    })
-    this.getgiohang();
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+
   }
 
   getgiohang() {
@@ -108,14 +116,14 @@ export class CartComponent implements OnInit {
     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
   }
 
-  XoaTatCa(){
-
+  XoaTatCa() {
+    this.arrSanPham.splice(0, this.arrSanPham.length);
+    this.giohang[0].San_Pham.splice(0, this.giohang[0].San_Pham.length);
+    this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+    this.checkAll = false
+    document.getElementById('trash').style.display = 'none';
   }
 
-  // Đồng ý xóa các sản phẩm trong giỏ hàng
-  XacNhan() {
-
-  }
 
   // Hàm xử lý sự kiện checked tại ô checkbox tổng
   KTCheckedAll() {
@@ -185,14 +193,14 @@ export class CartComponent implements OnInit {
 
   // Giảm số lượng sản phẩm đặt mua
   GiamSoLuong(index) {
-    if ( this.giohang[0].San_Pham[index].So_luong !== 1) {
+    if (this.giohang[0].San_Pham[index].So_luong !== 1) {
       this.giohang[0].San_Pham[index].So_luong -= 1;
     }
   }
 
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong(index) {
-    if ( this.giohang[0].San_Pham[index].So_luong <= 0) {
+    if (this.giohang[0].San_Pham[index].So_luong <= 0) {
       // const sl = document.getElementById('So_luong') as HTMLInputElement;
       // sl.value = '';
       this.giohang[0].San_Pham[index].So_luong = null;
@@ -201,16 +209,16 @@ export class CartComponent implements OnInit {
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
   So_luong_mac_dinh(index) {
-    if ( this.giohang[0].San_Pham[index].So_luong === null) {
+    if (this.giohang[0].San_Pham[index].So_luong === null) {
       this.giohang[0].San_Pham[index].So_luong = 1;
     }
-    if ( this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong) {
+    if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong) {
       this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
     }
   }
 
-   // Chọn khuyến mãi cao nhất của từng sản phẩm
-   KiemTraKhuyeMai(eachSP) {
+  // Chọn khuyến mãi cao nhất của từng sản phẩm
+  KiemTraKhuyeMai(eachSP) {
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
     let bool = false;

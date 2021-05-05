@@ -11,6 +11,9 @@
             <i class="fa fa-shopping-cart " aria-hidden="true"></i>
         </a>
         <div class="hovered-text">Giỏ hàng</div>
+        <sup *ngIf="SoLuongSanPham()">
+          <span class="badge badge-pill bg-danger">{{lengthdssanpham}}</span>
+        </sup>
     </div>
 
     <div class="hp-pc-lift-nav-text">

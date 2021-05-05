@@ -5,10 +5,9 @@ let GioHangSchema = new mongoose.Schema({
     San_Pham: [{
         SanPham_id: String,
         So_luong: Number,
-        Gia_ban: Number
-
     }],
     KhachHang_id: String,
+    Thoi_gian_cap_nhat: Date
 });
 
 const GioHangModel = mongoose.model('gio_hangs', GioHangSchema);

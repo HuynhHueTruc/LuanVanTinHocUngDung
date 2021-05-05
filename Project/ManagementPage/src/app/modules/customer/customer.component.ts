@@ -1,3 +1,4 @@
+import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { DiachiService } from './../../../services/DiaChi/diachi.service';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,62 +20,62 @@ import { DatePipe } from '@angular/common';
 })
 export class CustomerComponent implements OnInit {
 
- // Chứa thông tin được nhập vào trong form đăng ký
- khachhang: KhachHangModel;
- flag = false;
- // Chứa mật khẩu được random
- text = '';
- checkAll = false;
- KiemTraThongTin = false;
- lengthchecked = 0;
- // Mãng ID khachhang, mãng mật khẩu, mãng tên khachhang, mãng email khachhang được check để xóa và gửi email
- arrKhachHangID = [];
- arrMatKhauKH = [];
- arrTenKH = [];
- arrEmailKH = [];
- // Tạo Model Thông tin khách hàng để gửi Email sau khi tạo
- ThongTinGuiEmailTaiKhoan: ThongTinTaiKhoanEmailModel[] = [];
- // Tạo Model thông tin người nhận trong Dialog gửi mail
- NguoiNhanMail: NguoiNhanModel[] = [];
- dsNguoiNhanMail: NguoiNhanModel[] = [];
- // Dùng cho Modal
- //  Biến lưu ID của đối tượng cần xác nhận xóa
- khachhangID: string;
- KhachHangFormGroup: FormGroup;
+  // Chứa thông tin được nhập vào trong form đăng ký
+  khachhang: KhachHangModel;
+  flag = false;
+  // Chứa mật khẩu được random
+  text = '';
+  checkAll = false;
+  KiemTraThongTin = false;
+  lengthchecked = 0;
+  // Mãng ID khachhang, mãng mật khẩu, mãng tên khachhang, mãng email khachhang được check để xóa và gửi email
+  arrKhachHangID = [];
+  arrMatKhauKH = [];
+  arrTenKH = [];
+  arrEmailKH = [];
+  // Tạo Model Thông tin khách hàng để gửi Email sau khi tạo
+  ThongTinGuiEmailTaiKhoan: ThongTinTaiKhoanEmailModel[] = [];
+  // Tạo Model thông tin người nhận trong Dialog gửi mail
+  NguoiNhanMail: NguoiNhanModel[] = [];
+  dsNguoiNhanMail: NguoiNhanModel[] = [];
+  // Dùng cho Modal
+  //  Biến lưu ID của đối tượng cần xác nhận xóa
+  khachhangID: string;
+  KhachHangFormGroup: FormGroup;
 
- // Trạng thái div chứa thông báo lỗi của giới tính
- display = 'block';
+  // Trạng thái div chứa thông báo lỗi của giới tính
+  display = 'block';
 
- // Chứa mảng các giá trị của từng checkbox
- checked = [];
- lengthdskhachhang = 0;
+  // Chứa mảng các giá trị của từng checkbox
+  checked = [];
+  lengthdskhachhang = 0;
 
- // Tạo Email giả
- tai_khoan = '';
- chu_de = '';
- noi_dung = '';
- chu_tai_khoan = '';
- // gioitinh: string;
-// Biến lưu trữ từ khóa tìm kiếm
- keyword: string;
+  // Tạo Email giả
+  tai_khoan = '';
+  chu_de = '';
+  noi_dung = '';
+  chu_tai_khoan = '';
+  // gioitinh: string;
+  // Biến lưu trữ từ khóa tìm kiếm
+  keyword: string;
 
- thanhphos: DiaChiModel[] = [];
- quanhuyens: QuanHuyenModel[] = [];
- arrquanhuyen1: QuanHuyenModel[] = [];
- xaphuongs: XaPhuongModel[] = [];
- arrxaphuong: XaPhuongModel[] = [];
- diachi: DiaChiDKModle[] = [];
- thanhpho: string;
- quanhuyen: string;
- dskhachhang: KhachHangModel[] = [];
- dskhachhangsearch: KhachHangModel[] = [];
- dsdiachi: DiaChiDKModle[] = [];
- arrdiachi: DiaChiDKModle[] = [];
- is_edit = false;
+  thanhphos: DiaChiModel[] = [];
+  quanhuyens: QuanHuyenModel[] = [];
+  arrquanhuyen1: QuanHuyenModel[] = [];
+  xaphuongs: XaPhuongModel[] = [];
+  arrxaphuong: XaPhuongModel[] = [];
+  diachi: DiaChiDKModle[] = [];
+  thanhpho: string;
+  quanhuyen: string;
+  dskhachhang: KhachHangModel[] = [];
+  dskhachhangsearch: KhachHangModel[] = [];
+  dsdiachi: DiaChiDKModle[] = [];
+  arrdiachi: DiaChiDKModle[] = [];
+  is_edit = false;
 
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
-  constructor(private modalService: NgbModal,private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe) { }
+  constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService) { }
 
   ngOnInit(): void {
     this.getdskhachhang();
@@ -82,7 +83,7 @@ export class CustomerComponent implements OnInit {
   }
 
   // Hàm lấy danh sách khách hàng
-  getdskhachhang(){
+  getdskhachhang() {
     this.KHService.getListKhachHang().subscribe((res: any) => {
       this.dskhachhang = res.khachhangs;
       // hỗ trợ searchbykeywword và searchbysex
@@ -90,88 +91,88 @@ export class CustomerComponent implements OnInit {
       // Lưu độ dài của danh sách khách hàng để làm checkbox
       this.lengthdskhachhang = this.dskhachhang.length;
 
-      for (const khachhang in this.dskhachhang){
-        if (this.dskhachhang.hasOwnProperty(khachhang)){
-         this.dsdiachi.push(this.dskhachhang[khachhang].Dia_chi);
+      for (const khachhang in this.dskhachhang) {
+        if (this.dskhachhang.hasOwnProperty(khachhang)) {
+          this.dsdiachi.push(this.dskhachhang[khachhang].Dia_chi);
         }
-     }
+      }
 
-      for (const dc in this.dsdiachi){
-        if (this.dsdiachi.hasOwnProperty(dc)){
+      for (const dc in this.dsdiachi) {
+        if (this.dsdiachi.hasOwnProperty(dc)) {
           this.arrdiachi.push(this.dsdiachi[dc][0]);
         }
       }
       // Thiết lập mảng giá trị checked = false cho các đối tượng
-      for (const length in this.dskhachhang){
-        if (this.dskhachhang.hasOwnProperty(length)){
-         this.checked.push(false);
+      for (const length in this.dskhachhang) {
+        if (this.dskhachhang.hasOwnProperty(length)) {
+          this.checked.push(false);
         }
-     }
+      }
       // console.log(this.checked);
     });
 
 
   }
 
-    // Hàm lấy thông tin thành phố
-  geteachDiaDiem(){
-      this.diachiService.getListDiaChi().subscribe((res: any) => {
-        this.thanhphos = res;
-      });
+  // Hàm lấy thông tin thành phố
+  geteachDiaDiem() {
+    this.diachiService.getListDiaChi().subscribe((res: any) => {
+      this.thanhphos = res;
+    });
   }
 
-     // Hàm random Mật khẩu
-  RandomMatKhau(){
-      this.text = '';
-      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  // Hàm random Mật khẩu
+  RandomMatKhau() {
+    this.text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-      for (let i = 0; i < 8; i++){
-        this.text += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      return this.text;
+    for (let i = 0; i < 8; i++) {
+      this.text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return this.text;
   }
 
-   // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
-  ThanhPho(e?, diachi?){
+  // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
+  ThanhPho(e?, diachi?) {
 
-  // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
+    // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
     this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
     this.quanhuyens.splice(0, this.quanhuyens.length);
 
-  // Clear lại xã phường
+    // Clear lại xã phường
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
 
-    if (e === null){
-      for (const qh in this.thanhphos){
-        if (this.thanhphos.hasOwnProperty(qh)){
-          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho){
+    if (e === null) {
+      for (const qh in this.thanhphos) {
+        if (this.thanhphos.hasOwnProperty(qh)) {
+          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
             this.arrquanhuyen1.push(this.thanhphos[qh].districts);
 
-            for (const arr2 in this.arrquanhuyen1[0]){
-            if (this.arrquanhuyen1[0].hasOwnProperty(arr2)){
-              if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan){
-                this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
+            for (const arr2 in this.arrquanhuyen1[0]) {
+              if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+                if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
+                  this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
 
+                }
               }
             }
-          }
             this.arrxaphuong.push(this.quanhuyens[0].wards);
 
-            for (const arr in this.arrxaphuong[0]){
-            if (this.arrxaphuong[0].hasOwnProperty(arr)){
+            for (const arr in this.arrxaphuong[0]) {
+              if (this.arrxaphuong[0].hasOwnProperty(arr)) {
 
-                  if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong){
-                    this.xaphuongs.push(this.arrxaphuong[0][arr]);
-                  }
+                if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
+                  this.xaphuongs.push(this.arrxaphuong[0][arr]);
+                }
+              }
             }
-          }
           }
         }
       }
       this.HienThiQuanHuyen_XaPhuong(null, diachi);
     }
-    else{
+    else {
       this.khachhang.Dia_chi.Huyen_Quan = '';
       this.khachhang.Dia_chi.Xa_Phuong = '';
 
@@ -183,27 +184,27 @@ export class CustomerComponent implements OnInit {
       document.getElementById('mes_huyen_quan').style.display = 'block';
       document.getElementById('mes_xa_phuong').style.display = 'block';
 
-      for (const qh in this.thanhphos){
-            if (this.thanhphos.hasOwnProperty(qh)){
-              if (this.thanhphos[qh].name === this.thanhpho){
-              this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-              for (const arr2 in this.arrquanhuyen1[0]){
-                if (this.arrquanhuyen1[0].hasOwnProperty(arr2)){
-                  this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-                }
-              }
+      for (const qh in this.thanhphos) {
+        if (this.thanhphos.hasOwnProperty(qh)) {
+          if (this.thanhphos[qh].name === this.thanhpho) {
+            this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+            for (const arr2 in this.arrquanhuyen1[0]) {
+              if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+                this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
               }
             }
+          }
+        }
       }
 
     }
   }
 
-  HienThiQuanHuyen_XaPhuong(evt, diachi){
-    if (evt === null){
+  HienThiQuanHuyen_XaPhuong(evt, diachi) {
+    if (evt === null) {
       document.getElementById('mes_xa_phuong').style.display = 'none';
 
-    }else{
+    } else {
       document.getElementById('mes_xa_phuong').style.display = 'block';
       this.khachhang.Dia_chi.Xa_Phuong = '';
     }
@@ -214,28 +215,28 @@ export class CustomerComponent implements OnInit {
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
 
-    for (const qh in this.thanhphos){
-      if (this.thanhphos.hasOwnProperty(qh)){
-        if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho){
-        this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-        for (const arr2 in this.arrquanhuyen1[0]){
-          if (this.arrquanhuyen1[0].hasOwnProperty(arr2)){
-            this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
+    for (const qh in this.thanhphos) {
+      if (this.thanhphos.hasOwnProperty(qh)) {
+        if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
+          this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+          for (const arr2 in this.arrquanhuyen1[0]) {
+            if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+              this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
+            }
           }
-        }
         }
       }
     }
 
-    for (const xp in this.quanhuyens){
-      if (this.quanhuyens.hasOwnProperty(xp)){
-        if (this.quanhuyens[xp].name === diachi.Huyen_Quan){
-        this.arrxaphuong.push(this.quanhuyens[xp].wards);
-        for (const arr2 in this.arrxaphuong[0]){
-          if (this.arrxaphuong[0].hasOwnProperty(arr2)){
-            this.xaphuongs.push(this.arrxaphuong[0][arr2]);
+    for (const xp in this.quanhuyens) {
+      if (this.quanhuyens.hasOwnProperty(xp)) {
+        if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
+          this.arrxaphuong.push(this.quanhuyens[xp].wards);
+          for (const arr2 in this.arrxaphuong[0]) {
+            if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
+              this.xaphuongs.push(this.arrxaphuong[0][arr2]);
+            }
           }
-        }
         }
       }
     }
@@ -244,68 +245,68 @@ export class CustomerComponent implements OnInit {
     // console.log(this.quanhuyens);
   }
 
-  KiemTraDiaChiUpdate(){
-    if (this.khachhang.Dia_chi.Huyen_Quan !== ''){
+  KiemTraDiaChiUpdate() {
+    if (this.khachhang.Dia_chi.Huyen_Quan !== '') {
       document.getElementById('mes_huyen_quan').style.display = 'none';
-    }else {
+    } else {
       this.khachhang.Dia_chi.Xa_Phuong = '';
       document.getElementById('mes_huyen_quan').style.display = 'block';
       document.getElementById('mes_xa_phuong').style.display = 'block';
 
     }
   }
-   // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
-  QuanHuyen(e){
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-      this.xaphuongs.splice(0, this.xaphuongs.length);
-      this.arrxaphuong.splice(0, this.arrxaphuong.length);
-  //  console.log(this.thanhpho);
-      e.preventDefault();
-      const target = e.target;
-     // console.log(target.value);
-      this.quanhuyen = target.value;
+  // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
+  QuanHuyen(e) {
+    document.getElementById('mes_xa_phuong').style.display = 'block';
+    this.xaphuongs.splice(0, this.xaphuongs.length);
+    this.arrxaphuong.splice(0, this.arrxaphuong.length);
+    //  console.log(this.thanhpho);
+    e.preventDefault();
+    const target = e.target;
+    // console.log(target.value);
+    this.quanhuyen = target.value;
+    // console.log(this.quanhuyen)
+    if (this.quanhuyen !== '') {
+      // console.log(this.xaphuongs)
       // console.log(this.quanhuyen)
-      if (this.quanhuyen !== ''){
-        // console.log(this.xaphuongs)
-        // console.log(this.quanhuyen)
 
-        for (const xp in this.quanhuyens){
-          if (this.quanhuyens.hasOwnProperty(xp)){
-            if (this.quanhuyens[xp].name === this.quanhuyen){
+      for (const xp in this.quanhuyens) {
+        if (this.quanhuyens.hasOwnProperty(xp)) {
+          if (this.quanhuyens[xp].name === this.quanhuyen) {
             this.arrxaphuong.push(this.quanhuyens[xp].wards);
-            for (const arr2 in this.arrxaphuong[0]){
-              if (this.arrxaphuong[0].hasOwnProperty(arr2)){
+            for (const arr2 in this.arrxaphuong[0]) {
+              if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
                 this.xaphuongs.push(this.arrxaphuong[0][arr2]);
               }
             }
-            }
           }
         }
-      }else {
-        this.xaphuongs.splice(0, this.xaphuongs.length);
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-
       }
+    } else {
+      this.xaphuongs.splice(0, this.xaphuongs.length);
+      document.getElementById('mes_xa_phuong').style.display = 'block';
 
-      if (this.khachhang.Dia_chi.Huyen_Quan !== ''){
-        document.getElementById('mes_huyen_quan').style.display = 'none';
-      }else {
-        document.getElementById('mes_huyen_quan').style.display = 'block';
-      }
+    }
+
+    if (this.khachhang.Dia_chi.Huyen_Quan !== '') {
+      document.getElementById('mes_huyen_quan').style.display = 'none';
+    } else {
+      document.getElementById('mes_huyen_quan').style.display = 'block';
+    }
   }
 
   // Kiểm tra chọn xã phường
-  XaPhuong(diachi?){
-    if (diachi === null){
-      if (this.khachhang.Dia_chi.Xa_Phuong !== ''){
+  XaPhuong(diachi?) {
+    if (diachi === null) {
+      if (this.khachhang.Dia_chi.Xa_Phuong !== '') {
         document.getElementById('mes_xa_phuong').style.display = 'none';
-      }else {
+      } else {
         document.getElementById('mes_xa_phuong').style.display = 'block';
       }
-    }else {
-      if (this.khachhang.Dia_chi.Xa_Phuong !== ''){
+    } else {
+      if (this.khachhang.Dia_chi.Xa_Phuong !== '') {
         document.getElementById('mes_xa_phuong').style.display = 'none';
-      }else {
+      } else {
         document.getElementById('mes_xa_phuong').style.display = 'block';
       }
     }
@@ -313,41 +314,41 @@ export class CustomerComponent implements OnInit {
   }
 
   // Hàm xử lý sự kiện checked tại ô checkbox tổng
-  KTCheckedAll(){
+  KTCheckedAll() {
     if (this.checkAll) {
       this.checkAll = false;
       this.checked = [];
-      for (let i = 0; i < this.lengthdskhachhang; i++){
+      for (let i = 0; i < this.lengthdskhachhang; i++) {
         this.checked.push(false);
         document.getElementById('divbutton').style.display = 'none';
-     }
-    } else{
+      }
+    } else {
       this.checkAll = true;
       this.checked = [];
-      for (let i = 0; i < this.lengthdskhachhang; i++){
+      for (let i = 0; i < this.lengthdskhachhang; i++) {
         this.checked.push(true);
         document.getElementById('divbutton').style.display = 'block';
       }
     }
   }
-    // Bỏ chọn tất cả checkbox
-  UnChecked(){
-      this.checkAll = true
-      this.KTCheckedAll()
+  // Bỏ chọn tất cả checkbox
+  UnChecked() {
+    this.checkAll = true
+    this.KTCheckedAll()
   }
 
   // Hàm kiểm tra checked tại các item
-  KTChecked(i: string){
+  KTChecked(i: string) {
     this.lengthchecked = 0;
     this.checked[i] = !this.checked[i];
-    if (this.checkAll){
+    if (this.checkAll) {
       this.checkAll = false;
     }
 
     // Kiểm tra có checkbox nào được check hay không, nếu có thì hiển thị divbutton
-    for (const kt in this.checked){
-      if (this.checked.hasOwnProperty(kt)){
-        if (this.checked[kt]){
+    for (const kt in this.checked) {
+      if (this.checked.hasOwnProperty(kt)) {
+        if (this.checked[kt]) {
           this.lengthchecked += 1;
           document.getElementById('divbutton').style.display = 'block';
           // break;
@@ -355,27 +356,27 @@ export class CustomerComponent implements OnInit {
           document.getElementById('divbutton').style.display = 'none';
         }
       }
-   }
-// Nếu các checkbox đều được check thì checbox chechkAll cũng được check
-    if (this.lengthchecked === this.checked.length){
+    }
+    // Nếu các checkbox đều được check thì checbox chechkAll cũng được check
+    if (this.lengthchecked === this.checked.length) {
       this.checkAll = true;
     }
     // Mở divbutton khi có checkbox được check
-    if (this.lengthchecked > 0){
+    if (this.lengthchecked > 0) {
       document.getElementById('divbutton').style.display = 'block';
 
     }
   }
 
   // Mãng khách hàng được check
-  KhachHangChecked(){
+  KhachHangChecked() {
     this.arrKhachHangID = [];
     this.arrMatKhauKH = [];
     this.arrTenKH = [];
     this.arrEmailKH = [];
-    for (const kt in this.checked){
-      if (this.checked.hasOwnProperty(kt)){
-        if (this.checked[kt] === true){
+    for (const kt in this.checked) {
+      if (this.checked.hasOwnProperty(kt)) {
+        if (this.checked[kt] === true) {
           this.arrEmailKH.push(this.dskhachhang[kt].Email);
           this.arrKhachHangID.push(this.dskhachhang[kt].Khach_hang_id);
           this.arrMatKhauKH.push(this.dskhachhang[kt].Mat_khau);
@@ -385,15 +386,17 @@ export class CustomerComponent implements OnInit {
     }
   }
 
-   // Gộp thông tin của từng nhân viên để gửi email
-   ThongTinGuiEmail(){
+  // Gộp thông tin của từng nhân viên để gửi email
+  ThongTinGuiEmail() {
     this.ThongTinGuiEmailTaiKhoan = [];
 
     const sl = this.arrEmailKH.length;
 
-    for (let i = 0 ; i < sl; i++){
-      this.ThongTinGuiEmailTaiKhoan.push({Ho_ten: this.arrTenKH[i], Mat_khau: this.arrMatKhauKH[i],
-         Khach_hang_id: this.arrKhachHangID[i], Email: this.arrEmailKH[i]});
+    for (let i = 0; i < sl; i++) {
+      this.ThongTinGuiEmailTaiKhoan.push({
+        Ho_ten: this.arrTenKH[i], Mat_khau: this.arrMatKhauKH[i],
+        Khach_hang_id: this.arrKhachHangID[i], Email: this.arrEmailKH[i]
+      });
     }
     // console.log(this.ThongTinGuiEmailTaiKhoan);
   }
@@ -401,22 +404,22 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
     this.UnChecked();
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     this.RandomMatKhau();
     // Gán giá trị rỗng ban đầu cho khachhang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
     // Gán giá trị rỗng ban đầu cho giới tính
     this.khachhang.Gioi_tinh = '';
     // Gán giá trị rỗng ban đầu cho địa chỉ
-    this.khachhang.Dia_chi = {Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: ''};
+    this.khachhang.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
     // Gán giá trị mật khẩu bằng chuỗi random khi vừa load form đăng ký
     this.khachhang.Mat_khau = this.text;
   }
 
-    // Hàm mở Dialog Cập nhật tài khoản
+  // Hàm mở Dialog Cập nhật tài khoản
   open_update(content_update, khachhangUpdate) {
     this.UnChecked();
-    this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
     // Gán giá trị rỗng ban đầu cho khachang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
     khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
@@ -430,23 +433,25 @@ export class CustomerComponent implements OnInit {
 
   // Hàm mở Dialog gửi mail
   open_send_mail(content_mails, kh?) {
-      this.dsNguoiNhanMail = [];
-      this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
-      if (kh === null ){
-        this.KhachHangChecked();
-        this.ThongTinGuiEmail();
-        for (const email in this.ThongTinGuiEmailTaiKhoan){
-          if (this.ThongTinGuiEmailTaiKhoan.hasOwnProperty(email)){
-          this.dsNguoiNhanMail.push({Email: this.ThongTinGuiEmailTaiKhoan[email].Email,
-            Ho_ten: this.ThongTinGuiEmailTaiKhoan[email].Ho_ten});
-          }
+    this.dsNguoiNhanMail = [];
+    this.modalService.open(content_mails, { ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
+    if (kh === null) {
+      this.KhachHangChecked();
+      this.ThongTinGuiEmail();
+      for (const email in this.ThongTinGuiEmailTaiKhoan) {
+        if (this.ThongTinGuiEmailTaiKhoan.hasOwnProperty(email)) {
+          this.dsNguoiNhanMail.push({
+            Email: this.ThongTinGuiEmailTaiKhoan[email].Email,
+            Ho_ten: this.ThongTinGuiEmailTaiKhoan[email].Ho_ten
+          });
         }
-      } else {
-        this.UnChecked();
-        this.ThongTinGuiEmailTaiKhoan = [];
-        this.ThongTinGuiEmailTaiKhoan.push({Ho_ten: kh.Ho_ten, Email: kh.Email, Mat_khau: kh.Mat_khau, Khach_hang_id: kh.Khach_hang_id});
-        this.dsNguoiNhanMail.push({Email: kh.Email, Ho_ten: kh.Ho_ten});
       }
+    } else {
+      this.UnChecked();
+      this.ThongTinGuiEmailTaiKhoan = [];
+      this.ThongTinGuiEmailTaiKhoan.push({ Ho_ten: kh.Ho_ten, Email: kh.Email, Mat_khau: kh.Mat_khau, Khach_hang_id: kh.Khach_hang_id });
+      this.dsNguoiNhanMail.push({ Email: kh.Email, Ho_ten: kh.Ho_ten });
+    }
 
   }
 
@@ -456,57 +461,59 @@ export class CustomerComponent implements OnInit {
     this.chu_tai_khoan = '';
     this.noi_dung = '';
     this.chu_de = '';
-    this.modalService.open(content_info_mail_plus, {ariaLabelledBy: 'modal-basic-title-info-mail-plus',
-    backdrop: 'static', keyboard: false });
+    this.modalService.open(content_info_mail_plus, {
+      ariaLabelledBy: 'modal-basic-title-info-mail-plus',
+      backdrop: 'static', keyboard: false
+    });
   }
 
   // Hàm mở Dialog Xác nhận xóa tài khoản
-  open_delete(content_delete, Khach_hang_id?){
-    if (Khach_hang_id != null){
+  open_delete(content_delete, Khach_hang_id?) {
+    if (Khach_hang_id != null) {
       this.UnChecked();
       this.khachhangID = Khach_hang_id;
       this.flag = false;
-    }else{
+    } else {
       this.flag = true;
     }
-    this.modalService.open(content_delete, {ariaLabelledBy: 'modal-basic-title-notification', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_delete, { ariaLabelledBy: 'modal-basic-title-notification', backdrop: 'static', keyboard: false });
 
   }
 
   // Hàm thêm email
-  ThemMail(content_mails){
-    this.dsNguoiNhanMail.push({Email: this.tai_khoan, Ho_ten: this.chu_tai_khoan});
+  ThemMail(content_mails) {
+    this.dsNguoiNhanMail.push({ Email: this.tai_khoan, Ho_ten: this.chu_tai_khoan });
     this.modalService.dismissAll();
-    this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_mails, { ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
   }
 
   // Xoá email ra khỏi danh sách gửi
-  xoa_email(kh){
-    for (let i in this.dsNguoiNhanMail){
-      if (this.dsNguoiNhanMail[i].Email === kh.Email){
-        this.dsNguoiNhanMail.splice(Number.parseInt(i) , 1);
+  xoa_email(kh) {
+    for (let i in this.dsNguoiNhanMail) {
+      if (this.dsNguoiNhanMail[i].Email === kh.Email) {
+        this.dsNguoiNhanMail.splice(Number.parseInt(i), 1);
       }
     }
   }
 
- // Đóng dialog
-  DongModal(){
+  // Đóng dialog
+  DongModal() {
     this.modalService.dismissAll();
     location.reload();
   }
 
-    // Thực hiện xóa sau khi xác nhận Dialog
-    XacNhan(){
-      if (this.flag === true){
-        this.XoaNhieuKhachHang();
-      }else {
-        this.XoaKhachHang(this.khachhangID);
-      }
-      this.modalService.dismissAll();
+  // Thực hiện xóa sau khi xác nhận Dialog
+  XacNhan() {
+    if (this.flag === true) {
+      this.XoaNhieuKhachHang();
+    } else {
+      this.XoaKhachHang(this.khachhangID);
     }
+    this.modalService.dismissAll();
+  }
 
-    // Hàm kiểm tra thông tin
-  KTNull(khachhang: KhachHangModel){
+  // Hàm kiểm tra thông tin
+  KTNull(khachhang: KhachHangModel) {
     const hoten = khachhang.Ho_ten;
     const ngaysinh = khachhang.Ngay_sinh;
     const KHId = khachhang.Khach_hang_id;
@@ -519,22 +526,22 @@ export class CustomerComponent implements OnInit {
     const thongtinkhachhang = [];
     thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
       diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
-    for (const i in thongtinkhachhang){
-      if (thongtinkhachhang.hasOwnProperty(i)){
-        if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null){
+    for (const i in thongtinkhachhang) {
+      if (thongtinkhachhang.hasOwnProperty(i)) {
+        if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null) {
           window.alert('Hãy nhập đầy đủ thông tin!');
           this.KiemTraThongTin = false;
           break;
         } else {
-         this.KiemTraThongTin = true;
+          this.KiemTraThongTin = true;
         }
       }
     }
   }
 
   // Hàm kiểm tra giá trị giới tính
-  KTGioiTinh(){
-    if (this.khachhang.Gioi_tinh !== ''){
+  KTGioiTinh() {
+    if (this.khachhang.Gioi_tinh !== '') {
       document.getElementById('mes_gioitinh').style.display = 'none';
     } else {
       document.getElementById('mes_gioitinh').style.display = 'block';
@@ -543,149 +550,156 @@ export class CustomerComponent implements OnInit {
   }
 
   // Hàm thực hiện thêm tài khoản nhân viên
-  ThemKhachHang(){
-    this.ThongTinGuiEmailTaiKhoan = [];
-    // let thongtin;
-    this.khachhang.Mat_khau = this.text;
+  ThemKhachHang() {
+    try {
+      this.ThongTinGuiEmailTaiKhoan = [];
+      // let thongtin;
+      this.khachhang.Mat_khau = this.text;
 
-    this.KTNull(this.khachhang);
+      this.KTNull(this.khachhang);
 
-    if (this.KiemTraThongTin  && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)){
-      this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
-        if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"'){
-          this.ThongTinGuiEmailTaiKhoan.push({Khach_hang_id: this.khachhang.Khach_hang_id, Email: this.khachhang.Email,
-             Ho_ten: this.khachhang.Ho_ten, Mat_khau: this.khachhang.Mat_khau});
-          this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
-          this.DongModal();
+      if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
+        this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
+          if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
+            this.ThongTinGuiEmailTaiKhoan.push({
+              Khach_hang_id: this.khachhang.Khach_hang_id, Email: this.khachhang.Email,
+              Ho_ten: this.khachhang.Ho_ten, Mat_khau: this.khachhang.Mat_khau
+            });
+            // Tạo giỏ hàng
+            this.giohangService.ThemGioHang({ KhachHang_id: this.khachhang.Khach_hang_id }).subscribe()
 
-        }
-        else {
+            this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
+            this.DongModal();
+
+          }
+          else {
             window.alert(data_them);
           }
         });
+      }
+
+    } catch (error) {
+      alert(error)
     }
   }
 
   // Hàm thực hiện xóa nhân viên
-  XoaKhachHang(Khach_hang_id: string){
+  XoaKhachHang(Khach_hang_id: string) {
     this.KHService.XoaKhachHang(Khach_hang_id).subscribe(data_xoa => {
-      window.alert(data_xoa);
       location.reload();
     });
   }
 
-   // Hàm xóa nhiều nhân viên
-   XoaNhieuKhachHang(){
+  // Hàm xóa nhiều nhân viên
+  XoaNhieuKhachHang() {
     this.KhachHangChecked();
     this.KHService.XoaNhieuKhachHang(this.arrKhachHangID).subscribe(data_xoanhieukh => {
-      if (JSON.stringify(data_xoanhieukh) === '"Xóa tài khoản khách hàng thành công!"'){
+      if (JSON.stringify(data_xoanhieukh) === '"Xóa tài khoản khách hàng thành công!"') {
         this.DongModal();
-        // location.reload();
-        // this.modalService.dismissAll();
-    } else {
+      } else {
         window.alert(data_xoanhieukh);
       }
     });
   }
 
   // Hàm thực hiện cập nhật thông tin nhân viên
-  CapNhatKhachHang(){
+  CapNhatKhachHang() {
     this.KTNull(this.khachhang);
-    if (this.KiemTraThongTin  && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)){
+    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
       this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
-        if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"'){
+        if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
           this.DongModal();
         } else {
-            window.alert(data_capnhat);
-          }
-        });
-    }
-  }
-
-    // Gửi email cho nhiều nhân viên
-  GuiMailKhachHang(kh){
-      this.KHService.GuiEmailTaiKhoan(this.ThongTinGuiEmailTaiKhoan).subscribe();
-  }
-
-  GuiMail(){
-      if (this.chu_de === '' || this.noi_dung === ''){
-        window.alert('Hãy nhập đầy đủ thông tin!');
-      }
-      else{
-        // console.log(this.dsNguoiNhanMail)
-        this.KHService.GuiEmailKhachHang(this.dsNguoiNhanMail, this.noi_dung, this.chu_de).subscribe();
-        this.DongModal();
-      }
-  }
-
-// Hàm chuyển đổi tiếng Việt sang tiếng Anh
-removeAccents(str) {
-  return str.normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D')
-            ;
-}
- // Hàm tìm kiếm theo tên hoặc id
- SearchByKeyWord(){
-  this.dskhachhang = this.dskhachhangsearch;
-  const text = this.removeAccents(this.keyword);
-  if (text === ''){
-    this.getdskhachhang();
-  }else{
-    this.dskhachhang = this.dskhachhang.filter( res => {
-      const hoten = this.removeAccents(res.Ho_ten);
-      const maso = this.removeAccents(res.Khach_hang_id);
-      const tmp2 = text.replace(/·/g, '');
-      if (hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())){
-        return hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
-      }else {
-        if (maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())){
-          return maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+          window.alert(data_capnhat);
         }
-      }
-    });
-  }
-}
-
-SearchByOption(value){
-  this.dskhachhang = this.dskhachhangsearch;
-  value.preventDefault();
-  const target = value.target.value;
-  if (target === 'Tất cả' || target === 'Cũ nhất'){
-    this.getdskhachhang();
-  }else{
-    if (target === 'Mới nhất'){
-      this.dskhachhang.reverse();
-    }else {
-      const text = this.removeAccents(target);
-      this.dskhachhang = this.dskhachhang.filter( res => {
-        const gioitinh = this.removeAccents(res.Gioi_tinh);
-        return gioitinh.match(text);
       });
     }
   }
-}
 
-// Bắt sự kiện chọn ngày
-ChangeDate(e) {
-  e.preventDefault();
-  const target = e.target;
-  if (target.id === 'NgaySinh') {
-    document.getElementById('errNgaySinh').style.display = 'none'
-  }
-  this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
-}
-
-
-KiemTraNgaySinh(ngaysinh) {
-  if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
-    document.getElementById('errNgaySinh2').style.display = 'block'
-    document.getElementById('errNgaySinh').style.display = 'none'
-    return false
-  } else {
-    document.getElementById('errNgaySinh2').style.display = 'none'
-    return true
+  // Gửi email cho nhiều nhân viên
+  GuiMailKhachHang(kh) {
+    this.KHService.GuiEmailTaiKhoan(this.ThongTinGuiEmailTaiKhoan).subscribe();
   }
 
-}
+  GuiMail() {
+    if (this.chu_de === '' || this.noi_dung === '') {
+      window.alert('Hãy nhập đầy đủ thông tin!');
+    }
+    else {
+      // console.log(this.dsNguoiNhanMail)
+      this.KHService.GuiEmailKhachHang(this.dsNguoiNhanMail, this.noi_dung, this.chu_de).subscribe();
+      this.DongModal();
+    }
+  }
+
+  // Hàm chuyển đổi tiếng Việt sang tiếng Anh
+  removeAccents(str) {
+    return str.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+      ;
+  }
+  // Hàm tìm kiếm theo tên hoặc id
+  SearchByKeyWord() {
+    this.dskhachhang = this.dskhachhangsearch;
+    const text = this.removeAccents(this.keyword);
+    if (text === '') {
+      this.getdskhachhang();
+    } else {
+      this.dskhachhang = this.dskhachhang.filter(res => {
+        const hoten = this.removeAccents(res.Ho_ten);
+        const maso = this.removeAccents(res.Khach_hang_id);
+        const tmp2 = text.replace(/·/g, '');
+        if (hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+          return hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+        } else {
+          if (maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+            return maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+          }
+        }
+      });
+    }
+  }
+
+  SearchByOption(value) {
+    this.dskhachhang = this.dskhachhangsearch;
+    value.preventDefault();
+    const target = value.target.value;
+    if (target === 'Tất cả' || target === 'Cũ nhất') {
+      this.getdskhachhang();
+    } else {
+      if (target === 'Mới nhất') {
+        this.dskhachhang.reverse();
+      } else {
+        const text = this.removeAccents(target);
+        this.dskhachhang = this.dskhachhang.filter(res => {
+          const gioitinh = this.removeAccents(res.Gioi_tinh);
+          return gioitinh.match(text);
+        });
+      }
+    }
+  }
+
+  // Bắt sự kiện chọn ngày
+  ChangeDate(e) {
+    e.preventDefault();
+    const target = e.target;
+    if (target.id === 'NgaySinh') {
+      document.getElementById('errNgaySinh').style.display = 'none'
+    }
+    this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
+  }
+
+
+  KiemTraNgaySinh(ngaysinh) {
+    if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
+      document.getElementById('errNgaySinh2').style.display = 'block'
+      document.getElementById('errNgaySinh').style.display = 'none'
+      return false
+    } else {
+      document.getElementById('errNgaySinh2').style.display = 'none'
+      return true
+    }
+
+  }
 }

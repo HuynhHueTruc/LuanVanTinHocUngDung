@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { GioHangModel } from './../../models/GioHang/giohang';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,9 @@ import { Injectable } from '@angular/core';
 })
 export class GiohangService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  ThemGioHang(khach_hang_id): Observable<GioHangModel[]>{
+    return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/taomoi', khach_hang_id).pipe();
+   }
 }

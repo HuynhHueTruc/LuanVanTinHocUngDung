@@ -1,3 +1,4 @@
+import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
 import { XaPhuongModel } from './../../../models/DiaChi/xaphuong';
 import { QuanHuyenModel } from './../../../models/DiaChi/quanhuyen';
@@ -17,7 +18,7 @@ import { DatePipe } from '@angular/common';
 export class LoginComponent implements OnInit {
 
   constructor(private KHService: KhachhangService, private diachiService: DiachiService,
-              private route: ActivatedRoute, private router: Router) { }
+              private route: ActivatedRoute, private router: Router, private giohangService: GiohangService) { }
 
   khachhang: KhachHangModel;
 
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
   KiemTraThongTin = false;
 
   ngOnInit(): void {
+
     this.geteachDiaDiem();
 
     this.khachhang = new KhachHangModel();
@@ -273,6 +275,9 @@ export class LoginComponent implements OnInit {
       if (this.KiemTraThongTin  && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)){
         this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"'){
+            alert(data_them)
+            this.giohangService.ThemGioHang({ KhachHang_id: this.khachhang.Khach_hang_id }).subscribe()
+
            location.reload();
           }
           else {

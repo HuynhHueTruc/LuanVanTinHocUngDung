@@ -1,3 +1,5 @@
+import { GiohangService } from './../../../services/GioHang/giohang.service';
+import { GioHangModel } from './../../../models/GioHang/giohang';
 import { ThongtincuahangService } from './../../../services/ThongTinCuaHang/thongtincuahang.service';
 import { ThongTinCuaHangModel } from './../../../models/ThongTinCuaHang/thongtincuahang';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
@@ -18,6 +20,7 @@ export class DetailComponent implements OnInit {
 
   href = '';
   sanpham_id;
+  datalogin: any;
   dssanpham: SanPhamModel;
   sanphamdetail: SanPhamModel[] = [];
   dskhuyenmai: KhuyenMaiModel[] = [];
@@ -25,6 +28,7 @@ export class DetailComponent implements OnInit {
   dshoadonban: HoaDonBanHangModel;
   khuyenmai: KhuyenMaiModel;
   thongtincuahang: ThongTinCuaHangModel[] = [];
+  giohang: GioHangModel[] = [];
   SoLuongBan = 0;
   SoLuongDanhGia = 0;
   So_diem = 0;
@@ -40,12 +44,20 @@ export class DetailComponent implements OnInit {
   arrHinhAnh = [];
   So_luong = 1;
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
-              private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService) { }
+              private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService) { }
 
   ngOnInit(): void {
+    this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.href = this.router.url;
     this.sanpham_id = this.href.replace('/detail/', '');
     this.getdssanpham();
+    this.getgiohang();
+  }
+
+  getgiohang() {
+    this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
+      this.giohang = dt;
+    });
   }
 
   getdssanpham() {
@@ -225,6 +237,11 @@ export class DetailComponent implements OnInit {
     }
   }
 
-
+  ThemVaoGioHang(){
+    this.giohang[0].KhachHang_id = this.datalogin.Khach_hang_id;
+    this.giohang[0].San_Pham.push({SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong})
+    this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+    alert('Đã thêm vào giỏ hàng!')
+  }
 
 }

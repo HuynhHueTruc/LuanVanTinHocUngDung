@@ -7,6 +7,6 @@ export class GioHangModel{
 
     }];
     KhachHang_id: string;
-    Tong_tien: Number
+    Thoi_gian_cap_nhat: Date
 
 }

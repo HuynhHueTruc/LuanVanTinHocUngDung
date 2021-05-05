@@ -17,16 +17,16 @@ export class GiohangService {
     return this.refreshPage;
   }
 
-  getdsGioHang(): Observable<GioHangModel[]>{
-    return this.http.get<GioHangModel[]>('http://localhost:3000/giohang').pipe();
-  }
-
   getGioHang(KhachHang): Observable<GioHangModel[]>{
     return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/thongtin', KhachHang).pipe();
   }
 
+  ThemGioHang(khach_hang_id): Observable<GioHangModel[]>{
+    return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/taomoi', khach_hang_id).pipe();
+   }
+
   CapNhatGioHang(giohang): Observable<GioHangModel[]>{
-    return this.http.put<GioHangModel[]>(`${'http://localhost:3000/giohang/capnhat'}/${giohang._id}`, giohang)
+    return this.http.put<GioHangModel[]>(`${'http://localhost:3000/giohang/capnhat'}/${giohang.KhachHang_id}`, giohang)
     .pipe(
       tap(() => {
         this.refreshPage.next();

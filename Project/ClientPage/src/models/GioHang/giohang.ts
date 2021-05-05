@@ -3,7 +3,7 @@ export class GioHangModel {
   San_Pham: [{
     SanPham_id: string,
     So_luong: number,
-    Gia_ban: number
   }];
   KhachHang_id: string;
+  Thoi_gian_cap_nhat: Date
 }
