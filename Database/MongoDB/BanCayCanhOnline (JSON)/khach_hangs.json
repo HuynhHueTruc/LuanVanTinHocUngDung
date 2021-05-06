@@ -18,8 +18,8 @@
   "CMND_CCCD": "123456789011",
   "So_dien_thoai": "0964452406",
   "Ma_so": "137359",
-  "Mat_khau": "sIVxXtXR",
-  "Email": "huynhhuetruc@gmail.com",
+  "Mat_khau": "12345678",
+  "Email": "huynhhuetruc99@gmail.com",
   "Tich_diem": 0,
   "Thoi_gian_tao": {
     "$date": "2021-03-24T15:12:17Z"
@@ -27,13 +27,31 @@
   "Thoi_gian_cap_nhat": {
     "$date": "2021-03-24T15:12:17Z"
   },
-  "__v": 0
+  "__v": 0,
+  "Ngay_sinh": {
+    "$date": "1999-09-14T17:00:00Z"
+  },
+  "So_thich": [
+    {
+      "Loai_cay": {
+        "$oid": "60030069c5c7b25212bab46d"
+      }
+    },
+    {
+      "Loai_cay": {
+        "$oid": "600c3eba0c8c6941c440be50"
+      }
+    }
+  ]
 },{
   "_id": {
     "$oid": "605b57a150ba8920081b4a7e"
   },
   "Khach_hang_id": "HuynhKhanhDuy",
   "Ho_ten": "Huỳnh Khánh Duy",
+  "Ngay_sinh": {
+    "$date": "1999-09-14T17:00:00Z"
+  },
   "Dia_chi": [
     {
       "_id": {
@@ -57,5 +75,62 @@
   "Thoi_gian_cap_nhat": {
     "$date": "2021-03-31T02:39:31Z"
   },
-  "__v": 0
+  "__v": 0,
+  "So_thich": [
+    {
+      "Loai_cay": {
+        "$oid": "60030069c5c7b25212bab46d"
+      }
+    },
+    {
+      "Loai_cay": {
+        "$oid": "600c3eba0c8c6941c440be50"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6092544efa5105404891de81"
+  },
+  "Khach_hang_id": "HuynhHueTruc",
+  "Ho_ten": "Huỳnh Huệ Trúc",
+  "Ngay_sinh": {
+    "$date": "1999-09-15T00:00:00Z"
+  },
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "6092544efa5105404891de82"
+      },
+      "Tinh_ThanhPho": "Tỉnh Sóc Trăng",
+      "Huyen_Quan": "Huyện Long Phú",
+      "Xa_Phuong": "Xã Song Phụng"
+    }
+  ],
+  "Gioi_tinh": "Nữ",
+  "CMND_CCCD": "366191340",
+  "So_dien_thoai": "0964452406",
+  "Ma_so": "380314",
+  "Mat_khau": "12345678",
+  "Email": "huynhhuetruc@gmail.com",
+  "Tich_diem": 0,
+  "Thoi_gian_tao": {
+    "$date": "2021-05-05T08:16:14Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-05T08:16:14Z"
+  },
+  "__v": 0,
+  "So_thich": [
+    {
+      "Loai_cay": {
+        "$oid": "60030069c5c7b25212bab46d"
+      }
+    },
+    {
+      "Loai_cay": {
+        "$oid": "600c3eba0c8c6941c440be50"
+      }
+    }
+  ]
 }]

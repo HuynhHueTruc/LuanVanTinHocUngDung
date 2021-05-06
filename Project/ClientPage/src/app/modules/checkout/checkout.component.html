@@ -1,0 +1,143 @@
+<div class="main">
+  <app-header></app-header>
+  <app-liftnav></app-liftnav>
+  <div class="form-gap"></div>
+
+  <div class="container ">
+    <div class="row setbackground ">
+      <div class="col-sm-12 font-weight-bold  ">
+        <h3 class="title m-0 p-4">Green Life | Đặt Hàng</h3>
+      </div>
+    </div>
+
+    <div class="row setbackground mt-2 ">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <h6 class="m-0">ĐỊA CHỈ NHẬN HÀNG</h6>
+          </div>
+
+        </div>
+        <div class="row p-3" >
+          <div class="col-sm-4 font-weight-bold">
+            {{datalogin.Ho_ten}} - {{datalogin.So_dien_thoai}}
+          </div>
+          <div class="col-sm-7">
+            <p id="address">{{datalogin.Dia_chi[0].Xa_Phuong}}, {{datalogin.Dia_chi[0].Huyen_Quan}},{{datalogin.Dia_chi[0].Tinh_ThanhPho}}</p>
+          </div>
+          <div class="col-sm-1">
+           <button id="changeaddress">Thay Đổi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2 setbackground p-2">
+      <div class="col-sm-4 d-flex justify-content-start ">
+        Sản Phẩm
+      </div>
+      <div class="col-sm-3 d-flex justify-content-center p-0">
+        Đơn giá
+      </div>
+      <div class="col-sm-2 d-flex justify-content-center p-0">
+        Số lượng
+      </div>
+      <div class="col-sm-3 d-flex justify-content-center p-0">
+        Tổng tiền
+      </div>
+
+    </div>
+
+    <hr width="100%" size="10px" />
+
+    <div class="row mt-4 setbackground" *ngFor="let eachSP of arrSanPhamThanhToan; let i = index">
+      <div class="col-sm-4 d-flex justify-content-start pt-3 pb-3">
+        <div>
+          <img id="image" src={{eachSP.Hinh_anh}} class="avatar">
+        </div>
+        <div class="ml-2 ">{{eachSP.Ten_san_pham}}</div>
+      </div>
+
+      <!-- Hiển thị giá tiền ban đầu khi sản phẩm có khuyến mãi -->
+      <div class="col-sm-3 d-flex justify-content-center align-items-center">
+        <div class="col-sm-6 p-0 khuyenmai" *ngIf="KiemTraKhuyeMai(eachSP)">
+          {{eachSP.Gia | currency: "VND"}}
+        </div>
+        <!-- Hiển thị giá sau khi khuyến mãi -->
+        <div class="col-sm-6 p-0" *ngIf="KiemTraKhuyeMai(eachSP)">
+          {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
+        </div>
+        <!-- Hiển thị giá tiền cho sản phẩm không có khuyến mãi -->
+        <div class="col-sm-6 p-0" *ngIf="!KiemTraKhuyeMai(eachSP)">
+          {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
+        </div>
+      </div>
+      <div class="col-sm-2 d-flex justify-content-center align-items-center">
+        <div>
+          <p>{{ this.arrSanPhamThanhToan[i].So_luong}}</p>
+        </div>
+      </div>
+      <div class="col-sm-3 d-flex justify-content-center align-items-center">
+        {{(eachSP.Gia - eachSP.Gia*giatrikhuyenmai) *giohang[0]?.San_Pham[i].So_luong | currency: "VND"}}
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container mt-3  hp-pc-lift-nav">
+    <div class="row">
+      <div class="col-sm-12 setbackground">
+        <h6 class=" m-0 p-4">PHƯƠNG THỨC THANH TOÁN</h6>
+      </div>
+    </div>
+
+    <div class="row thanhtoan p-5 ">
+      <div class="col-sm-12 ">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-end">
+            <div class="col-sm-10 d-flex justify-content-end">
+              <p class="m-0"> Tổng tiền hàng: </p>
+            </div>
+
+            <div class="col-sm-2 d-flex justify-content-end">
+              <p>{{tong_tien | currency: 'VND'}}</p>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12 d-flex justify-content-end">
+            <div class="col-sm-10 d-flex justify-content-end">
+              <p class="m-0"> Phí vận chuyển: </p>
+            </div>
+
+            <div class="col-sm-2 d-flex justify-content-end">
+              <p>{{tong_tien | currency: 'VND'}}</p>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12 d-flex justify-content-end">
+            <div class="col-sm-10 d-flex justify-content-end">
+              <p class="m-0"> Tổng thanh toán: </p>
+            </div>
+            <!-- <p class="m-0"> Tổng thanh toán: </p> <h6 id="tongthanhtoan">{{tong_tien | currency: 'VND'}}</h6> -->
+            <div class="col-sm-2 d-flex justify-content-end">
+              <h4 id="tongthanhtoan">{{tong_tien | currency: 'VND'}}</h4>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row order thanhtoan">
+      <div class="col-sm-12 d-flex justify-content-end align-items-center">
+        <button class="p-3  font-weight-bold  themsanpham" (click)="DatHang()">Đặt Hàng</button>
+      </div>
+    </div>
+  </div>
+</div>

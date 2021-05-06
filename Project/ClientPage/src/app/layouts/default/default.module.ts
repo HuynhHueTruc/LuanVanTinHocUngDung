@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './../../modules/checkout/checkout.component';
 import { DetailComponent } from './../../modules/detail/detail.component';
 import { ServiceComponent } from './../../modules/service/service.component';
 import { SupportsComponent } from './../../modules/supports/supports.component';
@@ -52,7 +53,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NotFoundComponent,
     SupportsComponent,
     ServiceComponent,
-    DetailComponent
+    DetailComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,

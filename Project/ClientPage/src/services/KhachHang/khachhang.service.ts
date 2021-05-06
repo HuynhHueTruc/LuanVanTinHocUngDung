@@ -21,13 +21,11 @@ export class KhachhangService {
   constructor(private http: HttpClient, private router: Router) { }
 
   setLoggedIn(value: boolean, data: any) {
-
     this.loggedInStatus = value;
     localStorage.setItem('loggedIn', 'true');
     this.loggedInAccount = data;
     localStorage.setItem('loggedInAcount', JSON.stringify(this.loggedInAccount));
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
-
   }
 
   get isLoggedIn() {

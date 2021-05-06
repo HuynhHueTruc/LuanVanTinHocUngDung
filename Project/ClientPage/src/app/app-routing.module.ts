@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { DetailComponent } from './modules/detail/detail.component';
 import { ServiceComponent } from './modules/service/service.component';
 import { SupportsComponent } from './modules/supports/supports.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
   {

@@ -17,6 +17,9 @@ import { Observable, interval, Subscription } from 'rxjs';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  message:string;
+
+
 
   href = '';
   sanpham_id;
@@ -38,6 +41,7 @@ export class CartComponent implements OnInit {
   tong_tien = 0;
   So_luong = 0;
   giatrikhuyenmai = 0;
+  arrSanPhamThanhToan: any;
 
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
     private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService) { }
@@ -54,6 +58,7 @@ export class CartComponent implements OnInit {
       this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
       this.href = this.router.url;
       this.sanpham_id = this.href.replace('/detail/', '');
+
       this.giohangService.getRefeshPage().subscribe(() => {
         this.getgiohang();
       })
@@ -196,6 +201,7 @@ export class CartComponent implements OnInit {
 
   TongTien() {
     this.tong_tien = 0;
+    this.arrSanPhamThanhToan = []
     for (const i in this.arrSanPham) {
       this.KiemTraKhuyeMai(this.arrSanPham[i])
       this.tong_tien = this.tong_tien + (this.arrSanPham[i].Gia - this.arrSanPham[i].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[i].So_luong
@@ -204,9 +210,11 @@ export class CartComponent implements OnInit {
       if (!this.checked[j]){
         this.KiemTraKhuyeMai(this.arrSanPham[j])
         this.tong_tien = this.tong_tien - (this.arrSanPham[j].Gia - this.arrSanPham[j].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[j].So_luong
+
+      }else{
+        this.arrSanPhamThanhToan.push(this.arrSanPham[j])
       }
     }
-
   }
 
   // Tăng số lượng sản phẩm đặt mua
@@ -288,5 +296,15 @@ export class CartComponent implements OnInit {
     }
     // console.log(this.khuyenmai)
     return bool;
+  }
+
+  Checkout(){
+    if (this.arrSanPhamThanhToan === undefined){
+      alert('Vui lòng chọn sản phẩm thanh toán!')
+    }else{
+      this.giohangService.setArrSP(this.arrSanPhamThanhToan)
+      this.router.navigateByUrl('/checkout')
+
+    }
   }
 }
