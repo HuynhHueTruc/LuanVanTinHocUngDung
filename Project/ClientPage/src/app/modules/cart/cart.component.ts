@@ -147,8 +147,10 @@ export class CartComponent implements OnInit {
     if (this.checkAll){
       // this.tong_tien = 0;
       this.TongTien()
+      this.lengthchecked = this.checked.length;
     }else{
       this.tong_tien = 0;
+      this.lengthchecked = 0
     }
   }
 

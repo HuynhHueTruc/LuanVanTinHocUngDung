@@ -85,10 +85,15 @@
                           <br>
 
                           <label for="pass" class="label">CMND/CCCD</label>
-                          <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"  #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="input" id="CMND_CCCD" [(ngModel)]="khachhang.CMND_CCCD" name="CMND_CCCD" placeholder=" Enter your identity card number" required >
+                          <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"
+                            #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="input" id="CMND_CCCD"
+                            [(ngModel)]="khachhang.CMND_CCCD" name="CMND_CCCD"
+                            placeholder=" Enter your identity card number" required>
                           <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
-                            <small class="err text-danger"*ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn cước công dân không được trống! </small>
-                            <small class="err text-danger"*ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân dân/căn cước công dân có 8 hoặc 12 số!</small>
+                            <small class="err text-danger" *ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn
+                              cước công dân không được trống! </small>
+                            <small class="err text-danger" *ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân
+                              dân/căn cước công dân có 8 hoặc 12 số!</small>
                           </div>
                           <br>
 
@@ -107,8 +112,8 @@
                           <label for="pass" class="label">Số điện thoại</label>
                           <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"
                             #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="input" id="So_dien_thoai"
-                            [(ngModel)]="khachhang.So_dien_thoai" name="So_dien_thoai"
-                            placeholder=" Your number phone" required>
+                            [(ngModel)]="khachhang.So_dien_thoai" name="So_dien_thoai" placeholder=" Your number phone"
+                            required>
                           <div class="mess-err"
                             *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
                             <small class="err text-danger" *ngIf="So_dien_thoai.errors.required"> Số điện thoại không
@@ -119,8 +124,8 @@
                           <br>
 
                           <label for="pass" class="label">Giới tính</label>
-                          <select id="Gioi_tinh" class="input" (change)="KTGioiTinh()"
-                            [(ngModel)]="khachhang.Gioi_tinh" name="GioiTinh">
+                          <select id="Gioi_tinh" class="input" (change)="KTGioiTinh()" [(ngModel)]="khachhang.Gioi_tinh"
+                            name="GioiTinh">
                             <option class="item" selected disabled hidden value=""> -- Sex --</option>
                             <option class="item" value="Nam">Nam</option>
                             <option class="item" value="Nữ">Nữ</option>
@@ -151,7 +156,7 @@
                           <label for="pass" class="label">Huyện/Quận</label>
                           <select id="districts" [(ngModel)]="khachhang.Dia_chi.Huyen_Quan"
                             name="calc_shipping_district" class="input" (change)="QuanHuyen($event)">
-                            <option class="item" selected  value="">-- District --</option>
+                            <option class="item" selected value="">-- District --</option>
                             <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
                               {{eachQuanHuyen.name}}</option>
 
@@ -164,7 +169,7 @@
                           <label for="pass" class="label">Xã/Phường</label>
                           <select id="ward" [(ngModel)]="khachhang.Dia_chi.Xa_Phuong" name="calc_shipping_ward"
                             class="input" (change)="XaPhuong(null)">
-                            <option class="item" selected  value="">-- Ward --</option>
+                            <option class="item" selected value="">-- Ward --</option>
                             <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
                               {{eachXaPhuong.name}}</option>
                           </select>
@@ -172,7 +177,22 @@
                             <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
                           </div>
                         </div>
-<br>
+                        <br>
+                        <div class="group ">
+                          <label for="pass" class="label">Danh mục:</label>
+
+                            <ng-multiselect-dropdown class="input" name="ngInterestsSelect" [placeholder]="'--- Interests ---'" style="border: none;"
+                            [(ngModel)]="so_thich"
+                              [settings]="dropdownSettings" [data]="dsloaicay" (onSelect)="onItemSelect($event)"
+                              (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+                            </ng-multiselect-dropdown>
+
+                          <div class="mess-err">
+                            <small id="errTaoMoi" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+                          </div>
+                        </div>
+
                         <div class="group">
                           <label for="pass" class="label">Mật khẩu</label>
                           <input type="password" (keyup)="KiemTraMatKhau()"
@@ -180,18 +200,18 @@
                             class="input" id="Mat_khau_moi" [(ngModel)]="mat_khau_moi" name="Mat_khau_moi"
                             placeholder="Your new password" minlength="8" maxlength="32" required>
 
-                        <div class="mess-err"
-                          *ngIf="Mat_khau_moi.errors && (Mat_khau_moi.invalid || Mat_khau_moi.touched)">
-                          <small class="err text-danger" *ngIf="Mat_khau_moi.errors.required"> Mật khẩu không được
-                            trống! </small>
-                          <small class="err text-danger" *ngIf="Mat_khau_moi.errors.minlength "> Mật khẩu nằm trong
-                            khoảng độ dài ký tự từ 8 đến 32 </small>
-                        </div>
-                        <div class="mess-err" id="err_mat_khau_moi">
-                          <small class="err text-danger"> Chỉ sử dụng chữ cái, số và ký tự chấm câu thường gặp</small>
-                        </div>
+                          <div class="mess-err"
+                            *ngIf="Mat_khau_moi.errors && (Mat_khau_moi.invalid || Mat_khau_moi.touched)">
+                            <small class="err text-danger" *ngIf="Mat_khau_moi.errors.required"> Mật khẩu không được
+                              trống! </small>
+                            <small class="err text-danger" *ngIf="Mat_khau_moi.errors.minlength "> Mật khẩu nằm trong
+                              khoảng độ dài ký tự từ 8 đến 32 </small>
+                          </div>
+                          <div class="mess-err" id="err_mat_khau_moi">
+                            <small class="err text-danger"> Chỉ sử dụng chữ cái, số và ký tự chấm câu thường gặp</small>
+                          </div>
 
-                        <br>
+                          <br>
                           <label for="pass" class="label">Xác nhận mật khẩu</label>
                           <input type="password" (keyup)="KiemTraMatKhau()"
                             [class.is-invalid]="Xac_nhan_mat_khau.invalid && Xac_nhan_mat_khau.touched"

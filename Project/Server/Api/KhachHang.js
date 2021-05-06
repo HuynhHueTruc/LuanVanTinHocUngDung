@@ -33,6 +33,9 @@ route.get('/khachhang', async(req, res) => {
         So_dien_thoai: 1,
         Mat_khau: 1,
         Email: 1,
+        So_thich: [{
+            Loai_cay: 1
+        }],
         Tich_diem: 1,
         Thoi_gian_tao: 1,
         Thoi_gian_cap_nhat: 1
@@ -52,7 +55,7 @@ route.get('/khachhang', async(req, res) => {
 
 
 route.post('/khachhang/dangky', async(req, res) => {
-
+console.log(req.body.So_thich)
     var Khach_hang_id = req.body.Khach_hang_id;
     var Ho_ten = req.body.Ho_ten;
     var Ngay_sinh = req.body.Ngay_sinh
@@ -61,14 +64,13 @@ route.post('/khachhang/dangky', async(req, res) => {
     var Gioi_tinh = req.body.Gioi_tinh;
     var So_dien_thoai = req.body.So_dien_thoai;
     var Mat_khau = req.body.Mat_khau;
+    var So_thich = req.body.So_thich;
     var Email = req.body.Email;
     var Thoi_gian_tao = dateFormat();
     var Thoi_gian_cap_nhat = dateFormat();
     var Ma_so = getRndInteger(100001, 999999);
     var Tich_diem = 0;
-// console.log(Khach_hang_id, Ho_ten, Dia_chi, Gioi_tinh, So_dien_thoai, CMND_CCCD, Mat_khau, Email, Thoi_gian_tao, Thoi_gian_cap_nhat, MaOTP, Tich_diem);
    
-// Kiểm tra mã khách hàng có tồn tại chưa
 KhachHangModel.findOne({
     Khach_hang_id: Khach_hang_id
 })
@@ -95,6 +97,7 @@ KhachHangModel.findOne({
                     CMND_CCCD: CMND_CCCD,
                     So_dien_thoai : So_dien_thoai,
                     Ma_so : Ma_so,
+                    So_thich: So_thich,
                     Mat_khau : Mat_khau,
                     Email : Email,
                     Tich_diem : Tich_diem,

@@ -1,3 +1,5 @@
+import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
+import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
 import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { DiachiService } from './../../../services/DiaChi/diachi.service';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
@@ -12,6 +14,7 @@ import { ThongTinTaiKhoanEmailModel } from './../../../models/KhachHang/thongtin
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-customer',
@@ -38,6 +41,7 @@ export class CustomerComponent implements OnInit {
   // Tạo Model thông tin người nhận trong Dialog gửi mail
   NguoiNhanMail: NguoiNhanModel[] = [];
   dsNguoiNhanMail: NguoiNhanModel[] = [];
+  dsloaicay: LoaiCayModel
   // Dùng cho Modal
   //  Biến lưu ID của đối tượng cần xác nhận xóa
   khachhangID: string;
@@ -72,14 +76,27 @@ export class CustomerComponent implements OnInit {
   dsdiachi: DiaChiDKModle[] = [];
   arrdiachi: DiaChiDKModle[] = [];
   is_edit = false;
+  so_thich = []
+  dropdownSettings: IDropdownSettings;
 
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
-  constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService) { }
+  constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
+    private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
     this.getdskhachhang();
     this.geteachDiaDiem();
+    this.getloaicay();
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: '_id',
+      textField: 'Ten_loai_cay',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
   // Hàm lấy danh sách khách hàng
@@ -112,6 +129,60 @@ export class CustomerComponent implements OnInit {
     });
 
 
+  }
+
+  getloaicay() {
+    this.loaicayService.getListLoaiCay().subscribe((res: any) => {
+      this.dsloaicay = res.loaicays
+      // console.log(this.dsloaicay)
+
+    })
+  }
+
+  //Chọn nhiều phần tử trong thẻ select
+  onItemSelect(item: any, i?) {
+    // i = 0 là tạo mới, = 1 là cập nhật
+    if (i === 0) {
+      document.getElementById('errTaoMoi').style.display = 'none'
+    } else {
+      if (i === 1) {
+        document.getElementById('CapNhat').style.display = 'none'
+      }
+    }
+  }
+
+  onSelectAll(items: any, i?) {
+    this.so_thich = items
+    if (i === 0) {
+      document.getElementById('errTaoMoi').style.display = 'none'
+    } else {
+      if (i === 1) {
+        document.getElementById('CapNhat').style.display = 'none'
+      }
+    }
+
+  }
+
+  onDeSelectAll(items: any, i?) {
+    this.so_thich = items
+
+    if (i === 0) {
+      document.getElementById('errTaoMoi').style.display = 'block'
+    } else {
+      if (i === 1) {
+        document.getElementById('CapNhat').style.display = 'block'
+      }
+    }
+  }
+
+  onItemDeSelect(item: any, i?) {
+    if (i === 0) {
+      document.getElementById('errTaoMoi').style.display = 'block'
+    } else {
+      if (i === 1) {
+        document.getElementById('CapNhat').style.display = 'block'
+      }
+    }
   }
 
   // Hàm lấy thông tin thành phố
@@ -412,6 +483,7 @@ export class CustomerComponent implements OnInit {
     this.khachhang.Gioi_tinh = '';
     // Gán giá trị rỗng ban đầu cho địa chỉ
     this.khachhang.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
+    this.khachhang.So_thich = [{ Loai_cay: '' }]
     // Gán giá trị mật khẩu bằng chuỗi random khi vừa load form đăng ký
     this.khachhang.Mat_khau = this.text;
   }
@@ -523,12 +595,13 @@ export class CustomerComponent implements OnInit {
     const email = khachhang.Email;
     const cmnd = khachhang.CMND_CCCD;
     const matkhau = khachhang.Mat_khau;
+    const sothich = khachhang.So_thich
     const thongtinkhachhang = [];
     thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
       diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
     for (const i in thongtinkhachhang) {
       if (thongtinkhachhang.hasOwnProperty(i)) {
-        if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null) {
+        if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null || sothich.length <= 0) {
           window.alert('Hãy nhập đầy đủ thông tin!');
           this.KiemTraThongTin = false;
           break;
@@ -555,9 +628,12 @@ export class CustomerComponent implements OnInit {
       this.ThongTinGuiEmailTaiKhoan = [];
       // let thongtin;
       this.khachhang.Mat_khau = this.text;
+      for (const i in this.so_thich) {
 
+        this.khachhang.So_thich.push({ Loai_cay: this.so_thich[i]._id })
+      }
+      this.khachhang.So_thich.splice(0, 1)
       this.KTNull(this.khachhang);
-
       if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
         this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
@@ -569,6 +645,7 @@ export class CustomerComponent implements OnInit {
             this.giohangService.ThemGioHang({ KhachHang_id: this.khachhang.Khach_hang_id }).subscribe()
 
             this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
+            alert(data_them)
             this.DongModal();
 
           }
@@ -583,6 +660,10 @@ export class CustomerComponent implements OnInit {
     }
   }
 
+  HuyThemKhachHang() {
+    this.so_thich = []
+    this.DongModal()
+  }
   // Hàm thực hiện xóa nhân viên
   XoaKhachHang(Khach_hang_id: string) {
     this.KHService.XoaKhachHang(Khach_hang_id).subscribe(data_xoa => {

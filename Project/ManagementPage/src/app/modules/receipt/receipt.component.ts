@@ -404,28 +404,6 @@ onItemSelect(item: any, i?) {
   // console.log(this.sanphamtmp)
 }
 
-// Xử lý chuỗi dropdown
-onSelectAll(items: any, i?) {
-  if (i === 0 ){
-    document.getElementById('errSanPham').style.display = 'none'
-  }else{
-    if (i === 1){
-      document.getElementById('SanPham').style.display = 'none'
-    }
-  }
-}
-
-onDeSelectAll(items: any, i?){
-
-  if (i === 0 ){
-    document.getElementById('errSanPham').style.display = 'none'
-  }else{
-    if (i === 1){
-      document.getElementById('SanPham').style.display = 'none'
-    }
-  }
-
-}
 
 onItemDeSelect(item: any, i?){
 

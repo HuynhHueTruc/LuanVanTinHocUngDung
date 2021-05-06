@@ -16,6 +16,9 @@ let KhachHangSchema = new mongoose.Schema({
     Ma_so: String,
     Mat_khau: String,
     Email: String,
+    So_thich: [{
+        Loai_cay: String
+    }],
     Tich_diem: Number,
     Thoi_gian_tao: Date,
     Thoi_gian_cap_nhat: Date

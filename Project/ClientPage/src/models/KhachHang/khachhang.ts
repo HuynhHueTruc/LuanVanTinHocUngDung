@@ -11,6 +11,9 @@ export class KhachHangModel{
   CMND_CCCD: string;
   So_dien_thoai: string;
   Ma_so: string;
+  So_thich: [{
+    Loai_cay: string
+  }]
   Mat_khau: string;
   Email: string;
   Tich_diem: number;

@@ -255,6 +255,28 @@
           </div>
         </div>
 
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Sở thích:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+            name="ngInterestsSelect"
+            [placeholder]="'--- Interests ---'"
+            [(ngModel)]="so_thich"
+            [settings]="dropdownSettings"
+            [data]="dsloaicay"
+            (onSelect)="onItemSelect($event, 0)"
+            (onSelectAll)="onSelectAll($event, 0)"
+            (onDeSelect)="onItemDeSelect($event, 0)"
+            (onDeSelectAll)="onDeSelectAll($event, 0)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="errTaoMoi" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div>
+
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Mật khẩu</label>
           <div class="col-sm-7">
@@ -269,7 +291,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="ThemKhachHang()">Lưu tài khoản</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Hủy</button>
+      <button type="button" class="btn btn-secondary" (click)="HuyThemKhachHang()">Hủy</button>
     </div>
   </ng-template>
 
@@ -395,6 +417,26 @@
 
         </div>
 
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Sở thích:</label>
+          <div class="col-sm-8">
+
+            <ng-multiselect-dropdown
+            name="ngInterestsSelect"
+            [placeholder]="'--- Interests ---'"
+            [(ngModel)]="so_thich"
+            [settings]="dropdownSettings"
+            [data]="dsloaicay"
+            (onSelect)="onItemSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelect)="onItemDeSelect($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="mess-err" >
+            <small id="CapNhat" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+          </div>
+        </div>
       </form>
     </div>
     <div class="modal-footer">

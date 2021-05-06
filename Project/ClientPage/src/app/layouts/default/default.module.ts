@@ -29,6 +29,7 @@ import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardModule } from '@nebular/theme';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -67,10 +68,8 @@ import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardMod
     NbLayoutModule,
     NbTabsetModule,
     NbInputModule,
-    NbCardModule
-    // BackButtonDisableModule.forRoot({
-    //   preserveScrollPosition: true
-    // })
+    NbCardModule,
+    NgMultiSelectDropDownModule.forRoot()
   ]
 })
 export class DefaultModule { }

@@ -244,8 +244,8 @@
           <div class="col-sm-8">
             <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
               [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 1)"
-              (onSelectAll)="onSelectAll($event, 1)" (onDeSelect)="onItemDeSelect($event, 1)"
-              (onDeSelectAll)="onDeSelectAll($event, 1)">
+               (onDeSelect)="onItemDeSelect($event, 1)"
+             >
             </ng-multiselect-dropdown>
           </div>
           <div class="mess-err">
