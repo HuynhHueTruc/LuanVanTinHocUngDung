@@ -43,27 +43,63 @@
 }
 
 #tongthanhtoan{
-  color:brown;
+  color:#ee4d2d;
 }
 
 .order{
   height: 100px;
-  border: 1px dashed #BDBDBD;
+  border: 1px dashed #fffefb;
 }
 .themsanpham:hover{
   background-color: crimson;
 }
 
-#changeaddress{
+.changeaddress{
   background-color: transparent;
   border: none;
   color: darkcyan;
 }
 
-#changeaddress:focus{
+.changeaddress:focus{
   outline:none
 }
 
 #address{
   font-size: 20px;
+}
+
+.input{
+  width: 350px;
+}
+
+#hinhthucvanchuyen{
+  border: 1px dashed #BDBDBD;
+  background-color: #fafdff;
+}
+#phuongthucthanhtoan{
+  border: 1px dashed #BDBDBD;
+  background-color: #fafdff;
+}
+
+#errThanhToan{
+  display: none;
+}
+
+#errVanChuyen{
+  display: none;
+}
+
+#changethanhtoan{
+  display: none;
+}
+
+#changevanchuyen{
+  display: none;
+}
+
+#luuthanhtoan{
+  display: none;
+}
+#luuvanchuyen{
+  display: none;
 }

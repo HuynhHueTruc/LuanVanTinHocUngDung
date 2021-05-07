@@ -14,7 +14,7 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-12">
-            <h6 class="m-0">ĐỊA CHỈ NHẬN HÀNG</h6>
+            <h6 class="m-0 pt-1">ĐỊA CHỈ NHẬN HÀNG</h6>
           </div>
 
         </div>
@@ -25,9 +25,10 @@
           <div class="col-sm-7">
             <p id="address">{{datalogin.Dia_chi[0].Xa_Phuong}}, {{datalogin.Dia_chi[0].Huyen_Quan}},{{datalogin.Dia_chi[0].Tinh_ThanhPho}}</p>
           </div>
-          <div class="col-sm-1">
-           <button id="changeaddress">Thay Đổi</button>
+          <div class="col-sm-1 d-flex justify-content-center p-0">
+            <button (click)="ThayDoiThongTin()" class="changeaddress">Thay Đổi</button>
           </div>
+
         </div>
       </div>
     </div>
@@ -85,10 +86,47 @@
   </div>
 
 
-  <div class="container mt-3  hp-pc-lift-nav">
-    <div class="row">
-      <div class="col-sm-12 setbackground">
-        <h6 class=" m-0 p-4">PHƯƠNG THỨC THANH TOÁN</h6>
+  <div class="container mt-3" >
+    <div class="row " id="hinhthucvanchuyen">
+       <div class="col-sm-4"> <h6 class=" m-0 p-4">HÌNH THỨC VẬN CHUYỂN</h6></div>
+       <div class="col-sm-7 d-flex justify-content-center align-items-center" >
+         <p id="changevanchuyen1">{{vanchuyen[0]?.Ten_hinh_thuc}}</p>
+        <ng-multiselect-dropdown class="input"  name="ngInterestsSelect"  style="border: none;" id="changevanchuyen"
+        [(ngModel)]="vanchuyen"
+          [settings]="dropdownSettings" [data]="dsvanchuyen" (onSelect)="onItemSelect($event)"
+          (onDeSelect)="onItemDeSelect($event)">
+        </ng-multiselect-dropdown>
+        <div class="mess-err ml-1">
+          <small id="errVanChuyen" class="err text-danger">Bạn chưa chọn hình thức vận chuyển! </small>
+        </div>
+       </div>
+
+       <div class="col-sm-1 d-flex justify-content-center p-0">
+        <button (click)="DoiVanChuyen()" class="changeaddress" id="doivanchuyen">Thay Đổi</button>
+        <button (click)="LuuVanChuyen()" class="changeaddress" id="luuvanchuyen">Lưu</button>
+
+      </div>
+
+    </div>
+
+    <div class="row mt-1" id="phuongthucthanhtoan">
+      <div class="col-sm-4"> <h6 class=" m-0 p-4">PHƯƠNG THỨC THANH TOÁN</h6></div>
+       <div class="col-sm-7 d-flex justify-content-center align-items-center" >
+        <p id="changethanhtoan1">{{thanhtoan[0]?.Ten_phuong_thuc}}</p>
+
+        <ng-multiselect-dropdown class="input" name="ngInterestsSelect"  style="border: none;" id="changethanhtoan"
+        [(ngModel)]="thanhtoan"
+          [settings]="dropdownSettingsThanhToan" [data]="dsthanhtoan" (onSelect)="onItemSelectThanhToan($event)"
+           (onDeSelect)="onItemDeSelectThanhToan($event)">
+        </ng-multiselect-dropdown>
+        <div class="mess-err ml-1">
+          <small id="errThanhToan" class="err text-danger">Bạn chưa chọn phương thức thanh toán! </small>
+        </div>
+       </div>
+
+       <div class="col-sm-1 d-flex justify-content-center p-0">
+        <button (click)="DoiThanhToan()" class="changeaddress" id="doithanhtoan">Thay Đổi</button>
+        <button (click)="LuuThanhToan()" class="changeaddress" id="luuthanhtoan">Lưu</button>
       </div>
     </div>
 

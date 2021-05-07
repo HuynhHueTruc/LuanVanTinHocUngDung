@@ -1,4 +1,4 @@
-export class PhuongThucThanhToan{
+export class PhuongThucThanhToanModel{
   _id: string;
   Ten_phuong_thuc: string;
   Thoi_gian_tao: Date;

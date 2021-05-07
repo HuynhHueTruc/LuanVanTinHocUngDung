@@ -1,3 +1,6 @@
+import { PhuongThucThanhToanModel } from './../../models/PhuongThucThanhToan/phuongthucthanhtoan';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class PhuongthucthanhtoanService {
 
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
+
+  getListPhuongThucThanhToan(): Observable<PhuongThucThanhToanModel[]>{
+    return this.http.get<PhuongThucThanhToanModel[]>('http://localhost:3000/phuongthucthanhtoan/thongtin').pipe();
+  }
 }

@@ -567,7 +567,7 @@ Huy(){
         this.thanhtoantmp.push(this.dsphuongthucthanhtoan[i])
       }
     }
-
+console.log(this.thanhtoantmp)
     this.lstsanpham = eachPhieuDat.San_Pham
     for (const j in this.lstsanpham) {
       for (const i in this.dssanpham) {
