@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
   datalogin: any;
   vanchuyen = [];
   thanhtoan = [];
+  giavanchuyen = 0;
   dropdownSettings: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
   private valueFromChildSubscription: Subscription;
@@ -99,6 +100,7 @@ export class CheckoutComponent implements OnInit {
     this.hinhthucvanchuyenService.getListHinhThucVanChuyen().subscribe((res: any) => {
       this.dsvanchuyen = res.hinhthucvanchuyens;
       this.vanchuyen.push(this.dsvanchuyen[0])
+      this.giavanchuyen = this.dsvanchuyen[0].Gia
 
     });
   }
@@ -114,6 +116,11 @@ export class CheckoutComponent implements OnInit {
   // Điều khiển vận chuyển
   onItemSelect(item: any) {
     document.getElementById('errVanChuyen').style.display = 'none'
+    for (const i in this.dsvanchuyen){
+      if (this.dsvanchuyen[i]._id === this.vanchuyen[0]._id){
+        this.giavanchuyen = this.dsvanchuyen[i].Gia
+      }
+    }
   }
 
 
