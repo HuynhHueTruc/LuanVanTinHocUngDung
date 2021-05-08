@@ -413,7 +413,7 @@ route.post('/nhanvien/guiOTP', async(req, res) => {
            }).then (d =>{
                console.log(arrThongTin.Ma_so)
            })
-        }, 45000)
+        }, 60000)
         
         // const secret_key = generateUniqueSecret();
         // const otpAuth = generateOTPToken(arrThongTin.Nhan_vien_id, 'GreenLifeShop.com', secret_key);
@@ -469,7 +469,7 @@ async function sendOTP(arruser, callback){
             subject: "[GREEN LIFE] MÃ XÁC NHẬN",
             html: `<h1>Xin chào ${arruser.Ho_ten}</h1>
             <h1>Mã số là: ${arruser.Ma_so}</h1> <br> 
-            <h2> Lưu ý: Mã có hiệu lực trong vòng 45 giây. Không được chia sẻ mã với người khác.
+            <h2> Lưu ý: Mã có hiệu lực trong vòng 60 giây. Không được chia sẻ mã với người khác.
             <br>
             <h3>GreenLife Shop!</h3>`
         }   

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { NhanvienService } from './../../../services/NhanVien/nhanvien.service';
 import { NhanVienModel } from './../../../models/NhanVien/nhanvien';
 import { Component, OnInit } from '@angular/core';
@@ -13,28 +14,56 @@ export class ForgotpasswordComponent implements OnInit {
   diachiEmail: any;
   nhanvien: NhanVienModel;
   datalogin: any;
+  dsnhanvien: NhanVienModel;
   key: string;
   mat_khau_moi = null;
   xac_nhan_mat_khau_moi = null;
-  constructor(private NVService: NhanvienService) { }
+  constructor(private NVService: NhanvienService, private router: Router) { }
 
   ngOnInit(): void {
-    this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.nhanvien = new NhanVienModel();
-    this.nhanvien = this.datalogin;
+
+    if (this.NVService.isLoggedIn){
+      this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
+      this.nhanvien = this.datalogin;
+    }
+    this.getdsnhanvien();
+  }
+
+  getdsnhanvien(){
+    this.NVService.getListNhanVien().subscribe((res: any) => {
+      this.dsnhanvien = res.nhanviens
+    })
   }
 
   // Kiểm tra Email có đúng không
   XacNhanEmail(){
-    if (this.diachiEmail === this.nhanvien.Email){
-      document.getElementById('code').style.display = 'block';
-      document.getElementById('emailaddress').style.display = 'none';
-      // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
-      this.LayMaXacNhan();
+    if (this.NVService.isLoggedIn){
+      if (this.diachiEmail === this.datalogin.Email){
+        document.getElementById('code').style.display = 'block';
+        document.getElementById('emailaddress').style.display = 'none';
+        // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
+        this.LayMaXacNhan();
 
-    }else {
-      document.getElementById('err_addressmail').style.display = 'block';
+      }else {
+        document.getElementById('err_addressmail').style.display = 'block';
+      }
+    }else{
+      for (const i in this.dsnhanvien){
+        if (this.diachiEmail === this.dsnhanvien[i].Email){
+          this.nhanvien = this.dsnhanvien[i]
+          document.getElementById('code').style.display = 'block';
+          document.getElementById('emailaddress').style.display = 'none';
+          // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
+          this.LayMaXacNhan();
+
+        }else {
+          document.getElementById('err_addressmail').style.display = 'block';
+        }
+      }
     }
+
+
   }
  // Hàm nhận về chuỗi OTP người dùng nhập
   onOtpChange(e){
@@ -51,11 +80,12 @@ export class ForgotpasswordComponent implements OnInit {
   // Hàm xử lý khi click button
   LayMaXacNhan(){
     this.NVService.GetOTP(this.nhanvien).subscribe( dt => {
-      // console.log(dt)
       const data = dt;
       // const tmp = JSON.stringify(dt);
       // const data = JSON.parse(tmp);
-      localStorage.setItem('loggedInAcount', JSON.stringify(data));
+      if (this.NVService.isLoggedIn){
+        localStorage.setItem('loggedInAcount', JSON.stringify(data));
+      }
       document.getElementById('title-forgot').style.display = 'none';
       document.getElementById('sub-title-forgot').style.display = 'none';
       document.getElementById('Xac_nhan').style.display = 'none';
@@ -66,6 +96,7 @@ export class ForgotpasswordComponent implements OnInit {
   GuiLaiMa(){
     this.LayMaXacNhan();
   }
+
   // Kiểm tra Secret Key
   XacNhanKey(){
     this.NVService.TimKiemNhanVien(this.nhanvien).subscribe(dt => {
@@ -172,7 +203,12 @@ AnPass(idevent){
           if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
             localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
             window.alert('Thay đổi mật khẩu thành công!');
-            location.reload();
+            if (this.NVService.isLoggedIn){
+              this.router.navigateByUrl('/default')
+            }else{
+              this.router.navigateByUrl('/login')
+
+            }
           } else {
               window.alert(data_capnhat);
             }
