@@ -106,7 +106,7 @@ export class CartComponent implements OnInit {
   }
 
   KiemTraSoLuongSanPham(){
-    if(this.giohang[0].San_Pham[0] === undefined){
+    if(this.giohang[0]?.San_Pham[0] === undefined){
       return false
     }else{
       return true
@@ -232,7 +232,6 @@ export class CartComponent implements OnInit {
       this.giohang[0].San_Pham[index].So_luong += 1;
       this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe(dt =>
         {
-          console.log(dt)
           this.getgiohang()
         }
         )
