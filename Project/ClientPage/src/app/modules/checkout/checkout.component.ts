@@ -1,3 +1,5 @@
+import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
+import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
 import { PhuongthucthanhtoanService } from './../../../services/PhuongThucThanhToan/phuongthucthanhtoan.service';
 import { PhuongThucThanhToanModel } from './../../../models/PhuongThucThanhToan/phuongthucthanhtoan';
 import { HinhThucVanChuyenModel } from './../../../models/HinhThucVanChuyen/hinhthucvanchuyen';
@@ -27,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   dsvanchuyen: HinhThucVanChuyenModel[] = [];
   dsthanhtoan: PhuongThucThanhToanModel[] = [];
   khuyenmai: KhuyenMaiModel;
+  phieudat: PhieuDatModel;
   giohang: GioHangModel[] = [];
   sanphamthanhtoan = []
   datalogin: any;
@@ -38,9 +41,11 @@ export class CheckoutComponent implements OnInit {
   private valueFromChildSubscription: Subscription;
 
   constructor(private giohangService: GiohangService, private khuyenmaiService: KhuyenmaiService, private router: Router, private hinhthucvanchuyenService: HinhthucvanchuyenService,
-    private phuongthucthanhtoanService: PhuongthucthanhtoanService) { }
+    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService) { }
 
   ngOnInit(): void {
+
+
     this.getdshinhthucvanchuyen();
     this.getdsphuongthucthanhtoan();
 
@@ -96,6 +101,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+
   getdshinhthucvanchuyen() {
     this.hinhthucvanchuyenService.getListHinhThucVanChuyen().subscribe((res: any) => {
       this.dsvanchuyen = res.hinhthucvanchuyens;
@@ -116,8 +122,8 @@ export class CheckoutComponent implements OnInit {
   // Điều khiển vận chuyển
   onItemSelect(item: any) {
     document.getElementById('errVanChuyen').style.display = 'none'
-    for (const i in this.dsvanchuyen){
-      if (this.dsvanchuyen[i]._id === this.vanchuyen[0]._id){
+    for (const i in this.dsvanchuyen) {
+      if (this.dsvanchuyen[i]._id === this.vanchuyen[0]._id) {
         this.giavanchuyen = this.dsvanchuyen[i].Gia
       }
     }
@@ -221,7 +227,38 @@ export class CheckoutComponent implements OnInit {
   }
 
   DatHang() {
+    this.phieudat = new PhieuDatModel();
+    this.phieudat.San_Pham = [{SanPham_id: '', So_luong: 0, Gia_ban: 0}]
+    this.phieudat.KhachHang_id = this.datalogin.Khach_hang_id
+    this.phieudat.Ho_ten = this.datalogin.Ho_ten
+    this.phieudat.Dia_chi = this.datalogin.Dia_chi
+    this.phieudat.So_dien_thoai = this.datalogin.So_dien_thoai
+    this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
+    this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
+    this.phieudat.Trang_thai = 'Chưa duyệt'
+    this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
+    for (const i in this.arrSanPhamThanhToan) {
+      this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
+    }
+    this.phieudat.San_Pham.splice(0,1);
 
+    for (const j in this.giohang[0].San_Pham){
+      for (const k in this.arrSanPhamThanhToan){
+        if (this.giohang[0].San_Pham[j].SanPham_id === this.arrSanPhamThanhToan[k]._id){
+          this.giohang[0].San_Pham.splice(Number.parseInt(j), 1);
+        }
+      }
+    }
+ this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+      alert('Đặt hàng thành công!')
+      this.arrSanPhamThanhToan = []
+      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+      this.giohangService.data = null
+      this.router.navigateByUrl('/cart')
+
+    })
+    // console.log(this.giohang[0].San_Pham)
+    // console.log(this.arrSanPhamThanhToan)
   }
 
 

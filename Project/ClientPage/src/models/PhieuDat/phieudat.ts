@@ -1,4 +1,4 @@
-export class PhieuDat{
+export class PhieuDatModel{
   _id: string;
   San_Pham: [{
       SanPham_id: string,

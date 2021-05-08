@@ -105,6 +105,15 @@ export class CartComponent implements OnInit {
     });
   }
 
+  KiemTraSoLuongSanPham(){
+    if(this.giohang[0].San_Pham[0] === undefined){
+      return false
+    }else{
+      return true
+    }
+  }
+
+
   // Lấy danh sách khuyến mãi
   getdskhuyenmai() {
     this.dskhuyenmai = []

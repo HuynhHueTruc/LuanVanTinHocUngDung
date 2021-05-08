@@ -87,7 +87,7 @@
   </div>
 
 
-  <div class="container mt-3">
+  <div class="container mt-3" >
     <div class="row " id="hinhthucvanchuyen">
       <div class="col-sm-4">
         <h6 class=" m-0 p-4">HÌNH THỨC VẬN CHUYỂN</h6>
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="col-sm-2 d-flex justify-content-center align-items-center">
-        <p>Đơn giá: {{giavanchuyen}}</p>
+        <p>Đơn giá: {{giavanchuyen | currency: 'VND'}}</p>
       </div>
       <div class="col-sm-1 d-flex justify-content-center p-0">
         <button (click)="DoiVanChuyen()" class="changeaddress" id="doivanchuyen">Thay Đổi</button>
@@ -117,7 +117,7 @@
       <div class="col-sm-4">
         <h6 class=" m-0 p-4">PHƯƠNG THỨC THANH TOÁN</h6>
       </div>
-      <div class="col-sm-7 d-flex justify-content-center align-items-center">
+      <div class="col-sm-5 d-flex justify-content-center align-items-center">
         <p id="changethanhtoan1">{{thanhtoan[0]?.Ten_phuong_thuc}}</p>
 
         <ng-multiselect-dropdown class="input" name="ngInterestsSelect" style="border: none;" id="changethanhtoan"
@@ -127,6 +127,8 @@
         <div class="mess-err ml-1">
           <small id="errThanhToan" class="err text-danger">Bạn chưa chọn phương thức thanh toán! </small>
         </div>
+      </div>
+      <div class="col-sm-2 d-flex justify-content-center align-items-center">
       </div>
       <div class="col-sm-1 d-flex justify-content-center p-0">
         <button (click)="DoiThanhToan()" class="changeaddress" id="doithanhtoan">Thay Đổi</button>
@@ -156,7 +158,7 @@
             </div>
 
             <div class="col-sm-2 d-flex justify-content-end">
-              <p>{{tong_tien | currency: 'VND'}}</p>
+              <p>{{giavanchuyen | currency: 'VND'}}</p>
             </div>
 
 
@@ -169,7 +171,7 @@
             </div>
             <!-- <p class="m-0"> Tổng thanh toán: </p> <h6 id="tongthanhtoan">{{tong_tien | currency: 'VND'}}</h6> -->
             <div class="col-sm-2 d-flex justify-content-end">
-              <h4 id="tongthanhtoan">{{tong_tien | currency: 'VND'}}</h4>
+              <h4 id="tongthanhtoan">{{(tong_tien + giavanchuyen) | currency: 'VND'}}</h4>
             </div>
           </div>
         </div>
@@ -182,4 +184,6 @@
       </div>
     </div>
   </div>
+
+
 </div>
