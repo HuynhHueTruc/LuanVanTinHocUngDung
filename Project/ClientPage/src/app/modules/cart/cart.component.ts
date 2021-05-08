@@ -230,23 +230,19 @@ export class CartComponent implements OnInit {
   ThemSoLuong(index) {
     if (this.giohang[0].San_Pham[index].So_luong < this.arrSanPham[index].So_luong) {
       this.giohang[0].San_Pham[index].So_luong += 1;
-      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe(dt =>
-        {
-          this.getgiohang()
-        }
-        )
-      // this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
-      this.TongTien()
     } else {
       this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
     }
+    this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+    this.TongTien()
+
   }
 
   // Giảm số lượng sản phẩm đặt mua
   GiamSoLuong(index) {
     if (this.giohang[0].San_Pham[index].So_luong !== 1) {
       this.giohang[0].San_Pham[index].So_luong -= 1;
-      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
       this.TongTien()
     }
   }
@@ -254,9 +250,14 @@ export class CartComponent implements OnInit {
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong(index) {
     if (this.giohang[0].San_Pham[index].So_luong <= 0) {
-      // const sl = document.getElementById('So_luong') as HTMLInputElement;
-      // sl.value = '';
       this.giohang[0].San_Pham[index].So_luong = null;
+    }else{
+      if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong){
+        this.So_luong_mac_dinh(index);
+      }
+      console.log(this.giohang[0].San_Pham[index].So_luong)
+      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+      this.TongTien()
     }
   }
 
@@ -268,6 +269,8 @@ export class CartComponent implements OnInit {
     if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong) {
       this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
     }
+    this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+    this.TongTien()
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
