@@ -200,18 +200,14 @@ AnPass(idevent){
         this.nhanvien.Mat_khau = this.mat_khau_moi;
         this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
 
-          if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
-            localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
             window.alert('Thay đổi mật khẩu thành công!');
             if (this.NVService.isLoggedIn){
+              localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
               this.router.navigateByUrl('/default')
             }else{
               this.router.navigateByUrl('/login')
+            }
 
-            }
-          } else {
-              window.alert(data_capnhat);
-            }
           });
       }
     }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
 import { Component, OnInit } from '@angular/core';
@@ -11,28 +12,54 @@ export class ForgotpasswordComponent implements OnInit {
 
   diachiEmail: any;
   khachhang: KhachHangModel;
+  dskhachhang: KhachHangModel;
   datalogin: any;
   key: string;
   mat_khau_moi = null;
   xac_nhan_mat_khau_moi = null;
-  constructor(private KHService: KhachhangService) { }
+  constructor(private KHService: KhachhangService, private router: Router) { }
 
   ngOnInit(): void {
-    this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.khachhang = new KhachHangModel();
-    this.khachhang = this.datalogin;
+
+    if (this.KHService.loggedInStatus){
+      this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
+      this.khachhang = this.datalogin;
+    }
+    this.getdskhachhang();
+  }
+
+  getdskhachhang(){
+    this.KHService.getListKhachHang().subscribe((res: any) =>{
+      this.dskhachhang = res.khachhangs
+    })
   }
 
   // Kiểm tra Email có đúng không
   XacNhanEmail(){
-    if (this.diachiEmail === this.khachhang.Email){
-      document.getElementById('code').style.display = 'block';
-      document.getElementById('emailaddress').style.display = 'none';
-      // this.NVService.GuiEmailLayOTP(this.khachhang).subscribe();
-      this.LayMaXacNhan();
+    if (this.KHService.loggedInStatus){
+      if (this.diachiEmail === this.datalogin.Email){
+        document.getElementById('code').style.display = 'block';
+        document.getElementById('emailaddress').style.display = 'none';
+        // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
+        this.LayMaXacNhan();
 
-    }else {
-      document.getElementById('err_addressmail').style.display = 'block';
+      }else {
+        document.getElementById('err_addressmail').style.display = 'block';
+      }
+    }else{
+      for (const i in this.dskhachhang){
+        if (this.diachiEmail === this.dskhachhang[i].Email){
+          this.khachhang = this.dskhachhang[i]
+          document.getElementById('code').style.display = 'block';
+          document.getElementById('emailaddress').style.display = 'none';
+          // this.NVService.GuiEmailLayOTP(this.nhanvien).subscribe();
+          this.LayMaXacNhan();
+
+        }else {
+          document.getElementById('err_addressmail').style.display = 'block';
+        }
+      }
     }
   }
  // Hàm nhận về chuỗi OTP người dùng nhập
@@ -51,7 +78,9 @@ export class ForgotpasswordComponent implements OnInit {
   LayMaXacNhan(){
     this.KHService.GetOTP(this.khachhang).subscribe( dt => {
       const data = dt;
-      localStorage.setItem('loggedInAcount', JSON.stringify(data));
+      if (this.KHService.loggedInStatus){
+        localStorage.setItem('loggedInAcount', JSON.stringify(data));
+      }
       document.getElementById('title-forgot').style.display = 'none';
       document.getElementById('sub-title-forgot').style.display = 'none';
       document.getElementById('Xac_nhan').style.display = 'none';
@@ -166,13 +195,14 @@ AnPass(idevent){
         this.khachhang.Mat_khau = this.mat_khau_moi;
         this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
 
-          if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"'){
-            localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
             window.alert('Thay đổi mật khẩu thành công!');
-            location.reload();
-          } else {
-              window.alert(data_capnhat);
+            if (this.KHService.loggedInStatus){
+              localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
+              this.router.navigateByUrl('/default')
+            }else{
+              this.router.navigateByUrl('/login')
             }
+
           });
       }
     }

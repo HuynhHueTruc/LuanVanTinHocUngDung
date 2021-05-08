@@ -39,6 +39,9 @@ export class KhachhangService {
     this.router.navigate(['login']);
   }
 
+  getListKhachHang(): Observable<KhachHangModel[]>{
+    return this.http.get<KhachHangModel[]>('http://localhost:3000/khachhang').pipe();
+  }
   // Tạo biến gửi trùng tên với biến nhận bên server
   DangNhapKhachHang(Khach_hang_id, Mat_khau) {
     return this.http.post('http://localhost:3000/khachhang/dangnhap', { Khach_hang_id, Mat_khau });
@@ -54,7 +57,6 @@ export class KhachhangService {
   }
 
   CapNhatKhachHang(khachhang: KhachHangModel): Observable<KhachHangModel[]> {
-    console.log(khachhang)
     return this.http.put<KhachHangModel[]>(`${'http://localhost:3000/khachhang/capnhatkhachhang'}/${khachhang.Khach_hang_id}`, khachhang).pipe(
     );
   }

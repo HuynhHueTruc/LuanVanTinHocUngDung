@@ -339,6 +339,7 @@ async function sendMail(arruser, noi_dung, chu_de, callback){
 route.post('/khachhang/guiOTP', async(req, res) => {
     try {
         const arrThongTin = req.body;
+        console.log(arrThongTin)
         let a =  setInterval(function(){
             const key = getRndInteger(100001, 999999)
             arrThongTin.Ma_so = key
@@ -349,12 +350,12 @@ route.post('/khachhang/guiOTP', async(req, res) => {
            }).then (d =>{
                console.log(arrThongTin.Ma_so)
            })
-        }, 45000)
+        }, 60000)
         
         const key = getRndInteger(100001, 999999)
         arrThongTin.Ma_so = key
         KhachHangModel.updateOne({
-            Nhan_vien_id: arrThongTin.Khach_hang_id
+            Khach_hang_id: arrThongTin.Khach_hang_id
         }, {
          Ma_so : key
        }).then (dt => {
@@ -387,7 +388,7 @@ async function sendOTP(arruser, callback){
             subject: "[GREEN LIFE] MÃ XÁC NHẬN",
             html: `<h1>Xin chào ${arruser.Ho_ten}</h1>
             <h1>Mã số là: ${arruser.Ma_so}</h1> <br> 
-            <h2> Lưu ý: Mã có hiệu lực trong vòng 45 giây. Không được chia sẻ mã với người khác.
+            <h2> Lưu ý: Mã có hiệu lực trong vòng 60 giây. Không được chia sẻ mã với người khác.
             <br>
             <h3>GreenLife Shop!</h3>`
         }   
