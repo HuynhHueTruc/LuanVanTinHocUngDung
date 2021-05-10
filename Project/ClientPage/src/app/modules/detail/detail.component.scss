@@ -209,3 +209,77 @@ button {
 polyline {
   transition: all 250ms ease-in-out;
 }
+
+.main{
+  background-color: whitesmoke;
+}
+
+.setbackground{
+  background-color: white;
+}
+
+.row{
+  margin-left: 0cm;
+  margin-right: 0cm;
+}
+
+button{
+  background-color: cadetblue;
+  color: white;
+  border: none;
+  height: 30px;
+}
+
+// h5{
+//   font-size: 18px !important;
+//   max-width: 210px;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+// }
+h5 {
+  font-size: 18px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.row{
+  margin: 0px;
+  padding: 0px;
+}
+
+// .card{
+//   height: 200px !important;
+// }
+.card-img-top{
+  vertical-align: middle;
+  width: 215px;
+  height: 215px;
+  object-fit: cover;
+}
+
+.khuyenmai{
+  text-decoration: line-through;
+}
+
+// .col-sm-4{
+//   margin: 0px;
+//   padding: 0px;
+// }
+
+.sale{
+  color: crimson;
+}
+
+a{
+  text-decoration: none
+}
+
+.goiy:hover {
+  transform: scale(1.1);
+}
+
+.daban{
+  font-size: 12px;
+}

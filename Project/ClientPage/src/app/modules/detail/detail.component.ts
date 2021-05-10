@@ -1,3 +1,7 @@
+import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
+import { DanhMucModel } from './../../../models/DanhMuc/danhmuc';
+import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
+import { DanhmucService } from './../../../services/DanhMuc/danhmuc.service';
 import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { GioHangModel } from './../../../models/GioHang/giohang';
 import { ThongtincuahangService } from './../../../services/ThongTinCuaHang/thongtincuahang.service';
@@ -9,14 +13,14 @@ import { HoadonbanhangService } from './../../../services/HoaDonBanHang/hoadonba
 import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { SanphamService } from './../../../services/SanPham/sanpham.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, AfterContentChecked {
 
   href = '';
   sanpham_id;
@@ -43,8 +47,18 @@ export class DetailComponent implements OnInit {
   isDisplay = [];
   arrHinhAnh = [];
   So_luong = 1;
+  dscaycanh: SanPhamModel[] = [];
+  danhmuc = ''
+  arrSanPham: SanPhamModel[] = []
+  danhmucloaicay: DanhMucModel
+  loaicays: LoaiCayModel
+  isLoading = false
+  arrSoLuongBan = [];
+
+
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
-              private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService) { }
+    private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
+    private danhmucService: DanhmucService, private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -54,11 +68,22 @@ export class DetailComponent implements OnInit {
     this.getgiohang();
   }
 
+  ngAfterContentChecked(): void {
+    // Called after every check of the component's or directive's content.
+    // Add 'implements AfterContentChecked' to the class.
+    if (this.isLoading) {
+      window.location.reload();
+    }
+    this.isLoading = false;
+  }
   getgiohang() {
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
     });
   }
+
+
+
 
   getdssanpham() {
     let sd = 0;
@@ -72,6 +97,7 @@ export class DetailComponent implements OnInit {
           }
         }
       }
+
       this.SoLuongDanhGia = this.sanphamdetail[0].Danh_gia.length;
       for (const j in this.sanphamdetail[0].Danh_gia) {
         if (this.sanphamdetail[0].Danh_gia.hasOwnProperty(j)) {
@@ -91,14 +117,25 @@ export class DetailComponent implements OnInit {
         document.getElementById(`star-${i + 1}`).style.color = 'yellow';
       }
 
+
+
       this.getthongtincuahang();
       this.getdskhuyenmai();
       this.getdsHoaDonBanHang();
+        // Lấy danh mục cuả sản phẩm và tìm sản phẩm tương tự
+        this.danhmuc = this.sanphamdetail[0].Danh_Muc[0].DMN_id
+        for (const i in this.dssanpham) {
+          if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.danhmuc) {
+            this.arrSanPham.push(this.dssanpham[i])
+          }
+        }
+
     });
   }
 
   getdsHoaDonBanHang() {
     let count = 0;
+    let sum =0
     this.hoadonbanService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonban = res.hoadonbanhangs;
       for (const i in this.sanphamdetail) {
@@ -116,6 +153,22 @@ export class DetailComponent implements OnInit {
           count = 0;
         }
       }
+      for (const i in this.arrSanPham) {
+        if (this.arrSanPham.hasOwnProperty) {
+          for (const j in this.dshoadonban) {
+            if (this.dshoadonban.hasOwnProperty){
+              for (const h in this.dshoadonban[j].San_Pham){
+                if (this.arrSanPham[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id){
+                  sum += this.dshoadonban[j].San_Pham[h].So_luong;
+                }
+              }
+            }
+          }
+          this.arrSoLuongBan.push({SanPham_id: this.arrSanPham[i]._id, So_luong_ban: sum});
+          sum = 0;
+        }
+      }
+      console.log(this.arrSoLuongBan)
     });
   }
 
@@ -185,17 +238,17 @@ export class DetailComponent implements OnInit {
   }
 
   // Xem hình ảnh trước hình ảnh đang xem
-  HinhAnhTruoc(){
-    if (this.arr_index > 0 ){
+  HinhAnhTruoc() {
+    if (this.arr_index > 0) {
       this.arr_index -= 1;
       this.url = this.arrHinhAnh[this.index][this.arr_index].url;
     }
   }
 
   // Xem hình ảnh sau hình ảnh đang xem
-  HinhAnhSau(){
+  HinhAnhSau() {
     // console.log(this.arrHinhAnh[this.index].length - 1, this.arr_index)
-    if (this.arrHinhAnh[this.index].length - 1 > this.arr_index){
+    if (this.arrHinhAnh[this.index].length - 1 > this.arr_index) {
       this.arr_index += 1;
       this.url = this.arrHinhAnh[this.index][this.arr_index].url;
 
@@ -204,60 +257,64 @@ export class DetailComponent implements OnInit {
   }
 
   // Tăng số lượng sản phẩm đặt mua
-  ThemSoLuong(){
-    if (this.So_luong < this.sanphamdetail[0].So_luong){
+  ThemSoLuong() {
+    if (this.So_luong < this.sanphamdetail[0].So_luong) {
       this.So_luong += 1;
 
-    }else{
+    } else {
       this.So_luong = this.sanphamdetail[0].So_luong;
     }
   }
 
   // Giảm số lượng sản phẩm đặt mua
-  GiamSoLuong(){
-    if (this.So_luong !== 1){
+  GiamSoLuong() {
+    if (this.So_luong !== 1) {
       this.So_luong -= 1;
     }
   }
 
   // Kiểm tra số lượng nhập vào thẻ input
-  KiemTraSoLuong(){
-    if (this.So_luong <= 0){
-     const sl = document.getElementById('So_luong') as HTMLInputElement;
-     sl.value = '';
+  KiemTraSoLuong() {
+    if (this.So_luong <= 0) {
+      const sl = document.getElementById('So_luong') as HTMLInputElement;
+      sl.value = '';
     }
   }
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
-  So_luong_mac_dinh(){
-    if (this.So_luong === null || this.So_luong === 0){
+  So_luong_mac_dinh() {
+    if (this.So_luong === null || this.So_luong === 0) {
       this.So_luong = 1;
     }
-    if (this.So_luong > this.sanphamdetail[0].So_luong){
+    if (this.So_luong > this.sanphamdetail[0].So_luong) {
       this.So_luong = this.sanphamdetail[0].So_luong;
     }
   }
 
   // Cập nhật số lượng sản phẩm nếu sản phẩm đang thêm đã tồn tại trong giỏ hàng
-  CapNhatSoLuongSanPhamTrung(sanpham){
+  CapNhatSoLuongSanPhamTrung(sanpham) {
     let bool = false
-    for (const i in this.giohang[0].San_Pham){
-      if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id){
+    for (const i in this.giohang[0].San_Pham) {
+      if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
         this.giohang[0].San_Pham[i].So_luong += this.So_luong
-       return true
-      }else{
+        return true
+      } else {
         bool = false
       }
     }
     return bool
   }
 
-  ThemVaoGioHang(){
-    if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])){
-      this.giohang[0].San_Pham.push({SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong})
+  ThemVaoGioHang() {
+    if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
+      this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
     }
     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
     alert('Đã thêm vào giỏ hàng!')
   }
 
+  ProductDetail(eachSP) {
+    this.router.navigateByUrl(`/detail/${eachSP._id}`);
+    this.isLoading = true;
+  }
 }

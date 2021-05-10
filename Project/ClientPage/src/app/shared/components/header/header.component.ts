@@ -81,6 +81,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
       this.loaicays = res.loaicays;
     });
   }
+
   // Hàm lấy từng Danh mục sản phẩm
   geteachDanhMuc() {
     this.danhmucService.getListDanhMuc().subscribe((res: any) => {
@@ -191,6 +192,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   }
 
   onSelectLTypeTree(eachLoaiCay) {
+    console.log(eachLoaiCay)
     // this.router.navigate(['/default/typetree', eachLoaiCay._id], { state: { _id: `${eachLoaiCay._id}` }});
     this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
     // this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);

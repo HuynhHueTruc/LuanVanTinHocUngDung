@@ -154,6 +154,7 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraKhuyeMai(eachSP) {
+
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
     let bool = false;

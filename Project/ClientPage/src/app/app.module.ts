@@ -4,7 +4,7 @@ import { DanhmucService } from '../services/DanhMuc/danhmuc.service';
 import { SharedModule } from './shared/shared.module';
 import { DefaultModule } from './layouts/default/default.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { DefautGuard } from '../guard/defaut.guard';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 @NgModule({
   // Khai báo các component, directive, pile của module này
@@ -39,8 +40,10 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
     RouterModule,
     NbInputModule,
-    NbTabsetModule
+    NbTabsetModule,
+    IvyCarouselModule
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   // Các dịch vụ, mà các component khác có thể sử dụng
   providers: [
      DanhmucService,

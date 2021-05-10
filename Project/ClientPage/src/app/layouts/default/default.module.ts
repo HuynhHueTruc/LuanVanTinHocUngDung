@@ -18,7 +18,7 @@ import { IntroComponent } from './../../modules/intro/intro.component';
 import { ContentComponent } from './../../modules/content/content.component';
 import { PostsComponent } from './../../modules/posts/posts.component';
 import { DashboardComponent } from './../../modules/dashboard/dashboard.component';
-import { Input, NgModule } from '@angular/core';
+import { Input, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DefaultComponent } from './default.component';
@@ -31,6 +31,7 @@ import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardModule } from '@nebular/theme';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NbTabsetModule,
     NbInputModule,
     NbCardModule,
+    IvyCarouselModule,
     NgMultiSelectDropDownModule.forRoot()
   ]
 })

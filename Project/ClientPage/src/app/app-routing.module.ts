@@ -21,6 +21,8 @@ import { NgModule, Component } from '@angular/core';
 // import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 const routes: Routes = [
   // Tự động chuyển sang trang Login khi load, set pathMatch: 'full' để tránh vòng lặp tìm path vô hạn
@@ -57,7 +59,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' },), IvyCarouselModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

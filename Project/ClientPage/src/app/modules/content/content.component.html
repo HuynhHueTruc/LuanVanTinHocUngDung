@@ -1,25 +1,27 @@
-<!-- row giới thiệu -->
-<div class="container">
-  <div class="row">
+  <!-- row giới thiệu -->
+  <div class="container">
+    <div class="row">
       <div class="col-6">
-        <img src="../../../assets//images/gt.jpg"  class="img-fluid" alt="Responsive image">
+        <img src="../../../assets//images/gt.jpg" class="img-fluid" alt="Responsive image">
       </div>
       <div class="col-6 ">
         <p class="title-gt">Giới thiệu</p>
         <hr class="p-hr">
         <p class="title">Green Life</p>
-        <p class="gt">   &nbsp;&nbsp;&nbsp;&nbsp;
-        Green Life không chỉ mang lại cho bạn một không gian sống trong lành mà còn sang trọng với những loài cây đẹp
-        mắt với giá trị phong thủy cao. </p>
-        <p class="gt"> &nbsp;&nbsp;&nbsp;&nbsp; Có Green Life bạn không cần phải đau đầu trong việc lựa chọn sản phẩm trang trí cho cảnh quan của mình.</p>
-        <p class="gt" > &nbsp;&nbsp;&nbsp;&nbsp; Với dịch vụ chăm sóc khách hàng trực tuyến hiện đại và gần gũi. Green Life chắc chắn sẽ tạo cho bạn cảm giác
-        thoải mái và tin tưởng khi sử dụng dịch vụ của Green Life. </p>
+        <p class="gt"> &nbsp;&nbsp;&nbsp;&nbsp;
+          Green Life không chỉ mang lại cho bạn một không gian sống trong lành mà còn sang trọng với những loài cây đẹp
+          mắt với giá trị phong thủy cao. </p>
+        <p class="gt"> &nbsp;&nbsp;&nbsp;&nbsp; Có Green Life bạn không cần phải đau đầu trong việc lựa chọn sản phẩm
+          trang trí cho cảnh quan của mình.</p>
+        <p class="gt"> &nbsp;&nbsp;&nbsp;&nbsp; Với dịch vụ chăm sóc khách hàng trực tuyến hiện đại và gần gũi. Green
+          Life chắc chắn sẽ tạo cho bạn cảm giác
+          thoải mái và tin tưởng khi sử dụng dịch vụ của Green Life. </p>
         <div class="wapper col-sm-12">
           <button name="button" type="button">Xem thêm</button>
         </div>
       </div>
+    </div>
   </div>
-</div>
   <!-- Row khuyến mãi -->
   <div class="row col-wrap">
     <div class="col-12">
@@ -28,21 +30,22 @@
       <p class="title">Khuyến mãi</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col goiy">
-      <img class="image" src="../../../assets//images/gt2.jpg"  class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col goiy">
-      <img class="image" src="../../../assets//images/gt1.png"  class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col goiy ">
-      Giảm giá  3
-    </div>
-    <div class="col goiy">
-      Giảm giá  4
-    </div>
-    <div class="col goiy ">
-      Giảm giá 5
+  <div class="row d-flex justify-content-center">
+
+    <div class="carousel ">
+      <carousel>
+        <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
+            <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
+              <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
+              <div class="_2TDZGE">
+                <span class="percent">{{giatrikhuyenmai*100}}%</span>
+                <span class="_17XqBU">GIẢM</span>
+              </div>
+            </div>
+            </div>
+        </div>
+    </carousel>
     </div>
   </div>
   <div class="container">
@@ -54,30 +57,30 @@
         <p class="title">Sản phẩm bán chạy</p>
       </div>
     </div>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="row div-sp">
-        <div class="col sp goiy">
-          <img class="image" src="../../../assets/images/Bancong1.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="row div-sp">
+            <div class="col sp goiy">
+              <img class="image" src="../../../assets/images/Bancong1.jpg">
+            </div>
+            <div class="col sp goiy">
+              Sản phẩm 2
+            </div>
+            <div class="col  sp goiy">
+              Sản phẩm 3
+            </div>
+            <div class="col  sp goiy">
+              Sản phẩm 4
+            </div>
+            <div class="col  sp goiy">
+              Sản phẩm 5
+            </div>
+          </div>
         </div>
-        <div class="col sp goiy">
-          Sản phẩm 2
-         </div>
-        <div class="col  sp goiy">
-          Sản phẩm 3
-        </div>
-        <div class="col  sp goiy">
-          Sản phẩm 4
-        </div>
-        <div class="col  sp goiy">
-          Sản phẩm 5
-        </div>
-  </div>
-</div>
-</div>
-</div>
-<!-- Row sản phẩm -->
+      </div>
+    </div>
+    <!-- Row sản phẩm -->
     <div class="row">
       <div class="col-12">
         <p class="title-gt">Giới thiệu</p>
@@ -85,7 +88,7 @@
         <p class="title">Sản phẩm</p>
       </div>
     </div>
-<!-- Cây để bàn -->
+    <!-- Cây để bàn -->
     <div class="row">
       <div class="row">
         <p class="title-gt textcase">Cây để bàn</p>
@@ -94,144 +97,16 @@
         <div class="col-6">
           <div class="row div-sp">
             <div class="col goiy sp">
-                Sản phẩm 1
+              Sản phẩm 1
             </div>
             <div class="col goiy sp">
               Sản phẩm 2
             </div>
-      </div>
+          </div>
 
-      <div class="row div-sp">
-          <div class="col goiy sp">
+          <div class="row div-sp">
+            <div class="col goiy sp">
               Sản phẩm 3
-          </div>
-          <div class="col goiy sp">
-              Sản phẩm 4
-      </div>
-    </div>
-    </div>
-    <div class="col-6 ">
-      <img class="image" src="../../../assets/images/gt3.jpg">
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- Cây ban công -->
-<div class="container">
-  <div class="row ">
-    <p class="title-gt textcase">Cây ban công</p>
-  </div>
-  <div class="col d-flex justify-content-center ">
-    <img class="image" src="../../../assets/images/BanCong.jpg" class="img-fluid" alt="Responsive image" >
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="row div-sp">
-        <div class="col sp goiy">
-          <img class="image" src="../../../assets/images/Bancong1.jpg">
-        </div>
-        <div class="col sp goiy">
-          Sản phẩm 2
-        </div>
-        <div class="col  sp goiy">
-          Sản phẩm 3
-        </div>
-        <div class="col  sp goiy">
-         Sản phẩm 4
-        </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- Cây dây leo -->
-<div class="container" >
-  <div class="row ">
-    <p class="subtitle textcase">Cây dây leo</p>
-  </div>
-  <div class="col d-flex justify-content-center">
-    <img class="image" src="../../../assets/images/DayLeo.png" class="img-fluid" alt="Responsive image" >
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="row div-sp">
-        <div class="col sp goiy">
-          <img class="image" src="../../../assets/images/Bancong1.jpg">
-        </div>
-        <div class="col sp goiy">
-          Sản phẩm 2
-         </div>
-        <div class="col  sp goiy">
-          Sản phẩm 3
-        </div>
-        <div class="col  sp goiy">
-          Sản phẩm 4
-        </div>
-  </div>
-</div>
-</div>
-</div>
-<!-- Cây phong thủy -->
-    <div class="container">
-      <div class="row">
-        <p class="subtitle textcase">Cây phong thủy</p>
-      </div>
-      <div class="row">
-        <div class="col-6 ">
-          <img class="image" src="../../../assets/images/PhongThuy.png">
-        </div>
-        <div class="col-6">
-          <div class="row div-sp">
-            <div class="col goiy sp">
-                Sản phẩm 1
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 2
-            </div>
-          </div>
-          <div class="row div-sp">
-            <div class="col goiy sp">
-                Sản phẩm 3
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 4
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Button xem thêm -->
-<div class="wapper col-sm-12 " id="hidden">
-  <button  (click)="setHidden()" type="button" aria-expanded="false"
-  data-toggle="collapse" data-target="#boxnoidung">Xem thêm</button>
-</div>
-
-<!-- Hiển thị thêm-->
-<div class="collapse mt-4" id="boxnoidung" >
-  <div class="card card-body ">
-<!-- Cây nội thất-->
-    <div class="container">
-      <div class="row">
-        <p class="title-gt textcase">Cây nội thất</p>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <div class="row div-sp">
-            <div class="col goiy sp">
-                Sản phẩm 1
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 2
-            </div>
-          </div>
-          <div class="row div-sp">
-            <div class="col goiy sp">
-                Sản phẩm 3
             </div>
             <div class="col goiy sp">
               Sản phẩm 4
@@ -239,45 +114,19 @@
           </div>
         </div>
         <div class="col-6 ">
-          <img class="image" src="../../../assets/images/NoiThat.png">
+          <img class="image" src="../../../assets/images/gt3.jpg">
         </div>
       </div>
     </div>
-    <!-- Cây thủy sinh -->
-<div class="container">
-  <div class="row ">
-    <p class="title-gt textcase">Cây thủy sinh</p>
   </div>
-  <div class="col d-flex justify-content-center ">
-    <img class="image" src="../../../assets/images/ThuySinh.png" class="img-fluid" alt="Responsive image" >
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="row div-sp">
-        <div class="col sp goiy">
-          <img class="image" src="../../../assets/images/Bancong1.jpg">
-        </div>
-        <div class="col sp goiy">
-          Sản phẩm 2
-        </div>
-        <div class="col  sp goiy">
-          Sản phẩm 3
-        </div>
-        <div class="col  sp goiy">
-         Sản phẩm 4
-        </div>
-    </div>
-  </div>
-</div>
-</div>
 
-  <!-- Cây ngoại thất -->
+  <!-- Cây ban công -->
   <div class="container">
     <div class="row ">
-      <p class="subtitle textcase">Cây ngoại thất</p>
+      <p class="title-gt textcase">Cây ban công</p>
     </div>
     <div class="col d-flex justify-content-center ">
-      <img class="image" src="../../../assets/images//NgoaiThat.png" class="img-fluid" alt="Responsive image" >
+      <img class="image" src="../../../assets/images/BanCong.jpg" class="img-fluid" alt="Responsive image">
     </div>
     <div class="row">
       <div class="col">
@@ -292,64 +141,56 @@
             Sản phẩm 3
           </div>
           <div class="col  sp goiy">
-           Sản phẩm 4
+            Sản phẩm 4
           </div>
-      </div>
-    </div>
-  </div>
-  </div>
-<!-- Cây công trình-->
-<div class="container">
-  <div class="row">
-    <p class="title-gt textcase">Cây công trình</p>
-  </div>
-  <div class="row">
-    <div class="col-6">
-      <div class="row div-sp">
-        <div class="col goiy sp">
-            Sản phẩm 1
-        </div>
-        <div class="col goiy sp">
-          Sản phẩm 2
-        </div>
-      </div>
-      <div class="row div-sp">
-        <div class="col goiy sp">
-            Sản phẩm 3
-        </div>
-        <div class="col goiy sp">
-          Sản phẩm 4
         </div>
       </div>
     </div>
-    <div class="col-6 ">
-      <img class="image" src="../../../assets/images/CongTrinh.png">
-    </div>
   </div>
-</div>
 
-  <!-- Button xem thêm -->
-  <div class="wapper col-sm-12 " id="hidden2">
-    <button  (click)="setHidden()" type="button" aria-expanded="false"
-    data-toggle="collapse" data-target="#boxnoidung2">Xem thêm</button>
+  <!-- Cây dây leo -->
+  <div class="container">
+    <div class="row ">
+      <p class="subtitle textcase">Cây dây leo</p>
+    </div>
+    <div class="col d-flex justify-content-center">
+      <img class="image" src="../../../assets/images/DayLeo.png" class="img-fluid" alt="Responsive image">
+    </div>
   </div>
-<!-- Xem thêm thông tin -->
-<div class="collapse mt-4" id="boxnoidung2" >
-<div class="card card-body ">
 
-  <!-- Terrarium -->
   <div class="container">
     <div class="row">
-      <p class="subtitle textcase">Terrarium</p>
+      <div class="col">
+        <div class="row div-sp">
+          <div class="col sp goiy">
+            <img class="image" src="../../../assets/images/Bancong1.jpg">
+          </div>
+          <div class="col sp goiy">
+            Sản phẩm 2
+          </div>
+          <div class="col  sp goiy">
+            Sản phẩm 3
+          </div>
+          <div class="col  sp goiy">
+            Sản phẩm 4
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Cây phong thủy -->
+  <div class="container">
+    <div class="row">
+      <p class="subtitle textcase">Cây phong thủy</p>
     </div>
     <div class="row">
       <div class="col-6 ">
-        <img class="image" src="../../../assets/images/Terrarium.png">
+        <img class="image" src="../../../assets/images/PhongThuy.png">
       </div>
       <div class="col-6">
         <div class="row div-sp">
           <div class="col goiy sp">
-              Sản phẩm 1
+            Sản phẩm 1
           </div>
           <div class="col goiy sp">
             Sản phẩm 2
@@ -357,7 +198,7 @@
         </div>
         <div class="row div-sp">
           <div class="col goiy sp">
-              Sản phẩm 3
+            Sản phẩm 3
           </div>
           <div class="col goiy sp">
             Sản phẩm 4
@@ -366,105 +207,265 @@
       </div>
     </div>
   </div>
-<!-- Cây sen đá -->
-<div class="container">
-<div class="row ">
-  <p class="subtitle textcase">Cây sen đá</p>
-</div>
-<div class="col d-flex justify-content-center ">
-  <img class="image" src="../../../assets/images/SenDa.png" class="img-fluid" alt="Responsive image" >
-</div>
-<div class="row">
-  <div class="col">
-    <div class="row div-sp">
-      <div class="col sp goiy">
-        <img class="image" src="../../../assets/images/Bancong1.jpg">
+
+  <!-- Button xem thêm -->
+  <div class="wapper col-sm-12 " id="hidden">
+    <button (click)="setHidden()" type="button" aria-expanded="false" data-toggle="collapse"
+      data-target="#boxnoidung">Xem thêm</button>
+  </div>
+
+  <!-- Hiển thị thêm-->
+  <div class="collapse mt-4" id="boxnoidung">
+    <div class="card card-body ">
+      <!-- Cây nội thất-->
+      <div class="container">
+        <div class="row">
+          <p class="title-gt textcase">Cây nội thất</p>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="row div-sp">
+              <div class="col goiy sp">
+                Sản phẩm 1
+              </div>
+              <div class="col goiy sp">
+                Sản phẩm 2
+              </div>
+            </div>
+            <div class="row div-sp">
+              <div class="col goiy sp">
+                Sản phẩm 3
+              </div>
+              <div class="col goiy sp">
+                Sản phẩm 4
+              </div>
+            </div>
+          </div>
+          <div class="col-6 ">
+            <img class="image" src="../../../assets/images/NoiThat.png">
+          </div>
+        </div>
       </div>
-      <div class="col sp goiy">
-        Sản phẩm 2
+      <!-- Cây thủy sinh -->
+      <div class="container">
+        <div class="row ">
+          <p class="title-gt textcase">Cây thủy sinh</p>
+        </div>
+        <div class="col d-flex justify-content-center ">
+          <img class="image" src="../../../assets/images/ThuySinh.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="row div-sp">
+              <div class="col sp goiy">
+                <img class="image" src="../../../assets/images/Bancong1.jpg">
+              </div>
+              <div class="col sp goiy">
+                Sản phẩm 2
+              </div>
+              <div class="col  sp goiy">
+                Sản phẩm 3
+              </div>
+              <div class="col  sp goiy">
+                Sản phẩm 4
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col  sp goiy">
-        Sản phẩm 3
+
+      <!-- Cây ngoại thất -->
+      <div class="container">
+        <div class="row ">
+          <p class="subtitle textcase">Cây ngoại thất</p>
+        </div>
+        <div class="col d-flex justify-content-center ">
+          <img class="image" src="../../../assets/images//NgoaiThat.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="row div-sp">
+              <div class="col sp goiy">
+                <img class="image" src="../../../assets/images/Bancong1.jpg">
+              </div>
+              <div class="col sp goiy">
+                Sản phẩm 2
+              </div>
+              <div class="col  sp goiy">
+                Sản phẩm 3
+              </div>
+              <div class="col  sp goiy">
+                Sản phẩm 4
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col  sp goiy">
-       Sản phẩm 4
+      <!-- Cây công trình-->
+      <div class="container">
+        <div class="row">
+          <p class="title-gt textcase">Cây công trình</p>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="row div-sp">
+              <div class="col goiy sp">
+                Sản phẩm 1
+              </div>
+              <div class="col goiy sp">
+                Sản phẩm 2
+              </div>
+            </div>
+            <div class="row div-sp">
+              <div class="col goiy sp">
+                Sản phẩm 3
+              </div>
+              <div class="col goiy sp">
+                Sản phẩm 4
+              </div>
+            </div>
+          </div>
+          <div class="col-6 ">
+            <img class="image" src="../../../assets/images/CongTrinh.png">
+          </div>
+        </div>
       </div>
-  </div>
-</div>
-</div>
-</div>
-<!-- Cây sen-->
-<div class="container">
-<div class="row">
-<p class="title-gt textcase">Cây sen</p>
-</div>
-<div class="row">
-<div class="col-6">
-  <div class="row div-sp">
-    <div class="col goiy sp">
-        Sản phẩm 1
-    </div>
-    <div class="col goiy sp">
-      Sản phẩm 2
-    </div>
-  </div>
-  <div class="row div-sp">
-    <div class="col goiy sp">
-        Sản phẩm 3
-    </div>
-    <div class="col goiy sp">
-      Sản phẩm 4
-    </div>
-  </div>
-</div>
-<div class="col-6 ">
-  <img class="image" src="../../../assets/images/Sen.png">
-</div>
 
-</div>
-</div>
-  </div>
-</div>
+      <!-- Button xem thêm -->
+      <div class="wapper col-sm-12 " id="hidden2">
+        <button (click)="setHidden()" type="button" aria-expanded="false" data-toggle="collapse"
+          data-target="#boxnoidung2">Xem thêm</button>
+      </div>
+      <!-- Xem thêm thông tin -->
+      <div class="collapse mt-4" id="boxnoidung2">
+        <div class="card card-body ">
+
+          <!-- Terrarium -->
+          <div class="container">
+            <div class="row">
+              <p class="subtitle textcase">Terrarium</p>
+            </div>
+            <div class="row">
+              <div class="col-6 ">
+                <img class="image" src="../../../assets/images/Terrarium.png">
+              </div>
+              <div class="col-6">
+                <div class="row div-sp">
+                  <div class="col goiy sp">
+                    Sản phẩm 1
+                  </div>
+                  <div class="col goiy sp">
+                    Sản phẩm 2
+                  </div>
+                </div>
+                <div class="row div-sp">
+                  <div class="col goiy sp">
+                    Sản phẩm 3
+                  </div>
+                  <div class="col goiy sp">
+                    Sản phẩm 4
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Cây sen đá -->
+          <div class="container">
+            <div class="row ">
+              <p class="subtitle textcase">Cây sen đá</p>
+            </div>
+            <div class="col d-flex justify-content-center ">
+              <img class="image" src="../../../assets/images/SenDa.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="row div-sp">
+                  <div class="col sp goiy">
+                    <img class="image" src="../../../assets/images/Bancong1.jpg">
+                  </div>
+                  <div class="col sp goiy">
+                    Sản phẩm 2
+                  </div>
+                  <div class="col  sp goiy">
+                    Sản phẩm 3
+                  </div>
+                  <div class="col  sp goiy">
+                    Sản phẩm 4
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Cây sen-->
+          <div class="container">
+            <div class="row">
+              <p class="title-gt textcase">Cây sen</p>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="row div-sp">
+                  <div class="col goiy sp">
+                    Sản phẩm 1
+                  </div>
+                  <div class="col goiy sp">
+                    Sản phẩm 2
+                  </div>
+                </div>
+                <div class="row div-sp">
+                  <div class="col goiy sp">
+                    Sản phẩm 3
+                  </div>
+                  <div class="col goiy sp">
+                    Sản phẩm 4
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 ">
+                <img class="image" src="../../../assets/images/Sen.png">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
-  <!-- Row gợi ý -->
-<div class="row">
-  <div class="col-12">
-    <p class="title-gt"></p>
-    <p class="title-goiy">Dành cho bạn!</p>
-  </div>
-</div>
+      <!-- Row gợi ý -->
+      <div class="row">
+        <div class="col-12">
+          <p class="title-gt"></p>
+          <p class="title-goiy">Dành cho bạn!</p>
+        </div>
+      </div>
 
-<div class="row">
-    <div class="col goiy">
-      <img class="image" src="../../../assets/images/gt4.jpg">
-    </div>
-    <div class="col goiy goiy">
-      Gợi ý 2
-    </div>
-    <div class="col goiy goiy">
-      Gợi ý 3
-    </div>
-    <div class="col goiy goiy">
-     Gợi ý 4
-    </div>
-    <div class="col goiy goiy">
-      Gợi ý 5
-     </div>
-</div>
+      <div class="row">
+        <div class="col goiy">
+          <img class="image" src="../../../assets/images/gt4.jpg">
+        </div>
+        <div class="col goiy goiy">
+          Gợi ý 2
+        </div>
+        <div class="col goiy goiy">
+          Gợi ý 3
+        </div>
+        <div class="col goiy goiy">
+          Gợi ý 4
+        </div>
+        <div class="col goiy goiy">
+          Gợi ý 5
+        </div>
+      </div>
 
-<!-- div dư -->
-<div class="row">
-  <div class="col bg-danger">
-      Cột 1
-  </div>
-  <div class="col bg-info">
-      Cột 2
-  </div>
-  <div class="col bg-warning">
-      Cột 3
-  </div>
-</div>
-
-
+      <!-- div dư -->
+      <div class="row">
+        <div class="col bg-danger">
+          Cột 1
+        </div>
+        <div class="col bg-info">
+          Cột 2
+        </div>
+        <div class="col bg-warning">
+          Cột 3
+        </div>
+      </div>

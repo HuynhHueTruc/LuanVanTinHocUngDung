@@ -1,144 +1,192 @@
 <app-header></app-header>
 <app-liftnav></app-liftnav>
-<div class="form-gap"></div>
 
-<div class=" container detail">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4 p-0">
-        <img class="card-img-top" src="{{sanphamdetail[0]?.Hinh_anh}}" alt="Card image cap">
+
+<div class="main">
+  <div class="form-gap"></div>
+  <div class=" container detail setbackground">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 p-0">
+          <img class="card-img-top" src="{{sanphamdetail[0]?.Hinh_anh}}" alt="Card image cap">
+        </div>
+        <div class="col-sm-7 pl-5 ">
+          <div class="row d-flex justify-content-center">
+            <h4 class="m-0">{{sanphamdetail[0]?.Ten_san_pham}}</h4>
+            <button class="icon btn btn-default btn-circle pl-3"><i class="far fa-heart"></i></button>
+            <button class="icon btn btn-default btn-circle pl-1"><i class="fas fa-share-alt"></i></button>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-2 pl-3">
+              <div class="row">
+                <i class="far fa-star" id="star-1"></i>
+                <i class="far fa-star" id="star-2"></i>
+                <i class="far fa-star" id="star-3"></i>
+                <i class="far fa-star" id="star-4"></i>
+                <i class="far fa-star" id="star-5"></i>
+              </div>
+              <!-- <div class="stars">
+              <form action="">
+                <input class="star star-5" id="star-5" type="radio" name="star"/>
+                <label class="star star-5" for="star-5" id="5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star"/>
+                <label class="star star-4" for="star-4" id="4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star"/>
+                <label class="star star-3" for="star-3" id="3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star"/>
+                <label class="star star-2" for="star-2" id="2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star"/>
+                <label class="star star-1" for="star-1" id="1"></label>
+              </form>
+            </div> -->
+            </div>
+            <div class="col-sm-2 p-0">{{SoLuongBan}} Đã Bán</div>
+            <div class="col-sm-2 p-0">{{SoLuongDanhGia}} Đánh giá</div>
+          </div>
+          <div class="row gia mt-3">
+            <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center"
+              *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
+              <p class="giagoc mb-0">{{sanphamdetail[0]?.Gia | currency: "VND"}}</p>
+            </div>
+            <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center" *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
+              <p class="mb-0 khuyenmai"> Giảm {{giatrikhuyenmai*100}}%</p>
+            </div>
+            <div class="col-sm-8 p-0 d-flex  align-items-center">
+              <h3 class="mb-0 ml-3">{{sanphamdetail[0]?.Gia - sanphamdetail[0]?.Gia*giatrikhuyenmai | currency: "VND"}}</h3>
+            </div>
+
+          </div>
+
+          <div class="form-gap"></div>
+
+          <div class="row">
+            <div class="col-sm-3">Số lượng: </div>
+            <div class="col-sm-9">
+              <div class="buttons_added">
+                <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong()">
+                <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong()" (blur)="So_luong_mac_dinh()" [(ngModel)]="So_luong" #plus="ngModel" name="plus" value={{So_luong}}>
+                <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong()" >
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-sm-4 p-0">
+              <button class="p-2 themsanpham" (click)="ThemVaoGioHang()"><i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i> Thêm Vào Giỏ Hàng</button>
+            </div>
+            <div class="col-sm-4 p-0">
+              <button class="p-2 themsanpham"><i class="fas fa-shopping-bag mr-1"></i> Mua Hàng</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-7 pl-5 ">
-        <div class="row d-flex justify-content-center">
-          <h4 class="m-0">{{sanphamdetail[0]?.Ten_san_pham}}</h4>
-          <button class="icon btn btn-default btn-circle pl-3"><i class="far fa-heart"></i></button>
-          <button class="icon btn btn-default btn-circle pl-1"><i class="fas fa-share-alt"></i></button>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-2 pl-3">
-            <div class="row">
-              <i class="far fa-star" id="star-1"></i>
-              <i class="far fa-star" id="star-2"></i>
-              <i class="far fa-star" id="star-3"></i>
-              <i class="far fa-star" id="star-4"></i>
-              <i class="far fa-star" id="star-5"></i>
-            </div>
-            <!-- <div class="stars">
-            <form action="">
-              <input class="star star-5" id="star-5" type="radio" name="star"/>
-              <label class="star star-5" for="star-5" id="5"></label>
-              <input class="star star-4" id="star-4" type="radio" name="star"/>
-              <label class="star star-4" for="star-4" id="4"></label>
-              <input class="star star-3" id="star-3" type="radio" name="star"/>
-              <label class="star star-3" for="star-3" id="3"></label>
-              <input class="star star-2" id="star-2" type="radio" name="star"/>
-              <label class="star star-2" for="star-2" id="2"></label>
-              <input class="star star-1" id="star-1" type="radio" name="star"/>
-              <label class="star star-1" for="star-1" id="1"></label>
-            </form>
-          </div> -->
-          </div>
-          <div class="col-sm-2 p-0">{{SoLuongBan}} Đã Bán</div>
-          <div class="col-sm-2 p-0">{{SoLuongDanhGia}} Đánh giá</div>
-        </div>
-        <div class="row gia mt-3">
-          <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center"
-            *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
-            <p class="giagoc mb-0">{{sanphamdetail[0]?.Gia | currency: "VND"}}</p>
-          </div>
-          <div class="col-sm-2 p-0 d-flex justify-content-center align-items-center" *ngIf="KiemTraKhuyeMai(sanphamdetail[0])">
-            <p class="mb-0 khuyenmai"> Giảm {{giatrikhuyenmai*100}}%</p>
-          </div>
-          <div class="col-sm-8 p-0 d-flex  align-items-center">
-            <h3 class="mb-0 ml-3">{{sanphamdetail[0]?.Gia - sanphamdetail[0]?.Gia*giatrikhuyenmai | currency: "VND"}}</h3>
-          </div>
 
+  </div>
+  </div>
+
+  <div class="container mt-3 p-4 mota setbackground">
+    <div class="row m-0">
+      <h6 class="m-0">Mô tả sản phẩm: </h6>
+      <div class=" row mt-1" [innerHTML]="sanphamdetail[0]?.Mo_ta"></div>
+    </div>
+  </div>
+
+  <div class="container mota mt-3 p-4 setbackground">
+    <div class="row m-0">
+      <h6 class="m-0">Đánh giá sản phẩm: </h6>
+    </div>
+
+    <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
+     <div class="col-12">
+      <div class="row m-3" >
+        <div class="col-sm-1 p-0 d-flex justify-content-end">
+          <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
         </div>
 
-        <div class="form-gap"></div>
-
-        <div class="row">
-          <div class="col-sm-3">Số lượng: </div>
-          <div class="col-sm-9">
-            <div class="buttons_added">
-              <input class="minus is-form" type="button" value="-" (click)="GiamSoLuong()">
-              <input aria-label="quantity" class="input-qty" max="10" min="1" type="number" id="So_luong" (keyup)="KiemTraSoLuong()" (blur)="So_luong_mac_dinh()" [(ngModel)]="So_luong" #plus="ngModel" name="plus" value={{So_luong}}>
-              <input class="plus is-form" type="button" value="+" (click)="ThemSoLuong()" >
+        <div class="col-sm-11">
+          <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
+          <div class="row m-0">
+            <i class="far fa-star" id="star_customer_yellow" *ngFor="let j of countStar[i]"></i>
+            <i class="far fa-star" id="star_customer"  *ngFor="let h of arrSoDiemConLai[i]"></i>
+          </div>
+          <br>
+          <div class="row m-0">
+            <div class="col-sm-1 p-0 " *ngFor="let hinhanh of eachdetail.Hinh_anh; let j = index">
+             <button id="buttonhinhanh" class="m-1" (click)="Zoom(hinhanh.url, i, j)"><img id="imagecomment" src={{hinhanh.url}} class="avatarcomment"></button>
             </div>
           </div>
+          <br>
+          <div class="row m-0" id="zoom" [ngStyle]="{'display': isDisplay[i]}">
+            <div class="col-sm-6">
+              <img id="imagezoom" src={{url}} class="avatarzoom" >
+              <button class="arrow left" (click)="HinhAnhTruoc()">
+                <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
+                  <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
+                45.63,75.8 0.375,38.087 45.63,0.375 "/>
+                </svg>
+              </button>
+              <button class="arrow right" (click)="HinhAnhSau()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
+                  <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
+                0.375,0.375 45.63,38.087 0.375,75.8 "/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <br>
+          <div class="row m-0">
+            <p>{{eachdetail.Noi_dung}}</p>
+          </div>
         </div>
+      </div>
+     </div>
+     <hr  width="100%" size="10px" />
+    </div>
+  </div>
 
-        <div class="row mt-3">
-          <div class="col-sm-4 p-0">
-            <button class="p-2 themsanpham" (click)="ThemVaoGioHang()"><i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i> Thêm Vào Giỏ Hàng</button>
+  <div class="container mt-3 p-4 mota setbackground">
+    <div class="row m-0">
+      <h6 class="m-0">Có thể bạn sẽ thích: </h6>
+      <div class="row">
+        <div class="col-sm-3 " *ngFor="let eachSP of arrSanPham; let i = index">
+          <div class="container ">
+            <a (click)="ProductDetail(eachSP)">
+              <div class="card d-flex justify-content-center goiy">
+                <img class="card-img-top" src="{{eachSP.Hinh_anh}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title ">{{eachSP?.Ten_san_pham }}</h5>
+                  <div class="container p-0">
+                    <div class="row" *ngIf="KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text khuyenmai">{{eachSP?.Gia | currency: "VND"}}</small>
+
+                        &nbsp;
+                        <small class="cart-text sale"> -{{giatrikhuyenmai*100}}%</small>
+                    </div>
+                    <div class="row" *ngIf="!KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text khuyenmai"></small>
+
+                        &nbsp;
+                        <small class="cart-text sale"></small>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6 p-0">
+                      <p class="card-text" >{{eachSP?.Gia - eachSP?.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                    </div>
+                    <div class="col-sm-6  p-0" >
+                      <p class="card-text daban"> Đã bán {{arrSoLuongBan[i]?.So_luong_ban}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+
           </div>
-          <div class="col-sm-4 p-0">
-            <button class="p-2 themsanpham"><i class="fas fa-shopping-bag mr-1"></i> Mua Hàng</button>
-          </div>
+          <br>
         </div>
       </div>
     </div>
-
-</div>
-</div>
-
-<div class="container mt-3 p-4 mota">
-  <div class="row m-0">
-    <h6 class="m-0">Mô tả sản phẩm: </h6>
-    <div class=" row mt-1" [innerHTML]="sanphamdetail[0]?.Mo_ta"></div>
-  </div>
-</div>
-
-<div class="container mota mt-3 p-4">
-  <div class="row m-0">
-    <h6 class="m-0">Đánh giá sản phẩm: </h6>
-  </div>
-
-  <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
-   <div class="col-12">
-    <div class="row m-3" >
-      <div class="col-sm-1 p-0 d-flex justify-content-end">
-        <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
-      </div>
-
-      <div class="col-sm-11">
-        <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
-        <div class="row m-0">
-          <i class="far fa-star" id="star_customer_yellow" *ngFor="let j of countStar[i]"></i>
-          <i class="far fa-star" id="star_customer"  *ngFor="let h of arrSoDiemConLai[i]"></i>
-        </div>
-        <br>
-        <div class="row m-0">
-          <div class="col-sm-1 p-0 " *ngFor="let hinhanh of eachdetail.Hinh_anh; let j = index">
-           <button id="buttonhinhanh" class="m-1" (click)="Zoom(hinhanh.url, i, j)"><img id="imagecomment" src={{hinhanh.url}} class="avatarcomment"></button>
-          </div>
-        </div>
-        <br>
-        <div class="row m-0" id="zoom" [ngStyle]="{'display': isDisplay[i]}">
-          <div class="col-sm-6">
-            <img id="imagezoom" src={{url}} class="avatarzoom" >
-            <button class="arrow left" (click)="HinhAnhTruoc()">
-              <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
-                <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-              45.63,75.8 0.375,38.087 45.63,0.375 "/>
-              </svg>
-            </button>
-            <button class="arrow right" (click)="HinhAnhSau()">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
-                <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-              0.375,0.375 45.63,38.087 0.375,75.8 "/>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <br>
-        <div class="row m-0">
-          <p>{{eachdetail.Noi_dung}}</p>
-        </div>
-      </div>
-    </div>
-   </div>
-   <hr  width="100%" size="10px" />
   </div>
 </div>
 
