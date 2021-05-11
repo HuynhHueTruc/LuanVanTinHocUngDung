@@ -67,13 +67,13 @@
         <p class="title">Sản phẩm bán chạy</p>
       </div>
     </div>
-    <div class="carousel sanphambanchay" *ngIf="danhmuckhuyenmais.length > 0">
+    <div class="carousel sanphambanchay" *ngIf="sanphambanchays.length > 0">
       <carousel [height]="300">
-           <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
+           <div class="carousel-cell" *ngFor="let eachSP of sanphambanchays"  >
             <div style="height: 180px;">
-              <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+              <img src="{{eachSP.Hinh_anh}}" class="sale" (click)="ProductDetail(eachSP)">
             </div>
-            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
+            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachSP)">
               <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
               <div class="_2TDZGE">
                 <span class="percent">{{giatrikhuyenmai*100}}%</span>
@@ -82,9 +82,9 @@
             </div>
             </div>
             <div class="card-body">
-              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
+              <h6 class="card-title ">{{eachSP.Ten_san_pham }}</h6>
               <div class="d-flex justify-content-center mt-2">
-                <p class="giasale" >{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                <p class="giasale" >{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
                </div>
             </div>
 

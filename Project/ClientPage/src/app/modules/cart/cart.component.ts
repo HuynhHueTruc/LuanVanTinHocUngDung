@@ -101,7 +101,6 @@ export class CartComponent implements OnInit {
           }
         }
       }
-      console.log(this.arrSanPham)
       this.getdskhuyenmai();
     });
   }

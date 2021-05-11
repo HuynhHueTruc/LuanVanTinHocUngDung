@@ -19,13 +19,14 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 export class ContentComponent implements OnInit, AfterContentChecked {
 
   dskhuyenmai: KhuyenMaiModel
-  dssanphambanchay: SanPhamModel
+  dssanphambanchay = []
   dssanpham: SanPhamModel
   dshoadonbanhang: HoaDonBanHangModel
 
   arrdanhmuckhuyenmai = []
   arrsanphambanchay = []
   danhmuckhuyenmais = []
+  sanphambanchays = []
   danhmucloaicay: DanhMucModel
   danhmuctmp = []
   loaicays: LoaiCayModel
@@ -69,29 +70,64 @@ export class ContentComponent implements OnInit, AfterContentChecked {
       for (const i in this.dskhuyenmai) {
         if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
           && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-            for (const j in this.dskhuyenmai[i].Danh_muc_nho){
-                  this.arrdanhmuckhuyenmai.push(this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id)
-            }
+          for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+            this.arrdanhmuckhuyenmai.push(this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id)
+          }
         }
       }
       // Xóa trùng sản phẩm trong arrdanhmuckhuyenmai
       this.arrdanhmuckhuyenmai = [...new Set(this.arrdanhmuckhuyenmai)];
       this.getdshoadonbanhang();
-      this.getdssanpham()
 
     })
   }
 
+  // Hàm sắp xếp giảm dần mãng json
+  sortJSON(data, key, way) {
+    return data.sort(function (a, b) {
+      var x = a[key]; var y = b[key];
+      if (way === '123') { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
+      if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
+    });
+  }
+
   getdshoadonbanhang() {
+    let count = 0
+    let arrXoaTrung = []
+
     this.hoadonbanhangService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonbanhang = res.hoadonbanhangs;
-      // console.log(this.dshoadonbanhang)
       for (const i in this.dshoadonbanhang) {
-        for (const j in this.dshoadonbanhang[i].San_Pham){
+        for (const j in this.dshoadonbanhang[i].San_Pham) {
           this.arrsanphambanchay.push(this.dshoadonbanhang[i].San_Pham[j])
+          arrXoaTrung.push(this.dshoadonbanhang[i].San_Pham[j].SanPham_id)
         }
       }
-      console.log(this.arrsanphambanchay)
+
+      arrXoaTrung = [...new Set(arrXoaTrung)]
+
+      // Tính số lượng bán được của từng sản phẩm
+      for (const h in arrXoaTrung) {
+        for (const k in this.arrsanphambanchay) {
+          if (this.arrsanphambanchay[k].SanPham_id === arrXoaTrung[h]) {
+            count += this.arrsanphambanchay[k].So_luong
+          }
+        }
+
+        this.dssanphambanchay.push({ SanPham_id: this.arrsanphambanchay[h].SanPham_id, So_luong: count })
+        count = 0
+      }
+
+      // Sắp xếp mảng giảm dần
+      this.dssanphambanchay = this.sortJSON(this.dssanphambanchay, 'So_luong', '321'); // 123: tăng dần or 321: giảm dần
+      // for (const i in this.dssanphambanchay){
+      //   for (const j in this.dssanpham) {
+      //     if (this.dssanpham[j]._id === this.dssanphambanchay[i].SanPham_id) {
+      //       this.danhmuctmp.push(this.dssanpham[i])
+      //     }
+      //   }
+      // }
+      this.getdssanpham()
     })
   }
 
@@ -143,13 +179,20 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           }
         }
         this.danhmuckhuyenmais.push(this.danhmuctmp[0])
-
         this.danhmuctmp = []
+      }
+
+       for (const h in this.dssanphambanchay){
+        for (const k in this.dssanpham) {
+          if (this.dssanpham[k]._id === this.dssanphambanchay[h].SanPham_id) {
+            this.sanphambanchays.push(this.dssanpham[k])
+          }
+        }
       }
     })
   }
 
-  ProductDetail(eachDanhMuc){
+  ProductDetail(eachDanhMuc) {
     this.router.navigateByUrl(`/detail/${eachDanhMuc._id}`);
     this.isLoading = true;
   }
