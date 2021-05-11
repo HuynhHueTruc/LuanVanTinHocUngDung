@@ -168,7 +168,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
           sum = 0;
         }
       }
-      console.log(this.arrSoLuongBan)
     });
   }
 
@@ -317,4 +316,12 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.router.navigateByUrl(`/detail/${eachSP._id}`);
     this.isLoading = true;
   }
+
+  KiemTraDSKhuyenMai() {
+    if (this.arrSanPham.length > 0){
+      return true
+    }else{
+      return false
+    }
+   }
 }

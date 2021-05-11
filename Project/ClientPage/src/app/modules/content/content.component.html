@@ -32,8 +32,8 @@
   </div>
   <div class="row d-flex justify-content-center">
 
-    <div class="carousel ">
-      <carousel>
+    <div class="carousel" *ngIf="KiemTraDSKhuyenMai()">
+      <carousel >
         <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
             <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
             <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">

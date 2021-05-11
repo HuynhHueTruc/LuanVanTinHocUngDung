@@ -75,6 +75,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     })
   }
 
+
   // getdsdanhmuc() {
   //   this.danhmucService.getListDanhMuc().subscribe((res: any) => {
   //     this.danhmucloaicay = res.danhmucs[1];
@@ -177,8 +178,12 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   //   }
   // }
 
-  KT(a) {
-    console.log(a)
+  KiemTraDSKhuyenMai() {
+   if (this.danhmuckhuyenmais.length > 0){
+     return true
+   }else{
+     return false
+   }
   }
 
 }
