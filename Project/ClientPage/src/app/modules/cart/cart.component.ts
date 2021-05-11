@@ -127,7 +127,8 @@ export class CartComponent implements OnInit {
   Xoa(index) {
     this.arrSanPham.splice(index, 1);
     this.giohang[0].San_Pham.splice(index, 1);
-    this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+    this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+    this.TongTien()
   }
 
   XoaTatCa() {

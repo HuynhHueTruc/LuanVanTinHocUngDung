@@ -1,3 +1,4 @@
+import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
 import { DanhMucModel } from './../../../models/DanhMuc/danhmuc';
 import { LoaicayService } from './../../../services/LoaiCay/loaicay.service';
@@ -58,7 +59,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
-    private danhmucService: DanhmucService, private loaicayService: LoaicayService) { }
+    private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -305,11 +306,16 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   }
 
   ThemVaoGioHang() {
-    if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
-      this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
+    if (this.KHService.loggedInStatus){
+      if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
+        this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
+      }
+      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+      alert('Đã thêm vào giỏ hàng!')
+    }else{
+      this.router.navigateByUrl('/login');
     }
-    this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
-    alert('Đã thêm vào giỏ hàng!')
+
   }
 
   ProductDetail(eachSP) {
