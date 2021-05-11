@@ -1,55 +1,92 @@
-
 @media all and (max-width: 415px) {
-    .navbar-toggler {
-        padding: .2rem .4rem;
-        font-size: 175rem !important
-    }
+  .navbar-toggler {
+    padding: .2rem .4rem;
+    font-size: 175rem !important
+  }
 }
-@media (min-width: 576px){
-.col-sm-12 {
+
+@media (min-width: 576px) {
+  .col-sm-12 {
     flex: 0 0 100%;
     max-width: 100%;
     text-align: center;
-}
-}
-.giangcach {
-    margin-left: 5rem!important;
-    margin-right: 5rem!important;
+  }
 }
 
-.row{
+.giangcach {
+  margin-left: 5rem !important;
+  margin-right: 5rem !important;
+}
+
+.row {
   margin-left: 0cm;
   margin-right: 0cm;
 }
-.p-hr{
-  width: 10% !important ;
+
+.p-hr {
+  width: 10% !important;
   margin-top: 0%;
   text-align: "center";
   background-color: black;
 }
 
 @-webkit-keyframes my {
-  0% { color: cadetblue; }
-  50% { color: #F8CD0A;  }
-  100% { color: cadetblue;  }
-}
-@-moz-keyframes my {
-  0% { color:cadetblue;  }
-  50% { color: #F8CD0A;  }
-  100% { color: cadetblue;  }
-}
-@-o-keyframes my {
-  0% { color:cadetblue; }
-  50% { color: #F8CD0A; }
-  100% { color: cadetblue;  }
-}
-@keyframes my {
-  0% { color:cadetblue;  }
-  50% { color: #F8CD0A;  }
-  100% { color: cadetblue;  }
+  0% {
+    color: cadetblue;
+  }
+
+  50% {
+    color: #F8CD0A;
+  }
+
+  100% {
+    color: cadetblue;
+  }
 }
 
-.title-gt{
+@-moz-keyframes my {
+  0% {
+    color: cadetblue;
+  }
+
+  50% {
+    color: #F8CD0A;
+  }
+
+  100% {
+    color: cadetblue;
+  }
+}
+
+@-o-keyframes my {
+  0% {
+    color: cadetblue;
+  }
+
+  50% {
+    color: #F8CD0A;
+  }
+
+  100% {
+    color: cadetblue;
+  }
+}
+
+@keyframes my {
+  0% {
+    color: cadetblue;
+  }
+
+  50% {
+    color: #F8CD0A;
+  }
+
+  100% {
+    color: cadetblue;
+  }
+}
+
+.title-gt {
   margin-top: 5%;
   font-family: "Calibri";
   font-size: 20px;
@@ -58,75 +95,79 @@
 
 }
 
-.subtitle{
+.subtitle {
   font-family: "Calibri";
   font-size: 20px;
   text-align: center;
   color: cadetblue;
 }
 
-.title-khuyenmai{
+.title-khuyenmai {
   margin-top: 5%;
   font-family: "Calibri";
   font-size: 20px;
   text-align: center;
   // color: cadetblue;
-  font-weight:bold;
-	 -webkit-animation: my 700ms infinite;
-	 -moz-animation: my 700ms infinite;
-	 -o-animation: my 700ms infinite;
-	 animation: my 700ms infinite;
+  font-weight: bold;
+  -webkit-animation: my 700ms infinite;
+  -moz-animation: my 700ms infinite;
+  -o-animation: my 700ms infinite;
+  animation: my 700ms infinite;
 }
-.image{
+
+.image {
   width: 100%;
   height: 100%;
 }
 
-.title{
+.title {
   font-size: 40px;
   text-align: center;
   margin-bottom: 3%;
 }
 
-button{
+button {
   background-color: cadetblue;
   color: white;
   border: none;
   height: 30px;
 }
+
 .wrapper {
   text-align: center;
 }
-.gt{
+
+.gt {
   margin-left: 5%;
 }
 
-.sp{
+.sp {
   height: 100%;
   margin-bottom: 7%;
   margin: 2%;
 }
 
-.container{
+.container {
   height: auto;
 }
-.div-sp{
-height: 50%;
-margin-bottom: 7px;
+
+.div-sp {
+  height: 50%;
+  margin-bottom: 7px;
 }
 
 
-.title-goiy{
+.title-goiy {
   font-size: 40px;
   text-align: center;
 }
 
-.goiy{
-margin-left: 1%;
-margin-right: 1%;
-height: auto;
-overflow: hidden;
-border: 1px solid #e5e5e5;
+.goiy {
+  margin-left: 1%;
+  margin-right: 1%;
+  height: auto;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
 }
 
 .goiy img {
@@ -138,37 +179,47 @@ border: 1px solid #e5e5e5;
 .goiy img:hover {
   transform: scale(1.2);
 }
+
 .col-wrap {
-display: table;
-width: 100%;
+  display: table;
+  width: 100%;
 }
 
 .col {
-display: table-cell;
-padding: 1rem
+  display: table-cell;
+  padding: 1rem
 }
-.textcase{
+
+.textcase {
   text-transform: uppercase;
   font-weight: bold;
 }
-.card{
+
+.card {
   border: none;
 }
-.wapper{
+
+.wapper {
   margin-top: 3%;
 }
 
-.sale{
-    //vertical-align: middle;
-    width: 100px;
-    height: 100px;
-    //object-fit: cover;
+.sale {
+  //vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  //object-fit: cover;
 }
 
-.carousel{
+.carousel {
   width: 840px;
-
+  height: 350px;
 }
+
+// .carousel-cell {
+//   transform: translateX(630px);
+//   width: 200px;
+//   height: 350px;
+// }
 
 ._1jPz8l {
   position: absolute;
@@ -201,18 +252,21 @@ padding: 1rem
 ._17XqBU {
   color: #fff;
 }
+
 ._1jPz8l .shopee-badge {
   float: right;
   margin-left: .3125rem;
 }
 
 ._2xY8te {
-  background-color: rgba(255,212,36,.9);
+  background-color: rgba(255, 212, 36, .9);
 }
+
 ._36vTKx {
   width: 36px;
   height: 32px;
 }
+
 ._3iRehQ {
   display: inline-block;
   -moz-box-sizing: border-box;

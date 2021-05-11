@@ -178,12 +178,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   //   }
   // }
 
-  KiemTraDSKhuyenMai() {
-   if (this.danhmuckhuyenmais.length > 0){
-     return true
-   }else{
-     return false
-   }
-  }
+
 
 }
