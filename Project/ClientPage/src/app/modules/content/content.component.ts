@@ -197,6 +197,10 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
 
+
+  DSSanPham(){
+
+  }
   // onSelectLTypeTree(eachDanhMuc) {
   //   let loaicay = '';
   //   // console.log(this.danhmucloaicay)
