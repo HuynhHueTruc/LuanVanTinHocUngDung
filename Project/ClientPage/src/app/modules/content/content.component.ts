@@ -82,21 +82,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     })
   }
 
-
-  // getdsdanhmuc() {
-  //   this.danhmucService.getListDanhMuc().subscribe((res: any) => {
-  //     this.danhmucloaicay = res.danhmucs[1];
-  //     console.log(this.danhmucloaicay)
-  //   })
-  // }
-  // // Lấy loại cây làm danh mục
-  // getLoaiCay() {
-  //   this.loaicayService.getListLoaiCay().subscribe((res: any) => {
-  //     this.loaicays = res.loaicays;
-  //   });
-  // }
-
-
   getdshoadonbanhang() {
     this.hoadonbanhangService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonbanhang = res.hoadonbanhangs;
@@ -106,7 +91,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           this.arrsanphambanchay.push(this.dshoadonbanhang[i].San_Pham[j])
         }
       }
-      // console.log(this.arrsanphambanchay)
+      console.log(this.arrsanphambanchay)
     })
   }
 
@@ -192,6 +177,18 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   //   }
   // }
 
+  // getdsdanhmuc() {
+  //   this.danhmucService.getListDanhMuc().subscribe((res: any) => {
+  //     this.danhmucloaicay = res.danhmucs[1];
+  //     console.log(this.danhmucloaicay)
+  //   })
+  // }
+  // // Lấy loại cây làm danh mục
+  // getLoaiCay() {
+  //   this.loaicayService.getListLoaiCay().subscribe((res: any) => {
+  //     this.loaicays = res.loaicays;
+  //   });
+  // }
 
 
 }

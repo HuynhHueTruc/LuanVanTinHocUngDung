@@ -77,14 +77,12 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     }
     this.isLoading = false;
   }
+
   getgiohang() {
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
     });
   }
-
-
-
 
   getdssanpham() {
     let sd = 0;
@@ -264,6 +262,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     } else {
       this.So_luong = this.sanphamdetail[0].So_luong;
     }
+    console.log(this.So_luong)
   }
 
   // Giảm số lượng sản phẩm đặt mua
@@ -307,10 +306,10 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   ThemVaoGioHang() {
     if (this.KHService.loggedInStatus){
-      console.log(this.sanphamdetail[0]._id, this.So_luong)
       if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
         this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
       }
+      console.log(this.giohang[0].San_Pham)
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       alert('Đã thêm vào giỏ hàng!')
     }else{
@@ -324,11 +323,4 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
 
-  KiemTraDSKhuyenMai() {
-    if (this.arrSanPham.length > 0){
-      return true
-    }else{
-      return false
-    }
-   }
 }

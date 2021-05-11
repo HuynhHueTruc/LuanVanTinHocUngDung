@@ -92,15 +92,16 @@ export class CartComponent implements OnInit {
     this.arrSanPham = []
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
-      for (const i in this.dssanpham) {
-        if (this.dssanpham.hasOwnProperty(i)) {
-          for (const j in this.giohang[0].San_Pham) {
+      for (const j in this.giohang[0].San_Pham) {
+        if (this.dssanpham.hasOwnProperty(j)) {
+          for (const i in this.dssanpham) {
             if (this.giohang[0].San_Pham[j].SanPham_id === this.dssanpham[i]._id) {
               this.arrSanPham.push(this.dssanpham[i]);
             }
           }
         }
       }
+      console.log(this.arrSanPham)
       this.getdskhuyenmai();
     });
   }
@@ -125,8 +126,10 @@ export class CartComponent implements OnInit {
 
   // Mở Dialog xác nhận xóa giỏ hàng
   Xoa(index) {
+    console.log(index)
     this.arrSanPham.splice(index, 1);
     this.giohang[0].San_Pham.splice(index, 1);
+    console.log(this.giohang[0].San_Pham)
     this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
     this.TongTien()
   }

@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 export class GiohangService {
 
 
-  arrSP = (localStorage.getItem('arrSanPhamThanhToan') || null);
+  arrSP = (sessionStorage.getItem('arrSanPhamThanhToan') || null);
   data: any;
   constructor(private http: HttpClient) { }
 
@@ -19,11 +19,11 @@ export class GiohangService {
 
   setArrSP(arrSanPham) {
     this.arrSP = arrSanPham;
-    localStorage.setItem('arrSanPhamThanhToan', JSON.stringify(this.arrSP));
+    sessionStorage.setItem('arrSanPhamThanhToan', JSON.stringify(this.arrSP));
   }
 
   getArrSP() {
-    this.data = JSON.parse(localStorage.getItem('arrSanPhamThanhToan'));
+    this.data = JSON.parse(sessionStorage.getItem('arrSanPhamThanhToan'));
     return this.data;
   }
 
