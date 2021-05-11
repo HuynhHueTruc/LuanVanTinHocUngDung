@@ -210,16 +210,20 @@ button {
   //object-fit: cover;
 }
 
-.carousel {
+.khuyenmai {
   width: 840px;
-  height: 350px;
+  height: 250px;
 }
 
-// .carousel-cell {
-//   transform: translateX(630px);
-//   width: 200px;
-//   height: 350px;
-// }
+.sanphambanchay{
+  width: 1050px;
+  height: 250px;
+}
+
+.giasale{
+  font-size: 20px;
+  color: #ee4d2d;
+}
 
 ._1jPz8l {
   position: absolute;
@@ -274,4 +278,11 @@ button {
   position: relative;
   padding: 4px 2px 3px;
   font-weight: 700;
+}
+
+h6 {
+  font-size: 18px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

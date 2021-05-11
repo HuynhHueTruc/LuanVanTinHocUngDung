@@ -307,6 +307,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   ThemVaoGioHang() {
     if (this.KHService.loggedInStatus){
+      console.log(this.sanphamdetail[0]._id, this.So_luong)
       if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
         this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
       }

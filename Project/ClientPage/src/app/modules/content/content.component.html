@@ -32,10 +32,12 @@
   </div>
   <div class="row d-flex justify-content-center">
 
-    <div class="carousel" *ngIf="danhmuckhuyenmais.length > 0">
-      <carousel >
-        <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
-            <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+    <div class="carousel khuyenmai" *ngIf="danhmuckhuyenmais.length > 0">
+      <carousel [height]="300">
+           <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
+            <div style="height: 180px;">
+              <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+            </div>
             <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
               <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
               <div class="_2TDZGE">
@@ -44,12 +46,20 @@
               </div>
             </div>
             </div>
+            <div class="card-body">
+              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
+              <div class="d-flex justify-content-center mt-2">
+                <p class="giasale" >{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+               </div>
+            </div>
+
         </div>
     </carousel>
     </div>
   </div>
+
+ <!-- Sản phẩm bán chạy -->
   <div class="container">
-    <!-- Sản phẩm bán chạy -->
     <div class="row col-wrap">
       <div class="col-12">
         <p class="title-khuyenmai">HOT</p>
@@ -57,28 +67,29 @@
         <p class="title">Sản phẩm bán chạy</p>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="row div-sp">
-            <div class="col sp goiy">
-              <img class="image" src="../../../assets/images/Bancong1.jpg">
+    <div class="carousel sanphambanchay" *ngIf="danhmuckhuyenmais.length > 0">
+      <carousel [height]="300">
+           <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
+            <div style="height: 180px;">
+              <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
             </div>
-            <div class="col sp goiy">
-              Sản phẩm 2
+            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
+              <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
+              <div class="_2TDZGE">
+                <span class="percent">{{giatrikhuyenmai*100}}%</span>
+                <span class="_17XqBU">GIẢM</span>
+              </div>
             </div>
-            <div class="col  sp goiy">
-              Sản phẩm 3
             </div>
-            <div class="col  sp goiy">
-              Sản phẩm 4
+            <div class="card-body">
+              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
+              <div class="d-flex justify-content-center mt-2">
+                <p class="giasale" >{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+               </div>
             </div>
-            <div class="col  sp goiy">
-              Sản phẩm 5
-            </div>
-          </div>
+
         </div>
-      </div>
+    </carousel>
     </div>
     <!-- Row sản phẩm -->
     <div class="row">

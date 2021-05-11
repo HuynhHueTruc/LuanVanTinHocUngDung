@@ -19,10 +19,12 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 export class ContentComponent implements OnInit, AfterContentChecked {
 
   dskhuyenmai: KhuyenMaiModel
+  dssanphambanchay: SanPhamModel
   dssanpham: SanPhamModel
   dshoadonbanhang: HoaDonBanHangModel
 
   arrdanhmuckhuyenmai = []
+  arrsanphambanchay = []
   danhmuckhuyenmais = []
   danhmucloaicay: DanhMucModel
   danhmuctmp = []
@@ -39,7 +41,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     // this.getLoaiCay();
     // this.getdsdanhmuc();
     this.getdskhuyenmai()
-    this.getdshoadonbanhang()
+    // this.getdshoadonbanhang()
   }
 
   ngAfterContentChecked(): void {
@@ -67,9 +69,14 @@ export class ContentComponent implements OnInit, AfterContentChecked {
       for (const i in this.dskhuyenmai) {
         if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
           && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-          this.arrdanhmuckhuyenmai = this.dskhuyenmai[i].Danh_muc_nho
+            for (const j in this.dskhuyenmai[i].Danh_muc_nho){
+                  this.arrdanhmuckhuyenmai.push(this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id)
+            }
         }
       }
+      // Xóa trùng sản phẩm trong arrdanhmuckhuyenmai
+      this.arrdanhmuckhuyenmai = [...new Set(this.arrdanhmuckhuyenmai)];
+      this.getdshoadonbanhang();
       this.getdssanpham()
 
     })
@@ -93,6 +100,13 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getdshoadonbanhang() {
     this.hoadonbanhangService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonbanhang = res.hoadonbanhangs;
+      // console.log(this.dshoadonbanhang)
+      for (const i in this.dshoadonbanhang) {
+        for (const j in this.dshoadonbanhang[i].San_Pham){
+          this.arrsanphambanchay.push(this.dshoadonbanhang[i].San_Pham[j])
+        }
+      }
+      // console.log(this.arrsanphambanchay)
     })
   }
 
@@ -139,7 +153,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
 
       for (const j in this.arrdanhmuckhuyenmai) {
         for (const i in this.dssanpham) {
-          if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.arrdanhmuckhuyenmai[j].DMN_id) {
+          if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.arrdanhmuckhuyenmai[j]) {
             this.danhmuctmp.push(this.dssanpham[i])
           }
         }
