@@ -34,31 +34,31 @@
 
     <div class="carousel khuyenmai" *ngIf="danhmuckhuyenmais.length > 0">
       <carousel [height]="300">
-           <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais"  >
-            <div style="height: 180px;">
-              <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
-            </div>
-            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
-              <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
+        <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais">
+          <div style="height: 180px;">
+            <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+          </div>
+          <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
+            <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
               <div class="_2TDZGE">
                 <span class="percent">{{giatrikhuyenmai*100}}%</span>
                 <span class="_17XqBU">GIẢM</span>
               </div>
             </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
+            <div class="d-flex justify-content-center mt-2">
+              <p class="giasale">{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
             </div>
-            <div class="card-body">
-              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
-              <div class="d-flex justify-content-center mt-2">
-                <p class="giasale" >{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
-               </div>
-            </div>
+          </div>
 
         </div>
-    </carousel>
+      </carousel>
     </div>
   </div>
 
- <!-- Sản phẩm bán chạy -->
+  <!-- Sản phẩm bán chạy -->
   <div class="container">
     <div class="row col-wrap">
       <div class="col-12">
@@ -69,27 +69,27 @@
     </div>
     <div class="carousel sanphambanchay" *ngIf="sanphambanchays.length > 0">
       <carousel [height]="300">
-           <div class="carousel-cell" *ngFor="let eachSP of sanphambanchays"  >
-            <div style="height: 180px;">
-              <img src="{{eachSP.Hinh_anh}}" class="sale" (click)="ProductDetail(eachSP)">
-            </div>
-            <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachSP)">
-              <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
+        <div class="carousel-cell" *ngFor="let eachSP of sanphambanchays">
+          <div style="height: 180px;">
+            <img src="{{eachSP.Hinh_anh}}" class="sale" (click)="ProductDetail(eachSP)">
+          </div>
+          <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachSP)">
+            <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
               <div class="_2TDZGE">
                 <span class="percent">{{giatrikhuyenmai*100}}%</span>
                 <span class="_17XqBU">GIẢM</span>
               </div>
             </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title ">{{eachSP.Ten_san_pham }}</h6>
+            <div class="d-flex justify-content-center mt-2">
+              <p class="giasale">{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
             </div>
-            <div class="card-body">
-              <h6 class="card-title ">{{eachSP.Ten_san_pham }}</h6>
-              <div class="d-flex justify-content-center mt-2">
-                <p class="giasale" >{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
-               </div>
-            </div>
+          </div>
 
         </div>
-    </carousel>
+      </carousel>
     </div>
 
 
@@ -101,10 +101,13 @@
         <p class="title">Sản phẩm</p>
       </div>
     </div>
-    <!-- Cây để bàn -->
-    <div class="row">
+  </div>
+
+  <!-- Cây để bàn -->
+  <div class="container" *ngFor="let eachLoaiCay of loaicays; let i = index">
+    <div class="container" *ngIf="KiemTraChanLe(i)">
       <div class="row">
-        <a (click)="DSSanPham()" class="title-gt textcase">Cây để bàn</a>
+        <button (click)="DSSanPham()" class="title-gt textcase">{{eachLoaiCay.Ten_loai_cay}}</button>
       </div>
       <div class="row">
         <div class="col-6">
@@ -127,325 +130,56 @@
           </div>
         </div>
         <div class="col-6 ">
-          <img class="image" src="../../../assets/images/gt3.jpg">
+          <img class="image" src="{{eachLoaiCay.Hinh_anh}}">
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Cây ban công -->
-  <div class="container">
-    <div class="row ">
-      <p class="title-gt textcase">Cây ban công</p>
-    </div>
-    <div class="col d-flex justify-content-center ">
-      <img class="image" src="../../../assets/images/BanCong.jpg" class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="row div-sp">
-          <div class="col sp goiy">
-            <img class="image" src="../../../assets/images/Bancong1.jpg">
-          </div>
-          <div class="col sp goiy">
-            Sản phẩm 2
-          </div>
-          <div class="col  sp goiy">
-            Sản phẩm 3
-          </div>
-          <div class="col  sp goiy">
-            Sản phẩm 4
-          </div>
-        </div>
+    <div class="container" *ngIf="!KiemTraChanLe(i)">
+      <div class="row">
+        <button (click)="DSSanPham()" class="subtitle textcase">{{eachLoaiCay.Ten_loai_cay}}</button>
       </div>
-    </div>
-  </div>
-
-  <!-- Cây dây leo -->
-  <div class="container">
-    <div class="row ">
-      <p class="subtitle textcase">Cây dây leo</p>
-    </div>
-    <div class="col d-flex justify-content-center">
-      <img class="image" src="../../../assets/images/DayLeo.png" class="img-fluid" alt="Responsive image">
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="row div-sp">
-          <div class="col sp goiy">
-            <img class="image" src="../../../assets/images/Bancong1.jpg">
+      <div class="row">
+        <div class="col-6 ">
+          <img class="image" src="{{eachLoaiCay.Hinh_anh}}">
+        </div>
+        <div class="col-6">
+          <div class="row div-sp">
+            <div class="col goiy sp">
+              Sản phẩm 1
+            </div>
+            <div class="col goiy sp">
+              Sản phẩm 2
+            </div>
           </div>
-          <div class="col sp goiy">
-            Sản phẩm 2
-          </div>
-          <div class="col  sp goiy">
-            Sản phẩm 3
-          </div>
-          <div class="col  sp goiy">
-            Sản phẩm 4
+          <div class="row div-sp">
+            <div class="col goiy sp">
+              Sản phẩm 3
+            </div>
+            <div class="col goiy sp">
+              Sản phẩm 4
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Cây phong thủy -->
-  <div class="container">
-    <div class="row">
-      <p class="subtitle textcase">Cây phong thủy</p>
-    </div>
-    <div class="row">
-      <div class="col-6 ">
-        <img class="image" src="../../../assets/images/PhongThuy.png">
-      </div>
-      <div class="col-6">
-        <div class="row div-sp">
-          <div class="col goiy sp">
-            Sản phẩm 1
-          </div>
-          <div class="col goiy sp">
-            Sản phẩm 2
-          </div>
-        </div>
-        <div class="row div-sp">
-          <div class="col goiy sp">
-            Sản phẩm 3
-          </div>
-          <div class="col goiy sp">
-            Sản phẩm 4
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="container mt-5">
+   <div class="row">
+     <div class="col-sm-12 d-flex justify-content-center align-items-center">
+      <button class="previous_next" id="previous" (click)="Previous()" *ngIf="KiemTraPrevious()">
+        <i class="fas fa-angle-double-left current"></i>
+      </button>
+     <button id="page{{j}}" *ngFor="let i of numberOfPages; let j = index" class="ml-1" (click)="IndexPage(j)">
+      {{i+1}}
+     </button>
+      <button class="previous_next" id="next" (click)="Next()" *ngIf="KiemTraNext()">
+        <i class="fas fa-angle-double-right current"></i>
+      </button>
+     </div>
+   </div>
+ </div>
 
-  <!-- Button xem thêm -->
-  <div class="wapper col-sm-12 " id="hidden">
-    <button (click)="setHidden()" type="button" aria-expanded="false" data-toggle="collapse"
-      data-target="#boxnoidung">Xem thêm</button>
-  </div>
-
-  <!-- Hiển thị thêm-->
-  <div class="collapse mt-4" id="boxnoidung">
-    <div class="card card-body ">
-      <!-- Cây nội thất-->
-      <div class="container">
-        <div class="row">
-          <p class="title-gt textcase">Cây nội thất</p>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <div class="row div-sp">
-              <div class="col goiy sp">
-                Sản phẩm 1
-              </div>
-              <div class="col goiy sp">
-                Sản phẩm 2
-              </div>
-            </div>
-            <div class="row div-sp">
-              <div class="col goiy sp">
-                Sản phẩm 3
-              </div>
-              <div class="col goiy sp">
-                Sản phẩm 4
-              </div>
-            </div>
-          </div>
-          <div class="col-6 ">
-            <img class="image" src="../../../assets/images/NoiThat.png">
-          </div>
-        </div>
-      </div>
-      <!-- Cây thủy sinh -->
-      <div class="container">
-        <div class="row ">
-          <p class="title-gt textcase">Cây thủy sinh</p>
-        </div>
-        <div class="col d-flex justify-content-center ">
-          <img class="image" src="../../../assets/images/ThuySinh.png" class="img-fluid" alt="Responsive image">
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="row div-sp">
-              <div class="col sp goiy">
-                <img class="image" src="../../../assets/images/Bancong1.jpg">
-              </div>
-              <div class="col sp goiy">
-                Sản phẩm 2
-              </div>
-              <div class="col  sp goiy">
-                Sản phẩm 3
-              </div>
-              <div class="col  sp goiy">
-                Sản phẩm 4
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cây ngoại thất -->
-      <div class="container">
-        <div class="row ">
-          <p class="subtitle textcase">Cây ngoại thất</p>
-        </div>
-        <div class="col d-flex justify-content-center ">
-          <img class="image" src="../../../assets/images//NgoaiThat.png" class="img-fluid" alt="Responsive image">
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="row div-sp">
-              <div class="col sp goiy">
-                <img class="image" src="../../../assets/images/Bancong1.jpg">
-              </div>
-              <div class="col sp goiy">
-                Sản phẩm 2
-              </div>
-              <div class="col  sp goiy">
-                Sản phẩm 3
-              </div>
-              <div class="col  sp goiy">
-                Sản phẩm 4
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Cây công trình-->
-      <div class="container">
-        <div class="row">
-          <p class="title-gt textcase">Cây công trình</p>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <div class="row div-sp">
-              <div class="col goiy sp">
-                Sản phẩm 1
-              </div>
-              <div class="col goiy sp">
-                Sản phẩm 2
-              </div>
-            </div>
-            <div class="row div-sp">
-              <div class="col goiy sp">
-                Sản phẩm 3
-              </div>
-              <div class="col goiy sp">
-                Sản phẩm 4
-              </div>
-            </div>
-          </div>
-          <div class="col-6 ">
-            <img class="image" src="../../../assets/images/CongTrinh.png">
-          </div>
-        </div>
-      </div>
-
-      <!-- Button xem thêm -->
-      <div class="wapper col-sm-12 " id="hidden2">
-        <button (click)="setHidden()" type="button" aria-expanded="false" data-toggle="collapse"
-          data-target="#boxnoidung2">Xem thêm</button>
-      </div>
-      <!-- Xem thêm thông tin -->
-      <div class="collapse mt-4" id="boxnoidung2">
-        <div class="card card-body ">
-
-          <!-- Terrarium -->
-          <div class="container">
-            <div class="row">
-              <p class="subtitle textcase">Terrarium</p>
-            </div>
-            <div class="row">
-              <div class="col-6 ">
-                <img class="image" src="../../../assets/images/Terrarium.png">
-              </div>
-              <div class="col-6">
-                <div class="row div-sp">
-                  <div class="col goiy sp">
-                    Sản phẩm 1
-                  </div>
-                  <div class="col goiy sp">
-                    Sản phẩm 2
-                  </div>
-                </div>
-                <div class="row div-sp">
-                  <div class="col goiy sp">
-                    Sản phẩm 3
-                  </div>
-                  <div class="col goiy sp">
-                    Sản phẩm 4
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Cây sen đá -->
-          <div class="container">
-            <div class="row ">
-              <p class="subtitle textcase">Cây sen đá</p>
-            </div>
-            <div class="col d-flex justify-content-center ">
-              <img class="image" src="../../../assets/images/SenDa.png" class="img-fluid" alt="Responsive image">
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="row div-sp">
-                  <div class="col sp goiy">
-                    <img class="image" src="../../../assets/images/Bancong1.jpg">
-                  </div>
-                  <div class="col sp goiy">
-                    Sản phẩm 2
-                  </div>
-                  <div class="col  sp goiy">
-                    Sản phẩm 3
-                  </div>
-                  <div class="col  sp goiy">
-                    Sản phẩm 4
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Cây sen-->
-          <div class="container">
-            <div class="row">
-              <p class="title-gt textcase">Cây sen</p>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="row div-sp">
-                  <div class="col goiy sp">
-                    Sản phẩm 1
-                  </div>
-                  <div class="col goiy sp">
-                    Sản phẩm 2
-                  </div>
-                </div>
-                <div class="row div-sp">
-                  <div class="col goiy sp">
-                    Sản phẩm 3
-                  </div>
-                  <div class="col goiy sp">
-                    Sản phẩm 4
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 ">
-                <img class="image" src="../../../assets/images/Sen.png">
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-    </div>
-  </div>
   <!-- Row gợi ý -->
   <div class="row">
     <div class="col-12">

@@ -32,7 +32,6 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardModule } from '@nebular/theme';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
-
 @NgModule({
   declarations: [
     DefaultComponent,

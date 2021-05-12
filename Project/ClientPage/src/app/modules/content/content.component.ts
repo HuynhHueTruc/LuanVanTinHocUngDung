@@ -22,24 +22,31 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   dssanphambanchay = []
   dssanpham: SanPhamModel
   dshoadonbanhang: HoaDonBanHangModel
-
+  dsloaicaycurrentPage: LoaiCayModel
   arrdanhmuckhuyenmai = []
   arrsanphambanchay = []
   danhmuckhuyenmais = []
   sanphambanchays = []
   danhmucloaicay: DanhMucModel
   danhmuctmp = []
-  loaicays: LoaiCayModel
+  loaicays: LoaiCayModel[] = []
   arrKhuyenMai: KhuyenMaiModel[] = [];
   giatrikhuyenmai = 0;
   khuyenmai: KhuyenMaiModel;
   isLoading = false;
 
+
+  currentPage = 1;
+  pageSize = 4;
+  numberOfPages = [];
+
+
   constructor(private khuyenmaiService: KhuyenmaiService, private sanphamService: SanphamService, private hoadonbanhangService: HoadonbanhangService, private router: Router,
     private loaicayService: LoaicayService, private danhmucService: DanhmucService) { }
 
   ngOnInit(): void {
-    // this.getLoaiCay();
+
+    this.getLoaiCay();
     // this.getdsdanhmuc();
     this.getdskhuyenmai()
     // this.getdshoadonbanhang()
@@ -182,7 +189,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
         this.danhmuctmp = []
       }
 
-       for (const h in this.dssanphambanchay){
+      for (const h in this.dssanphambanchay) {
         for (const k in this.dssanpham) {
           if (this.dssanpham[k]._id === this.dssanphambanchay[h].SanPham_id) {
             this.sanphambanchays.push(this.dssanpham[k])
@@ -197,8 +204,93 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
 
+  //  // Hàm tìm kiếm theo tên hoặc id
+  //  SearchByKeyWord() {
+  //   this.dskhuyenmai = this.dskhuyenmaisearch;
+  //   const text = this.removeAccents(this.keyword);
+  //   if (text === '') {
+  //     this.getdskhuyenmai();
+  //   } else {
+  //     this.dskhuyenmai = this.dskhuyenmai.filter(res => {
+  //       const hoten = this.removeAccents(res.Ten_khuyen_mai);
+  //       const maso = this.removeAccents(res._id);
+  //       const tmp2 = text.replace(/·/g, '');
+  //       if (hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+  //         return hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+  //       } else {
+  //         if (maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+  //           return maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
 
-  DSSanPham(){
+  // Lấy loại cây làm danh mục
+  getLoaiCay() {
+    let count = 0;
+    this.loaicayService.getListLoaiCay().subscribe((res: any) => {
+      this.loaicays = res.loaicays;
+      // console.log(this.loaicays.length)
+      count = Math.ceil(this.loaicays.length / this.pageSize);
+      for (let i = 0; i < count; i++){
+        this.numberOfPages.push(i)
+      }
+      this.loaicays.filter(res => {
+
+      });
+    });
+  }
+
+  KiemTraChanLe(index) {
+    return index % 2 === 0
+  }
+
+  Previous() {
+    if ((this.currentPage - 1) > 0) {
+      this.currentPage -= 1
+    }
+
+  }
+
+  Next() {
+    if (this.currentPage < (this.loaicays.length / this.pageSize)) {
+      this.currentPage += 1
+    }
+  }
+
+  IndexPage(index){
+    let i = Number.parseInt(index)
+    document.getElementById('page'+ i).style.backgroundColor = 'red'
+    for (let j in this.numberOfPages){
+      if (Number.parseInt(j) !== i){
+        document.getElementById('page'+ j).style.backgroundColor = 'cadetblue'
+
+      }
+    }
+  }
+
+  KiemTraPrevious() {
+    if (this.currentPage === 1) {
+      return false
+    } else {
+      if (this.currentPage > 1) {
+        return true
+      }
+    }
+  }
+
+  KiemTraNext() {
+    if (this.currentPage === (this.loaicays.length / this.pageSize)) {
+      return false
+    } else {
+      if (this.currentPage < (this.loaicays.length / this.pageSize)) {
+        return true
+      }
+    }
+  }
+
+  DSSanPham() {
 
   }
   // onSelectLTypeTree(eachDanhMuc) {
@@ -229,12 +321,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   //     this.danhmucloaicay = res.danhmucs[1];
   //     console.log(this.danhmucloaicay)
   //   })
-  // }
-  // // Lấy loại cây làm danh mục
-  // getLoaiCay() {
-  //   this.loaicayService.getListLoaiCay().subscribe((res: any) => {
-  //     this.loaicays = res.loaicays;
-  //   });
   // }
 
 

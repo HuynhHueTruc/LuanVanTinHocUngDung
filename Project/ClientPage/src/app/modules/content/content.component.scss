@@ -92,7 +92,7 @@
   font-size: 20px;
   text-align: center;
   color: cadetblue;
-
+  background-color: transparent;
 }
 
 .subtitle {
@@ -100,6 +100,7 @@
   font-size: 20px;
   text-align: center;
   color: cadetblue;
+  background-color: transparent;
 }
 
 .title-khuyenmai {
@@ -215,12 +216,12 @@ button {
   height: 250px;
 }
 
-.sanphambanchay{
+.sanphambanchay {
   width: 1050px;
   height: 250px;
 }
 
-.giasale{
+.giasale {
   font-size: 20px;
   color: #ee4d2d;
 }
@@ -285,4 +286,12 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.previous_next{
+  background-color: transparent;
+}
+
+.current{
+  color: black;
 }

@@ -17,7 +17,7 @@ dashboard: https://www.youtube.com/watch?v=FP7Hs8lTy1k&t=481s
 Nebular: https://akveo.github.io/nebular/docs/components/toastr/overview#nbtoastrservice, https://akveo.github.io/nebular/docs/components/sidebar/overview#nbsidebarcomponent
 Cài đặt: https://www.thanhlongdev.com/huong-dan-xay-dung-pagination-voi-nodejs-express-va-mongodb/
 ngx-admin: https://www.akveo.com/ngx-admin/pages/dashboard
-Phân trang: https://www.thanhlongdev.com/huong-dan-xay-dung-pagination-voi-nodejs-express-va-mongodb/
+Phân trang: https://ciphertrick.com/search-sort-pagination-angular/, https://www.thanhlongdev.com/huong-dan-xay-dung-pagination-voi-nodejs-express-va-mongodb/
 Bảng đồ: https://www.npmjs.com/package/highcharts-angular, https://viblo.asia/p/gioi-thieu-thu-vien-highcharts-amoG81emvz8P
 icon -material design: https://material.io/resources/icons/?icon=chrome_reader_mode&style=baseline
 disable button back on browser: https://www.npmjs.com/package/angular-disable-browser-back-button
