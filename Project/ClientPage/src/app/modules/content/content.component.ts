@@ -290,9 +290,12 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  DSSanPham() {
-
+  DSSanPham(LoaiCay_id) {
+    console.log(LoaiCay_id)
+      this.router.navigateByUrl(`/default/typetree/${LoaiCay_id}`);
+      this.isLoading = true;
   }
+
   // onSelectLTypeTree(eachDanhMuc) {
   //   let loaicay = '';
   //   // console.log(this.danhmucloaicay)
