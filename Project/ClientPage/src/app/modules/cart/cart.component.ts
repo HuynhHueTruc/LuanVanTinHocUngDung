@@ -1,3 +1,5 @@
+import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
+import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 
 
@@ -17,7 +19,7 @@ import { Observable, interval, Subscription } from 'rxjs';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  message:string;
+  message: string;
 
 
 
@@ -42,9 +44,11 @@ export class CartComponent implements OnInit {
   So_luong = 0;
   giatrikhuyenmai = 0;
   arrSanPhamThanhToan: any;
+  sum = 0;
+  dsphieudat: PhieuDatModel
 
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
-    private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService) { }
+    private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService, private phieudatService: PhieudatService) { }
 
   // private updateSubscription: Subscription;
 
@@ -105,10 +109,10 @@ export class CartComponent implements OnInit {
     });
   }
 
-  KiemTraSoLuongSanPham(){
-    if(this.giohang[0]?.San_Pham[0] === undefined){
+  KiemTraSoLuongSanPham() {
+    if (this.giohang[0]?.San_Pham[0] === undefined) {
       return false
-    }else{
+    } else {
       return true
     }
   }
@@ -128,7 +132,6 @@ export class CartComponent implements OnInit {
     console.log(index)
     this.arrSanPham.splice(index, 1);
     this.giohang[0].San_Pham.splice(index, 1);
-    console.log(this.giohang[0].San_Pham)
     this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
     this.TongTien()
   }
@@ -161,11 +164,11 @@ export class CartComponent implements OnInit {
       }
     }
 
-    if (this.checkAll){
+    if (this.checkAll) {
       // this.tong_tien = 0;
       this.TongTien()
       this.lengthchecked = this.checked.length;
-    }else{
+    } else {
       this.tong_tien = 0;
       this.lengthchecked = 0
     }
@@ -218,12 +221,12 @@ export class CartComponent implements OnInit {
       this.KiemTraKhuyeMai(this.arrSanPham[i])
       this.tong_tien = this.tong_tien + (this.arrSanPham[i].Gia - this.arrSanPham[i].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[i].So_luong
     }
-    for (const j in this.arrSanPham){
-      if (!this.checked[j]){
+    for (const j in this.arrSanPham) {
+      if (!this.checked[j]) {
         this.KiemTraKhuyeMai(this.arrSanPham[j])
         this.tong_tien = this.tong_tien - (this.arrSanPham[j].Gia - this.arrSanPham[j].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[j].So_luong
 
-      }else{
+      } else {
         this.arrSanPhamThanhToan.push(this.arrSanPham[j])
       }
     }
@@ -231,14 +234,26 @@ export class CartComponent implements OnInit {
 
   // Tăng số lượng sản phẩm đặt mua
   ThemSoLuong(index) {
-    if (this.giohang[0].San_Pham[index].So_luong < this.arrSanPham[index].So_luong) {
-      this.giohang[0].San_Pham[index].So_luong += 1;
-    } else {
-      this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
-    }
-    this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
-    this.TongTien()
+    this.sum = 0;
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
 
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
+      }
+
+      if (this.giohang[0].San_Pham[index].So_luong < this.arrSanPham[index].So_luong - this.sum) {
+        this.giohang[0].San_Pham[index].So_luong += 1;
+      } else {
+        this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong - this.sum;
+      }
+      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+      this.TongTien()
+    })
   }
 
   // Giảm số lượng sản phẩm đặt mua
@@ -252,28 +267,59 @@ export class CartComponent implements OnInit {
 
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong(index) {
-    if (this.giohang[0].San_Pham[index].So_luong <= 0) {
-      this.giohang[0].San_Pham[index].So_luong = null;
-    }else{
-      if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong){
-        this.So_luong_mac_dinh(index);
+    this.sum = 0;
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
       }
-      console.log(this.giohang[0].San_Pham[index].So_luong)
-      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
-      this.TongTien()
-    }
+      if (this.giohang[0].San_Pham[index].So_luong <= 0) {
+        this.giohang[0].San_Pham[index].So_luong = null;
+      } else {
+        if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong - this.sum) {
+          this.So_luong_mac_dinh(index);
+        }
+        this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+        this.TongTien()
+      }
+
+    })
+
+
+
   }
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
   So_luong_mac_dinh(index) {
+    this.sum = 0;
     if (this.giohang[0].San_Pham[index].So_luong === null) {
       this.giohang[0].San_Pham[index].So_luong = 1;
     }
-    if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong) {
-      this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong;
-    }
-    this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
-    this.TongTien()
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
+      }
+      if (this.giohang[0].San_Pham[index].So_luong > this.arrSanPham[index].So_luong - this.sum) {
+        this.giohang[0].San_Pham[index].So_luong = this.arrSanPham[index].So_luong - this.sum;
+      }
+      this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
+      this.TongTien()
+
+    })
+
+
+
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
@@ -312,10 +358,10 @@ export class CartComponent implements OnInit {
     return bool;
   }
 
-  Checkout(){
-    if (this.arrSanPhamThanhToan === undefined){
+  Checkout() {
+    if (this.arrSanPhamThanhToan === undefined) {
       alert('Vui lòng chọn sản phẩm thanh toán!')
-    }else{
+    } else {
       this.giohangService.setArrSP(this.arrSanPhamThanhToan)
       this.router.navigateByUrl('/checkout')
 

@@ -1,3 +1,5 @@
+import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
+import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
 import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
 import { DanhMucModel } from './../../../models/DanhMuc/danhmuc';
@@ -55,11 +57,12 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   loaicays: LoaiCayModel
   isLoading = false
   arrSoLuongBan = [];
-
+dsphieudat: PhieuDatModel
+sum = 0;
 
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
-    private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService) { }
+    private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService, private phieudatServcie: PhieudatService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -76,6 +79,12 @@ export class DetailComponent implements OnInit, AfterContentChecked {
       window.location.reload();
     }
     this.isLoading = false;
+  }
+
+  getdsphieudat(){
+    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+    })
   }
 
   getgiohang() {
@@ -256,13 +265,25 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   // Tăng số lượng sản phẩm đặt mua
   ThemSoLuong() {
-    if (this.So_luong < this.sanphamdetail[0].So_luong) {
-      this.So_luong += 1;
+    this.sum = 0;
+    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
 
-    } else {
-      this.So_luong = this.sanphamdetail[0].So_luong;
-    }
-    console.log(this.So_luong)
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
+      }
+
+      if (this.So_luong < this.sanphamdetail[0].So_luong - this.sum) {
+        this.So_luong += 1;
+
+      } else {
+        this.So_luong = this.sanphamdetail[0].So_luong - this.sum;
+      }
+    })
   }
 
   // Giảm số lượng sản phẩm đặt mua
@@ -282,12 +303,29 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
   So_luong_mac_dinh() {
+     this.sum = 0;
     if (this.So_luong === null || this.So_luong === 0) {
       this.So_luong = 1;
     }
-    if (this.So_luong > this.sanphamdetail[0].So_luong) {
-      this.So_luong = this.sanphamdetail[0].So_luong;
-    }
+
+    // if (this.So_luong > this.sanphamdetail[0].So_luong) {
+    //   this.So_luong = this.sanphamdetail[0].So_luong;
+    // }
+    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+           this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
+      }
+      if (this.So_luong > (this.sanphamdetail[0].So_luong - this.sum)) {
+        this.So_luong = (this.sanphamdetail[0].So_luong - this.sum);
+      }
+
+    })
   }
 
   // Cập nhật số lượng sản phẩm nếu sản phẩm đang thêm đã tồn tại trong giỏ hàng
@@ -295,7 +333,14 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     let bool = false
     for (const i in this.giohang[0].San_Pham) {
       if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
-        this.giohang[0].San_Pham[i].So_luong += this.So_luong
+        if (  (this.giohang[0].San_Pham[i].So_luong + this.So_luong) > (this.sanphamdetail[0].So_luong - this.sum)){
+          this.giohang[0].San_Pham[i].So_luong = this.sanphamdetail[0].So_luong - this.sum
+
+        }else{
+          console.log( this.giohang[0].San_Pham[i].So_luong, this.So_luong)
+          this.giohang[0].San_Pham[i].So_luong += this.So_luong
+        }
+
         return true
       } else {
         bool = false
@@ -309,7 +354,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
       if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
         this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
       }
-      console.log(this.giohang[0].San_Pham)
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       alert('Đã thêm vào giỏ hàng!')
     }else{
@@ -322,5 +366,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.router.navigateByUrl(`/detail/${eachSP._id}`);
     this.isLoading = true;
   }
+
 
 }

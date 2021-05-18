@@ -17,9 +17,16 @@ export class PhieudatService {
     return this.refreshPage;
   }
 
+  getListPhieuDat(): Observable<PhieuDatModel[]>{
+    return this.http.get<PhieuDatModel[]>('http://localhost:3000/phieudat/thongtin').pipe();
+  }
+
   ThemPhieuDat(phieudat: PhieuDatModel): Observable<PhieuDatModel[]>{
     return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/taomoi', phieudat)
     .pipe(
+      tap(() => {
+        this.refreshPage.next();
+      })
     );
    }
 

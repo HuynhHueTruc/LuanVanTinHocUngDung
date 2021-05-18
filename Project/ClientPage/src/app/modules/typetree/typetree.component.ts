@@ -1,3 +1,5 @@
+import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
+import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { HoadonbanhangService } from './../../../services/HoaDonBanHang/hoadonbanhang.service';
 import { HoaDonBanHangModel } from './../../../models/HoaDonBanHang/hoadonbanhang';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
@@ -36,6 +38,7 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
   dscaycanh: SanPhamModel[] = [];
   dskhuyenmai: KhuyenMaiModel[] = [];
   dshoadonban: HoaDonBanHangModel;
+  dsphieudat: PhieuDatModel;
   giatrikhuyenmai = 0;
   arrKhuyenMai: KhuyenMaiModel[] = [];
   khuyenmai: KhuyenMaiModel;
@@ -43,19 +46,23 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
   isLoading = false;
 
   constructor(private router: Router, private loaicayService: LoaicayService, private route: ActivatedRoute,
-              private sanphamService: SanphamService, private danhmucService: DanhmucService,
-              private khuyenmaiService: KhuyenmaiService, private hoadonbanService: HoadonbanhangService) {
+    private sanphamService: SanphamService, private danhmucService: DanhmucService,
+    private khuyenmaiService: KhuyenmaiService, private hoadonbanService: HoadonbanhangService,
+    private phieudatService: PhieudatService) {
     //this.tmp = this.router.getCurrentNavigation().extras.state._id;
   }
 
   ngOnInit(): void {
-
+    this.phieudatService.getRefeshPage().subscribe(() => {
+      this.getLoaiCay();
+    })
   }
 
   ngAfterViewInit(): void {
 
     this.href = this.router.url;
     this.loaicay_id = this.href.replace('/default/typetree/', '');
+
     this.getLoaiCay();
     // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // this.router.onSameUrlNavigation = 'reload';
@@ -104,11 +111,9 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
           }
         }
       }
-
-
       this.getdskhuyenmai();
       this.getdsHoaDonBanHang();
-      // console.log(this.dscaycanh)
+      this.getdsphieudat();
     });
   }
 
@@ -126,21 +131,39 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
       for (const i in this.dscaycanh) {
         if (this.dscaycanh.hasOwnProperty) {
           for (const j in this.dshoadonban) {
-            if (this.dshoadonban.hasOwnProperty){
-              for (const h in this.dshoadonban[j].San_Pham){
-                if (this.dscaycanh[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id){
+            if (this.dshoadonban.hasOwnProperty) {
+              for (const h in this.dshoadonban[j].San_Pham) {
+                if (this.dscaycanh[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id) {
                   count += this.dshoadonban[j].San_Pham[h].So_luong;
                 }
               }
             }
           }
-          this.arrSoLuongBan.push({SanPham_id: this.dscaycanh[i]._id, So_luong_ban: count});
+          this.arrSoLuongBan.push({ SanPham_id: this.dscaycanh[i]._id, So_luong_ban: count });
           count = 0;
         }
       }
     });
   }
 
+  getdsphieudat() {
+    let SL;
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          for (const k in this.dscaycanh){
+            if (this.dscaycanh[k]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+              SL = this.dscaycanh[k].So_luong - this.dsphieudat[i].San_Pham[j].So_luong;
+              if (SL <= 0){
+                this.dscaycanh.splice(Number.parseInt(k), 1);
+              }
+            }
+          }
+        }
+      }
+    })
+  }
 
   // Lấy sản phẩm theo id được chọn
   SoKhopLoaiCay(loaicay_id) {
@@ -190,7 +213,7 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
   }
 
 
-  ProductDetail(eachSP){
+  ProductDetail(eachSP) {
     this.router.navigateByUrl(`/detail/${eachSP._id}`);
     this.isLoading = true;
   }
@@ -202,5 +225,25 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
       window.location.reload();
     }
     this.isLoading = false;
+  }
+
+  KiemTraSoLuong(eachcaycanh) {
+    let SL;
+    let bool = false;
+
+    //     for (const i in this.dsphieudat){
+    //       for (const j in this.dsphieudat[i].San_Pham){
+    //         if (eachcaycanh._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+    //           SL = eachcaycanh.So_luong - this.dsphieudat[i].San_Pham[j].So_luong;
+    //           if (SL > 0){
+    //             return true;
+    //           }else{
+    //             bool = false;
+    //           }
+    //         }
+    //       }
+    //     }
+    //     return bool;
+
   }
 }
