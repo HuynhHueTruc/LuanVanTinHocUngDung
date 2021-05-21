@@ -1,3 +1,4 @@
+import { DanhMucNhoModel } from './../../../models/DanhMuc/DanhMucNho';
 import { DanhmucService } from './../../../services/DanhMuc/danhmuc.service';
 import { DanhMucModel } from './../../../models/DanhMuc/danhmuc';
 import { LoaiCayModel } from './../../../models/LoaiCay/loaicay';
@@ -20,11 +21,14 @@ export class ContentComponent implements OnInit, AfterContentChecked {
 
   dskhuyenmai: KhuyenMaiModel
   dssanphambanchay = []
-  dssanpham: SanPhamModel
+  dssanpham: SanPhamModel[] = []
+  sanphams: SanPhamModel[] = []
   dshoadonbanhang: HoaDonBanHangModel
   dsloaicay: LoaiCayModel[] = []
+  dssanphamtheoloai: SanPhamModel[] = []
   arrdanhmuckhuyenmai = []
   arrsanphambanchay = []
+  arrsanphamtrangchu: SanPhamModel[] = []
   danhmuckhuyenmais = []
   sanphambanchays = []
   danhmucloaicay: DanhMucModel
@@ -34,12 +38,13 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   giatrikhuyenmai = 0;
   khuyenmai: KhuyenMaiModel;
   isLoading = false;
-
-
-  currentPage = 1;
-  pageSize = 4;
-  numberOfPages = [];
   p: number = 1;
+  dsdanhmuc: DanhMucModel;
+  dsdmcaycanh: any;
+  dsloaicaycanh: DanhMucNhoModel[] = [];
+  danhmucdaidien: DanhMucNhoModel[] = []
+  dscaycanh: SanPhamModel[] = [];
+
 
   constructor(private khuyenmaiService: KhuyenmaiService, private sanphamService: SanphamService, private hoadonbanhangService: HoadonbanhangService, private router: Router,
     private loaicayService: LoaicayService, private danhmucService: DanhmucService) { }
@@ -47,9 +52,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
 
     this.getLoaiCay();
-    // this.getdsdanhmuc();
     this.getdskhuyenmai()
-    // this.getdshoadonbanhang()
   }
 
   ngAfterContentChecked(): void {
@@ -60,6 +63,72 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     }
     this.isLoading = false;
   }
+
+  getdsdanhmuc(arrloaicay) {
+    this.danhmucService.getListDanhMuc().subscribe((res: any) => {
+      this.dsdanhmuc = res.danhmucs;
+      this.dsdmcaycanh = this.dsdanhmuc[1].Danh_muc_nho;
+
+      this.SoKhopLoaiCay(arrloaicay);
+    });
+  }
+
+  // Lấy sản phẩm theo id được chọn
+  SoKhopLoaiCay(arrloaicay) {
+    let arrtmp: any;
+    for (const j in arrloaicay) {
+      for (const i in this.dsdmcaycanh) {
+        if (this.dsdmcaycanh[i].Loai_cay === arrloaicay[j]._id) {
+          this.dsloaicaycanh.push(this.dsdmcaycanh[i]);
+        }
+      }
+      arrtmp = this.dsloaicaycanh
+      this.danhmucdaidien.push(arrtmp)
+      this.dsloaicaycanh = [];
+
+    }
+    this.getdssanphamtrangchu();
+  }
+
+  getdssanphamtrangchu() {
+    let arrtmp: any
+    let lsttmp: SanPhamModel[] = []
+    let random = []
+    let arrrandom: any
+    this.sanphamService.getListSanPham().subscribe((res: any) => {
+      this.dssanpham = res.sanphams;
+
+      for (const j in this.danhmucdaidien) {
+        for (const k in this.danhmucdaidien[j]) {
+          if (this.danhmucdaidien[j].hasOwnProperty(k)) {
+            for (const i in this.dssanpham) {
+              if (this.dssanpham.hasOwnProperty(i)) {
+                if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.danhmucdaidien[j][k].DMN_id) {
+                  lsttmp.push(this.dssanpham[i]);
+                }
+              }
+            }
+          }
+        }
+        arrtmp = lsttmp
+        this.dssanphamtheoloai.push(arrtmp)
+        lsttmp = [];
+      }
+     for (const l in this.dssanphamtheoloai){
+       if (this.dssanphamtheoloai.hasOwnProperty(l)){
+        for (let i = 0; i < 4; i++){
+        random.push(this.dssanphamtheoloai[l][Math.floor(Math.random() * this.dssanphambanchay.length)])
+        }
+        arrrandom = random
+        this.arrsanphamtrangchu.push(arrrandom);
+        random = []
+       }
+     }
+
+     console.log(this.arrsanphamtrangchu)
+    });
+  }
+
 
   setHidden() {
     var hidden = document.getElementById('hidden');
@@ -178,7 +247,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getdssanpham() {
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams
-
+      // this.sanphams = res.sanphams
       for (const j in this.arrdanhmuckhuyenmai) {
         for (const i in this.dssanpham) {
           if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.arrdanhmuckhuyenmai[j]) {
@@ -230,16 +299,9 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getLoaiCay() {
     let count = 0;
     this.loaicayService.getListLoaiCay().subscribe((res: any) => {
-      // this.loaicays = res.loaicays;
       this.dsloaicay = res.loaicays;
       this.ChuyenTrang(1);
-      // count = Math.ceil(this.loaicays.length / this.pageSize);
-      // for (let i = 0; i < count; i++){
-      //   this.numberOfPages.push(i)
-      // }
-      // this.loaicays.filter(res => {
 
-      // });
     });
   }
 
@@ -247,62 +309,18 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     return index % 2 === 0
   }
 
-  // Previous() {
-  //   if ((this.currentPage - 1) > 0) {
-  //     this.currentPage -= 1
-  //   }
-
-  // }
-
-  // Next() {
-  //   if (this.currentPage < (this.loaicays.length / this.pageSize)) {
-  //     this.currentPage += 1
-  //   }
-  // }
-
-  // IndexPage(index){
-  //   let i = Number.parseInt(index)
-  //   document.getElementById('page'+ i).style.backgroundColor = 'red'
-  //   for (let j in this.numberOfPages){
-  //     if (Number.parseInt(j) !== i){
-  //       document.getElementById('page'+ j).style.backgroundColor = 'cadetblue'
-
-  //     }
-  //   }
-  // }
-
-  // KiemTraPrevious() {
-  //   if (this.currentPage === 1) {
-  //     return false
-  //   } else {
-  //     if (this.currentPage > 1) {
-  //       return true
-  //     }
-  //   }
-  // }
-
-  // KiemTraNext() {
-  //   if (this.currentPage === (this.loaicays.length / this.pageSize)) {
-  //     return false
-  //   } else {
-  //     if (this.currentPage < (this.loaicays.length / this.pageSize)) {
-  //       return true
-  //     }
-  //   }
-  // }
 
   DSSanPham(LoaiCay_id) {
-      this.router.navigateByUrl(`/default/typetree/${LoaiCay_id}`);
-      this.isLoading = true;
+    this.router.navigateByUrl(`/default/typetree/${LoaiCay_id}`);
+    this.isLoading = true;
   }
 
-  ChuyenTrang(number){
-this.loaicays = []
-  for (let i = 0; i < 4; i++){
-    this.loaicays.push(this.dsloaicay[((number - 1)*4) + i]);
-  }
-console.log(this.loaicays)
-
+  ChuyenTrang(number) {
+    this.loaicays = []
+    for (let i = 0; i < 4; i++) {
+      this.loaicays.push(this.dsloaicay[((number - 1) * 4) + i]);
+    }
+    this.getdsdanhmuc(this.loaicays);
   }
   // onSelectLTypeTree(eachDanhMuc) {
   //   let loaicay = '';

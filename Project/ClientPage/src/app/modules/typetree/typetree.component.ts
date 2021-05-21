@@ -231,19 +231,5 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
     let SL;
     let bool = false;
 
-    //     for (const i in this.dsphieudat){
-    //       for (const j in this.dsphieudat[i].San_Pham){
-    //         if (eachcaycanh._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
-    //           SL = eachcaycanh.So_luong - this.dsphieudat[i].San_Pham[j].So_luong;
-    //           if (SL > 0){
-    //             return true;
-    //           }else{
-    //             bool = false;
-    //           }
-    //         }
-    //       }
-    //     }
-    //     return bool;
-
   }
 }

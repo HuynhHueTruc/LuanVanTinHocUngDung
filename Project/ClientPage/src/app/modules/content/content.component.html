@@ -169,15 +169,6 @@
  <div class="container mt-5">
    <div class="row">
      <div class="col-sm-12 d-flex justify-content-center align-items-center">
-      <!-- <button class="previous_next" id="previous" (click)="Previous()" *ngIf="KiemTraPrevious()">
-        <i class="fas fa-angle-double-left current"></i>
-      </button>
-     <button id="page{{j}}" *ngFor="let i of numberOfPages; let j = index" class="ml-1" (click)="IndexPage(j)">
-      {{i+1}}
-     </button>
-      <button class="previous_next" id="next" (click)="Next()" *ngIf="KiemTraNext()">
-        <i class="fas fa-angle-double-right current"></i>
-      </button> -->
       <ul id="pagination">
         <li *ngFor="let item of dsloaicay | paginate: { itemsPerPage: 4, currentPage: p }"> </li>
       </ul>
