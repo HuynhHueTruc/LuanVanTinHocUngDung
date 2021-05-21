@@ -22,7 +22,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   dssanphambanchay = []
   dssanpham: SanPhamModel
   dshoadonbanhang: HoaDonBanHangModel
-  dsloaicaycurrentPage: LoaiCayModel
+  dsloaicay: LoaiCayModel[] = []
   arrdanhmuckhuyenmai = []
   arrsanphambanchay = []
   danhmuckhuyenmais = []
@@ -39,7 +39,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   currentPage = 1;
   pageSize = 4;
   numberOfPages = [];
-
+  p: number = 1;
 
   constructor(private khuyenmaiService: KhuyenmaiService, private sanphamService: SanphamService, private hoadonbanhangService: HoadonbanhangService, private router: Router,
     private loaicayService: LoaicayService, private danhmucService: DanhmucService) { }
@@ -230,15 +230,16 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getLoaiCay() {
     let count = 0;
     this.loaicayService.getListLoaiCay().subscribe((res: any) => {
-      this.loaicays = res.loaicays;
-      // console.log(this.loaicays.length)
-      count = Math.ceil(this.loaicays.length / this.pageSize);
-      for (let i = 0; i < count; i++){
-        this.numberOfPages.push(i)
-      }
-      this.loaicays.filter(res => {
+      // this.loaicays = res.loaicays;
+      this.dsloaicay = res.loaicays;
+      this.ChuyenTrang(1);
+      // count = Math.ceil(this.loaicays.length / this.pageSize);
+      // for (let i = 0; i < count; i++){
+      //   this.numberOfPages.push(i)
+      // }
+      // this.loaicays.filter(res => {
 
-      });
+      // });
     });
   }
 
@@ -246,56 +247,63 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     return index % 2 === 0
   }
 
-  Previous() {
-    if ((this.currentPage - 1) > 0) {
-      this.currentPage -= 1
-    }
+  // Previous() {
+  //   if ((this.currentPage - 1) > 0) {
+  //     this.currentPage -= 1
+  //   }
 
-  }
+  // }
 
-  Next() {
-    if (this.currentPage < (this.loaicays.length / this.pageSize)) {
-      this.currentPage += 1
-    }
-  }
+  // Next() {
+  //   if (this.currentPage < (this.loaicays.length / this.pageSize)) {
+  //     this.currentPage += 1
+  //   }
+  // }
 
-  IndexPage(index){
-    let i = Number.parseInt(index)
-    document.getElementById('page'+ i).style.backgroundColor = 'red'
-    for (let j in this.numberOfPages){
-      if (Number.parseInt(j) !== i){
-        document.getElementById('page'+ j).style.backgroundColor = 'cadetblue'
+  // IndexPage(index){
+  //   let i = Number.parseInt(index)
+  //   document.getElementById('page'+ i).style.backgroundColor = 'red'
+  //   for (let j in this.numberOfPages){
+  //     if (Number.parseInt(j) !== i){
+  //       document.getElementById('page'+ j).style.backgroundColor = 'cadetblue'
 
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 
-  KiemTraPrevious() {
-    if (this.currentPage === 1) {
-      return false
-    } else {
-      if (this.currentPage > 1) {
-        return true
-      }
-    }
-  }
+  // KiemTraPrevious() {
+  //   if (this.currentPage === 1) {
+  //     return false
+  //   } else {
+  //     if (this.currentPage > 1) {
+  //       return true
+  //     }
+  //   }
+  // }
 
-  KiemTraNext() {
-    if (this.currentPage === (this.loaicays.length / this.pageSize)) {
-      return false
-    } else {
-      if (this.currentPage < (this.loaicays.length / this.pageSize)) {
-        return true
-      }
-    }
-  }
+  // KiemTraNext() {
+  //   if (this.currentPage === (this.loaicays.length / this.pageSize)) {
+  //     return false
+  //   } else {
+  //     if (this.currentPage < (this.loaicays.length / this.pageSize)) {
+  //       return true
+  //     }
+  //   }
+  // }
 
   DSSanPham(LoaiCay_id) {
-    console.log(LoaiCay_id)
       this.router.navigateByUrl(`/default/typetree/${LoaiCay_id}`);
       this.isLoading = true;
   }
 
+  ChuyenTrang(number){
+this.loaicays = []
+  for (let i = 0; i < 4; i++){
+    this.loaicays.push(this.dsloaicay[((number - 1)*4) + i]);
+  }
+console.log(this.loaicays)
+
+  }
   // onSelectLTypeTree(eachDanhMuc) {
   //   let loaicay = '';
   //   // console.log(this.danhmucloaicay)
