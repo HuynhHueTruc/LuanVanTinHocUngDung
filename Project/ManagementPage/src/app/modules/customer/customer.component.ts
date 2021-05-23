@@ -475,7 +475,7 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
     this.UnChecked();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
     this.RandomMatKhau();
     // Gán giá trị rỗng ban đầu cho khachhang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
@@ -491,7 +491,7 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog Cập nhật tài khoản
   open_update(content_update, khachhangUpdate) {
     this.UnChecked();
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg'  });
     // Gán giá trị rỗng ban đầu cho khachang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
     khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
@@ -506,7 +506,7 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog gửi mail
   open_send_mail(content_mails, kh?) {
     this.dsNguoiNhanMail = [];
-    this.modalService.open(content_mails, { ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_mails, { ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false, size: 'lg' });
     if (kh === null) {
       this.KhachHangChecked();
       this.ThongTinGuiEmail();

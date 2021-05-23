@@ -218,7 +218,7 @@ h5{
 .nguoinhan{
   border: 1px solid #BDBDBD;
   orientation: inherit;
-  height: 45px;
+  height: 100px;
   padding: 0px;
   overflow-x:auto;
   overflow-y:auto;
@@ -242,7 +242,11 @@ span.To{
 .them_mail{
   border: none;
   background-color: transparent;
-  margin-left: 65%;
+  outline:none
+  // margin-left: 65%;
+}
+.them_mai:focus{
+
 }
 
 .plus{
@@ -288,3 +292,4 @@ span.To{
 #errNgaySinh2{
   display: none;
 }
+

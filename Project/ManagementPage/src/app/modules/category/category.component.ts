@@ -109,7 +109,6 @@ export class CategoryComponent implements OnInit {
   open_update(content_update, eachDanhMuc) {
     this.danhmuc = eachDanhMuc
     this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
-
   }
 
   open_category_plus(content_info_category_plus) {

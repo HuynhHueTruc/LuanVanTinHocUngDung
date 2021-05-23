@@ -327,7 +327,7 @@ export class StaffComponent implements OnInit {
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
     this.UnChecked();
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
     this.RandomMatKhau();
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
     this.nhanvien = new NhanVienModel();
@@ -343,7 +343,7 @@ export class StaffComponent implements OnInit {
     // Hàm mở Dialog Cập nhật tài khoản
   open_update(content_update, nhanvienUpdate) {
     this.UnChecked();
-    this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_update, {ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg'  });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
     this.nhanvien = new NhanVienModel();
     nhanvienUpdate.Ngay_sinh = this.datePipe.transform(nhanvienUpdate.Ngay_sinh, 'yyyy-MM-dd');
@@ -357,7 +357,7 @@ export class StaffComponent implements OnInit {
   // Hàm mở Dialog gửi mail
   open_send_mail(content_mails, nv?) {
       this.dsNguoiNhanMail = [];
-      this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
+      this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false, size: 'lg'  });
       if (nv === null ){
         this.NhanVienChecked();
         this.ThongTinGuiEmail();
@@ -390,7 +390,7 @@ export class StaffComponent implements OnInit {
   ThemMail(content_mails){
     this.dsNguoiNhanMail.push({Email: this.tai_khoan, Ho_ten: this.chu_tai_khoan});
     this.modalService.dismissAll();
-    this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_mails, {ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false, size: 'lg' });
     // document.getElementById('modals_mails').style.display = 'none';
     // console.log(this.dsNguoiNhanMail);
   }

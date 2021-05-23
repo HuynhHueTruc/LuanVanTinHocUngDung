@@ -148,148 +148,162 @@
     </div>
     <div class="modal-body">
       <form #staffFormCreate="ngForm" name="DangKyTaiKhoanNhanVien">
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên đăng nhập:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
-          </div>
-          <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
-            <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không được trống! </small>
-            <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.pattern">  Tên đăng nhập không được có dấu.  Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
-          </div>
-       </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Họ và tên:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ho_ten.invalid && Ho_ten.touched" #Ho_ten="ngModel"  class="form-control " id="Ho_ten"  [(ngModel)]="nhanvien.Ho_ten" name="Ho_ten" placeholder=" Enter your full name" required >
-          </div>
-          <div class="mess-err" *ngIf="Ho_ten.errors && (Ho_ten.invalid || Ho_ten.touched)">
-            <small class="err text-danger"*ngIf="Ho_ten.errors.required"> Họ tên không được trống! </small>
-            <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
-          </div>
-
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Ngày sinh:</label>
-          <div class="col-sm-8">
-            <input type="date" [class.is-invalid]="NgaySinh.invalid && NgaySinh.touched" #NgaySinh="ngModel"  class="form-control " id="NgaySinh"  [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh" placeholder=" Enter name date of birth" (change)="ChangeDate($event)" >
-          </div>
-          <div class="mess-err" >
-            <small id="errNgaySinh" class="err text-danger"> Bạn chưa chọn ngày sinh! </small>
-            <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email:</label>
-          <div class="col-sm-8">
-            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhanvien.Email" name="Email" placeholder=" Enter your email" required >
-          </div>
-          <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
-            <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
-            <small class="err text-danger"*ngIf="Email.errors.pattern">  Chưa đúng định dạng Email! </small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số điện thoại:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone" required >
-          </div>
-          <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
-            <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
-            <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số CMND/CCCD:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"  #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD" name="CMND_CCCD" placeholder=" Enter your identity card number" required >
-          </div>
-          <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
-            <small class="err text-danger"*ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn cước công dân không được trống! </small>
-            <small class="err text-danger"*ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân dân/căn cước công dân có 8 hoặc 12 số!</small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Giới tính:</label>
-          <div class="col-sm-8">
-            <select class="form-control form-control-sm border-non setwidth" id="Gioi_tinh" [(ngModel)]="nhanvien.Gioi_tinh" name="Gioi_tinh" #Gioi_tinh="ngModel" (change)="KTGioiTinh()">
-              <option class="item" disabled value="">-- Sex --</option>
-              <option class="item" value="Nam">Nam</option>
-              <option class="item" value="Nữ">Nữ</option>
-            </select>
-          </div>
-          <div class="mess-err"  >
-            <small id="mes_gioitinh" class="err text-danger"> Bạn chưa chọn giới tính! </small>
-          </div>
-        </div>
-
-        <div class="form-group row" ngModelGroup="Dia_chi">
-          <label class="col-sm-4 col-form-label">Địa chỉ:</label>
-          <div class="col-sm-8">
-            <small>Thành phố</small>
-            <select id="provinces" [(ngModel)]="nhanvien.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth" (change)="ThanhPho($event, null)" >
-              <option class="item" selected disabled  value="">-- Provinces --</option>
-              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value] = "eachThanhPho.name" >{{eachThanhPho.name}}</option>
-            </select>
-            <div class="mess-err"  >
-              <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+       <div class="row">
+         <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tên đăng nhập:</label>
+            <div class="col-sm-8">
+              <input type="text" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
+            </div>
+            <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
+              <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không được trống! </small>
+              <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.pattern">  Tên đăng nhập không được có dấu.  Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
+            </div>
+         </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Họ và tên:</label>
+            <div class="col-sm-8">
+              <input type="text" [class.is-invalid]="Ho_ten.invalid && Ho_ten.touched" #Ho_ten="ngModel"  class="form-control " id="Ho_ten"  [(ngModel)]="nhanvien.Ho_ten" name="Ho_ten" placeholder=" Enter your full name" required >
+            </div>
+            <div class="mess-err" *ngIf="Ho_ten.errors && (Ho_ten.invalid || Ho_ten.touched)">
+              <small class="err text-danger"*ngIf="Ho_ten.errors.required"> Họ tên không được trống! </small>
+              <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
             </div>
 
-            <small>Huyện/Quận</small>
-            <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="QuanHuyen($event)">
-              <option class="item" selected value="">-- District --</option>
-              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value] = "eachQuanHuyen.name">{{eachQuanHuyen.name}}</option>
-            </select>
-            <div class="mess-err"  >
-              <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
-            </div>
-
-            <small>Xã/Phường</small>
-            <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth" (change)="XaPhuong(null)">
-              <option class="item" selected  value="">-- Ward --</option>
-              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value] = "eachXaPhuong.name">{{eachXaPhuong.name}}</option>
-            </select>
-            <div class="mess-err"  >
-              <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
-            </div>
           </div>
-
-        </div>
 
           <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Quyền sử dụng:</label>
-            <div class="col-sm-8" >
-                <div class="row">
-                  <div class="form-check col-sm-6">
-                    <input type="radio" name="QuyenSuDung" id="QuyenNhanVien" value="Nhân viên" (click)="QuyenSuDung='Nhân viên'"  [(ngModel)]="nhanvien.Quyen_su_dung" >
-                    <label class="form-check-label" for="exampleRadios1">
-                      Nhân viên
-                    </label>
-                  </div>
-                  <div class="form-check col-sm-6">
-                    <input type="radio" name="QuyenSuDung" id="QuyenQuanLy" value="Quản lý"  (click)="QuyenSuDung='Quản lý'" [(ngModel)]="nhanvien.Quyen_su_dung">
-                    <label class="form-check-label" for="exampleRadios2">
-                      Quản lý
-                    </label>
-                  </div>
-                </div>
+            <label class="col-sm-4 col-form-label">Ngày sinh:</label>
+            <div class="col-sm-8">
+              <input type="date" [class.is-invalid]="NgaySinh.invalid && NgaySinh.touched" #NgaySinh="ngModel"  class="form-control " id="NgaySinh"  [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh" placeholder=" Enter name date of birth" (change)="ChangeDate($event)" >
+            </div>
+            <div class="mess-err" >
+              <small id="errNgaySinh" class="err text-danger"> Bạn chưa chọn ngày sinh! </small>
+              <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
             </div>
           </div>
 
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Mật khẩu</label>
-          <div class="col-sm-7">
-            <input type="text" [(ngModel)]="nhanvien.Mat_khau" name="MatKhauRandom" readonly class="form-control" id="MatKhau" value={{text}} >
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Email:</label>
+            <div class="col-sm-8">
+              <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhanvien.Email" name="Email" placeholder=" Enter your email" required >
+            </div>
+            <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
+              <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
+              <small class="err text-danger"*ngIf="Email.errors.pattern">  Chưa đúng định dạng Email! </small>
+            </div>
           </div>
-          <div class="col-sm-1 random">
-              <i class="fas fa-sync-alt" (click)="RandomMatKhau()"></i>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Số điện thoại:</label>
+            <div class="col-sm-8">
+              <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone" required >
+            </div>
+            <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
+              <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
+              <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Giới tính:</label>
+            <div class="col-sm-8">
+              <select class="form-control form-control-sm border-non setwidth" id="Gioi_tinh" [(ngModel)]="nhanvien.Gioi_tinh" name="Gioi_tinh" #Gioi_tinh="ngModel" (change)="KTGioiTinh()">
+                <option class="item" disabled value="">-- Sex --</option>
+                <option class="item" value="Nam">Nam</option>
+                <option class="item" value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="mess-err"  >
+              <small id="mes_gioitinh" class="err text-danger"> Bạn chưa chọn giới tính! </small>
+            </div>
+          </div>
+          <!-- <div class="vertical-line" style="height: 45px;"></div> -->
+         </div>
+
+
+
+         <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">CMND/CCCD:</label>
+            <div class="col-sm-8">
+              <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"  #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD" name="CMND_CCCD" placeholder=" Enter your identity card" required >
+            </div>
+            <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
+              <small class="err text-danger"*ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn cước công dân không được trống! </small>
+              <small class="err text-danger"*ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân dân/căn cước công dân có 8 hoặc 12 số!</small>
+            </div>
+          </div>
+
+          <div class="form-group row" ngModelGroup="Dia_chi">
+            <label class="col-sm-4 col-form-label">Địa chỉ:</label>
+            <div class="col-sm-8">
+              <small>Thành phố</small>
+              <select id="provinces" [(ngModel)]="nhanvien.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth" (change)="ThanhPho($event, null)" >
+                <option class="item" selected disabled  value="">-- Provinces --</option>
+                <option class="item" *ngFor="let eachThanhPho of thanhphos" [value] = "eachThanhPho.name" >{{eachThanhPho.name}}</option>
+              </select>
+              <div class="mess-err"  >
+                <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+              </div>
+
+              <small>Huyện/Quận</small>
+              <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="QuanHuyen($event)">
+                <option class="item" selected value="">-- District --</option>
+                <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value] = "eachQuanHuyen.name">{{eachQuanHuyen.name}}</option>
+              </select>
+              <div class="mess-err"  >
+                <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
+              </div>
+
+              <small>Xã/Phường</small>
+              <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth" (change)="XaPhuong(null)">
+                <option class="item" selected  value="">-- Ward --</option>
+                <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value] = "eachXaPhuong.name">{{eachXaPhuong.name}}</option>
+              </select>
+              <div class="mess-err"  >
+                <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
+              </div>
+            </div>
+
+          </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Quyền sử dụng:</label>
+              <div class="col-sm-8" >
+                  <div class="row">
+                    <div class="form-check col-sm-6">
+                      <input type="radio" name="QuyenSuDung" id="QuyenNhanVien" value="Nhân viên" (click)="QuyenSuDung='Nhân viên'"  [(ngModel)]="nhanvien.Quyen_su_dung" >
+                      <label class="form-check-label" for="exampleRadios1">
+                        Nhân viên
+                      </label>
+                    </div>
+                    <div class="form-check col-sm-6">
+                      <input type="radio" name="QuyenSuDung" id="QuyenQuanLy" value="Quản lý"  (click)="QuyenSuDung='Quản lý'" [(ngModel)]="nhanvien.Quyen_su_dung">
+                      <label class="form-check-label" for="exampleRadios2">
+                        Quản lý
+                      </label>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Mật khẩu</label>
+            <div class="col-sm-7">
+              <input type="text" [(ngModel)]="nhanvien.Mat_khau" name="MatKhauRandom" readonly class="form-control" id="MatKhau" value={{text}} >
+            </div>
+            <div class="col-sm-1 random">
+                <i class="fas fa-sync-alt" (click)="RandomMatKhau()"></i>
+            </div>
           </div>
         </div>
+       </div>
+
+
+
       </form>
     </div>
 
@@ -309,149 +323,148 @@
     </div>
     <div class="modal-body">
       <form #staffFormUpdate="ngForm" name="CapNhatTaiKhoanNhanVien">
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên đăng nhập:</label>
-          <div class="col-sm-8">
-            <input disabled type="text" [value]="NhanVienUpdate.Ten_dang_nhap" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
-          </div>
-          <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
-            <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không được trống! </small>
-            <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.pattern">Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
-          </div>
-       </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Họ và tên:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ho_ten.invalid && Ho_ten.touched" #Ho_ten="ngModel" class="form-control " id="Ho_ten"  [(ngModel)]="nhanvien.Ho_ten" name="Ho_ten" placeholder=" Enter your full name" required >
-          </div>
-          <div class="mess-err" *ngIf="Ho_ten.errors && (Ho_ten.invalid || Ho_ten.touched)">
-            <small class="err text-danger"*ngIf="Ho_ten.errors.required"> Họ tên không được trống! </small>
-            <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
-          </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Tên đăng nhập:</label>
+              <div class="col-sm-8">
+                <input disabled type="text" [value]="NhanVienUpdate.Ten_dang_nhap" [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel" pattern="^[A-Za-z0-9 _-]{8,32}$" class="form-control " id="Ten_dang_nhap"  [(ngModel)]="nhanvien.Nhan_vien_id"  name="Ten_dang_nhap" placeholder=" Enter user name" required >
+              </div>
+              <div class="mess-err" *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
+                <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không được trống! </small>
+                <small class="err text-danger"*ngIf="Ten_dang_nhap.errors.pattern">Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
+              </div>
+           </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Họ và tên:</label>
+              <div class="col-sm-8">
+                <input type="text" [class.is-invalid]="Ho_ten.invalid && Ho_ten.touched" #Ho_ten="ngModel" class="form-control " id="Ho_ten"  [(ngModel)]="nhanvien.Ho_ten" name="Ho_ten" placeholder=" Enter your full name" required >
+              </div>
+              <div class="mess-err" *ngIf="Ho_ten.errors && (Ho_ten.invalid || Ho_ten.touched)">
+                <small class="err text-danger"*ngIf="Ho_ten.errors.required"> Họ tên không được trống! </small>
+                <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
+              </div>
 
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Ngày sinh:</label>
-          <div class="col-sm-8">
-            <input type="date" [class.is-invalid]="NgaySinh.invalid && NgaySinh.touched" #NgaySinh="ngModel"  class="form-control " id="NgaySinh"  [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh" placeholder=" Enter name date of birth" (change)="ChangeDate($event)" >
-          </div>
-          <div class="mess-err" >
-            <small id="errNgaySinh" class="err text-danger"> Bạn chưa chọn ngày sinh! </small>
-            <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email:</label>
-          <div class="col-sm-8">
-            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhanvien.Email" name="Email" placeholder=" Enter your email" required >
-          </div>
-          <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
-            <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
-            <small class="err text-danger"*ngIf="Email.errors.pattern">  Chưa đúng định dạng Email! </small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số điện thoại:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone" required >
-          </div>
-          <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
-            <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
-            <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số CMND/CCCD:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"  #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD" name="CMND_CCCD" placeholder=" Enter your identity card number" required >
-          </div>
-          <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
-            <small class="err text-danger"*ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn cước công dân không được trống! </small>
-            <small class="err text-danger"*ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân dân/căn cước công dân có 8 hoặc 12 số!</small>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Giới tính:</label>
-          <div class="col-sm-8">
-            <select class="form-control form-control-sm border-non setwidth" id="Gioi_tinh" [(ngModel)]="nhanvien.Gioi_tinh" name="Gioi_tinh" #Gioi_tinh="ngModel" (change)="KTGioiTinh()">
-              <option class="item" disabled value="">-- Sex --</option>
-              <option class="item" value="Nam">Nam</option>
-              <option class="item" value="Nữ">Nữ</option>
-            </select>
-          </div>
-          <div class="mess-err">
-            <small id="mes_gioitinh" class="err text-danger"  style="display: none;"> Bạn chưa chọn giới tính! </small>
-          </div>
-        </div>
-
-        <div class="form-group row" ngModelGroup="Dia_chi">
-          <label class="col-sm-4 col-form-label">Địa chỉ:</label>
-          <div class="col-sm-8">
-            <small>Tỉnh/Thành phố</small>
-            <select id="provinces" [(ngModel)]="nhanvien.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth"  (change)="ThanhPho($event, null)" >
-              <option class="item" disabled value="">-- Provinces --</option>
-              <option class="item" *ngFor="let eachThanhPho of thanhphos" value= "{{eachThanhPho.name}}">{{eachThanhPho.name}}</option>
-            </select>
-            <div class="mess-err"  >
-              <small id="mes_tinh_thanhpho" class="err text-danger" style="display: none;"> Bạn chưa chọn Tỉnh/Thành phố! </small>
             </div>
 
-            <small>Huyện/Quận</small>
-            <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="HienThiQuanHuyen_XaPhuong($event,nhanvien.Dia_chi)">
-              <option class="item"  value="">-- District --</option>
-              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" value= "{{eachQuanHuyen.name}}">{{eachQuanHuyen.name}}</option>
-            </select>
-            <div class="mess-err"  >
-              <small id="mes_huyen_quan" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Ngày sinh:</label>
+              <div class="col-sm-8">
+                <input type="date" [class.is-invalid]="NgaySinh.invalid && NgaySinh.touched" #NgaySinh="ngModel"  class="form-control " id="NgaySinh"  [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh" placeholder=" Enter name date of birth" (change)="ChangeDate($event)" >
+              </div>
+              <div class="mess-err" >
+                <small id="errNgaySinh" class="err text-danger"> Bạn chưa chọn ngày sinh! </small>
+                <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
+              </div>
             </div>
 
-            <small>Xã/Phường</small>
-            <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth"  (change)="XaPhuong(nhanvien.Dia_chi[0])">
-              <option class="item"  value="">-- Ward --</option>
-              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" value= "{{eachXaPhuong.name}}">{{eachXaPhuong.name}}</option>
-            </select>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Email:</label>
+              <div class="col-sm-8">
+                <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhanvien.Email" name="Email" placeholder=" Enter your email" required >
+              </div>
+              <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
+                <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
+                <small class="err text-danger"*ngIf="Email.errors.pattern">  Chưa đúng định dạng Email! </small>
+              </div>
+            </div>
 
-            <div class="mess-err"  >
-              <small id="mes_xa_phuong" class="errdiachi text-danger" style="display: none;"> Bạn chưa chọn Xã/Phường! </small>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Số điện thoại:</label>
+              <div class="col-sm-8">
+                <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone" required >
+              </div>
+              <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
+                <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
+                <small class="err text-danger"*ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Giới tính:</label>
+              <div class="col-sm-8">
+                <select class="form-control form-control-sm border-non setwidth" id="Gioi_tinh" [(ngModel)]="nhanvien.Gioi_tinh" name="Gioi_tinh" #Gioi_tinh="ngModel" (change)="KTGioiTinh()">
+                  <option class="item" disabled value="">-- Sex --</option>
+                  <option class="item" value="Nam">Nam</option>
+                  <option class="item" value="Nữ">Nữ</option>
+                </select>
+              </div>
+              <div class="mess-err">
+                <small id="mes_gioitinh" class="err text-danger"  style="display: none;"> Bạn chưa chọn giới tính! </small>
+              </div>
             </div>
           </div>
 
-        </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">CMND/CCCD:</label>
+              <div class="col-sm-8">
+                <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"  #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD" name="CMND_CCCD" placeholder=" Enter your identity card number" required >
+              </div>
+              <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
+                <small class="err text-danger"*ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn cước công dân không được trống! </small>
+                <small class="err text-danger"*ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân dân/căn cước công dân có 8 hoặc 12 số!</small>
+              </div>
+            </div>
 
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Quyền sử dụng:</label>
-            <div class="col-sm-8" >
-                <div class="row">
-                  <div class="form-check col-sm-6">
-                    <input type="radio" name="QuyenSuDung" id="QuyenNhanVien" value="Nhân viên" (click)="QuyenSuDung='Nhân viên'"  [(ngModel)]="nhanvien.Quyen_su_dung" >
-                    <label class="form-check-label" for="exampleRadios1">
-                      Nhân viên
-                    </label>
-                  </div>
-                  <div class="form-check col-sm-6">
-                    <input type="radio" name="QuyenSuDung" id="QuyenQuanLy" value="Quản lý"  (click)="QuyenSuDung='Quản lý'" [(ngModel)]="nhanvien.Quyen_su_dung">
-                    <label class="form-check-label" for="exampleRadios2">
-                      Quản lý
-                    </label>
-                  </div>
+            <div class="form-group row" ngModelGroup="Dia_chi">
+              <label class="col-sm-4 col-form-label">Địa chỉ:</label>
+              <div class="col-sm-8">
+                <small>Tỉnh/Thành phố</small>
+                <select id="provinces" [(ngModel)]="nhanvien.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth"  (change)="ThanhPho($event, null)" >
+                  <option class="item" disabled value="">-- Provinces --</option>
+                  <option class="item" *ngFor="let eachThanhPho of thanhphos" value= "{{eachThanhPho.name}}">{{eachThanhPho.name}}</option>
+                </select>
+                <div class="mess-err"  >
+                  <small id="mes_tinh_thanhpho" class="err text-danger" style="display: none;"> Bạn chưa chọn Tỉnh/Thành phố! </small>
                 </div>
-            </div>
-          </div>
 
-        <!-- <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Mật khẩu</label>
-          <div class="col-sm-7">
-            <input type="text" [(ngModel)]="nhanvien.Mat_khau" name="MatKhauRandom" readonly class="form-control" id="MatKhau" value={{text}} >
+                <small>Huyện/Quận</small>
+                <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="HienThiQuanHuyen_XaPhuong($event,nhanvien.Dia_chi)">
+                  <option class="item"  value="">-- District --</option>
+                  <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" value= "{{eachQuanHuyen.name}}">{{eachQuanHuyen.name}}</option>
+                </select>
+                <div class="mess-err"  >
+                  <small id="mes_huyen_quan" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
+                </div>
+
+                <small>Xã/Phường</small>
+                <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth"  (change)="XaPhuong(nhanvien.Dia_chi[0])">
+                  <option class="item"  value="">-- Ward --</option>
+                  <option class="item" *ngFor="let eachXaPhuong of xaphuongs" value= "{{eachXaPhuong.name}}">{{eachXaPhuong.name}}</option>
+                </select>
+
+                <div class="mess-err"  >
+                  <small id="mes_xa_phuong" class="errdiachi text-danger" style="display: none;"> Bạn chưa chọn Xã/Phường! </small>
+                </div>
+              </div>
+
+            </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Quyền sử dụng:</label>
+                <div class="col-sm-8" >
+                    <div class="row">
+                      <div class="form-check col-sm-6">
+                        <input type="radio" name="QuyenSuDung" id="QuyenNhanVien" value="Nhân viên" (click)="QuyenSuDung='Nhân viên'"  [(ngModel)]="nhanvien.Quyen_su_dung" >
+                        <label class="form-check-label" for="exampleRadios1">
+                          Nhân viên
+                        </label>
+                      </div>
+                      <div class="form-check col-sm-6">
+                        <input type="radio" name="QuyenSuDung" id="QuyenQuanLy" value="Quản lý"  (click)="QuyenSuDung='Quản lý'" [(ngModel)]="nhanvien.Quyen_su_dung">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Quản lý
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
           </div>
-          <div class="col-sm-1 random">
-              <i class="fas fa-sync-alt" (click)="RandomMatKhau()"></i>
-          </div>
-        </div> -->
+        </div>
+
+
+
       </form>
     </div>
     <div class="modal-footer">
@@ -487,76 +500,75 @@
     </div>
     <div class="modal-body">
       <form #staffFormSendMail="ngForm" name="GuiMailNhanVien">
-       <div class="row plus">
-        <button class="them_mail" (click)="open_info_mail_plus(content_info_mail_plus)">
-          <i class="fas fa-plus">
-            Thêm người nhận
-          </i>
-        </button>
-      </div>
-       <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Người nhận:</label>
-        <div class="col-sm-8 nguoinhan">
-            <span class="To" *ngFor="let eachNV of dsNguoiNhanMail; let i = index">
-              <input disabled class="emails" type="text" value={{eachNV.Email}}>
-              <sup>
-                <button class="iconbutton controlcheckbox" (click)="xoa_email(eachNV)" >
-                  <i class="fas fa-times"></i>
-                </button>
-              </sup>
-            </span>
-        </div>
-     </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Chủ đề:</label>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="row plus">
+              <button class="them_mail" (click)="open_info_mail_plus(content_info_mail_plus)">
+                <i class="fas fa-plus">
+                  Thêm người nhận
+                </i>
+              </button>
+            </div>
+            <div class="row mt-4">
+              <label class="col-sm-12 col-form-label ">Người nhận:</label>
+            </div>
+             <div class="form-group row ">
+
+              <div class="col-sm-12 nguoinhan ml-2 form-control">
+                  <span class="To  " *ngFor="let eachNV of dsNguoiNhanMail; let i = index">
+                    <input disabled class="emails" type="text" value={{eachNV.Email}}>
+                    <sup>
+                      <button class="iconbutton controlcheckbox" (click)="xoa_email(eachNV)" >
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </sup>
+                  </span>
+              </div>
+           </div>
+           <div class="row">
+            <label class="col-sm-12 col-form-label">Chủ đề:</label>
+           </div>
+              <div class="form-group row">
+
+                <div class="col-sm-12 p-0 ml-2">
+                  <input type="text" [class.is-invalid]="Chu_de.invalid && Chu_de.touched" #Chu_de="ngModel"  class="form-control " id="chu_de"  [(ngModel)]="chu_de" name="chu_de" required >
+                </div>
+                <div class="mess-err" *ngIf="Chu_de.errors && (Chu_de.invalid || Chu_de.touched)">
+                  <small class="err text-danger"*ngIf="Chu_de.errors.required">Không có chủ đề! </small>
+                  <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
+                </div>
+
+              </div>
+          </div>
           <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Chu_de.invalid && Chu_de.touched" #Chu_de="ngModel"  class="form-control " id="chu_de"  [(ngModel)]="chu_de" name="chu_de" required >
+            <div class="form-group row">
+              <label class="col-sm-12 col-form-label">Nội dung:</label>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <ckeditor
+                  [(ngModel)]="noi_dung"
+                  name="noi_dung"
+                  [config]="{
+                    extraPlugins: 'uploadimage',
+                    filebrowserBrowseUrl : '/browser/browse/type/all',
+                    filebrowserUploadUrl : '/browser/upload/type/all',
+                    filebrowserImageBrowseUrl : '/browser/browse/type/image',
+                filebrowserImageUploadUrl : '/browser/upload/type/image',
+                    filebrowserWindowWidth  : 800,
+                    filebrowserWindowHeight : 500
+                  }"
+                ></ckeditor>
+            </div>
+            </div>
           </div>
-          <div class="mess-err" *ngIf="Chu_de.errors && (Chu_de.invalid || Chu_de.touched)">
-            <small class="err text-danger"*ngIf="Chu_de.errors.required">Không có chủ đề! </small>
-            <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
-          </div>
-
         </div>
 
-        <div class="form-group row">
-          <label class="col-sm-12 col-form-label">Nội dung:</label>
-        </div>
 
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <ckeditor
-              [(ngModel)]="noi_dung"
-              name="noi_dung"
-              [config]="{
-                extraPlugins: 'uploadimage',
-                filebrowserBrowseUrl : '/browser/browse/type/all',
-                filebrowserUploadUrl : '/browser/upload/type/all',
-                filebrowserImageBrowseUrl : '/browser/browse/type/image',
-            filebrowserImageUploadUrl : '/browser/upload/type/image',
-                filebrowserWindowWidth  : 800,
-                filebrowserWindowHeight : 500
-              }"
-            ></ckeditor>
 
-            <!-- <ckeditor
-            [(ngModel)]="noi_dung"
-            name="noi_dung"
-            [config]="{
-              extraPlugins:'divarea',
-              filebrowserBrowseUrl:'https://zingnews.vn/',
-              filebrowserUploadMethod: 'form',
-              filebrowserUploadUrl:'/src/assets/img'
-             }" >
-          </ckeditor> -->
-          <!-- filebrowserBrowseUrl : '/browser/browse/type/all',
-          filebrowserUploadUrl : '/browser/upload/type/all',
-          filebrowserImageBrowseUrl : '/browser/browse/type/image',
-      filebrowserImageUploadUrl : '/browser/upload/type/image',
-          filebrowserWindowWidth  : 800,
-          filebrowserWindowHeight : 500 -->
-        </div>
-        </div>
+
 
       </form>
     </div>
@@ -577,6 +589,7 @@
     </div>
     <div class="modal-body">
       <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
+
 
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Tài khoản email:</label>

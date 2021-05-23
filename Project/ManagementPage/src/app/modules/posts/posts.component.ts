@@ -248,6 +248,7 @@ export class PostsComponent implements OnInit {
   open_cancel(content_cancel) {
     this.modalService.open(content_cancel, { ariaLabelledBy: 'modal-basic-title-notification', backdrop: 'static', keyboard: false, windowClass: 'my-class' });
   }
+
   // Hủy bỏ tạo mới
   Huy() {
     location.reload()
@@ -263,7 +264,6 @@ export class PostsComponent implements OnInit {
   open_delete(content_delete){
     this.modalService.open(content_delete, { ariaLabelledBy: 'modal-basic-title-notification', backdrop: 'static', keyboard: false, size: 'lg' });
   }
-
 
   // //Cập nhật chỉnh sửa
   // CapNhat() {

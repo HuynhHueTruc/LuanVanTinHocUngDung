@@ -63,10 +63,10 @@
                 <td class="content">{{i + 1}}</td>
                 <td class="content">{{eachDanhMuc._id}}</td>
                 <td>{{eachDanhMuc.Ten_danh_muc}}</td>
-                <td class="d-flex justify-content-center">
-                  <div class="form-group d-flex align-items-center">
+                <td class="d-flex justify-content-center ">
+                  <div class="form-group d-flex align-items-center ">
 
-                    <div class="card dssanpham" *ngIf="KiemTraDanhMucNho(i)">
+                    <div class="card dsdmloaicay" *ngIf="KiemTraDanhMucNho(i)">
                       <div class="card-body">
                         <table class="table table-bordered table-hover">
                           <thead>
@@ -139,7 +139,7 @@
                    </i>
                  </button>
                </div>
-               <div class="row plus danhmucnho ">
+               <div class="row plus danhmucnho lstloaicay">
                  <span class="DMN" *ngFor="let eachDMN of danhmuc.Danh_muc_nho; let i = index">
                    <input disabled class="emails" type="text" value={{eachDMN.Ten_danh_muc_nho}}>
                    <sup>

@@ -65,19 +65,11 @@
                       <th class="align-middle">Mã hóa đơn</th>
                       <th class="align-middle">
                         Thông tin sản phẩm
-                        <!-- <div class="row titlesanpham d-flex justify-content-center">Sản phẩm</div>
-                  <hr>
-                  <div class="row titlesanpham d-flex justify-content-center">
-                    <div class="col-sm-3">STT</div>
-                    <div class="col-sm-3">Sản phẩm</div>
-                    <div class="col-sm-3">Số lượng</div>
-                    <div class="col-sm-3">Giá nhập</div>
-                  </div> -->
+
                       </th>
                       <th class="align-middle">Chú thích</th>
                       <th class="align-middle">Tổng tiền</th>
                       <th class="align-middle">Ngày nhập</th>
-                      <!-- <th class="align-middle">Tác vụ</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -118,16 +110,6 @@
                       <td class="content">{{eachHoaDon.Tong_tien}}</td>
                       <td class="content">{{eachHoaDon.Ngay_nhap | date:'shortDate'}}</td>
 
-                      <!-- <td class="content d-flex justify-content-center">
-                  <span class="action">
-                    <button class="buttonicon" (click)="open_update(content_update, eachHoaDon)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
-                      <i class="far fa-edit m-1"></i>
-                    </button>
-                    <button class="buttonicon" (click)="open_delete(content_delete, eachHoaDon._id)" data-controls-modal="modals_delete" data-backdrop="static" data-keyboard="false" >
-                      <i class="far fa-trash-alt m-1"></i>
-                    </button>
-                  </span>
-                </td> -->
                     </tr>
                   </tbody>
                 </table>

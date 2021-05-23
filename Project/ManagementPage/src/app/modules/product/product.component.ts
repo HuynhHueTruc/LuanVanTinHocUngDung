@@ -252,7 +252,7 @@ export class ProductComponent implements OnInit {
     this.danhmuctmp = []
     this.noi_dung = ''
     this.UnChecked();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
     // Gán giá trị rỗng ban đầu
     this.sanpham = new SanPhamModel();
     this.sanpham.Danh_Muc = [{ DMN_id: '' }]
@@ -262,7 +262,7 @@ export class ProductComponent implements OnInit {
   open_update(content_update, sanphamUpdate) {
     this.choosefile = true
     this.UnChecked();
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg'  });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
     this.sanpham = new SanPhamModel();
     this.sanpham = sanphamUpdate;
