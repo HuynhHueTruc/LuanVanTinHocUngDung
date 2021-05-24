@@ -76,48 +76,26 @@ export class LoginComponent implements OnInit {
   }
 
    //Chọn nhiều phần tử trong thẻ select
-   onItemSelect(item: any, i?) {
+   onItemSelect(item: any) {
     // i = 0 là tạo mới, = 1 là cập nhật
-    if (i === 0) {
       document.getElementById('errTaoMoi').style.display = 'none'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'none'
-      }
-    }
   }
 
-  onSelectAll(items: any, i?) {
+  onSelectAll(items: any) {
     this.so_thich = items
-    if (i === 0) {
       document.getElementById('errTaoMoi').style.display = 'none'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'none'
-      }
-    }
-
   }
 
-  onDeSelectAll(items: any, i?) {
+  onDeSelectAll(items: any) {
     this.so_thich = items
 
-    if (i === 0) {
       document.getElementById('errTaoMoi').style.display = 'block'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'block'
-      }
-    }
   }
 
-  onItemDeSelect(item: any, i?) {
-    if (i === 0) {
+  onItemDeSelect(item: any) {
+    if (this.so_thich.length === 0){
       document.getElementById('errTaoMoi').style.display = 'block'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'block'
-      }
+
     }
   }
 

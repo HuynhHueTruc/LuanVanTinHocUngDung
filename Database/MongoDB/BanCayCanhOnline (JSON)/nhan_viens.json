@@ -1,41 +1,97 @@
 [{
   "_id": {
-    "$oid": "5f7d8af97cc2cc2a04b1574e"
+    "$oid": "604b2b182031ba45542e535c"
   },
-  "NhanVien_id": "HuynhKhanhDuy",
-  "San_Pham": [
+  "Nhan_vien_id": "HuynhKhanhDuy",
+  "Ho_ten": "Huỳnh Khánh Duy",
+  "Ngay_sinh": {
+    "$date": "1999-09-14T17:00:00Z"
+  },
+  "Dia_chi": [
     {
-      "SanPham_id": {
-        "$oid": "60687971d956b41cccafee51"
+      "_id": {
+        "$oid": "604b2b182031ba45542e535d"
       },
-      "So_luong": 100,
-      "Gia_nhap": 15000
-    },
-    {
-      "SanPham_id": {
-        "$oid": "60687de956bec7202863bfdc"
-      },
-      "So_luong": 300,
-      "Gia_nhap": 100000
-    },
-    {
-      "SanPham_id": {
-        "$oid": "60687de956bec7202863bfdc"
-      },
-      "So_luong": 300,
-      "Gia_nhap": 100000
-    },
-    {
-      "SanPham_id": {
-        "$oid": "60687de956bec7202863bfdc"
-      },
-      "So_luong": 300,
-      "Gia_nhap": 100000
+      "Tinh_ThanhPho": "Tỉnh Sóc Trăng",
+      "Huyen_Quan": "Thành phố Sóc Trăng",
+      "Xa_Phuong": "Phường 5"
     }
   ],
-  "Chu_thich": "Không",
-  "Tong_tien": 4500000,
-  "Ngay_nhap": {
-    "$date": "2020-09-30T17:00:00Z"
-  }
+  "Gioi_tinh": "Nam",
+  "So_dien_thoai": "0234567891",
+  "CMND_CCCD": "123456789010",
+  "Mat_khau": "12345678",
+  "Email": "trucb1706774@student.ctu.edu.vn",
+  "Quyen_su_dung": "Quản lý",
+  "Thoi_gian_tao": {
+    "$date": "2021-03-12T08:49:28Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-08T08:55:46Z"
+  },
+  "__v": 0,
+  "Ma_so": "620580"
+},{
+  "_id": {
+    "$oid": "606ae638734a7c16fff136f0"
+  },
+  "Nhan_vien_id": "HuynhTruc",
+  "Ho_ten": "Huỳnh Khánh Duy",
+  "Ngay_sinh": {
+    "$date": "1999-09-14T17:00:00Z"
+  },
+  "Dia_chi": [
+    {
+      "Tinh_ThanhPho": "Thành phố Hà Nội",
+      "Huyen_Quan": "Quận Hà Đông",
+      "Xa_Phuong": "Phường Dương Nội"
+    }
+  ],
+  "Gioi_tinh": "Nam",
+  "So_dien_thoai": "0234567891",
+  "CMND_CCCD": "123456789010",
+  "Mat_khau": "abcdefgh",
+  "Email": "truc@student.ctu.edu.vn",
+  "Quyen_su_dung": "Quản lý",
+  "Thoi_gian_tao": {
+    "$date": "2021-03-12T08:49:28Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-18T14:27:31Z"
+  },
+  "__v": 0,
+  "Ma_so": "961201"
+},{
+  "_id": {
+    "$oid": "607a933dec2b961e48d1c4e2"
+  },
+  "Nhan_vien_id": "NguyenVanA",
+  "Ma_so": "271302",
+  "Ho_ten": "Nguyễn Văn aa",
+  "Ngay_sinh": {
+    "$date": "2021-03-02T00:00:00Z"
+  },
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "607a933dec2b961e48d1c4e3"
+      },
+      "Tinh_ThanhPho": "Tỉnh Cao Bằng",
+      "Huyen_Quan": "Huyện Thông Nông",
+      "Xa_Phuong": "Xã Cần Nông"
+    }
+  ],
+  "Gioi_tinh": "Nữ",
+  "So_dien_thoai": "0234567891",
+  "CMND_CCCD": "123456789011",
+  "Mat_khau": "ECK4Hn8R",
+  "Email": "huynhhuetruc@gmail.com",
+  "Quyen_su_dung": "Quản lý",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-17T07:50:21Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-17T08:01:35Z"
+  },
+  "__v": 0
 }]
