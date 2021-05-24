@@ -57,8 +57,8 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   loaicays: LoaiCayModel
   isLoading = false
   arrSoLuongBan = [];
-dsphieudat: PhieuDatModel
-sum = 0;
+  dsphieudat: PhieuDatModel
+  sum = 0;
 
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
@@ -81,7 +81,7 @@ sum = 0;
     this.isLoading = false;
   }
 
-  getdsphieudat(){
+  getdsphieudat() {
     this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
     })
@@ -130,20 +130,20 @@ sum = 0;
       this.getthongtincuahang();
       this.getdskhuyenmai();
       this.getdsHoaDonBanHang();
-        // Lấy danh mục cuả sản phẩm và tìm sản phẩm tương tự
-        this.danhmuc = this.sanphamdetail[0].Danh_Muc[0].DMN_id
-        for (const i in this.dssanpham) {
-          if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.danhmuc) {
-            this.arrSanPham.push(this.dssanpham[i])
-          }
+      // Lấy danh mục cuả sản phẩm và tìm sản phẩm tương tự
+      this.danhmuc = this.sanphamdetail[0].Danh_Muc[0].DMN_id
+      for (const i in this.dssanpham) {
+        if (this.dssanpham[i].Danh_Muc[0].DMN_id === this.danhmuc) {
+          this.arrSanPham.push(this.dssanpham[i])
         }
+      }
 
     });
   }
 
   getdsHoaDonBanHang() {
     let count = 0;
-    let sum =0
+    let sum = 0
     this.hoadonbanService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonban = res.hoadonbanhangs;
       for (const i in this.sanphamdetail) {
@@ -164,15 +164,15 @@ sum = 0;
       for (const i in this.arrSanPham) {
         if (this.arrSanPham.hasOwnProperty) {
           for (const j in this.dshoadonban) {
-            if (this.dshoadonban.hasOwnProperty){
-              for (const h in this.dshoadonban[j].San_Pham){
-                if (this.arrSanPham[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id){
+            if (this.dshoadonban.hasOwnProperty) {
+              for (const h in this.dshoadonban[j].San_Pham) {
+                if (this.arrSanPham[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id) {
                   sum += this.dshoadonban[j].San_Pham[h].So_luong;
                 }
               }
             }
           }
-          this.arrSoLuongBan.push({SanPham_id: this.arrSanPham[i]._id, So_luong_ban: sum});
+          this.arrSoLuongBan.push({ SanPham_id: this.arrSanPham[i]._id, So_luong_ban: sum });
           sum = 0;
         }
       }
@@ -271,7 +271,7 @@ sum = 0;
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -303,21 +303,18 @@ sum = 0;
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
   So_luong_mac_dinh() {
-     this.sum = 0;
+    this.sum = 0;
     if (this.So_luong === null || this.So_luong === 0) {
       this.So_luong = 1;
     }
 
-    // if (this.So_luong > this.sanphamdetail[0].So_luong) {
-    //   this.So_luong = this.sanphamdetail[0].So_luong;
-    // }
     this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
-           this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
       }
@@ -330,33 +327,33 @@ sum = 0;
 
   // Cập nhật số lượng sản phẩm nếu sản phẩm đang thêm đã tồn tại trong giỏ hàng
   CapNhatSoLuongSanPhamTrung(sanpham) {
+
     let bool = false
-    for (const i in this.giohang[0].San_Pham) {
-      if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
-        if (  (this.giohang[0].San_Pham[i].So_luong + this.So_luong) > (this.sanphamdetail[0].So_luong - this.sum)){
-          this.giohang[0].San_Pham[i].So_luong = this.sanphamdetail[0].So_luong - this.sum
+      for (const i in this.giohang[0].San_Pham) {
+        if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
+          if ((this.giohang[0].San_Pham[i].So_luong + this.So_luong) > (this.sanphamdetail[0].So_luong - this.sum)) {
+            this.giohang[0].San_Pham[i].So_luong = this.sanphamdetail[0].So_luong - this.sum
 
-        }else{
-          console.log( this.giohang[0].San_Pham[i].So_luong, this.So_luong)
-          this.giohang[0].San_Pham[i].So_luong += this.So_luong
+          } else {
+            this.giohang[0].San_Pham[i].So_luong += this.So_luong
+          }
+
+          return true
+        } else {
+          bool = false
         }
-
-        return true
-      } else {
-        bool = false
-      }
     }
     return bool
   }
 
   ThemVaoGioHang() {
-    if (this.KHService.loggedInStatus){
+    if (this.KHService.loggedInStatus) {
       if (!this.CapNhatSoLuongSanPhamTrung(this.sanphamdetail[0])) {
         this.giohang[0].San_Pham.push({ SanPham_id: this.sanphamdetail[0]._id, So_luong: this.So_luong })
       }
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       alert('Đã thêm vào giỏ hàng!')
-    }else{
+    } else {
       this.router.navigateByUrl('/login');
     }
 

@@ -62,7 +62,6 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
 
     this.href = this.router.url;
     this.loaicay_id = this.href.replace('/default/typetree/', '');
-
     this.getLoaiCay();
     // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // this.router.onSameUrlNavigation = 'reload';

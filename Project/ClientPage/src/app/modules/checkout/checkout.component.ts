@@ -180,15 +180,11 @@ export class CheckoutComponent implements OnInit {
     return bool;
   }
 
-
   TongTien() {
-    // console.log(this.sanphamthanhtoan)
-    // console.log(this.arrSanPhamThanhToan)
     this.tong_tien = 0;
     this.arrSanPham = []
     for (const i in this.arrSanPhamThanhToan) {
       this.KiemTraKhuyeMai(this.arrSanPhamThanhToan[i])
-      // console.log(this.giatrikhuyenmai)
       this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[i].Gia - this.arrSanPhamThanhToan[i].Gia * this.giatrikhuyenmai) * this.sanphamthanhtoan[i].So_luong
     }
   }

@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <div class="card-body ">
             <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
             <div class="d-flex justify-content-center mt-2">
               <p class="giasale">{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
@@ -104,60 +104,96 @@
   </div>
 
   <!-- Các loại cây -->
-  <div class="container" *ngFor="let eachLoaiCay of loaicays; let i = index">
+  <div class="container " *ngFor="let eachLoaiCay of loaicays; let i = index">
     <div class="container" *ngIf="KiemTraChanLe(i)">
       <div class="row">
         <button (click)="DSSanPham(eachLoaiCay._id)" class="title-gt textcase">{{eachLoaiCay?.Ten_loai_cay}}</button>
       </div>
-      <div class="row">
-        <div class="col-6">
-          <div class="row div-sp">
-            <div class="col goiy sp">
-              Sản phẩm 1
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 2
-            </div>
-          </div>
 
-          <div class="row div-sp">
-            <div class="col goiy sp">
-              Sản phẩm 3
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 4
+      <div class="row ">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-sm-6 mt-4" *ngFor="let eachSP of arrsanphamtrangchu[i]; let j = index">
+              <a >
+                <div class="card d-flex justify-content-center goiy">
+                  <img class="card-img-top" src="{{eachSP?.Hinh_anh}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h6 id="Ten_san_pham" class="card-title">{{eachSP?.Ten_san_pham }}</h6>
+                    <div class="container">
+                      <div class="row" *ngIf="KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text khuyenmai">{{eachSP?.Gia | currency: "VND"}}</small>
+                        &nbsp;
+                        <small class="cart-text sale"> -{{giatrikhuyenmai*100}}%</small>
+                      </div>
+                      <div class="row rong" *ngIf="!KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text khuyenmai"></small>
+                        &nbsp;
+                        <small class="cart-text"></small>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6 p-0">
+                          <p class="card-text">{{eachSP?.Gia - eachSP?.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                        </div>
+                        <div class="col-sm-6  p-0">
+                          <p class="card-text daban" *ngIf="SoLuongBan(eachSP, j)"> Đã bán {{arrSoLuongBan}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
         <div class="col-6 ">
+         <div class="container">
           <img class="image" src="{{eachLoaiCay?.Hinh_anh}}">
+         </div>
         </div>
       </div>
     </div>
 
-    <div class="container" *ngIf="!KiemTraChanLe(i)">
+    <div class="container mt-5" *ngIf="!KiemTraChanLe(i)">
       <div class="row">
-        <button (click)="DSSanPham()" class="subtitle textcase">{{eachLoaiCay.Ten_loai_cay}}</button>
+        <button (click)="DSSanPham(eachLoaiCay._id)" class="subtitle textcase">{{eachLoaiCay?.Ten_loai_cay}}</button>
       </div>
       <div class="row">
         <div class="col-6 ">
-          <img class="image" src="{{eachLoaiCay.Hinh_anh}}">
+         <div class="container">
+          <img class="image" src="{{eachLoaiCay?.Hinh_anh}}">
+         </div>
         </div>
         <div class="col-6">
-          <div class="row div-sp">
-            <div class="col goiy sp">
-              Sản phẩm 1
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 2
-            </div>
-          </div>
-          <div class="row div-sp">
-            <div class="col goiy sp">
-              Sản phẩm 3
-            </div>
-            <div class="col goiy sp">
-              Sản phẩm 4
+          <div class="row ">
+            <div class="col-sm-6 mt-4" *ngFor="let eachSP of arrsanphamtrangchu[i]; let j = index">
+              <a>
+                <div class="card d-flex justify-content-center goiy">
+                  <img class="card-img-top" src="{{eachSP?.Hinh_anh}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h6 id="Ten_san_pham" class="card-title">{{eachSP?.Ten_san_pham }}</h6>
+                    <div class="container">
+                      <div class="row" *ngIf="KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text khuyenmai">{{eachSP?.Gia | currency: "VND"}}</small>
+                        &nbsp;
+                        <small class="cart-text sale"> -{{giatrikhuyenmai*100}}%</small>
+                      </div>
+                      <div class="row rong" *ngIf="!KiemTraKhuyeMai(eachSP)">
+                        <small class="card-text "></small>
+                        &nbsp;
+                        <small class="cart-text "></small>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6 p-0">
+                          <p class="card-text">{{eachSP?.Gia - eachSP?.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                        </div>
+                        <div class="col-sm-6  p-0">
+                          <p class="card-text daban" *ngIf="SoLuongBan(eachSP, j)"> Đã bán {{arrSoLuongBan}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -166,17 +202,17 @@
   </div>
 
   <!-- Phân trang -->
- <div class="container mt-5">
-   <div class="row">
-     <div class="col-sm-12 d-flex justify-content-center align-items-center">
-      <ul id="pagination">
-        <li *ngFor="let item of dsloaicay | paginate: { itemsPerPage: 4, currentPage: p }"> </li>
-      </ul>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-12 d-flex justify-content-center align-items-center">
+        <ul id="pagination">
+          <li *ngFor="let item of dsloaicay | paginate: { itemsPerPage: 4, currentPage: p }"> </li>
+        </ul>
 
-      <pagination-controls (pageChange)="p = $event" (click)="ChuyenTrang(p)"></pagination-controls>
-     </div>
-   </div>
- </div>
+        <pagination-controls (pageChange)="p = $event" (click)="ChuyenTrang(p)"></pagination-controls>
+      </div>
+    </div>
+  </div>
 
   <!-- Row gợi ý -->
   <div class="row">

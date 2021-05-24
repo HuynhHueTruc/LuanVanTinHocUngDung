@@ -44,6 +44,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   dsloaicaycanh: DanhMucNhoModel[] = [];
   danhmucdaidien: DanhMucNhoModel[] = []
   dscaycanh: SanPhamModel[] = [];
+  arrSoLuongBan = 0;
 
 
   constructor(private khuyenmaiService: KhuyenmaiService, private sanphamService: SanphamService, private hoadonbanhangService: HoadonbanhangService, private router: Router,
@@ -68,7 +69,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.danhmucService.getListDanhMuc().subscribe((res: any) => {
       this.dsdanhmuc = res.danhmucs;
       this.dsdmcaycanh = this.dsdanhmuc[1].Danh_muc_nho;
-
       this.SoKhopLoaiCay(arrloaicay);
     });
   }
@@ -76,6 +76,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   // Lấy sản phẩm theo id được chọn
   SoKhopLoaiCay(arrloaicay) {
     let arrtmp: any;
+    this.danhmucdaidien = []
     for (const j in arrloaicay) {
       for (const i in this.dsdmcaycanh) {
         if (this.dsdmcaycanh[i].Loai_cay === arrloaicay[j]._id) {
@@ -85,7 +86,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
       arrtmp = this.dsloaicaycanh
       this.danhmucdaidien.push(arrtmp)
       this.dsloaicaycanh = [];
-
     }
     this.getdssanphamtrangchu();
   }
@@ -95,6 +95,9 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     let lsttmp: SanPhamModel[] = []
     let random = []
     let arrrandom: any
+    this.arrsanphamtrangchu = []
+    this.dssanphamtheoloai = []
+    let sl = []
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.dssanpham = res.sanphams;
 
@@ -114,18 +117,28 @@ export class ContentComponent implements OnInit, AfterContentChecked {
         this.dssanphamtheoloai.push(arrtmp)
         lsttmp = [];
       }
-     for (const l in this.dssanphamtheoloai){
-       if (this.dssanphamtheoloai.hasOwnProperty(l)){
-        for (let i = 0; i < 4; i++){
-        random.push(this.dssanphamtheoloai[l][Math.floor(Math.random() * this.dssanphambanchay.length)])
+      for (const l in this.dssanphamtheoloai) {
+        if (this.dssanphamtheoloai.hasOwnProperty(l)) {
+          for (let i = 0; i < 4; i++) {
+            random.push(this.dssanphamtheoloai[l][Math.floor(Math.random() * this.dssanphambanchay.length)])
+          }
+          arrrandom = random
+          this.arrsanphamtrangchu.push(arrrandom);
+          random = []
         }
-        arrrandom = random
-        this.arrsanphamtrangchu.push(arrrandom);
-        random = []
-       }
-     }
-
-     console.log(this.arrsanphamtrangchu)
+      }
+      // for (const i in this.arrsanphamtrangchu) {
+      //   for (const j in this.arrsanphamtrangchu[i]) {
+      //     for (const i in this.dssanphambanchay) {
+      //       if (this.dssanphambanchay[i].SanPham_id === this.arrsanphamtrangchu[i][j]._id) {
+      //         sl.push(this.dssanphambanchay[i].So_luong)
+      //       }
+      //     }
+      //   }
+      //   this.arrSoLuongBan.push(sl)
+      //   sl = []
+      // }
+      // console.log(this.arrSoLuongBan)
     });
   }
 
@@ -170,7 +183,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getdshoadonbanhang() {
     let count = 0
     let arrXoaTrung = []
-
     this.hoadonbanhangService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonbanhang = res.hoadonbanhangs;
       for (const i in this.dshoadonbanhang) {
@@ -196,50 +208,48 @@ export class ContentComponent implements OnInit, AfterContentChecked {
 
       // Sắp xếp mảng giảm dần
       this.dssanphambanchay = this.sortJSON(this.dssanphambanchay, 'So_luong', '321'); // 123: tăng dần or 321: giảm dần
-      // for (const i in this.dssanphambanchay){
-      //   for (const j in this.dssanpham) {
-      //     if (this.dssanpham[j]._id === this.dssanphambanchay[i].SanPham_id) {
-      //       this.danhmuctmp.push(this.dssanpham[i])
-      //     }
-      //   }
-      // }
       this.getdssanpham()
     })
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraKhuyeMai(eachSP) {
-
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
     let bool = false;
-    for (const i in this.dskhuyenmai) {
-      if (this.dskhuyenmai.hasOwnProperty(i)) {
-        for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
-          if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
-            if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
-              if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
-                && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-                this.arrKhuyenMai.push(this.dskhuyenmai[i]);
+    if (eachSP !== undefined) {
+
+      for (const i in this.dskhuyenmai) {
+        if (this.dskhuyenmai.hasOwnProperty(i)) {
+          for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+            if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+              if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+                if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                  && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                  this.arrKhuyenMai.push(this.dskhuyenmai[i]);
+                }
+              } else {
+                bool = false;
               }
-            } else {
-              bool = false;
             }
           }
         }
       }
-    }
 
-    for (const i in this.arrKhuyenMai) {
-      if (this.arrKhuyenMai.hasOwnProperty(i)) {
-        if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
-          this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
-          this.khuyenmai = this.arrKhuyenMai[i];
-          bool = true;
+      for (const i in this.arrKhuyenMai) {
+        if (this.arrKhuyenMai.hasOwnProperty(i)) {
+          if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
+            this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
+            this.khuyenmai = this.arrKhuyenMai[i];
+            bool = true;
+          }
         }
-      }
 
+      }
+    } else {
+      bool = false
     }
+
     // console.log(this.khuyenmai)
     return bool;
   }
@@ -305,6 +315,21 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     });
   }
 
+    SoLuongBan(eachSP, i){
+
+      if (eachSP !== undefined){
+        for (const i in this.dssanphambanchay){
+          if (this.dssanphambanchay[i].SanPham_id === eachSP._id){
+            this.arrSoLuongBan = this.dssanphambanchay[i].So_luong
+          }else{
+            this.arrSoLuongBan = 0
+          }
+        }
+      }
+      return true
+
+    }
+
   KiemTraChanLe(index) {
     return index % 2 === 0
   }
@@ -317,6 +342,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
 
   ChuyenTrang(number) {
     this.loaicays = []
+    this.arrSoLuongBan = 0;
     for (let i = 0; i < 4; i++) {
       this.loaicays.push(this.dsloaicay[((number - 1) * 4) + i]);
     }

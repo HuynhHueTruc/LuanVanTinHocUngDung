@@ -27,10 +27,13 @@ export class LiftnavComponent implements OnInit {
   }
 
   getgiohang() {
-    this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
+    this.giohangService.getGioHang(this.datalogin).subscribe((dt) => {
       this.giohang = dt;
-      this.lengthdssanpham = this.giohang[0].San_Pham.length;
-
+      // if (this.giohang !== null){
+        this.lengthdssanpham = this.giohang[0].San_Pham.length;
+      // }else{
+      //   this.lengthdssanpham = 0;
+      // }
     });
   }
 

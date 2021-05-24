@@ -205,6 +205,8 @@ export class ProductComponent implements OnInit {
           }
         }
       });
+
+      this.compareDMN_id(this.dssanpham);
     }
   }
 
@@ -217,6 +219,7 @@ export class ProductComponent implements OnInit {
     } else {
       if (target === 'Mới nhất') {
         this.dssanpham.reverse();
+        this.thongtindanhmucnho.reverse();
       }
     }
   }

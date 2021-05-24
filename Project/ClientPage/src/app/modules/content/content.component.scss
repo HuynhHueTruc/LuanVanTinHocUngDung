@@ -156,34 +156,23 @@ button {
   height: auto;
 }
 
-.div-sp {
-  height: 50%;
-  margin-bottom: 7px;
-}
 
+
+.goiy:hover {
+  transform: scale(1.1);
+}
 
 .title-goiy {
   font-size: 40px;
   text-align: center;
 }
 
-.goiy {
-  margin-left: 1%;
-  margin-right: 1%;
-  height: auto;
-  overflow: hidden;
-  border: 1px solid #e5e5e5;
-}
+// .goiy img {
+//   width: 100%;
+//   height: 100%;
+//   transition-duration: 0.3s;
+// }
 
-.goiy img {
-  width: 100%;
-  height: 100%;
-  transition-duration: 0.3s;
-}
-
-.goiy img:hover {
-  transform: scale(1.2);
-}
 
 .col-wrap {
   display: table;
@@ -200,24 +189,27 @@ button {
   font-weight: bold;
 }
 
-.card {
-  border: none;
-}
+// .card {
+//   border: none;
+// }
 
 .wapper {
   margin-top: 3%;
 }
 
-.sale {
-  //vertical-align: middle;
-  width: 100px;
-  height: 100px;
-  //object-fit: cover;
+// .sale {
+//   //vertical-align: middle;
+//   width: 100px;
+//   height: 100px;
+//   //object-fit: cover;
+// }
+
+.sale{
+  color: crimson;
 }
 
-.khuyenmai {
-  width: 840px;
-  height: 250px;
+.khuyenmai{
+  text-decoration: line-through;
 }
 
 .sanphambanchay {
@@ -305,4 +297,42 @@ h6 {
   margin-left: 0;
   padding-left: 1em;
   text-indent: -1em;
+}
+
+.card-img-top{
+  // vertical-align: middle;
+  // width: 180px;
+  height: 200px;
+  // object-fit: cover;
+}
+
+.quangcao:hover {
+  transform: scale(1.1);
+}
+
+.khuyenmai{
+  text-decoration: line-through;
+}
+.sale{
+  color: crimson;
+}
+
+.daban{
+  font-size: 12px;
+}
+
+
+.loaicay{
+  height: auto;
+}
+
+#Ten_san_pham{
+  font-size: 18px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rong{
+  height:  20px;
 }

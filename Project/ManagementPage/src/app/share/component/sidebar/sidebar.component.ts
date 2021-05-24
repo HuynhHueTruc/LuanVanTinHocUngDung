@@ -8,6 +8,8 @@ import { NbMenuItem } from '@nebular/theme';
 })
 export class SidebarComponent implements OnInit {
   nhanvien: any;
+  // phieudat: PhieuDatModel
+  So_luong_phieu_dat = 0
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +20,13 @@ export class SidebarComponent implements OnInit {
       document.getElementById('Quyen_SD').style.display = 'none';
 
     }
+    // this.getSLphieudat();
   }
 
+// getSLphieudat(){
+// this.phieudatService.getListPhieuDat().subscribe((res: any) =>{
+//   this.phieudat = res.phieudats;
+//   this.So_luong_phieu_dat = this.phieudat.length
+// })
+//}
 }
