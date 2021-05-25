@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   sanphams: SanPhamModel[] = []
   dshoadonbanhang: HoaDonBanHangModel
   dsloaicay: LoaiCayModel[] = []
-  dssanphamtheoloai: SanPhamModel[] = []
+  dssanphamtheoloai = []
   arrdanhmuckhuyenmai = []
   arrsanphambanchay = []
   arrsanphamtrangchu: SanPhamModel[] = []
@@ -120,25 +120,13 @@ export class ContentComponent implements OnInit, AfterContentChecked {
       for (const l in this.dssanphamtheoloai) {
         if (this.dssanphamtheoloai.hasOwnProperty(l)) {
           for (let i = 0; i < 4; i++) {
-            random.push(this.dssanphamtheoloai[l][Math.floor(Math.random() * this.dssanphambanchay.length)])
+            random.push(this.dssanphamtheoloai[l][Math.floor(Math.random() * this.dssanphamtheoloai[l].length)])
           }
           arrrandom = random
           this.arrsanphamtrangchu.push(arrrandom);
           random = []
         }
       }
-      // for (const i in this.arrsanphamtrangchu) {
-      //   for (const j in this.arrsanphamtrangchu[i]) {
-      //     for (const i in this.dssanphambanchay) {
-      //       if (this.dssanphambanchay[i].SanPham_id === this.arrsanphamtrangchu[i][j]._id) {
-      //         sl.push(this.dssanphambanchay[i].So_luong)
-      //       }
-      //     }
-      //   }
-      //   this.arrSoLuongBan.push(sl)
-      //   sl = []
-      // }
-      // console.log(this.arrSoLuongBan)
     });
   }
 
@@ -285,6 +273,10 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
 
+  ProductDetailSP(eachSP) {
+    this.router.navigateByUrl(`/detail/${eachSP._id}`);
+    this.isLoading = true;
+  }
   //  // Hàm tìm kiếm theo tên hoặc id
   //  SearchByKeyWord() {
   //   this.dskhuyenmai = this.dskhuyenmaisearch;
@@ -352,6 +344,9 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     }
     this.getdsdanhmuc(this.loaicays);
   }
+
+
+
   // onSelectLTypeTree(eachDanhMuc) {
   //   let loaicay = '';
   //   // console.log(this.danhmucloaicay)
