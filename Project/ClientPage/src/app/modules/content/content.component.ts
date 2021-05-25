@@ -278,7 +278,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
    // Hàm tìm kiếm theo tên hoặc id
-   SearchByKeyWord() {
+   //SearchByKeyWord() {
     // this.dskhuyenmai = this.dskhuyenmaisearch;
     // const text = this.removeAccents(this.keyword);
     // if (text === '') {
@@ -297,7 +297,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     //     }
     //   });
     // }
-  }
+ // }
 
   // Lấy loại cây làm danh mục
   getLoaiCay() {

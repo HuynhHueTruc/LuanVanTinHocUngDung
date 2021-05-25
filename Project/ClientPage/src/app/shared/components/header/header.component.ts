@@ -1,3 +1,5 @@
+import { SanPhamModel } from './../../../../models/SanPham/sanpham';
+import { SanphamService } from './../../../../services/SanPham/sanpham.service';
 import { LoaicayService } from './../../../../services/LoaiCay/loaicay.service';
 import { LoaiCayModel } from './../../../../models/LoaiCay/loaicay';
 import { KhachhangService } from './../../../../services/KhachHang/khachhang.service';
@@ -50,6 +52,8 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   dsdungcu: TenDanhMucNhoModel[] = [];
   dshotro: TenDanhMucNhoModel[] = [];
 
+  dssanpham: SanPhamModel[] = []
+  dssanphamsearch = []
   name = '';
   loaicay_id = '';
   href = '';
@@ -57,12 +61,13 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   keysearch = ''
   // Khi chạy constructor thì khởi tạo luôn DanhmucService
   constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
-    private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute, private sanphamService: SanphamService) { }
 
   ngOnInit(): void {
 
     this.getLoaiCay();
     this.geteachDanhMuc();
+    this.getdscsanpham();
     // console.log(this.KHService.loggedInStatus, JSON.parse(this.KHService.loggedInStatus));
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     if (this.KHService.loggedInStatus === false) {
@@ -80,6 +85,13 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.loaicayService.getListLoaiCay().subscribe((res: any) => {
       this.loaicays = res.loaicays;
     });
+  }
+
+  getdscsanpham() {
+    this.sanphamService.getListSanPham().subscribe((res: any) => {
+      this.dssanpham = res.sanphams;
+
+    })
   }
 
   // Hàm lấy từng Danh mục sản phẩm
@@ -192,10 +204,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   }
 
   onSelectLTypeTree(eachLoaiCay) {
-    console.log(eachLoaiCay)
-    // this.router.navigate(['/default/typetree', eachLoaiCay._id], { state: { _id: `${eachLoaiCay._id}` }});
     this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
-    // this.router.navigateByUrl(`/default/typetree/${eachLoaiCay._id}`);
     this.isLoading = true;
   }
 
@@ -208,24 +217,53 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.isLoading = false;
   }
 
-  GoiYTuKhoa(){
-    if (this.keysearch === ''){
+  GoiYTuKhoa() {
+    if (this.keysearch === '') {
       document.getElementById('suggestions-box').style.display = 'none'
-    }else{
+    } else {
+      this.SearchByKeyWord()
       document.getElementById('suggestions-box').style.display = 'block'
     }
   }
 
-  HiddenSearch(){
+  HiddenSearch() {
+    console.log('hihi')
     document.getElementById('suggestions-box').style.display = 'none'
   }
 
-  onSelectProduct(eachSP?){
-    if (eachSP !== undefined){
+  onSelectProduct(eachSP?) {
+    if (eachSP !== undefined) {
       this.router.navigateByUrl(`/default/product/${eachSP.DMN_id}`);
       this.isLoading = true;
-    }else{
-          this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
+    } else {
+      this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
     }
   }
+
+  // Hàm chuyển đổi tiếng Việt sang tiếng Anh
+  removeAccents(str) {
+    return str.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+      ;
+  }
+
+// Tìm kiếm theo từ khóa
+  SearchByKeyWord() {
+    this.dssanphamsearch = this.dssanpham;
+    const text = this.removeAccents(this.keysearch);
+    if (text === '') {
+      this.getdscsanpham();
+    } else {
+      this.dssanphamsearch = this.dssanpham.filter(res => {
+        const tensanpham = this.removeAccents(res.Ten_san_pham);
+        const tmp2 = text.replace(/·/g, '');
+        if (tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+          return tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
+        }
+      });
+    }
+  }
+
+
 }

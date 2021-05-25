@@ -39,7 +39,7 @@ a.navbar-brand:hover {
 }
 
 .form-control {
-  width: 85%;
+  width: 100%;
   border: none;
   height: 50%;
 }
@@ -109,9 +109,21 @@ a {
   font-size: 14px;
 }
 
+.search{
+  border: 2px groove  #FFFAFA;
+}
+
 #filter-select {
   padding-left: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  color: black;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#select:hover{
+ background-color:  #FFFAFA;
 }
 
 .suggestions-box {
@@ -120,18 +132,23 @@ a {
   /* put .green-box above .dashed-box */
   background: white;
   border-style: outset;
-
+  height: fit-content;
   width: 340px;
   left: 9%;
   top: 55px;
-  height: 10em;
+  max-height: 15em;
   opacity: 0.9;
   overflow-x: auto;
   overflow-y: auto;
 }
 
+#submit {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
 
-#suggestions-box{
+#suggestions-box {
   display: none;
 }
 
@@ -139,6 +156,6 @@ a {
   border: none
 }
 
-.form-inline{
+.form-inline {
   width: 340px;
 }
