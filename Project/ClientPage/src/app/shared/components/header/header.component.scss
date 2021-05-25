@@ -1,97 +1,144 @@
-
 // .dropdown:hover .dropdown-menu  .dropdown-content{
 //   display: block;
 // }
 //* Hiển thị menu thả xuống khi di chuột * /
-.dropdown:hover .dropdown-menu  {
+.dropdown:hover .dropdown-menu {
   display: block;
 }
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
-a.navbar-brand:hover{
+
+a.navbar-brand:hover {
   color: chartreuse;
 }
-.imgid{
-height: 20px;
-width: 20px;
-font-size: 100%;
-margin-left: 10px;
+
+.imgid {
+  height: 20px;
+  width: 20px;
+  font-size: 100%;
+  margin-left: 10px;
 }
 
 .btn-outline-dark {
-border-color: #FFF;
-color: #FFF;
-}
-.btn-outline-dark:hover {
-border-color: #343a40;
-}
-.navbar-brand{
-text-decoration: none;
-color: cadetblue;
-font-family: "Brush Script MT";
-font-size: 30px;
-}
-.form-control{
-width: 70%;
-border: none;
-height: 50%;
-}
-.navbar{
-background-color: white;
-}
-.nav-link{
-  text-decoration: none;
-font-weight: bold;
-color: black !important;
-}
-.navbar-toggler-icon{
-background-color: black;
+  border-color: #FFF;
+  color: #FFF;
 }
 
-.btn-outline-dark{
-color: black;
+.btn-outline-dark:hover {
+  border-color: #343a40;
 }
-.account{
+
+.navbar-brand {
+  text-decoration: none;
+  color: cadetblue;
+  font-family: "Brush Script MT";
+  font-size: 30px;
+}
+
+.form-control {
+  width: 85%;
+  border: none;
+  height: 50%;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.nav-link {
+  text-decoration: none;
   font-weight: bold;
-  color:cadetblue;
+  color: black !important;
+}
+
+.navbar-toggler-icon {
+  background-color: black;
+}
+
+.btn-outline-dark {
+  color: black;
+}
+
+.account {
+  font-weight: bold;
+  color: cadetblue;
   font-size: 100%;
   margin-left: 5%;
 }
-.dropdown{
+
+.dropdown {
   position: relative;
   display: inline-block;
 }
-.content{
+
+.content {
   display: none;
   position: absolute;
   background-color: #f5f5f5;
   z-index: 1;
   list-style: none;
 }
-a{
-  color:white;
+
+a {
+  color: white;
   text-decoration: none;
 }
-.navbar-nav .dropdown-menu{
+
+.navbar-nav .dropdown-menu {
   background-color: black;
 
 }
 
-.dropdown-content{
+.dropdown-content {
   background-color: black;
   color: white;
 }
 
-.dropdown-content:hover{
+.dropdown-content:hover {
   color: cornflowerblue;
 }
 
-.dropdown-menu{
-  margin-top:  0px;
+.dropdown-menu {
+  margin-top: 0px;
 }
 
-.nav-link{
+.nav-link {
   font-size: 14px;
+}
+
+#filter-select {
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+.suggestions-box {
+  position: absolute;
+  z-index: 2;
+  /* put .green-box above .dashed-box */
+  background: white;
+  border-style: outset;
+
+  width: 340px;
+  left: 9%;
+  top: 55px;
+  height: 10em;
+  opacity: 0.9;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+
+#suggestions-box{
+  display: none;
+}
+
+.no-value {
+  border: none
+}
+
+.form-inline{
+  width: 340px;
 }

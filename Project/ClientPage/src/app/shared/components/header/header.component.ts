@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   loaicay_id = '';
   href = '';
   isLoading = false;
-
+  keysearch = ''
   // Khi chạy constructor thì khởi tạo luôn DanhmucService
   constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
     private router: Router, private route: ActivatedRoute) { }
@@ -208,13 +208,21 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.isLoading = false;
   }
 
+  GoiYTuKhoa(){
+    if (this.keysearch === ''){
+      document.getElementById('suggestions-box').style.display = 'none'
+    }else{
+      document.getElementById('suggestions-box').style.display = 'block'
+
+    }
+  }
+
   onSelectProduct(eachSP?){
     if (eachSP !== undefined){
       this.router.navigateByUrl(`/default/product/${eachSP.DMN_id}`);
       this.isLoading = true;
     }else{
           this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
-
     }
   }
 }
