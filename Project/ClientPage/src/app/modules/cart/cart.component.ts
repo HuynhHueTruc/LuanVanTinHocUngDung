@@ -149,14 +149,16 @@ export class CartComponent implements OnInit {
   KTCheckedAll() {
     if (this.checkAll) {
       this.checkAll = false;
+      this.arrSanPhamThanhToan = []
       this.checked = [];
       for (let i = 0; i < this.lengthdssanpham; i++) {
         this.checked.push(false);
         document.getElementById('divbutton').style.display = 'none';
       }
+
     } else {
       this.checkAll = true;
-      this.TongTien()
+      // this.TongTien()
       this.checked = [];
       for (let i = 0; i < this.lengthdssanpham; i++) {
         this.checked.push(true);
@@ -165,7 +167,6 @@ export class CartComponent implements OnInit {
     }
 
     if (this.checkAll) {
-      // this.tong_tien = 0;
       this.TongTien()
       this.lengthchecked = this.checked.length;
     } else {
@@ -359,7 +360,7 @@ export class CartComponent implements OnInit {
   }
 
   Checkout() {
-    if (this.arrSanPhamThanhToan === undefined) {
+    if (this.arrSanPhamThanhToan === undefined || this.arrSanPhamThanhToan[0] === undefined) {
       alert('Vui lòng chọn sản phẩm thanh toán!')
     } else {
       this.giohangService.setArrSP(this.arrSanPhamThanhToan)

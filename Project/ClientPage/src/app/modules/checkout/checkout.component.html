@@ -76,11 +76,11 @@
       </div>
       <div class="col-sm-2 d-flex justify-content-center align-items-center">
         <div>
-          <p>{{ this.arrSanPhamThanhToan[i].So_luong}}</p>
+          <p>{{ arrSanPhamThanhToan[i].So_luong}}</p>
         </div>
       </div>
       <div class="col-sm-3 d-flex justify-content-center align-items-center">
-        {{(eachSP.Gia - eachSP.Gia*giatrikhuyenmai) *giohang[0]?.San_Pham[i].So_luong | currency: "VND"}}
+        {{(eachSP.Gia - eachSP.Gia*giatrikhuyenmai) *arrSanPhamThanhToan[i].So_luong | currency: "VND"}}
       </div>
 
     </div>
