@@ -213,8 +213,11 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
       document.getElementById('suggestions-box').style.display = 'none'
     }else{
       document.getElementById('suggestions-box').style.display = 'block'
-
     }
+  }
+
+  HiddenSearch(){
+    document.getElementById('suggestions-box').style.display = 'none'
   }
 
   onSelectProduct(eachSP?){
