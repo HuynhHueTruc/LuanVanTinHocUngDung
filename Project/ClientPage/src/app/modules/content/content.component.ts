@@ -183,6 +183,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   getdshoadonbanhang() {
     let count = 0
     let arrXoaTrung = []
+    let sanpham = ''
     this.hoadonbanhangService.getListHoaDonBan().subscribe((res: any) => {
       this.dshoadonbanhang = res.hoadonbanhangs;
       for (const i in this.dshoadonbanhang) {
@@ -191,23 +192,25 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           arrXoaTrung.push(this.dshoadonbanhang[i].San_Pham[j].SanPham_id)
         }
       }
-
       arrXoaTrung = [...new Set(arrXoaTrung)]
 
       // Tính số lượng bán được của từng sản phẩm
       for (const h in arrXoaTrung) {
         for (const k in this.arrsanphambanchay) {
           if (this.arrsanphambanchay[k].SanPham_id === arrXoaTrung[h]) {
+            sanpham = this.arrsanphambanchay[k].SanPham_id
             count += this.arrsanphambanchay[k].So_luong
           }
         }
-
-        this.dssanphambanchay.push({ SanPham_id: this.arrsanphambanchay[h].SanPham_id, So_luong: count })
+        this.dssanphambanchay.push({ SanPham_id: sanpham, So_luong: count })
+        sanpham = ''
         count = 0
       }
 
       // Sắp xếp mảng giảm dần
       this.dssanphambanchay = this.sortJSON(this.dssanphambanchay, 'So_luong', '321'); // 123: tăng dần or 321: giảm dần
+      // this.dssanphambanchay = [...new Set(this.dssanphambanchay)]
+console.log(this.dssanphambanchay)
       this.getdssanpham()
     })
   }
@@ -275,6 +278,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           }
         }
       }
+      // console.log(this.sanphambanchays)
     })
   }
 

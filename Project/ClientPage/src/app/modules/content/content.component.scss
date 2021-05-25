@@ -95,8 +95,8 @@
   background-color: transparent;
 }
 
-.title-gt:focus{
-  outline:none;
+.title-gt:focus {
+  outline: none;
 }
 
 .subtitle {
@@ -204,12 +204,16 @@ button {
 //   //object-fit: cover;
 // }
 
-.sale{
+.sale {
   color: crimson;
 }
 
-.khuyenmai{
+.khuyenmai {
   text-decoration: line-through;
+}
+
+.spkhuyenmai {
+  width: 1050px;
 }
 
 .sanphambanchay {
@@ -284,22 +288,22 @@ h6 {
   text-overflow: ellipsis;
 }
 
-.previous_next{
+.previous_next {
   background-color: transparent;
 }
 
-.current{
+.current {
   color: black;
 }
 
-#pagination{
+#pagination {
   list-style: none;
   margin-left: 0;
   padding-left: 1em;
   text-indent: -1em;
 }
 
-.card-img-top{
+.card-img-top {
   // vertical-align: middle;
   // width: 180px;
   height: 200px;
@@ -310,29 +314,30 @@ h6 {
   transform: scale(1.1);
 }
 
-.khuyenmai{
+.khuyenmai {
   text-decoration: line-through;
 }
-.sale{
+
+.sale {
   color: crimson;
 }
 
-.daban{
+.daban {
   font-size: 12px;
 }
 
 
-.loaicay{
+.loaicay {
   height: auto;
 }
 
-#Ten_san_pham{
+#Ten_san_pham {
   font-size: 18px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.rong{
-  height:  20px;
+.rong {
+  height: 20px;
 }

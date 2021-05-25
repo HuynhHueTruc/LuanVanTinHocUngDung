@@ -32,7 +32,7 @@
   </div>
   <div class="row d-flex justify-content-center">
 
-    <div class="carousel khuyenmai" *ngIf="danhmuckhuyenmais.length > 0">
+    <div class="carousel spkhuyenmai" *ngIf="danhmuckhuyenmais.length > 0">
       <carousel [height]="300">
         <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais">
           <div style="height: 180px;">
@@ -145,8 +145,8 @@
             </div>
           </div>
         </div>
-        <div class="col-6 ">
-         <div class="container">
+        <div class="col-6 d-flex justify-content-center align-items-center">
+         <div class="container ">
           <img class="image" src="{{eachLoaiCay?.Hinh_anh}}">
          </div>
         </div>
@@ -158,7 +158,7 @@
         <button (click)="DSSanPham(eachLoaiCay._id)" class="subtitle textcase">{{eachLoaiCay?.Ten_loai_cay}}</button>
       </div>
       <div class="row">
-        <div class="col-6 ">
+        <div class="col-6  d-flex justify-content-center align-items-center">
          <div class="container">
           <img class="image" src="{{eachLoaiCay?.Hinh_anh}}">
          </div>
