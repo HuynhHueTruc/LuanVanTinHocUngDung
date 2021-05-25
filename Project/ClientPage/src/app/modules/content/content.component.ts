@@ -209,8 +209,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
 
       // Sắp xếp mảng giảm dần
       this.dssanphambanchay = this.sortJSON(this.dssanphambanchay, 'So_luong', '321'); // 123: tăng dần or 321: giảm dần
-      // this.dssanphambanchay = [...new Set(this.dssanphambanchay)]
-console.log(this.dssanphambanchay)
       this.getdssanpham()
     })
   }
@@ -325,8 +323,10 @@ console.log(this.dssanphambanchay)
         for (const i in this.dssanphambanchay){
           if (this.dssanphambanchay[i].SanPham_id === eachSP._id){
             this.arrSoLuongBan = this.dssanphambanchay[i].So_luong
+            return true
           }else{
             this.arrSoLuongBan = 0
+
           }
         }
       }
