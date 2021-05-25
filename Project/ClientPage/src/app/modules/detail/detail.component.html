@@ -88,17 +88,24 @@
     </div>
 
     <div class="row m-3" *ngFor="let eachdetail of sanphamdetail[0]?.Danh_gia; let i = index">
-      <div class="col-12">
-        <div class="row m-3">
+      <div class="col-12 p-0">
+        <div class="row m-0">
           <div class="col-sm-1 p-0 d-flex justify-content-end">
             <img id="image" src={{thongtincuahang[0]?.Anh_dai_dien}} class="avatar">
           </div>
 
           <div class="col-sm-11">
             <p class="m-0" id="Khachhang_id">{{eachdetail.KhachHang_id}}</p>
-            <div class="row m-0">
+            <div class="row m-0 mt-1">
               <i class="far fa-star" id="star_customer_yellow" *ngFor="let j of countStar[i]"></i>
               <i class="far fa-star" id="star_customer" *ngFor="let h of arrSoDiemConLai[i]"></i>
+            </div>
+            <br>
+            <div class="row m-0">
+              <p class="m-0">{{eachdetail.Noi_dung}}</p>
+            </div>
+            <div class="row m-0">
+              <small>{{eachdetail.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
             </div>
             <br>
             <div class="row m-0">
@@ -127,10 +134,7 @@
                 </button>
               </div>
             </div>
-            <br>
-            <div class="row m-0">
-              <p>{{eachdetail.Noi_dung}}</p>
-            </div>
+
           </div>
         </div>
       </div>
