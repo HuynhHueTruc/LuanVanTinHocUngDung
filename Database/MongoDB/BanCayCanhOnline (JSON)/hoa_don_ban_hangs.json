@@ -32,7 +32,7 @@
   "ThanhToan_id": {
     "$oid": "5f7d89b47cc2cc2a04b15745"
   },
-  "Tong_tien": "195000",
+  "Tong_tien": 195000,
   "Ngay_lap": {
     "$date": "2020-09-30T17:00:00Z"
   },
@@ -192,6 +192,130 @@
   "Tong_tien": 6940000,
   "Ngay_lap": {
     "$date": "2021-01-31T17:00:00Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60891e4c32036134e8c13b61"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60891e4c96452234e83ec214"
+      },
+      "SanPham_id": "607aaa4e62e0c41e48cb67ad",
+      "So_luong": 2,
+      "Gia_ban": 170000
+    },
+    {
+      "_id": {
+        "$oid": "60891e4c96452234e83ec215"
+      },
+      "SanPham_id": "607aae9662e0c41e48cb67b0",
+      "So_luong": 4,
+      "Gia_ban": 925000
+    }
+  ],
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "Trúc",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "Tinh_ThanhPho": "Thành phố Hà Nội",
+      "Huyen_Quan": "Quận Ba Đình",
+      "Xa_Phuong": "Phường Trúc Bạch"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5aad7cab023368e36b27"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89d47cc2cc2a04b15748"
+  },
+  "Tong_tien": 4040000,
+  "Ngay_lap": {
+    "$date": "2021-04-28T08:35:24Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6088502e9a12f43570478187"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60891f0096452234e83ec222"
+      },
+      "SanPham_id": "607aaa4e62e0c41e48cb67ad",
+      "So_luong": 1,
+      "Gia_ban": 170000
+    }
+  ],
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "HuynhKhanhDuy",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "Tinh_ThanhPho": "Tỉnh Hà Giang",
+      "Huyen_Quan": "Thành phố Hà Giang",
+      "Xa_Phuong": "Phường Quang Trung"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5aad7cab023368e36b27"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Tong_tien": 170000,
+  "Ngay_lap": {
+    "$date": "2021-04-28T08:38:24Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60ab7f751b7d1228b0f72cc8"
+  },
+  "NhanVien_id": "HuynhKhanhDuy",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60ab7f75fde72028b0b9572d"
+      },
+      "SanPham_id": "607ab61862e0c41e48cb67df",
+      "So_luong": 3,
+      "Gia_ban": 180000
+    },
+    {
+      "_id": {
+        "$oid": "60ab7f75fde72028b0b9572e"
+      },
+      "SanPham_id": "607ab5d762e0c41e48cb67dd",
+      "So_luong": 2,
+      "Gia_ban": 150000
+    }
+  ],
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "Huỳnh Khánh Duy",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "Tinh_ThanhPho": "Thành phố Cần Thơ",
+      "Huyen_Quan": "Quận Ninh Kiều",
+      "Xa_Phuong": "Phường An Khánh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5ac27cab023368e36b29"
+  },
+  "ThanhToan_id": {
+    "$oid": "605b69385f8f083e2cd65fb8"
+  },
+  "Tong_tien": 554000,
+  "Ngay_lap": {
+    "$date": "2021-05-24T10:27:01Z"
   },
   "__v": 0
 }]

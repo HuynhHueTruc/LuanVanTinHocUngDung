@@ -1,37 +1,40 @@
 [{
   "_id": {
-    "$oid": "5f7d8a847cc2cc2a04b1574a"
+    "$oid": "605b5aad7cab023368e36b27"
   },
   "Ten_hinh_thuc": "Ship code",
-  "Gia": 50000,
-  "Thoi_gian_tao": {
-    "$date": "2021-03-21T17:00:00Z"
-  },
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-21T17:00:00Z"
-  }
-},{
-  "_id": {
-    "$oid": "5f7d8a8c7cc2cc2a04b1574b"
-  },
-  "Ten_hinh_thuc": "Chuyển phát nhanh",
-  "Gia": 80000,
-  "Thoi_gian_tao": {
-    "$date": "2021-03-21T17:00:00Z"
-  },
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-21T17:00:00Z"
-  }
-},{
-  "_id": {
-    "$oid": "5f7d8a937cc2cc2a04b1574c"
-  },
-  "Ten_hinh_thuc": "Bưu điện",
   "Gia": 30000,
   "Thoi_gian_tao": {
-    "$date": "2021-03-21T17:00:00Z"
+    "$date": "2021-03-24T15:28:45Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-21T17:00:00Z"
-  }
+    "$date": "2021-03-24T15:28:45Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605b5ab87cab023368e36b28"
+  },
+  "Ten_hinh_thuc": "Bưu điện",
+  "Gia": 25000,
+  "Thoi_gian_tao": {
+    "$date": "2021-03-24T15:28:56Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-24T15:28:56Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605b5ac27cab023368e36b29"
+  },
+  "Ten_hinh_thuc": "Chuyển phát nhanh",
+  "Gia": 50000,
+  "Thoi_gian_tao": {
+    "$date": "2021-03-24T15:29:06Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-24T15:29:06Z"
+  },
+  "__v": 0
 }]

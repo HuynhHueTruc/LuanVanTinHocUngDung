@@ -2,6 +2,20 @@
   "_id": {
     "$oid": "5f7d895f7cc2cc2a04b15743"
   },
+  "Tieu_de": "Hàng mới về",
+  "NhanVien_id": "HuynhKhanhDuy",
+  "Noi_dung": "<p>Hoa phong lan mặt khỉ: Lo&agrave;i hoa c&oacute; nguồn gốc từ Peru v&agrave; Ecuador n&agrave;y c&oacute; h&igrave;nh d&aacute;ng giống mặt khỉ một c&aacute;ch kh&oacute; tin. Mỗi g&oacute;i hạt giống phong lan mặt khỉ (khoảng 160 hạt) nhập khẩu khoảng 1,5 triệu đồng (khoảng 10.000 đồng/hạt). Tuy nhi&ecirc;n, kh&aacute;ch h&agrave;ng thường phải đặt nh&agrave; vườn để nhập hạt giống về v&igrave; hạt kh&ocirc;ng c&oacute; b&aacute;n sẵn tr&ecirc;n thị trường Việt. Hoa phong lan mặt khỉ: Lo&agrave;i hoa c&oacute; nguồn gốc từ Peru v&agrave; Ecuador n&agrave;y c&oacute; h&igrave;nh d&aacute;ng giống mặt khỉ một c&aacute;ch kh&oacute; tin. Mỗi g&oacute;i hạt giống phong lan mặt khỉ (khoảng 160 hạt) nhập khẩu khoảng 1,5 triệu đồng (khoảng 10.000 đồng/hạt). Tuy nhi&ecirc;n, kh&aacute;ch h&agrave;ng thường phải đặt nh&agrave; vườn để nhập hạt giống về v&igrave; hạt kh&ocirc;ng c&oacute; b&aacute;n sẵn tr&ecirc;n thị trường Việt.</p>\n",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-19T07:47:55Z"
+  },
+  "Thơi_gian_tao": {
+    "$date": "2020-09-30T17:00:00Z"
+  },
+  "Anh_dai_dien": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sat%20Apr%2017%202021%2018%3A47%3A46%20GMT%2B0700%20(Indochina%20Time)-5.jpg?alt=media&token=4888c632-3885-4809-b097-252f521d6243"
+},{
+  "_id": {
+    "$oid": "606e71506337cbd848f77821"
+  },
   "Tieu_de": "Sản phẩm mới",
   "NhanVien_id": {
     "$oid": "5f7d828e7cc2cc2a04b15732"
@@ -13,5 +27,20 @@
   "Thơi_gian_tao": {
     "$date": "2020-09-30T17:00:00Z"
   },
-  "Anh_dai_dien": "E:\\HOC_TAP\\NAM4\\Nien_luan_nganh\\Project\\Pictures\\Tin_tuc\\1"
+  "Anh_dai_dien": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sat%20Apr%2017%202021%2017%3A00%3A15%20GMT%2B0700%20(Indochina%20Time)-1.jpg?alt=media&token=eac51b7e-ddef-4a4e-b3b9-0b5a70d3ae53"
+},{
+  "_id": {
+    "$oid": "607d376fe270893a6c522c62"
+  },
+  "Tieu_de": "Khuyến mãi",
+  "NhanVien_id": "HuynhKhanhDuy",
+  "Noi_dung": "<p>Khuyến m&atilde;i 20%&nbsp;nh&acirc;n ng&agrave;y khai trương.</p>\n",
+  "Anh_dai_dien": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Mon%20Apr%2019%202021%2014%3A55%3A26%20GMT%2B0700%20(Indochina%20Time)-khuyenmai.jpg?alt=media&token=f6f2cefd-3387-4407-b86c-c68f8149efc7",
+  "Thoi_gian_tao": {
+    "$date": "2021-04-19T07:55:27Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-04-19T07:55:27Z"
+  },
+  "__v": 0
 }]

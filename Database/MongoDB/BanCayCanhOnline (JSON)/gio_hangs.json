@@ -4,19 +4,88 @@
   },
   "San_Pham": [
     {
-      "SanPham_id": {
-        "$oid": "607aaa4e62e0c41e48cb67ad"
+      "_id": {
+        "$oid": "60a3502c0bdaa737f463eefb"
       },
-      "So_luong": 1,
-      "Gia_ban": 170000
-    },
-    {
-      "SanPham_id": {
-        "$oid": "607ab14262e0c41e48cb67b4"
-      },
-      "So_luong": 3,
-      "Gia_ban": 109000
+      "SanPham_id": "607aaa4e62e0c41e48cb67ad",
+      "So_luong": 39
     }
   ],
-  "KhachHang_id": "Huynh_Hue_TrucA"
+  "KhachHang_id": "Huynh_Hue_Truc",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-04T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "609205c314fa1d670e08021b"
+  },
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60ac660f4448933acc3decd1"
+      },
+      "SanPham_id": "607ad35bccf14534746d2ac1",
+      "So_luong": 1
+    },
+    {
+      "_id": {
+        "$oid": "60ac663e4448933acc3decd3"
+      },
+      "SanPham_id": "607b1c30ccf14534746d2c0f",
+      "So_luong": 2
+    },
+    {
+      "_id": {
+        "$oid": "60ad0923cd16a73de068477f"
+      },
+      "SanPham_id": "607af5dbccf14534746d2b5b",
+      "So_luong": 2
+    }
+  ],
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-04T17:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "6092544e8626db40483b4798"
+  },
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60926819fbebf71da0cfdad4"
+      },
+      "SanPham_id": "607ab14262e0c41e48cb67b4",
+      "So_luong": 3
+    },
+    {
+      "_id": {
+        "$oid": "609268dafbebf71da0cfdad6"
+      },
+      "SanPham_id": "607ab5d762e0c41e48cb67dd",
+      "So_luong": 5
+    },
+    {
+      "_id": {
+        "$oid": "6092690ffbebf71da0cfdad9"
+      },
+      "SanPham_id": "607b1262ccf14534746d2be1",
+      "So_luong": 1
+    }
+  ],
+  "KhachHang_id": "HuynhHueTruc",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-05T08:16:14Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60abc52de3b37e0b2cf86a61"
+  },
+  "San_Pham": [],
+  "KhachHang_id": "HueTruc1509",
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-24T15:24:29Z"
+  },
+  "__v": 0
 }]

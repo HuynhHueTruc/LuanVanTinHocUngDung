@@ -2,121 +2,96 @@
   "_id": {
     "$oid": "60030069c5c7b25212bab46d"
   },
-  "Ten_loai_cay": "Cây ban công",
+  "Ten_loai_cay": "Cây ban công ",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:11:51Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A07%3A35%20GMT%2B0700%20(Indochina%20Time)-BanCong.jpg?alt=media&token=e912f7fa-9315-4cca-9994-23b63000a806"
 },{
   "_id": {
     "$oid": "600c3d7e0c8c6941c440be4d"
   },
   "Ten_loai_cay": "Cây dây leo",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:12:48Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A12%3A45%20GMT%2B0700%20(Indochina%20Time)-DayLeo.png?alt=media&token=07333084-9a1b-4725-a1f2-c1d0cae992d6"
 },{
   "_id": {
     "$oid": "600c3eb10c8c6941c440be4f"
   },
   "Ten_loai_cay": "Cây để bàn",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:13:48Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A13%3A44%20GMT%2B0700%20(Indochina%20Time)-gt3.jpg?alt=media&token=4ed7e947-529d-45d5-b2aa-c32f1c287065"
 },{
   "_id": {
     "$oid": "600c3eba0c8c6941c440be50"
   },
   "Ten_loai_cay": "Cây phong thủy",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:14:10Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A14%3A07%20GMT%2B0700%20(Indochina%20Time)-PhongThuy.png?alt=media&token=aae59fe8-a49b-4007-9939-89f0d7183633"
 },{
   "_id": {
     "$oid": "600c3ec30c8c6941c440be51"
   },
   "Ten_loai_cay": "Cây nội thất",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:14:32Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A14%3A29%20GMT%2B0700%20(Indochina%20Time)-NoiThat.png?alt=media&token=ac858b7d-a5ed-4941-8e7f-7815991ce31f"
 },{
   "_id": {
     "$oid": "600c3eca0c8c6941c440be52"
   },
   "Ten_loai_cay": "Cây thủy sinh",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:17:53Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A17%3A49%20GMT%2B0700%20(Indochina%20Time)-ThuySinh.png?alt=media&token=691ff5ec-b293-40b2-a3fc-9e3ad06d0fb2"
 },{
   "_id": {
     "$oid": "600c3ed10c8c6941c440be53"
   },
   "Ten_loai_cay": "Cây ngoại thất",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:18:11Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
+  },
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A18%3A08%20GMT%2B0700%20(Indochina%20Time)-NgoaiThat.png?alt=media&token=d74f831b-007e-4733-8c8b-f8865e05bbdf"
 },{
   "_id": {
     "$oid": "600c3ed80c8c6941c440be54"
   },
   "Ten_loai_cay": "Cây công trình",
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
+    "$date": "2021-04-21T09:19:55Z"
   },
   "Thoi_gian_tao": {
     "$date": "2021-03-30T17:00:00Z"
-  }
-},{
-  "_id": {
-    "$oid": "600c43200c8c6941c440be55"
   },
-  "Ten_loai_cay": "Terrarium",
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
-  },
-  "Thoi_gian_tao": {
-    "$date": "2021-03-30T17:00:00Z"
-  }
-},{
-  "_id": {
-    "$oid": "600c4cec0c8c6941c440be56"
-  },
-  "Ten_loai_cay": "Cây sen đá",
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
-  },
-  "Thoi_gian_tao": {
-    "$date": "2021-03-30T17:00:00Z"
-  }
-},{
-  "_id": {
-    "$oid": "600c4cf90c8c6941c440be57"
-  },
-  "Ten_loai_cay": "Cây sen",
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-30T17:00:00Z"
-  },
-  "Thoi_gian_tao": {
-    "$date": "2021-03-30T17:00:00Z"
-  }
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Wed%20Apr%2021%202021%2016%3A19%3A52%20GMT%2B0700%20(Indochina%20Time)-CongTrinh.png?alt=media&token=8286a396-0946-4868-ba9c-14b899ef8e90"
 }]

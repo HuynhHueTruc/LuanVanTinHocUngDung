@@ -7,7 +7,7 @@
     "$date": "2021-04-13T17:00:00Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-13T17:00:00Z"
+    "$date": "2021-04-14T12:37:54Z"
   }
 },{
   "_id": {
@@ -16,6 +16,9 @@
   "Ten_danh_muc": "Cây cảnh",
   "Danh_muc_nho": [
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae2fd"
+      },
       "Ten_danh_muc_nho": "Cây anh thảo",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -25,6 +28,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae2fe"
+      },
       "Ten_danh_muc_nho": "Cây bạch mã hoàng tử",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -34,6 +40,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae2ff"
+      },
       "Ten_danh_muc_nho": "Cây bạch tuyết mai",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -43,6 +52,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae300"
+      },
       "Ten_danh_muc_nho": "Cây bàng Đài loan",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -52,6 +64,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae301"
+      },
       "Ten_danh_muc_nho": "Cây bằng lăng",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -61,6 +76,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae302"
+      },
       "Ten_danh_muc_nho": "Cây bàng Singapore",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -70,6 +88,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae303"
+      },
       "Ten_danh_muc_nho": "Cây bảy sắc cầu vòng",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -79,6 +100,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae304"
+      },
       "Ten_danh_muc_nho": "Cây cá vàng",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -88,6 +112,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae305"
+      },
       "Ten_danh_muc_nho": "Cây cẩm nhung",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -97,6 +124,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae306"
+      },
       "Ten_danh_muc_nho": "Cây cẩm thạch",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -106,6 +136,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae307"
+      },
       "Ten_danh_muc_nho": "Cây cau đuôi chồn",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -115,6 +148,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae308"
+      },
       "Ten_danh_muc_nho": "Cây cau vua",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -124,6 +160,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae309"
+      },
       "Ten_danh_muc_nho": "Cây chuỗi bi rũ",
       "Loai_cay": {
         "$oid": "600c446f2822fe42b17014f4"
@@ -133,6 +172,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30a"
+      },
       "Ten_danh_muc_nho": "Cây chuối cảnh",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -142,6 +184,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30b"
+      },
       "Ten_danh_muc_nho": "Cây chuông vàng",
       "Loai_cay": {
         "$oid": "600c44a02822fe42b17014f6"
@@ -151,6 +196,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30c"
+      },
       "Ten_danh_muc_nho": "Cây cọ dầu",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -160,6 +208,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30d"
+      },
       "Ten_danh_muc_nho": "Cây cỏ mây",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -169,6 +220,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30e"
+      },
       "Ten_danh_muc_nho": "Cây cọ Nhật",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -178,6 +232,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae30f"
+      },
       "Ten_danh_muc_nho": "Cây đa cảnh",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -187,6 +244,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae310"
+      },
       "Ten_danh_muc_nho": "Cây dạ yến thảo",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -196,6 +256,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae311"
+      },
       "Ten_danh_muc_nho": "Cây đại lộc",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -205,6 +268,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae312"
+      },
       "Ten_danh_muc_nho": "Cây đại phú gia",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -214,6 +280,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae313"
+      },
       "Ten_danh_muc_nho": "Cây dầu rái",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -223,6 +292,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae314"
+      },
       "Ten_danh_muc_nho": "Cây dây nhện",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -232,6 +304,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae315"
+      },
       "Ten_danh_muc_nho": "Cây đôla",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -241,6 +316,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae316"
+      },
       "Ten_danh_muc_nho": "Cây dứa cảnh",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -250,6 +328,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae317"
+      },
       "Ten_danh_muc_nho": "Cây đuôi công",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -259,6 +340,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae318"
+      },
       "Ten_danh_muc_nho": "Cây dương xỉ",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -268,6 +352,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae319"
+      },
       "Ten_danh_muc_nho": "Cây hải đường",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -277,6 +364,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31a"
+      },
       "Ten_danh_muc_nho": "Cây hoa 10 giờ",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -286,6 +376,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31b"
+      },
       "Ten_danh_muc_nho": "Cây hoa bướm đêm",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -295,6 +388,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31c"
+      },
       "Ten_danh_muc_nho": "Cây hoa cẩm tú cầu",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -304,6 +400,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31d"
+      },
       "Ten_danh_muc_nho": "Cây hoa đèn lồng",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -313,6 +412,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31e"
+      },
       "Ten_danh_muc_nho": "Cây hoa nhài",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -322,6 +424,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae31f"
+      },
       "Ten_danh_muc_nho": "Cây hoàng hậu",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -331,6 +436,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae320"
+      },
       "Ten_danh_muc_nho": "Cây hoàng nam",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -340,6 +448,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae321"
+      },
       "Ten_danh_muc_nho": "Cây hồng môn",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -349,6 +460,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae322"
+      },
       "Ten_danh_muc_nho": "Cây hương thảo",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -358,6 +472,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae323"
+      },
       "Ten_danh_muc_nho": "Cây kè bạc",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -367,6 +484,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae324"
+      },
       "Ten_danh_muc_nho": "Cây kim ngân",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -376,6 +496,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae325"
+      },
       "Ten_danh_muc_nho": "Cây kim tiền",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -385,6 +508,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae326"
+      },
       "Ten_danh_muc_nho": "Cây lệnh bài",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -394,6 +520,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae327"
+      },
       "Ten_danh_muc_nho": "Cây liễu",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -403,6 +532,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae328"
+      },
       "Ten_danh_muc_nho": "Cây lộc vừng",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -412,6 +544,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae329"
+      },
       "Ten_danh_muc_nho": "Cây lông não",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -421,6 +556,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32a"
+      },
       "Ten_danh_muc_nho": "Cây lưỡi cọp",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -430,6 +568,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32b"
+      },
       "Ten_danh_muc_nho": "Cây mai",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -439,6 +580,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32c"
+      },
       "Ten_danh_muc_nho": "Cây me tây",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -448,6 +592,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32d"
+      },
       "Ten_danh_muc_nho": "Cây muồng hoa đào",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -457,6 +604,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32e"
+      },
       "Ten_danh_muc_nho": "Cây nắp ấm",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -466,6 +616,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd345eed500cd03ae32f"
+      },
       "Ten_danh_muc_nho": "Cây ngọc bích",
       "Loai_cay": {
         "$oid": "600c3eb10c8c6941c440be4f"
@@ -475,6 +628,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae330"
+      },
       "Ten_danh_muc_nho": "Cây ngọc lan",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -484,6 +640,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae331"
+      },
       "Ten_danh_muc_nho": "Cây ngũ gia bì",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -493,6 +652,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae332"
+      },
       "Ten_danh_muc_nho": "Cây nguyệt quế",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -502,6 +664,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae333"
+      },
       "Ten_danh_muc_nho": "Cây nha đam",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -511,6 +676,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae334"
+      },
       "Ten_danh_muc_nho": "Cây nhất mạt hương",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -520,6 +688,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae335"
+      },
       "Ten_danh_muc_nho": "Cây phát tài",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -529,6 +700,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae336"
+      },
       "Ten_danh_muc_nho": "Cây phượng",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -538,6 +712,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae337"
+      },
       "Ten_danh_muc_nho": "Cây sala",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -547,6 +724,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae338"
+      },
       "Ten_danh_muc_nho": "Cây sao đen",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -556,6 +736,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae339"
+      },
       "Ten_danh_muc_nho": "Cây sen đá",
       "Loai_cay": {
         "$oid": "600c4cf90c8c6941c440be57"
@@ -565,6 +748,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33a"
+      },
       "Ten_danh_muc_nho": "Cây si",
       "Loai_cay": {
         "$oid": "600c3ed80c8c6941c440be54"
@@ -574,6 +760,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33b"
+      },
       "Ten_danh_muc_nho": "Cây sống đời",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -583,6 +772,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33c"
+      },
       "Ten_danh_muc_nho": "Cây sứ đại",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -592,6 +784,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33d"
+      },
       "Ten_danh_muc_nho": "Cây sung",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -601,6 +796,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33e"
+      },
       "Ten_danh_muc_nho": "Cây sừng hưu",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -610,6 +808,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae33f"
+      },
       "Ten_danh_muc_nho": "Cây tài lộc",
       "Loai_cay": {
         "$oid": "600c3eba0c8c6941c440be50"
@@ -619,6 +820,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae340"
+      },
       "Ten_danh_muc_nho": "Cây trác bách diệp",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -628,6 +832,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae341"
+      },
       "Ten_danh_muc_nho": "Cây trang",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -637,6 +844,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae342"
+      },
       "Ten_danh_muc_nho": "Cây trạng nguyên",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -646,15 +856,21 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae343"
+      },
       "Ten_danh_muc_nho": "Cây trầu bà",
       "Loai_cay": {
-        "$oid": "60030069c5c7b25212bab46d"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       },
       "DMN_id": {
         "$oid": "5f7d86e48bec9df446bcb4ff"
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae344"
+      },
       "Ten_danh_muc_nho": "Cây trúc bách hợp",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -664,6 +880,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae345"
+      },
       "Ten_danh_muc_nho": "Cây trường sinh",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -673,6 +892,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae346"
+      },
       "Ten_danh_muc_nho": "Cây tùng kim cương",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -682,6 +904,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae347"
+      },
       "Ten_danh_muc_nho": "Cây tùng la hán",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -691,6 +916,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae348"
+      },
       "Ten_danh_muc_nho": "Cây tùng tuyết",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -700,6 +928,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae349"
+      },
       "Ten_danh_muc_nho": "Cây tùng xương cá",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -709,6 +940,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34a"
+      },
       "Ten_danh_muc_nho": "Cây tuyết sơn phi hồ",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -718,15 +952,21 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34b"
+      },
       "Ten_danh_muc_nho": "Cây vẫy rồng",
       "Loai_cay": {
-        "$oid": "60030069c5c7b25212bab46d"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       },
       "DMN_id": {
         "$oid": "5f7d86fb8bec9df446bcb507"
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34c"
+      },
       "Ten_danh_muc_nho": "Cây hoa anh đào",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -736,6 +976,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34d"
+      },
       "Ten_danh_muc_nho": "Cây hoa hồng",
       "Loai_cay": {
         "$oid": "600c3ed10c8c6941c440be53"
@@ -745,6 +988,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34e"
+      },
       "Ten_danh_muc_nho": "Cây hoa sen",
       "Loai_cay": {
         "$oid": "600c4cf90c8c6941c440be57"
@@ -754,6 +1000,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae34f"
+      },
       "Ten_danh_muc_nho": "Cây hoa son môi",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -763,6 +1012,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae350"
+      },
       "Ten_danh_muc_nho": "Cây hoa tiên ông",
       "Loai_cay": {
         "$oid": "600c3ec30c8c6941c440be51"
@@ -772,6 +1024,9 @@
       }
     },
     {
+      "_id": {
+        "$oid": "6076cd355eed500cd03ae351"
+      },
       "Ten_danh_muc_nho": "Cây hoa lan",
       "Loai_cay": {
         "$oid": "60030069c5c7b25212bab46d"
@@ -781,12 +1036,63 @@
       }
     },
     {
-      "Ten_danh_muc_nho": "Terrarium",
+      "_id": {
+        "$oid": "6076e1f010225804301df9c2"
+      },
+      "Ten_danh_muc_nho": "Cây mù u",
       "Loai_cay": {
-        "$oid": "600c43200c8c6941c440be55"
+        "$oid": "600c3ed80c8c6941c440be54"
       },
       "DMN_id": {
-        "$oid": "5fb11eac192a11e11c9a91d5"
+        "$oid": "6076e1f0b9b2960430b164d6"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60aa1542474dbc3cdc5210ed"
+      },
+      "Ten_danh_muc_nho": "Sen đá",
+      "Loai_cay": {
+        "$oid": "600c3ed10c8c6941c440be53"
+      },
+      "DMN_id": {
+        "$oid": "607aa7ac48eb6b97a6fc7bef"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60aa1542474dbc3cdc5210ee"
+      },
+      "Ten_danh_muc_nho": "Hoa sen",
+      "Loai_cay": {
+        "$oid": "600c3eca0c8c6941c440be52"
+      },
+      "DMN_id": {
+        "$oid": "607aa7ff48eb6b97a6fc7bf0"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60aa1542474dbc3cdc5210ef"
+      },
+      "Ten_danh_muc_nho": "Cây thủy cúc",
+      "Loai_cay": {
+        "$oid": "600c3eca0c8c6941c440be52"
+      },
+      "DMN_id": {
+        "$oid": "60aa15415ce7bc3cdc54a3e1"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60aa1553474dbc3cdc521149"
+      },
+      "Ten_danh_muc_nho": "Cây ráy",
+      "Loai_cay": {
+        "$oid": "600c3eca0c8c6941c440be52"
+      },
+      "DMN_id": {
+        "$oid": "60aa15535ce7bc3cdc54a3e2"
       }
     }
   ],
@@ -794,7 +1100,7 @@
     "$date": "2021-04-13T17:00:00Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-13T17:00:00Z"
+    "$date": "2021-05-23T08:41:55Z"
   }
 },{
   "_id": {
@@ -1008,6 +1314,12 @@
       "DMN_id": {
         "$oid": "5f7d88758bec9df446bcb52b"
       }
+    },
+    {
+      "Ten_danh_muc_nho": "Phụ kiện trang trí",
+      "DMN_id": {
+        "$oid": "5f7d88277cc2cc2a04b1573d"
+      }
     }
   ],
   "Thoi_gian_tao": {
@@ -1044,12 +1356,6 @@
   },
   "Ten_danh_muc": "Hỗ trợ",
   "Danh_muc_nho": [
-    {
-      "Ten_danh_muc_nho": "Tuyển dụng",
-      "DMN_id": {
-        "$oid": "5f7d88b08bec9df446bcb52f"
-      }
-    },
     {
       "Ten_danh_muc_nho": "Hướng dẫn đặt hàng",
       "DMN_id": {

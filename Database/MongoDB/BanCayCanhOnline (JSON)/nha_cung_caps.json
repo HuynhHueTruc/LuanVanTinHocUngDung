@@ -1,72 +1,75 @@
 [{
   "_id": {
-    "$oid": "5f7d8abe7cc2cc2a04b1574d"
-  },
-  "Ten": "Nhà cung cấp dụng cụ làm vườn A",
-  "Dia_chi": [
-    {
-      "Xa_Phuong": "Xã Song Phụng",
-      "Huyen_Quan": "Huyện Long Phú",
-      "Tinh_ThanhPho": "Tỉnh Sóc Trăng"
-    }
-  ],
-  "Email": "truc@gmail.com",
-  "So_dien_thoai": "0123456789",
-  "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-29T17:00:00Z"
-  },
-  "Thoi_gian_tao": {
-    "$date": "2021-03-29T17:00:00Z"
-  },
-  "Danh_muc_cung_cap": [
-    {
-      "DMN_id": {
-        "$oid": "5f7d88718bec9df446bcb529"
-      }
-    }
-  ]
-},{
-  "_id": {
-    "$oid": "6063e3314c437447a0b4fcdf"
+    "$oid": "6064344e5a128248688ba6a3"
   },
   "Ten": "Nhà cung cấp cây trồng",
   "Dia_chi": [
     {
       "_id": {
-        "$oid": "6063e3317deff447a0a4321b"
+        "$oid": "6064344e5adf224868a49a72"
       },
       "Tinh_ThanhPho": "Thành phố Hà Nội",
       "Huyen_Quan": "Quận Ba Đình",
-      "Xa_Phuong": "Phường Trúc Bạch"
+      "Xa_Phuong": "Phường Cống Vị"
     }
   ],
-  "Email": "nhacungcapcaytrong@gmail.com",
+  "Email": "huynhhuetruc@gmail.com",
   "So_dien_thoai": "0234567891",
   "Danh_muc_cung_cap": [
     {
       "_id": {
-        "$oid": "6063e5f07deff447a0a43220"
+        "$oid": "6064344e5adf224868a49a73"
       },
-      "DMN_id": "5f7d85eb8bec9df446bcb4b8"
+      "DMN_id": {
+        "$oid": "5f7d85eb8bec9df446bcb4b8"
+      }
     },
     {
       "_id": {
-        "$oid": "6063e5f07deff447a0a43221"
+        "$oid": "6064344e5adf224868a49a74"
       },
-      "DMN_id": "5f7d85f48bec9df446bcb4b9"
-    },
-    {
-      "_id": {
-        "$oid": "6063e5f07deff447a0a43222"
-      },
-      "DMN_id": "5f7d85f98bec9df446bcb4ba"
+      "DMN_id": {
+        "$oid": "5f7d85f48bec9df446bcb4b9"
+      }
     }
   ],
   "Thoi_gian_tao": {
-    "$date": "2021-03-31T02:49:21Z"
+    "$date": "2021-03-31T08:35:26Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-31T03:01:04Z"
+    "$date": "2021-04-14T08:33:18Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606434955a128248688ba6a4"
+  },
+  "Ten": "Nhà cung cấp tiểu cảnh",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "606434955adf224868a49a76"
+      },
+      "Tinh_ThanhPho": "Tỉnh Hà Giang",
+      "Huyen_Quan": "Thành phố Hà Giang",
+      "Xa_Phuong": "Phường Trần Phú"
+    }
+  ],
+  "Email": "trucb1706774@student.ctu.edu.vn",
+  "So_dien_thoai": "0234567891",
+  "Danh_muc_cung_cap": [
+    {
+      "_id": {
+        "$oid": "606434955adf224868a49a77"
+      },
+      "DMN_id": "5f7d881e8bec9df446bcb51e"
+    }
+  ],
+  "Thoi_gian_tao": {
+    "$date": "2021-03-31T08:36:37Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-03-31T08:36:37Z"
   },
   "__v": 0
 }]

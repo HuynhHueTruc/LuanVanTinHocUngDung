@@ -11,13 +11,13 @@
       },
       "Tinh_ThanhPho": "Tỉnh Sóc Trăng",
       "Huyen_Quan": "Huyện Long Phú",
-      "Xa_Phuong": "Xã Song Phụng"
+      "Xa_Phuong": "Thị trấn Long Phú"
     }
   ],
   "Gioi_tinh": "Nữ",
   "CMND_CCCD": "123456789011",
   "So_dien_thoai": "0964452406",
-  "Ma_so": "137359",
+  "Ma_so": "123126",
   "Mat_khau": "12345678",
   "Email": "huynhhuetruc99@gmail.com",
   "Tich_diem": 0,
@@ -25,11 +25,11 @@
     "$date": "2021-03-24T15:12:17Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-24T15:12:17Z"
+    "$date": "2021-05-23T04:32:00Z"
   },
   "__v": 0,
   "Ngay_sinh": {
-    "$date": "1999-09-14T17:00:00Z"
+    "$date": "1999-09-15T00:00:00Z"
   },
   "So_thich": [
     {
@@ -57,23 +57,23 @@
       "_id": {
         "$oid": "605b57a150ba8920081b4a7f"
       },
-      "Tinh_ThanhPho": "Thành phố Hải Phòng",
-      "Huyen_Quan": "Huyện Vĩnh Bảo",
-      "Xa_Phuong": "Xã Liên Am"
+      "Tinh_ThanhPho": "Thành phố Cần Thơ",
+      "Huyen_Quan": "Quận Ninh Kiều",
+      "Xa_Phuong": "Phường An Khánh"
     }
   ],
   "Gioi_tinh": "Nam",
   "CMND_CCCD": "123456789011",
   "So_dien_thoai": "0964452406",
-  "Ma_so": "143801",
-  "Mat_khau": "jA0CzO9L",
+  "Ma_so": "919816",
+  "Mat_khau": "abcdefgh",
   "Email": "trucb1706774@student.ctu.edu.vn",
   "Tich_diem": 0,
   "Thoi_gian_tao": {
     "$date": "2021-03-24T15:15:45Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-03-31T02:39:31Z"
+    "$date": "2021-05-08T10:03:25Z"
   },
   "__v": 0,
   "So_thich": [
@@ -112,7 +112,7 @@
   "So_dien_thoai": "0964452406",
   "Ma_so": "380314",
   "Mat_khau": "12345678",
-  "Email": "huynhhuetruc@gmail.com",
+  "Email": "huynhhuetruc123@gmail.com",
   "Tich_diem": 0,
   "Thoi_gian_tao": {
     "$date": "2021-05-05T08:16:14Z"
@@ -133,4 +133,51 @@
       }
     }
   ]
+},{
+  "_id": {
+    "$oid": "60abc52d93f5e90b2cc11949"
+  },
+  "Khach_hang_id": "HueTruc1509",
+  "Ho_ten": "Huỳnh Huệ Trúc",
+  "Ngay_sinh": {
+    "$date": "1999-09-15T00:00:00Z"
+  },
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "60abc52d93f5e90b2cc1194a"
+      },
+      "Tinh_ThanhPho": "Tỉnh Sóc Trăng",
+      "Huyen_Quan": "Huyện Long Phú",
+      "Xa_Phuong": "Xã Song Phụng"
+    }
+  ],
+  "Gioi_tinh": "Nữ",
+  "CMND_CCCD": "366191340",
+  "So_dien_thoai": "0964452406",
+  "Ma_so": "128913",
+  "So_thich": [
+    {
+      "_id": {
+        "$oid": "60abc52d93f5e90b2cc1194b"
+      },
+      "Loai_cay": "60030069c5c7b25212bab46d"
+    },
+    {
+      "_id": {
+        "$oid": "60abc52d93f5e90b2cc1194c"
+      },
+      "Loai_cay": "600c3eb10c8c6941c440be4f"
+    }
+  ],
+  "Mat_khau": "12345678",
+  "Email": "huynhhuetruc@gmail.com",
+  "Tich_diem": 0,
+  "Thoi_gian_tao": {
+    "$date": "2021-05-24T15:24:29Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-24T15:24:29Z"
+  },
+  "__v": 0
 }]

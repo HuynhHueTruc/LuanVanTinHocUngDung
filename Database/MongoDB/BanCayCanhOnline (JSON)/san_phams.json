@@ -3,7 +3,7 @@
     "$oid": "607aaa4e62e0c41e48cb67ad"
   },
   "Ten_san_pham": "Cọ Nhật Để Bàn",
-  "So_luong": 50,
+  "So_luong": 41,
   "Danh_Muc": [
     {
       "_id": {
@@ -21,16 +21,77 @@
     "$date": "2021-04-17T09:28:46Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:08:12Z"
+    "$date": "2021-04-28T08:38:36Z"
   },
-  "Danh_gia": [],
+  "Danh_gia": [
+    {
+      "KhachHang_id": "Huynh_Hue_Truc",
+      "_id": {
+        "$oid": "60abcb20a1ccdc9c638a80b4"
+      },
+      "Noi_dung": "Sản phẩm chất lượng tốt. Shop đóng gói kỹ.",
+      "Hinh_anh": [
+        {
+          "url": "https://khoanh24.com/uploads/w750/2018/10/26/hinh-nen-may-tinh-hoa-hong-full-hd-165bd2c53cb1652_6f0a70c2566b8203d21efec7d121c0f2.jpg"
+        }
+      ],
+      "So_diem": 2,
+      "Ngay_danh_gia": {
+        "$date": "2021-05-23T17:00:00Z"
+      },
+      "Ngay_cap_nhat": {
+        "$date": "2021-05-23T17:00:00Z"
+      }
+    },
+    {
+      "KhachHang_id": "Huynh_Hue_TrucA",
+      "_id": {
+        "$oid": "60abcb3da1ccdc9c638a80b5"
+      },
+      "Noi_dung": "Vận chuyển nhanh, chất lượng tốt.",
+      "Hinh_anh": [
+        {
+          "url": "https://khoanh24.com/uploads/w750/2018/10/26/hinh-nen-may-tinh-hoa-hong-full-hd-165bd2c53cb1652_6f0a70c2566b8203d21efec7d121c0f2.jpg"
+        }
+      ],
+      "So_diem": 1,
+      "Ngay_cap_nhat": {
+        "$date": "2021-05-23T17:00:00Z"
+      },
+      "Ngay_danh_gia": {
+        "$date": "2021-05-23T17:00:00Z"
+      }
+    },
+    {
+      "KhachHang_id": "HuynhKhanhDuy",
+      "_id": {
+        "$oid": "60abcb4ba1ccdc9c638a80b6"
+      },
+      "Noi_dung": "Cây nhỏ nhưng rất khỏe.",
+      "Hinh_anh": [
+        {
+          "url": "https://kjvc.com.vn/uploads/tiny_uploads/tin-tuc/76d790552e8782ba5a6bc76d1bbe0a90_50284_2.jpg"
+        },
+        {
+          "url": "https://khoanh24.com/uploads/w750/2018/10/26/hinh-nen-may-tinh-hoa-hong-full-hd-165bd2c53cb1652_6f0a70c2566b8203d21efec7d121c0f2.jpg"
+        }
+      ],
+      "So_diem": 3,
+      "Ngay_cap_nhat": {
+        "$date": "2021-05-23T17:00:00Z"
+      },
+      "Ngay_danh_gia": {
+        "$date": "2021-05-23T17:00:00Z"
+      }
+    }
+  ],
   "__v": 0
 },{
   "_id": {
     "$oid": "607aac9e62e0c41e48cb67ae"
   },
   "Ten_san_pham": "Cây Cọ Nhật Lớn",
-  "So_luong": 50,
+  "So_luong": 40,
   "Danh_Muc": [
     {
       "_id": {
@@ -48,7 +109,7 @@
     "$date": "2021-04-17T09:38:38Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:08:12Z"
+    "$date": "2021-04-28T08:18:26Z"
   },
   "Danh_gia": [],
   "__v": 0
@@ -57,7 +118,7 @@
     "$oid": "607aae5f62e0c41e48cb67af"
   },
   "Ten_san_pham": "Cây Kè Nhật Công Trình",
-  "So_luong": 50,
+  "So_luong": 40,
   "Danh_Muc": [
     {
       "_id": {
@@ -75,7 +136,7 @@
     "$date": "2021-04-17T09:46:07Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:08:12Z"
+    "$date": "2021-04-28T08:36:30Z"
   },
   "Danh_gia": [],
   "__v": 0
@@ -84,7 +145,7 @@
     "$oid": "607aae9662e0c41e48cb67b0"
   },
   "Ten_san_pham": "Cây cọ nhật - kè nhật",
-  "So_luong": 50,
+  "So_luong": 40,
   "Danh_Muc": [
     {
       "_id": {
@@ -102,7 +163,7 @@
     "$date": "2021-04-17T09:47:02Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:08:12Z"
+    "$date": "2021-04-28T08:36:30Z"
   },
   "Danh_gia": [],
   "__v": 0
@@ -111,7 +172,7 @@
     "$oid": "607aaec562e0c41e48cb67b1"
   },
   "Ten_san_pham": "Cây Cọ Phong Thủy Mini Để Bàn",
-  "So_luong": 50,
+  "So_luong": 46,
   "Danh_Muc": [
     {
       "_id": {
@@ -129,7 +190,7 @@
     "$date": "2021-04-17T09:47:49Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:08:12Z"
+    "$date": "2021-04-27T17:08:34Z"
   },
   "Danh_gia": [],
   "__v": 0
@@ -138,7 +199,7 @@
     "$oid": "607aaf9e62e0c41e48cb67b2"
   },
   "Ten_san_pham": "Bay tay làm vườn, cán gỗ Tramontina",
-  "So_luong": 50,
+  "So_luong": 48,
   "Danh_Muc": [
     {
       "_id": {
@@ -156,7 +217,7 @@
     "$date": "2021-04-17T09:51:26Z"
   },
   "Thoi_gian_cap_nhat": {
-    "$date": "2021-04-18T09:15:16Z"
+    "$date": "2021-04-28T08:18:26Z"
   },
   "Danh_gia": [],
   "__v": 0
@@ -280,7 +341,7 @@
         "$oid": "607ab1b1ec2b961e48d1c4f5"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -307,7 +368,7 @@
         "$oid": "607ab1d4ec2b961e48d1c4f6"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -334,7 +395,7 @@
         "$oid": "607ab1f9ec2b961e48d1c4f7"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -361,7 +422,7 @@
         "$oid": "607ab23aec2b961e48d1c4f9"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -388,7 +449,7 @@
         "$oid": "607ab254ec2b961e48d1c4fa"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -415,7 +476,7 @@
         "$oid": "607ab26aec2b961e48d1c4fb"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -442,7 +503,7 @@
         "$oid": "607ab2a7ec2b961e48d1c4fc"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -469,7 +530,7 @@
         "$oid": "607ab2c8ec2b961e48d1c4fd"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -496,7 +557,7 @@
         "$oid": "607ab2daec2b961e48d1c4fe"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -523,7 +584,7 @@
         "$oid": "607ab2f7ec2b961e48d1c4ff"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -550,7 +611,7 @@
         "$oid": "607ab316ec2b961e48d1c500"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -577,7 +638,7 @@
         "$oid": "607ab32cec2b961e48d1c501"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -604,7 +665,7 @@
         "$oid": "607ab346ec2b961e48d1c502"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -631,7 +692,7 @@
         "$oid": "607ab35eec2b961e48d1c503"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -658,7 +719,7 @@
         "$oid": "607ab376ec2b961e48d1c504"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -685,7 +746,7 @@
         "$oid": "607ab38eec2b961e48d1c505"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -712,7 +773,7 @@
         "$oid": "607ab3a0ec2b961e48d1c506"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -739,7 +800,7 @@
         "$oid": "607ab3ccec2b961e48d1c507"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -766,7 +827,7 @@
         "$oid": "607ab401ec2b961e48d1c508"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -793,7 +854,7 @@
         "$oid": "607ab414ec2b961e48d1c509"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -820,7 +881,7 @@
         "$oid": "607ab426ec2b961e48d1c50a"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -847,7 +908,7 @@
         "$oid": "607ab43bec2b961e48d1c50b"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -874,7 +935,7 @@
         "$oid": "607ab453ec2b961e48d1c50c"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -901,7 +962,7 @@
         "$oid": "607ab469ec2b961e48d1c50d"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -928,7 +989,7 @@
         "$oid": "607ab482ec2b961e48d1c50e"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -955,7 +1016,7 @@
         "$oid": "607ab495ec2b961e48d1c50f"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -982,7 +1043,7 @@
         "$oid": "607ab4abec2b961e48d1c510"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -1009,7 +1070,7 @@
         "$oid": "607ab4bdec2b961e48d1c511"
       },
       "DMN_id": {
-        "$oid": "5f7d881e8bec9df446bcb51e"
+        "$oid": "5f7d88277cc2cc2a04b1573d"
       }
     }
   ],
@@ -1137,7 +1198,7 @@
     "$oid": "607ab54d62e0c41e48cb67d7"
   },
   "Ten_san_pham": "Bình xịt phun sương, tưới cây, tưới kiểng cao cấp - DUDACO",
-  "So_luong": 50,
+  "So_luong": 49,
   "Danh_Muc": [
     {
       "_id": {
@@ -4377,7 +4438,7 @@
     "$oid": "607ad704ccf14534746d2ada"
   },
   "Ten_san_pham": "Cây đô la",
-  "So_luong": 50,
+  "So_luong": 48,
   "Danh_Muc": [
     {
       "_id": {
@@ -4917,7 +4978,7 @@
     "$oid": "607ad8e8ccf14534746d2aee"
   },
   "Ten_san_pham": "Cây hải đường",
-  "So_luong": 50,
+  "So_luong": 47,
   "Danh_Muc": [
     {
       "_id": {
@@ -5032,7 +5093,7 @@
         "$oid": "607ad95e66f6c63474ac57a7"
       },
       "DMN_id": {
-        "$oid": "5f7d86638bec9df446bcb4d6"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -5059,7 +5120,7 @@
         "$oid": "607ad97766f6c63474ac57a8"
       },
       "DMN_id": {
-        "$oid": "5f7d86638bec9df446bcb4d6"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -5086,7 +5147,7 @@
         "$oid": "607ad98b66f6c63474ac57a9"
       },
       "DMN_id": {
-        "$oid": "5f7d86638bec9df446bcb4d6"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -5113,7 +5174,7 @@
         "$oid": "607ad99f66f6c63474ac57aa"
       },
       "DMN_id": {
-        "$oid": "5f7d86638bec9df446bcb4d6"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -5140,7 +5201,7 @@
         "$oid": "607ad9bb66f6c63474ac57ab"
       },
       "DMN_id": {
-        "$oid": "5f7d86638bec9df446bcb4d6"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -5457,7 +5518,7 @@
     "$oid": "607adca6ccf14534746d2b02"
   },
   "Ten_san_pham": "Cây hoa đèn lồng",
-  "So_luong": 50,
+  "So_luong": 49,
   "Danh_Muc": [
     {
       "_id": {
@@ -6537,7 +6598,7 @@
     "$oid": "607ae6c1ccf14534746d2b2b"
   },
   "Ten_san_pham": "Cây kim tiền",
-  "So_luong": 50,
+  "So_luong": 47,
   "Danh_Muc": [
     {
       "_id": {
@@ -7077,7 +7138,7 @@
     "$oid": "607aeeeaccf14534746d2b41"
   },
   "Ten_san_pham": "Cây Long Não (dã hương)",
-  "So_luong": 50,
+  "So_luong": 48,
   "Danh_Muc": [
     {
       "_id": {
@@ -8103,7 +8164,7 @@
     "$oid": "607af830ccf14534746d2b67"
   },
   "Ten_san_pham": "Cây Ngũ Gia Bì",
-  "So_luong": 50,
+  "So_luong": 49,
   "Danh_Muc": [
     {
       "_id": {
@@ -8157,7 +8218,7 @@
     "$oid": "607af880ccf14534746d2b69"
   },
   "Ten_san_pham": "Cây Ngũ Gia Bì",
-  "So_luong": 50,
+  "So_luong": 49,
   "Danh_Muc": [
     {
       "_id": {
@@ -10513,7 +10574,7 @@
         "$oid": "607b0a3f66f6c63474ac587c"
       },
       "DMN_id": {
-        "$oid": "5f7d86e48bec9df446bcb4ff"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -11350,7 +11411,7 @@
         "$oid": "607b122166f6c63474ac589f"
       },
       "DMN_id": {
-        "$oid": "5f7d86fb8bec9df446bcb507"
+        "$oid": "600c3d7e0c8c6941c440be4d"
       }
     }
   ],
@@ -12909,7 +12970,7 @@
     "$oid": "607b1fdfccf14534746d2c1e"
   },
   "Ten_san_pham": "Đầu Vòi Tưới Cây Dãn Nở Nước",
-  "So_luong": 50,
+  "So_luong": 49,
   "Danh_Muc": [
     {
       "_id": {
@@ -12982,6 +13043,195 @@
   },
   "Thoi_gian_cap_nhat": {
     "$date": "2021-04-18T17:37:40Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa15975ce7bc3cdc54a3e3"
+  },
+  "Ten_san_pham": "Cây thủy cúc",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa1597474dbc3cdc52114a"
+      },
+      "DMN_id": {
+        "$oid": "60aa15415ce7bc3cdc54a3e1"
+      }
+    }
+  ],
+  "Gia": 30000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A43%3A00%20GMT%2B0700%20(Indochina%20Time)-3.jpg?alt=media&token=d0a86e3e-f7ce-4197-81fb-3bf4365200f1",
+  "Mo_ta": "<p>C&acirc;y thủy c&uacute;c l&agrave; loại c&acirc;y thủy sinh bể c&aacute; thường thấy trong c&aacute;c hồ c&aacute; v&agrave; hồ thủy sinh. C&acirc;y dễ trồng v&agrave; ph&aacute;t triển nhanh n&ecirc;n được trồng kh&aacute; phổ biến. C&acirc;y c&oacute; nhiều l&aacute; m&agrave;u xanh n&otilde;n chuối m&aacute;t mắt với h&igrave;nh dạng giống l&aacute; c&uacute;c tần.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:43:03Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:43:03Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa15d25ce7bc3cdc54a3e4"
+  },
+  "Ten_san_pham": "Cây thủy cúc",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa15d2474dbc3cdc52114b"
+      },
+      "DMN_id": {
+        "$oid": "60aa15415ce7bc3cdc54a3e1"
+      }
+    }
+  ],
+  "Gia": 150000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A44%3A01%20GMT%2B0700%20(Indochina%20Time)-1.jpg?alt=media&token=24bb1675-3862-47ad-84eb-6b98d0ebeb46",
+  "Mo_ta": "<p>C&acirc;y thủy c&uacute;c l&agrave; loại c&acirc;y thủy sinh bể c&aacute; thường thấy trong c&aacute;c hồ c&aacute; v&agrave; hồ thủy sinh. C&acirc;y dễ trồng v&agrave; ph&aacute;t triển nhanh n&ecirc;n được trồng kh&aacute; phổ biến. C&acirc;y c&oacute; nhiều l&aacute; m&agrave;u xanh n&otilde;n chuối m&aacute;t mắt với h&igrave;nh dạng giống l&aacute; c&uacute;c tần.</p>\n\n<p>Gi&aacute; đ&atilde; bao gồm&nbsp;chậu như h&igrave;nh.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:44:02Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:49:10Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa16015ce7bc3cdc54a3e5"
+  },
+  "Ten_san_pham": "Cây thủy cúc ",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa1601474dbc3cdc52114c"
+      },
+      "DMN_id": {
+        "$oid": "60aa15415ce7bc3cdc54a3e1"
+      }
+    }
+  ],
+  "Gia": 130000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A44%3A47%20GMT%2B0700%20(Indochina%20Time)-2.jpg?alt=media&token=c1e96bf4-5d80-491f-a07b-f83fe4c2e041",
+  "Mo_ta": "<p>C&acirc;y thủy c&uacute;c l&agrave; loại c&acirc;y thủy sinh bể c&aacute; thường thấy trong c&aacute;c hồ c&aacute; v&agrave; hồ thủy sinh. C&acirc;y dễ trồng v&agrave; ph&aacute;t triển nhanh n&ecirc;n được trồng kh&aacute; phổ biến. C&acirc;y c&oacute; nhiều l&aacute; m&agrave;u xanh n&otilde;n chuối m&aacute;t mắt với h&igrave;nh dạng giống l&aacute; c&uacute;c tần.</p>\n\n<p>Gi&aacute; đ&atilde; bao gồm chậu như h&igrave;nh.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:44:49Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:44:49Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa16675ce7bc3cdc54a3e6"
+  },
+  "Ten_san_pham": "Cây ráy",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa1667474dbc3cdc52114d"
+      },
+      "DMN_id": {
+        "$oid": "60aa15535ce7bc3cdc54a3e2"
+      }
+    }
+  ],
+  "Gia": 140000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A46%3A30%20GMT%2B0700%20(Indochina%20Time)-1.jpg?alt=media&token=1181833a-d6b9-41bb-9aea-f29ee08668ca",
+  "Mo_ta": "<p>C&aacute;c lo&agrave;i c&acirc;y thuộc họ r&aacute;y đa phần đều l&agrave; c&aacute;c loại c&acirc;y thủy sinh dễ trồng. C&oacute; kh&ocirc;ng &iacute;t lo&agrave;i c&acirc;y thuộc họ n&agrave;y như c&acirc;y hồng m&ocirc;n, c&acirc;y m&ocirc;n trường sinh, c&acirc;y trầu b&agrave; hay c&acirc;y bạch phiến,&hellip; C&aacute;c c&acirc;y n&agrave;y thường c&oacute; đặc điểm chung l&agrave; l&aacute; to, tươi căng v&agrave; c&oacute; m&agrave;u xanh đẹp. C&acirc;y r&aacute;y thủy sinh c&oacute; thể trồng trong b&igrave;nh thủy tinh hay trong hồ c&aacute; đều th&iacute;ch hợp.</p>\n\n<p>K&egrave;m chậu như h&igrave;nh.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:46:31Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:46:31Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa168e5ce7bc3cdc54a3e7"
+  },
+  "Ten_san_pham": "Cây ráy",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa168e474dbc3cdc52114e"
+      },
+      "DMN_id": {
+        "$oid": "60aa15535ce7bc3cdc54a3e2"
+      }
+    }
+  ],
+  "Gia": 50000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A47%3A07%20GMT%2B0700%20(Indochina%20Time)-2.jpg?alt=media&token=add8017a-af13-4c67-adac-aea1a4a41b03",
+  "Mo_ta": "<p>C&aacute;c lo&agrave;i c&acirc;y thuộc họ r&aacute;y đa phần đều l&agrave; c&aacute;c loại c&acirc;y thủy sinh dễ trồng. C&oacute; kh&ocirc;ng &iacute;t lo&agrave;i c&acirc;y thuộc họ n&agrave;y như c&acirc;y hồng m&ocirc;n, c&acirc;y m&ocirc;n trường sinh, c&acirc;y trầu b&agrave; hay c&acirc;y bạch phiến,&hellip; C&aacute;c c&acirc;y n&agrave;y thường c&oacute; đặc điểm chung l&agrave; l&aacute; to, tươi căng v&agrave; c&oacute; m&agrave;u xanh đẹp. C&acirc;y r&aacute;y thủy sinh c&oacute; thể trồng trong b&igrave;nh thủy tinh hay trong hồ c&aacute; đều th&iacute;ch hợp.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:47:10Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:47:10Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa16a65ce7bc3cdc54a3e8"
+  },
+  "Ten_san_pham": "Cây ráy",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa16a6474dbc3cdc52114f"
+      },
+      "DMN_id": {
+        "$oid": "60aa15535ce7bc3cdc54a3e2"
+      }
+    }
+  ],
+  "Gia": 50000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A47%3A31%20GMT%2B0700%20(Indochina%20Time)-3.jpg?alt=media&token=79912dfa-5aa9-411b-839b-079ecd4a189f",
+  "Mo_ta": "<p>C&aacute;c lo&agrave;i c&acirc;y thuộc họ r&aacute;y đa phần đều l&agrave; c&aacute;c loại c&acirc;y thủy sinh dễ trồng. C&oacute; kh&ocirc;ng &iacute;t lo&agrave;i c&acirc;y thuộc họ n&agrave;y như c&acirc;y hồng m&ocirc;n, c&acirc;y m&ocirc;n trường sinh, c&acirc;y trầu b&agrave; hay c&acirc;y bạch phiến,&hellip; C&aacute;c c&acirc;y n&agrave;y thường c&oacute; đặc điểm chung l&agrave; l&aacute; to, tươi căng v&agrave; c&oacute; m&agrave;u xanh đẹp. C&acirc;y r&aacute;y thủy sinh c&oacute; thể trồng trong b&igrave;nh thủy tinh hay trong hồ c&aacute; đều th&iacute;ch hợp.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:47:34Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:47:34Z"
+  },
+  "Danh_gia": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aa16c25ce7bc3cdc54a3e9"
+  },
+  "Ten_san_pham": "Cây ráy",
+  "So_luong": 0,
+  "Danh_Muc": [
+    {
+      "_id": {
+        "$oid": "60aa16c2474dbc3cdc521150"
+      },
+      "DMN_id": {
+        "$oid": "60aa15535ce7bc3cdc54a3e2"
+      }
+    }
+  ],
+  "Gia": 70000,
+  "Hinh_anh": "https://firebasestorage.googleapis.com/v0/b/managementimagesgreenlife.appspot.com/o/Sun%20May%2023%202021%2015%3A47%3A59%20GMT%2B0700%20(Indochina%20Time)-5.jpg?alt=media&token=25c23a4a-3c95-4d4b-ab53-df157785d3bb",
+  "Mo_ta": "<p>C&aacute;c lo&agrave;i c&acirc;y thuộc họ r&aacute;y đa phần đều l&agrave; c&aacute;c loại c&acirc;y thủy sinh dễ trồng. C&oacute; kh&ocirc;ng &iacute;t lo&agrave;i c&acirc;y thuộc họ n&agrave;y như c&acirc;y hồng m&ocirc;n, c&acirc;y m&ocirc;n trường sinh, c&acirc;y trầu b&agrave; hay c&acirc;y bạch phiến,&hellip; C&aacute;c c&acirc;y n&agrave;y thường c&oacute; đặc điểm chung l&agrave; l&aacute; to, tươi căng v&agrave; c&oacute; m&agrave;u xanh đẹp. C&acirc;y r&aacute;y thủy sinh c&oacute; thể trồng trong b&igrave;nh thủy tinh hay trong hồ c&aacute; đều th&iacute;ch hợp.</p>\n",
+  "Thoi_gian_tao": {
+    "$date": "2021-05-23T08:48:02Z"
+  },
+  "Thoi_gian_cap_nhat": {
+    "$date": "2021-05-23T08:48:02Z"
   },
   "Danh_gia": [],
   "__v": 0

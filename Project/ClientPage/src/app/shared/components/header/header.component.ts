@@ -59,6 +59,8 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   href = '';
   isLoading = false;
   keysearch = ''
+  statuslogin: any
+
   // Khi chạy constructor thì khởi tạo luôn DanhmucService
   constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
     private router: Router, private route: ActivatedRoute, private sanphamService: SanphamService) { }
@@ -70,6 +72,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.getdscsanpham();
     // console.log(this.KHService.loggedInStatus, JSON.parse(this.KHService.loggedInStatus));
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
+    this.statuslogin = this.KHService.loggedInStatus
     if (this.KHService.loggedInStatus === false) {
       this.linkImgAccount = '../../../../assets/images/profile.png';
       this.nameAccount = 'Green Life';

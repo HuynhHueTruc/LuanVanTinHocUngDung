@@ -3,7 +3,7 @@
     "$oid": "60700228e1915b27d990233e"
   },
   "KhachHang_id": "HuynhHueTruc",
-  "Ho_ten": "Huỳnh Huệ Trúc B",
+  "Ho_ten": "Huỳnh Huệ Trúc ",
   "So_dien_thoai": "0964452409",
   "Dia_chi": [
     {
@@ -21,95 +21,246 @@
   "ThanhToan_id": {
     "$oid": "5f7d89b47cc2cc2a04b15745"
   },
-  "Trang_thai": "Đã hủy",
-  "Tong_tien": 6940000,
+  "Trang_thai": "Đang giao hàng",
+  "Tong_tien": 4300000,
   "Ngay_nhan": {
     "$date": "2020-01-17T00:00:00Z"
   },
   "Ngay_cap_nhat": {
-    "$date": "2020-10-09T17:00:00Z"
+    "$date": "2021-04-28T08:36:44Z"
   },
   "San_Pham": [
     {
       "_id": {
-        "$oid": "6074662d901ec828cc047d8d"
+        "$oid": "60885a2732a09235706c7355"
       },
-      "SanPham_id": "60687971d956b41cccafee51",
-      "So_luong": 10,
-      "Gia_ban": 50000
+      "SanPham_id": "607acdd0ccf14534746d2a9a",
+      "So_luong": 3,
+      "Gia_ban": 800000
     },
     {
       "_id": {
-        "$oid": "6074662d901ec828cc047d8e"
+        "$oid": "60885a2732a09235706c7356"
       },
-      "SanPham_id": "60687de956bec7202863bfdc",
-      "So_luong": 11,
-      "Gia_ban": 40000
+      "SanPham_id": "607ad12accf14534746d2aae",
+      "So_luong": 1,
+      "Gia_ban": 60000
     },
     {
       "_id": {
-        "$oid": "6074662d901ec828cc047d8f"
+        "$oid": "60885a2732a09235706c7357"
       },
-      "SanPham_id": "6068882056bec7202863bfdd",
-      "So_luong": 12,
-      "Gia_ban": 500000
+      "SanPham_id": "607ad38cccf14534746d2ac3",
+      "So_luong": 5,
+      "Gia_ban": 300000
+    },
+    {
+      "_id": {
+        "$oid": "60885a2732a09235706c7358"
+      },
+      "SanPham_id": "607aaa4e62e0c41e48cb67ad",
+      "So_luong": 1,
+      "Gia_ban": 170000
     }
   ]
 },{
   "_id": {
-    "$oid": "60755a2f8deb84436c81cca6"
+    "$oid": "60891a5232036134e8c13b60"
   },
-  "KhachHang_id": "HuynhHueTruc",
-  "Ho_ten": "Huỳnh Huệ Trúc B",
-  "So_dien_thoai": "0964452409",
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "HuynhKhanhDuy",
+  "So_dien_thoai": "0964452406",
   "Dia_chi": [
     {
       "_id": {
-        "$oid": "607415ee53d92b02646d5521"
+        "$oid": "60891a5296452234e83ec210"
       },
-      "Xa_Phuong": "Xã Liên Minh",
-      "Huyen_Quan": "Huyện Đức Thọ",
-      "Tinh_ThanhPho": "Tỉnh Hà Tĩnh"
+      "Tinh_ThanhPho": "Thành phố Hà Nội",
+      "Huyen_Quan": "Quận Hoàn Kiếm",
+      "Xa_Phuong": "Phường Phúc Tân"
     }
   ],
   "VanChuyen_id": {
-    "$oid": "605b5ab87cab023368e36b28"
+    "$oid": "605b5aad7cab023368e36b27"
   },
   "ThanhToan_id": {
     "$oid": "5f7d89b47cc2cc2a04b15745"
   },
-  "Trang_thai": "Xuất kho",
-  "Tong_tien": 6940000,
-  "Ngay_nhan": {
-    "$date": "2020-04-13T00:00:00Z"
-  },
-  "Ngay_cap_nhat": {
-    "$date": "2020-04-12T17:00:00Z"
-  },
+  "Trang_thai": "Đã duyệt",
   "San_Pham": [
     {
       "_id": {
-        "$oid": "6074662d901ec828cc047d8d"
+        "$oid": "60891a5296452234e83ec211"
       },
-      "SanPham_id": "60687971d956b41cccafee51",
-      "So_luong": 10,
-      "Gia_ban": 50000
+      "SanPham_id": "607aaf9e62e0c41e48cb67b2",
+      "So_luong": 2,
+      "Gia_ban": 46000
     },
     {
       "_id": {
-        "$oid": "6074662d901ec828cc047d8e"
+        "$oid": "60891a5296452234e83ec212"
       },
-      "SanPham_id": "60687de956bec7202863bfdc",
-      "So_luong": 11,
-      "Gia_ban": 40000
-    },
-    {
-      "_id": {
-        "$oid": "6074662d901ec828cc047d8f"
-      },
-      "SanPham_id": "6068882056bec7202863bfdd",
-      "So_luong": 12,
-      "Gia_ban": 500000
+      "SanPham_id": "607aac9e62e0c41e48cb67ae",
+      "So_luong": 3,
+      "Gia_ban": 250000
     }
-  ]
+  ],
+  "Tong_tien": 842000,
+  "Ngay_nhan": {
+    "$date": "2021-04-28T08:18:26Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2021-04-28T08:18:26Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60891e8e32036134e8c13b62"
+  },
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "Trúc",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "60891e4c96452234e83ec213"
+      },
+      "Tinh_ThanhPho": "Thành phố Hà Nội",
+      "Huyen_Quan": "Quận Ba Đình",
+      "Xa_Phuong": "Phường Trúc Bạch"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5aad7cab023368e36b27"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89d47cc2cc2a04b15748"
+  },
+  "Trang_thai": "Đã duyệt",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60891e8e96452234e83ec217"
+      },
+      "SanPham_id": "607aae9662e0c41e48cb67b0",
+      "So_luong": 4,
+      "Gia_ban": 925000
+    },
+    {
+      "_id": {
+        "$oid": "60891e8e96452234e83ec218"
+      },
+      "SanPham_id": "607aae5f62e0c41e48cb67af",
+      "So_luong": 6,
+      "Gia_ban": 1000000
+    }
+  ],
+  "Tong_tien": 9700000,
+  "Ngay_nhan": {
+    "$date": "2021-04-28T08:36:30Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2021-04-28T08:36:30Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609605c0d3e9eb2de0acf9c7"
+  },
+  "KhachHang_id": "HuynhKhanhDuy",
+  "Ho_ten": "Huỳnh Khánh Duy",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "605b57a150ba8920081b4a7f"
+      },
+      "Tinh_ThanhPho": "Thành phố Cần Thơ",
+      "Huyen_Quan": "Quận Ninh Kiều",
+      "Xa_Phuong": "Phường An Khánh"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5aad7cab023368e36b27"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Trang_thai": "Chưa duyệt",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "609605c0d9381f2de02687ef"
+      },
+      "SanPham_id": "607ad3fcccf14534746d2ac8",
+      "So_luong": 2,
+      "Gia_ban": 13000
+    },
+    {
+      "_id": {
+        "$oid": "609605c0d9381f2de02687f0"
+      },
+      "SanPham_id": "607ada91ccf14534746d2afc",
+      "So_luong": 1,
+      "Gia_ban": 200000
+    },
+    {
+      "_id": {
+        "$oid": "609605c0d9381f2de02687f1"
+      },
+      "SanPham_id": "607b1f0eccf14534746d2c19",
+      "So_luong": 3,
+      "Gia_ban": 30000
+    }
+  ],
+  "Tong_tien": 346000,
+  "Ngay_nhan": {
+    "$date": "2021-05-08T03:30:08Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2021-05-08T03:30:08Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60a34dcd2bceb037f4d62a80"
+  },
+  "KhachHang_id": "Huynh_Hue_Truc",
+  "Ho_ten": "Huỳnh Huệ Trúc",
+  "So_dien_thoai": "0964452406",
+  "Dia_chi": [
+    {
+      "_id": {
+        "$oid": "605b56d150ba8920081b4a7d"
+      },
+      "Tinh_ThanhPho": "Tỉnh Sóc Trăng",
+      "Huyen_Quan": "Huyện Long Phú",
+      "Xa_Phuong": "Xã Song Phụng"
+    }
+  ],
+  "VanChuyen_id": {
+    "$oid": "605b5aad7cab023368e36b27"
+  },
+  "ThanhToan_id": {
+    "$oid": "5f7d89b47cc2cc2a04b15745"
+  },
+  "Trang_thai": "Chưa duyệt",
+  "San_Pham": [
+    {
+      "_id": {
+        "$oid": "60a34dcd0bdaa737f463eee2"
+      },
+      "SanPham_id": "607aaa4e62e0c41e48cb67ad",
+      "So_luong": 1,
+      "Gia_ban": 170000
+    }
+  ],
+  "Tong_tien": 149000,
+  "Ngay_nhan": {
+    "$date": "2021-05-18T05:17:01Z"
+  },
+  "Ngay_cap_nhat": {
+    "$date": "2021-05-18T05:17:01Z"
+  },
+  "__v": 0
 }]

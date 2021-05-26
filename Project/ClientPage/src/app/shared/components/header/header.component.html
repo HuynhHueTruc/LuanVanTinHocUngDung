@@ -23,9 +23,6 @@
       </div>
     </form>
 
-
-
-
     <div class="collapse navbar-collapse" id="navbarSupportedContentXL">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -41,7 +38,6 @@
             Cây cảnh
           </a>
           <div class=" dropdown-menu dropdown-content" aria-labelledby="navbardrop">
-            <!-- (click)="onSelect(eachLoaiCay)" , [routerLink]="['typetree', eachLoaiCay._id]"  routerLinkActive="router-link-active"-->
             <a class="dropdown-item" (click)="onSelectLTypeTree(eachLoaiCay)"
               *ngFor="let eachLoaiCay of loaicays">{{eachLoaiCay.Ten_loai_cay}}</a>
             <br>
@@ -95,9 +91,6 @@
             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dịch vụ
           </a>
-          <!-- <div class="dropdown-menu  dropdown-content" aria-labelledby="navbardrop">
-                <a class="dropdown-item" (click)="onSelectProduct(eachDichVu)" *ngFor="let eachDichVu of dsdichvu">{{eachDichVu.Ten_danh_muc_nho}}</a>
-              </div> -->
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['product', '5f7d88277cc2cc2a04b1573d']"
@@ -109,9 +102,6 @@
             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Hỗ trợ
           </a>
-          <!-- <div class="dropdown-menu  dropdown-content" aria-labelledby="lienhe">
-                <a class="dropdown-item" href="#" *ngFor="let eachHoTro of dshotro">{{eachHoTro.Ten_danh_muc_nho}}</a>
-              </div> -->
         </li>
 
         <li class="nav-item dropdown notifications-nav pr-md-3">
@@ -120,13 +110,13 @@
             <img class=" imgid rounded-circle" src={{linkImgAccount}}>
             <span class="mr-2 d-none d-lg-inline text-gray-600 small account">{{nameAccount}}</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151" *ngIf="statuslogin">
             <a class="dropdown-item" href="/customerinfo">
               <i class="fa fa-user" aria-hidden="true"></i>
               &nbsp;
               Hồ sơ của tôi
             </a>
-            <a class="dropdown-item" href="#!">
+            <a class="dropdown-item" href="/order_tracking">
               <i class="fas fa-clipboard-list"></i>
               &nbsp;
               Đơn hàng
