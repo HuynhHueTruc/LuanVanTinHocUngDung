@@ -1,3 +1,4 @@
+import { CommentComponent } from './../../modules/comment/comment.component';
 import { OrderTrackingComponent } from './../../modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './../../modules/checkout/checkout.component';
 import { DetailComponent } from './../../modules/detail/detail.component';
@@ -56,7 +57,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     ServiceComponent,
     DetailComponent,
     CheckoutComponent,
-    OrderTrackingComponent
+    OrderTrackingComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,

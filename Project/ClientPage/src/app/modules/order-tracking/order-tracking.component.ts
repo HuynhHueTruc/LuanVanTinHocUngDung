@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AnhDaiDienModel } from './../../../models/SanPham/anhdaidien';
 import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { SanphamService } from './../../../services/SanPham/sanpham.service';
 import { HoaDonBanHangModel } from './../../../models/HoaDonBanHang/hoadonbanhang';
@@ -26,6 +28,11 @@ export class OrderTrackingComponent implements OnInit {
   dscholayhang = []
   dsdanggiaohang = []
 
+  sanphamchoxacnhan: AnhDaiDienModel[] = []
+  sanphamcholayhang: AnhDaiDienModel[] = []
+  sanphamdanggiaohang: AnhDaiDienModel[] = []
+  sanphamdanhgia: AnhDaiDienModel[] = []
+
   soluongchoxacnhan = 0
   soluongcholayhang = 0
   soluongdanggiaohang = 0
@@ -35,12 +42,11 @@ export class OrderTrackingComponent implements OnInit {
   trang_thai = ''
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
 
-  constructor(private phieudatService: PhieudatService, private hoadonService: HoadonbanhangService, private sanphamService: SanphamService) { }
+  constructor(private phieudatService: PhieudatService, private hoadonService: HoadonbanhangService, private sanphamService: SanphamService, private router: Router) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.getdsphieudat()
-
   }
 
   getdsphieudat() {
@@ -94,6 +100,9 @@ export class OrderTrackingComponent implements OnInit {
       this.dssanpham = res.sanphams;
 
       for (const i in this.dsdanhgia) {
+        // Lấy ảnh đại diện cho đơn mua
+        this.sanphamdanhgia.push({SanPham_id: this.dsdanhgia[i].San_Pham[0].SanPham_id, Hinh_anh: ''})
+
         for (const j in this.dsdanhgia[i].San_Pham) {
           for (const k in this.dssanpham) {
             if (this.dsdanhgia[i].San_Pham[j].SanPham_id === this.dssanpham[k]._id) {
@@ -107,17 +116,52 @@ export class OrderTrackingComponent implements OnInit {
 
         }
         this.arrdanhgia.push(count)
-          count = 0
+        count = 0
       }
-      for (const n in this.arrdanhgia){
-        if (this.arrdanhgia[n] === 0){
+      for (const n in this.arrdanhgia) {
+        if (this.arrdanhgia[n] === 0) {
           this.soluongdanhgia += 1
         }
       }
-      // console.log(this.dssanpham)
-      // console.log(this.dsdanhgia)
-      // console.log(this.arrdanhgia)
 
+      for (const l in this.dschoxacnhan){
+        this.sanphamchoxacnhan.push({SanPham_id: this.dschoxacnhan[l].San_Pham[0].SanPham_id, Hinh_anh: ''})
+      }
+
+      for (const k in this.dscholayhang){
+        this.sanphamcholayhang.push({SanPham_id: this.dscholayhang[k].San_Pham[0].SanPham_id, Hinh_anh: ''})
+      }
+
+      for (const m in this.dsdanggiaohang){
+        this.sanphamdanggiaohang.push({SanPham_id: this.dsdanggiaohang[m].San_Pham[0].SanPham_id, Hinh_anh: ''})
+      }
+
+      for (const j in this.dssanpham){
+        for (const h in this.sanphamdanhgia){
+          if(this.sanphamdanhgia[h].SanPham_id === this.dssanpham[j]._id){
+            this.sanphamdanhgia[h].Hinh_anh = this.dssanpham[j].Hinh_anh
+          }
+        }
+        for (const h in this.sanphamchoxacnhan){
+          if(this.sanphamchoxacnhan[h].SanPham_id === this.dssanpham[j]._id){
+            this.sanphamchoxacnhan[h].Hinh_anh = this.dssanpham[j].Hinh_anh
+          }
+        }
+        for (const h in this.sanphamcholayhang){
+          if(this.sanphamcholayhang[h].SanPham_id === this.dssanpham[j]._id){
+            this.sanphamcholayhang[h].Hinh_anh = this.dssanpham[j].Hinh_anh
+          }
+        }
+        for (const h in this.sanphamdanggiaohang){
+          if(this.sanphamdanggiaohang[h].SanPham_id === this.dssanpham[j]._id){
+            this.sanphamdanggiaohang[h].Hinh_anh = this.dssanpham[j].Hinh_anh
+          }
+        }
+      }
+      // console.log(this.sanphamdanhgia)
+      // console.log(this.sanphamchoxacnhan)
+      // console.log(this.sanphamcholayhang)
+      // console.log(this.sanphamdanggiaohang)
     })
   }
 
@@ -128,7 +172,8 @@ export class OrderTrackingComponent implements OnInit {
     return true
   }
 
-  KiemTraDanhGia() {
-
+  ChuyenTrangBinhLuan(eachPhieuDat){
+    this.router.navigateByUrl(`/comment/${eachPhieuDat._id}`);
   }
+
 }

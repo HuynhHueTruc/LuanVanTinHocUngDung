@@ -1,3 +1,4 @@
+import { CommentComponent } from './modules/comment/comment.component';
 import { OrderTrackingComponent } from './modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { DetailComponent } from './modules/detail/detail.component';
@@ -43,7 +44,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'customerinfo', component: CustomerinfoComponent,
+    path: 'customerinfo', component: CustomerinfoComponent, canActivate: [DefautGuard],
     children:
     [
       { path: '', component: ProfileComponent },
@@ -51,17 +52,16 @@ const routes: Routes = [
       { path: 'changepassword', component: ChangepasswordComponent }
     ]
   },
-  { path: 'forgotpassword', component: ForgotpasswordComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'forgotpassword', component: ForgotpasswordComponent, canActivate: [DefautGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [DefautGuard] },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
-  { path: 'order_tracking', component: OrderTrackingComponent },
+  { path: 'order_tracking', component: OrderTrackingComponent, canActivate: [DefautGuard]},
+  { path: 'comment/:_id', component: CommentComponent, canActivate: [DefautGuard] },
   { path: 'detail/:_id', component: DetailComponent },
   { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '404' },
-  // { path: 'tree/:id', component: TypetreeComponent }
-
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
