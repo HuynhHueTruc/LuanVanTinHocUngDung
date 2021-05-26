@@ -37,7 +37,7 @@ route.get('/hoadonbanhang/thongtin', async(req, res) => {
         VanChuyen_id: 1,
         ThanhToan_id: 1,
         Tong_tien: 1,
-        Ngay_lap: 1
+        Ngay_cap_nhat: 1
     }).exec((err, hoadonbanhangs) => {
         if (err) {
             res.json({
@@ -63,7 +63,7 @@ route.post('/hoadonbanhang/taomoi', async(req, res) => {
     var VanChuyen_id = req.body.VanChuyen_id;
     var ThanhToan_id = req.body.ThanhToan_id;
     var Tong_tien = req.body.Tong_tien;
-    var Ngay_lap = req.body.Ngay_lap;
+    var Ngay_cap_nhat = req.body.Ngay_cap_nhat;
 
         // Kiểm tra email đã tồn tại chưa
        return HoaDonBanHangModel.create({
@@ -77,7 +77,7 @@ route.post('/hoadonbanhang/taomoi', async(req, res) => {
             VanChuyen_id: VanChuyen_id,
             ThanhToan_id: ThanhToan_id,
             Tong_tien: Tong_tien,
-            Ngay_lap: Ngay_lap,
+            Ngay_cap_nhat: Ngay_cap_nhat,
         }).then(dt => {
             res.json('Tạo hóa đơn bán hàng thành công!')
         }).catch (err =>{

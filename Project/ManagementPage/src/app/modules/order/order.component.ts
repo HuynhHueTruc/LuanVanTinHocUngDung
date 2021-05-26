@@ -202,7 +202,7 @@ export class OrderComponent implements OnInit {
     this.hoadonban.Dia_chi = phieudat.Dia_chi
     this.hoadonban.Ho_ten = phieudat.Ho_ten
     this.hoadonban.KhachHang_id = phieudat.KhachHang_id
-    this.hoadonban.Ngay_lap = phieudat.Ngay_cap_nhat
+    this.hoadonban.Ngay_cap_nhat = phieudat.Ngay_cap_nhat
     this.hoadonban.San_Pham = phieudat.San_Pham
     this.hoadonban.So_dien_thoai = phieudat.So_dien_thoai
     this.hoadonban.ThanhToan_id = phieudat.ThanhToan_id

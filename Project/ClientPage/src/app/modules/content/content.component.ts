@@ -277,27 +277,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     this.router.navigateByUrl(`/detail/${eachSP._id}`);
     this.isLoading = true;
   }
-   // Hàm tìm kiếm theo tên hoặc id
-   //SearchByKeyWord() {
-    // this.dskhuyenmai = this.dskhuyenmaisearch;
-    // const text = this.removeAccents(this.keyword);
-    // if (text === '') {
-    //   this.getdskhuyenmai();
-    // } else {
-    //   this.dskhuyenmai = this.dskhuyenmai.filter(res => {
-    //     const hoten = this.removeAccents(res.Ten_khuyen_mai);
-    //     const maso = this.removeAccents(res._id);
-    //     const tmp2 = text.replace(/·/g, '');
-    //     if (hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
-    //       return hoten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
-    //     } else {
-    //       if (maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
-    //         return maso.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
-    //       }
-    //     }
-    //   });
-    // }
- // }
 
   // Lấy loại cây làm danh mục
   getLoaiCay() {
@@ -344,38 +323,5 @@ export class ContentComponent implements OnInit, AfterContentChecked {
     }
     this.getdsdanhmuc(this.loaicays);
   }
-
-
-
-  // onSelectLTypeTree(eachDanhMuc) {
-  //   let loaicay = '';
-  //   // console.log(this.danhmucloaicay)
-  //   // console.log(eachDanhMuc)
-  //   for (const i in this.danhmucloaicay.Danh_muc_nho) {
-  //     if (eachDanhMuc.Danh_Muc[0].DMN_id === this.danhmucloaicay.Danh_muc_nho[i].DMN_id) {
-  //       loaicay = this.danhmucloaicay.Danh_muc_nho[i].Loai_cay
-  //     }
-  //   }
-  //   this.router.navigateByUrl(`/default/typetree/${loaicay}`);
-  //   this.isLoading = true;
-  // }
-
-  // onSelectProduct(eachSP?) {
-  //   if (eachSP !== undefined) {
-  //     this.router.navigateByUrl(`/default/product/${eachSP.DMN_id}`);
-  //     this.isLoading = true;
-  //   } else {
-  //     this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
-
-  //   }
-  // }
-
-  // getdsdanhmuc() {
-  //   this.danhmucService.getListDanhMuc().subscribe((res: any) => {
-  //     this.danhmucloaicay = res.danhmucs[1];
-  //     console.log(this.danhmucloaicay)
-  //   })
-  // }
-
 
 }

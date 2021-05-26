@@ -5,7 +5,7 @@ let HoaDonBanHangSchema = new mongoose.Schema({
     _id: mongoose.Schema.ObjectId,
     NhanVien_id: String,
     San_Pham: [{
-        SanPham_id: String,
+        SanPham_id: mongoose.Schema.ObjectId,
         So_luong: Number,
         Gia_ban: Number
     }],
@@ -20,7 +20,7 @@ let HoaDonBanHangSchema = new mongoose.Schema({
     VanChuyen_id: mongoose.Schema.ObjectId,
     ThanhToan_id: mongoose.Schema.ObjectId,
     Tong_tien: Number,
-    Ngay_lap: Date
+    Ngay_cap_nhat: Date
 });
 
 const HoaDonBanHangModel = mongoose.model('hoa_don_ban_hangs', HoaDonBanHangSchema);
