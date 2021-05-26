@@ -124,9 +124,8 @@ export class OrderTrackingComponent implements OnInit {
   KiemTraTrangThai(eachPhieuDat) {
     if (eachPhieuDat.Trang_thai === undefined) {
       this.trang_thai = 'Đã giao hàng thành công'
-    } else {
-      this.trang_thai = eachPhieuDat.Trang_thai
     }
+    return true
   }
 
   KiemTraDanhGia() {

@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-sm-10">
                       <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{trang_thai}}
+                        {{eachPhieuDat.Trang_thai}}
                       </div>
                       <div class="row mt-3">
                         Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-sm-10">
                       <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{trang_thai}}
+                        {{eachPhieuDat.Trang_thai}}
                       </div>
                       <div class="row mt-3">
                         Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
@@ -68,7 +68,7 @@
               </div>
             </div>
           </nb-tab>
-          <nb-tab badgeText={{soluongdanggiaohnag}} badgeStatus="danger" tabTitle="Đang giao" tabIcon="car-outline" responsive>
+          <nb-tab badgeText={{soluongdanhgia}} badgeStatus="danger" tabTitle="Đang giao" tabIcon="car-outline" responsive>
             <div class="container pt-1 order_tracking">
 
               <div class="row pl-4 pr-4 divphieudat" *ngFor="let eachPhieuDat of dsdanggiaohang">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-sm-10">
                       <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{trang_thai}}
+                        {{eachPhieuDat.Trang_thai}}
                       </div>
                       <div class="row mt-3">
                         Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
