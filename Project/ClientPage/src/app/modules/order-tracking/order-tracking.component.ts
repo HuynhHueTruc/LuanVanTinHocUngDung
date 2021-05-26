@@ -28,7 +28,7 @@ export class OrderTrackingComponent implements OnInit {
 
   soluongchoxacnhan = 0
   soluongcholayhang = 0
-  soluongdanggiaohnag = 0
+  soluongdanggiaohang = 0
   soluongdanhgia = 0
 
   arrdanhgia = []
@@ -70,7 +70,7 @@ export class OrderTrackingComponent implements OnInit {
 
       this.soluongchoxacnhan = this.dschoxacnhan.length
       this.soluongcholayhang = this.dscholayhang.length
-      this.soluongdanggiaohnag = this.dsdanggiaohang.length
+      this.soluongdanggiaohang = this.dsdanggiaohang.length
       this.getdshoadon()
     })
   }
