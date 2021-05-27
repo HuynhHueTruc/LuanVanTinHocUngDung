@@ -10,123 +10,223 @@
     <nb-card>
       <nb-card-body>
         <nb-tabset fullWidth>
-          <nb-tab badgeText={{soluongchoxacnhan}} badgeStatus="danger" tabTitle="Chờ xác nhận" tabIcon="credit-card-outline" responsive>
+          <nb-tab badgeText={{soluongchoxacnhan}} badgeStatus="danger" tabTitle="Chờ xác nhận"
+            tabIcon="credit-card-outline" responsive>
             <div class="container pt-1 order_tracking">
-
               <div class="row pl-4 pr-4 divphieudat" *ngFor="let eachPhieuDat of dschoxacnhan; let i = index">
-                <button id="phieudat" class="mt-3 mb-3">
-                  <div class="row">
-                    <div class="col-sm-2 pl-0">
-                      <img
-                        src={{sanphamchoxacnhan[i]?.Hinh_anh}}
-                        alt="Imgage error" class="avatar">
+                <div class="container eachphieudat">
+
+                  <button id="phieudat" class="mt-3 mb-3" *ngFor="let eachSP of eachPhieuDat.San_Pham; let j = index">
+                    <div class="row">
+                      <div class="col-sm-2 pl-0">
+                        <img src={{sanphamchoxacnhan[i][j]?.Hinh_anh}} alt="Imgage error" class="avatar"
+                          *ngIf="sanphamchoxacnhan[i] !== undefined">
+                      </div>
+                      <div class="col-sm-10">
+                        <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
+                          {{eachPhieuDat.Trang_thai}}
+                        </div>
+                        <div class="row mt-3">
+                          <h6 class="m-0" *ngIf="sanphamchoxacnhan[i] !== undefined">
+                            {{sanphamchoxacnhan[i][j]?.Ten_san_pham}}</h6>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-sm-10">
-                      <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{eachPhieuDat.Trang_thai}}
-                      </div>
-                      <div class="row mt-3">
-                        Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
-                        {{eachPhieuDat.Trang_thai}}.
-                      </div>
-                      <div class="row mt-2">
-                        <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
-                      </div>
+                  </button>
+                 <div class="container">
+                 <div class="row">
+                  <div class="col-sm-9 d-flex justify-content-end">
+                    <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="row d-flex justify-content-end">
+                      <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                      <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
                     </div>
                   </div>
+                 </div>
 
-                </button>
+                 </div>
+                </div>
               </div>
             </div>
           </nb-tab>
-          <nb-tab badgeText={{soluongcholayhang}} badgeStatus="danger" tabTitle="Chờ lấy hàng" tabIcon="gift-outline" responsive>
+
+          <nb-tab badgeText={{soluongcholayhang}} badgeStatus="danger" tabTitle="Chờ lấy hàng" tabIcon="gift-outline"
+            responsive>
             <div class="container pt-1 order_tracking">
 
               <div class="row pl-4 pr-4 divphieudat" *ngFor="let eachPhieuDat of dscholayhang; let i = index">
-                <button id="phieudat" class="mt-3 mb-3">
-                  <div class="row">
-                    <div class="col-sm-2 pl-0">
-                      <img
-                        src={{sanphamcholayhang[i]?.Hinh_anh}}
-                        alt="Imgage error" class="avatar">
-                    </div>
-                    <div class="col-sm-10">
-                      <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{eachPhieuDat.Trang_thai}}
+                <div class="container eachphieudat">
+                  <button id="phieudat" class="mt-3 mb-3" *ngFor="let eachSP of eachPhieuDat.San_Pham; let j = index">
+                    <div class="row">
+                      <div class="col-sm-2 pl-0">
+                        <img src={{sanphamcholayhang[i][j]?.Hinh_anh}} alt="Imgage error" class="avatar"
+                          *ngIf="sanphamcholayhang[i] !== undefined">
                       </div>
-                      <div class="row mt-3">
-                        Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
-                        {{eachPhieuDat.Trang_thai}}.
-                      </div>
-                      <div class="row mt-2">
-                        <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
-                      </div>
-                    </div>
-                  </div>
+                      <div class="col-sm-10">
+                        <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
+                          {{eachPhieuDat.Trang_thai}}
+                        </div>
+                        <div class="row mt-3">
+                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
+                        {{eachPhieuDat.Trang_thai}}. -->
+                          <h6 class="m-0" *ngIf="sanphamcholayhang[i] !== undefined">
+                            {{sanphamcholayhang[i][j]?.Ten_san_pham}}</h6>
 
-                </button>
+                        </div>
+                        <div class="row mt-2">
+                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                        </div>
+                      </div>
+                    </div>
+
+                  </button>
+                  <div class="container">
+                    <div class="row">
+                     <div class="col-sm-9 d-flex justify-content-end">
+                       <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
+                     </div>
+                     <div class="col-sm-3">
+                       <div class="row d-flex justify-content-end">
+                         <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
+                       </div>
+                       <div class="row d-flex justify-content-end">
+                         <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                       </div>
+                     </div>
+                    </div>
+
+                    </div>
+                </div>
               </div>
             </div>
           </nb-tab>
-          <nb-tab badgeText={{soluongdanggiaohang}} badgeStatus="danger" tabTitle="Đang giao" tabIcon="car-outline" responsive>
+
+          <nb-tab badgeText={{soluongdanggiaohang}} badgeStatus="danger" tabTitle="Đang giao" tabIcon="car-outline"
+            responsive>
             <div class="container pt-1 order_tracking">
 
               <div class="row pl-4 pr-4 divphieudat" *ngFor="let eachPhieuDat of dsdanggiaohang; let i = index">
-                <button id="phieudat" class="mt-3 mb-3">
-                  <div class="row">
-                    <div class="col-sm-2 pl-0">
-                      <img
-                        src={{sanphamdanggiaohang[i]?.Hinh_anh}}
-                        alt="Imgage error" class="avatar">
-                    </div>
-                    <div class="col-sm-10">
-                      <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
-                        {{eachPhieuDat.Trang_thai}}
+                <div class="container eachphieudat">
+                  <button id="phieudat" class="mt-3 mb-3" *ngFor="let eachSP of eachPhieuDat.San_Pham; let j = index">
+                    <div class="row">
+                      <div class="col-sm-2 pl-0">
+                        <img src={{sanphamdanggiaohang[i][j]?.Hinh_anh}} alt="Imgage error" class="avatar"
+                          *ngIf="sanphamdanggiaohang[i] !== undefined">
                       </div>
-                      <div class="row mt-3">
-                        Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
-                        {{eachPhieuDat.Trang_thai}}.
-                      </div>
-                      <div class="row mt-2">
-                        <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
-                      </div>
-                    </div>
-                  </div>
+                      <div class="col-sm-10">
+                        <div class="row mt-2 status" *ngIf="KiemTraTrangThai(eachPhieuDat)">
+                          {{eachPhieuDat.Trang_thai}}
+                        </div>
+                        <div class="row mt-3">
+                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
+                        {{eachPhieuDat.Trang_thai}}. -->
+                          <h6 class="m-0" *ngIf="sanphamdanggiaohang[i] !== undefined">
+                            {{sanphamdanggiaohang[i][j]?.Ten_san_pham}}</h6>
 
-                </button>
+                        </div>
+                        <div class="row mt-2">
+                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                        </div>
+                      </div>
+                    </div>
+
+                  </button>
+                  <div class="container">
+                    <div class="row">
+                     <div class="col-sm-9 d-flex justify-content-end">
+                       <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
+                     </div>
+                     <div class="col-sm-3">
+                       <div class="row d-flex justify-content-end">
+                         <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
+                       </div>
+                       <div class="row d-flex justify-content-end">
+                         <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                       </div>
+                     </div>
+                    </div>
+
+                    </div>
+                </div>
               </div>
             </div>
           </nb-tab>
-          <nb-tab badgeText={{soluongdanhgia}} badgeStatus="danger" tabTitle="Đánh giá" tabIcon="star-outline" responsive>
+
+          <nb-tab badgeText={{soluongdanhgia}} badgeStatus="danger" tabTitle="Đánh giá" tabIcon="star-outline"
+            responsive>
             <div class="container pt-1 order_tracking">
 
-              <div class="row pl-4 pr-4 divphieudat" *ngFor="let eachPhieuDat of dsdanhgia; let i = index">
-                <button id="phieudat" class="mt-3 mb-3" (click)="ChuyenTrangBinhLuan(eachPhieuDat)">
-                  <div class="row">
-                    <div class="col-sm-2 pl-0">
-                      <img
-                        src={{sanphamdanhgia[i]?.Hinh_anh}}
-                        alt="Imgage error" class="avatar">
-                    </div>
-                    <div class="col-sm-9">
-                      <div class="row mt-2 status">
-                        Giao hàng thành công
+              <div class="row pl-4 pr-4 divphieudat mt-4" *ngFor="let eachPhieuDat of dsdanhgia; let i = index">
+                <div class="container eachphieudat">
+                  <button id="phieudat" class="mt-3 mb-3" (click)="ChuyenTrangBinhLuan(eachPhieuDat)"
+                    *ngFor="let eachSP of eachPhieuDat.San_Pham; let j = index">
+                    <div class="row">
+                      <div class="col-sm-2 pl-0">
+                        <img src={{sanphamdanhgia[i][j]?.Hinh_anh}} alt="Imgage error" class="avatar"
+                          *ngIf="sanphamdanhgia[i] !== undefined">
                       </div>
-                      <div class="row mt-3">
-                        Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn đã giao hàng thành công.
+                      <div class="col-sm-10">
+                        <div class="row mt-2 status">
+                          Giao hàng thành công
+                        </div>
+                        <div class="row mt-3">
+                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn đã giao hàng thành
+                          công. -->
+                          <h6 class="m-0" *ngIf="sanphamdanhgia[i] !== undefined">{{sanphamdanhgia[i][j]?.Ten_san_pham}}
+                          </h6>
+                        </div>
+                        <div class="row mt-2">
+                          <small>x{{eachSP.So_luong}}</small>
+                        </div>
+                        <div class="row mt-2">
+                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                        </div>
                       </div>
-                      <div class="row mt-2">
-                        <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
-                      </div>
-                    </div>
-                    <div class="col-sm-1 d-flex align-items-center p-0">
-                      <button name="button" type="button" id="danhgia" *ngIf="arrdanhgia[i] != 0">Đánh giá</button>
-                      <button name="button" type="button" id="danhgia" *ngIf="arrdanhgia[i] === 0">Cập nhật</button>
 
+                    </div>
+
+                  </button>
+                  <div class="container mb-3">
+                    <div class="row tongtien">
+                      <div class="col-sm-8"></div>
+                      <div class="col-sm-1 p-0 ">
+                        <p class="m-0 mt-1">Tổng tiền: </p>
+                      </div>
+                      <div class="col-sm-3 p-0">
+                        <h5 class="m-0 sum">{{eachPhieuDat.Tong_tien | currency: "VND"}}</h5>
+                      </div>
+                    </div>
+                    <div class="row tongtien">
+                      <div class="col-sm-8"></div>
+                      <div class="col-sm-4 p-0">
+                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] != 0">Đánh
+                          giá</button>
+                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] === 0">Cập nhật
+                          đánh giá</button>
+                      </div>
                     </div>
                   </div>
+                  <div class="container">
+                    <div class="row">
+                     <div class="col-sm-9 d-flex justify-content-end">
 
-                </button>
+                     </div>
+                     <div class="col-sm-3">
+                       <div class="row d-flex justify-content-end">
+                         <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
+                       </div>
+                       <div class="row d-flex justify-content-end">
+                         <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                       </div>
+                     </div>
+                    </div>
+
+                    </div>
+                </div>
               </div>
             </div>
           </nb-tab>
@@ -134,4 +234,3 @@
 
       </nb-card-body>
     </nb-card>
-

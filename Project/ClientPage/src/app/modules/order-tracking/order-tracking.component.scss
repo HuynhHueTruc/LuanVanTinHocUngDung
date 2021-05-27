@@ -37,13 +37,35 @@
   padding: 1.25rem;
 }
 
-#danhgia{
+.buttondanhgia{
   border: none;
-  background-color: white;
-  height: 25px;
-  color: darkcyan;
+  background-color: darkcyan;
+  height: 35px;
+  width: 200px;
+  color: white;
+}
+
+.buttondanhgia:focus{
+  outline: none;
+}
+
+.buttondanhgia:hover{
+  background-color: crimson;
 }
 
 #phieudat:focus{
   outline: none;
+}
+
+.eachphieudat{
+  // border-style: ridge;
+  border: 2px ridge #FBEFEF
+}
+
+.tongtien{
+  height: 40px;
+}
+
+.sum{
+color: crimson;
 }
