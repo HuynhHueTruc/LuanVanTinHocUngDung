@@ -163,7 +163,7 @@
 
               <div class="row pl-4 pr-4 divphieudat mt-4" *ngFor="let eachPhieuDat of dsdanhgia; let i = index">
                 <div class="container eachphieudat">
-                  <button id="phieudat" class="mt-3 mb-3" (click)="ChuyenTrangBinhLuan(eachPhieuDat)"
+                  <button id="phieudat" class="mt-3 mb-3" (click)="ChiTietDonHang(eachPhieuDat)"
                     *ngFor="let eachSP of eachPhieuDat.San_Pham; let j = index">
                     <div class="row">
                       <div class="col-sm-2 pl-0">
@@ -201,9 +201,9 @@
                     <div class="row tongtien">
                       <div class="col-sm-7"></div>
                       <div class="col-sm-2 p-0 d-flex justify-content-end">
-                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] != 0">Đánh
+                        <button name="button" type="button" class="buttondanhgia" (click)="ChuyenTrangBinhLuan(eachPhieuDat)" *ngIf="arrdanhgia[i] != 0">Đánh
                           giá</button>
-                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] === 0">Cập nhật
+                        <button name="button" type="button" class="buttondanhgia" (click)="ChuyenTrangBinhLuan(eachPhieuDat)" *ngIf="arrdanhgia[i] === 0">Cập nhật
                           đánh giá</button>
                       </div>
                       <div class="col-sm-3">

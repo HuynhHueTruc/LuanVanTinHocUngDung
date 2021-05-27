@@ -1,3 +1,5 @@
+import { OrderTrackingDetailsComponent } from './modules/order-tracking-details/order-tracking-details.component';
+import { BillManagementComponent } from './modules/bill-management/bill-management.component';
 import { CommentComponent } from './modules/comment/comment.component';
 import { OrderTrackingComponent } from './modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
@@ -33,32 +35,40 @@ const routes: Routes = [
   {
     path: 'default', component: DefaultComponent,
     children:
-    [
-      { path: '', component: ContentComponent },
-      { path: 'typetree/:_id', component: TypetreeComponent },
-      { path: 'posts', component: PostsComponent },
-      { path: 'product/:_id', component: ProductComponent },
-      { path: 'supports', component: SupportsComponent },
-      { path: 'service', component: ServiceComponent },
+      [
+        { path: '', component: ContentComponent },
+        { path: 'typetree/:_id', component: TypetreeComponent },
+        { path: 'posts', component: PostsComponent },
+        { path: 'product/:_id', component: ProductComponent },
+        { path: 'supports', component: SupportsComponent },
+        { path: 'service', component: ServiceComponent },
 
-    ]
+      ]
   },
   {
     path: 'customerinfo', component: CustomerinfoComponent, canActivate: [DefautGuard],
     children:
-    [
-      { path: '', component: ProfileComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'changepassword', component: ChangepasswordComponent }
-    ]
+      [
+        { path: '', component: ProfileComponent },
+        { path: 'profile', component: ProfileComponent },
+        { path: 'changepassword', component: ChangepasswordComponent }
+      ]
   },
   { path: 'forgotpassword', component: ForgotpasswordComponent, canActivate: [DefautGuard] },
   { path: 'cart', component: CartComponent, canActivate: [DefautGuard] },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
-  { path: 'order_tracking', component: OrderTrackingComponent, canActivate: [DefautGuard]},
-  { path: 'comment/:_id', component: CommentComponent, canActivate: [DefautGuard] },
+  {
+    path: 'bill_manegement', component: BillManagementComponent, canActivate: [DefautGuard], children:
+      [
+        { path: '', component: OrderTrackingComponent },
+        { path: 'order_tracking', component: OrderTrackingComponent },
+        { path: 'comment/:_id', component: CommentComponent },
+        { path: 'order_tracking_detail/:_id', component: OrderTrackingDetailsComponent },
+      ]
+  },
+
   { path: 'detail/:_id', component: DetailComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '404' }

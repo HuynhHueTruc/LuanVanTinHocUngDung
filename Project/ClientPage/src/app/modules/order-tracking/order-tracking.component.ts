@@ -202,8 +202,12 @@ export class OrderTrackingComponent implements OnInit {
     return true
   }
 
+  ChiTietDonHang(eachPhieuDat){
+    this.router.navigateByUrl(`/bill_manegement/order_tracking_detail/${eachPhieuDat._id}`);
+  }
+
   ChuyenTrangBinhLuan(eachPhieuDat) {
-    this.router.navigateByUrl(`/comment/${eachPhieuDat._id}`);
+    this.router.navigateByUrl(`/bill_manegement/comment/${eachPhieuDat._id}`);
   }
 
 }

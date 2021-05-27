@@ -1,3 +1,5 @@
+import { OrderTrackingDetailsComponent } from './../../modules/order-tracking-details/order-tracking-details.component';
+import { BillManagementComponent } from './../../modules/bill-management/bill-management.component';
 import { CommentComponent } from './../../modules/comment/comment.component';
 import { OrderTrackingComponent } from './../../modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './../../modules/checkout/checkout.component';
@@ -58,7 +60,9 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     DetailComponent,
     CheckoutComponent,
     OrderTrackingComponent,
-    CommentComponent
+    CommentComponent,
+    BillManagementComponent,
+    OrderTrackingDetailsComponent
   ],
   imports: [
     CommonModule,
