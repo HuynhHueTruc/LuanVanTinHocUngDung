@@ -30,10 +30,22 @@
                           <h6 class="m-0" *ngIf="sanphamchoxacnhan[i] !== undefined">
                             {{sanphamchoxacnhan[i][j]?.Ten_san_pham}}</h6>
                         </div>
+                        <div class="row mt-2">
+                          <small>x{{eachSP.So_luong}}</small>
+                        </div>
                       </div>
                     </div>
                   </button>
-                 <div class="container">
+                 <div class="container mb-3">
+                  <div class="row tongtien">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-1 p-0 ">
+                      <p class="m-0 mt-1">Tổng tiền: </p>
+                    </div>
+                    <div class="col-sm-3 p-0">
+                      <h5 class="m-0 sum">{{eachPhieuDat.Tong_tien | currency: "VND"}}</h5>
+                    </div>
+                  </div>
                  <div class="row">
                   <div class="col-sm-9 d-flex justify-content-end">
                     <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
@@ -71,20 +83,27 @@
                           {{eachPhieuDat.Trang_thai}}
                         </div>
                         <div class="row mt-3">
-                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
-                        {{eachPhieuDat.Trang_thai}}. -->
+
                           <h6 class="m-0" *ngIf="sanphamcholayhang[i] !== undefined">
                             {{sanphamcholayhang[i][j]?.Ten_san_pham}}</h6>
-
                         </div>
                         <div class="row mt-2">
-                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                          <small>x{{eachSP.So_luong}}</small>
                         </div>
                       </div>
                     </div>
 
                   </button>
-                  <div class="container">
+                  <div class="container mb-3">
+                    <div class="row tongtien">
+                      <div class="col-sm-8"></div>
+                      <div class="col-sm-1 p-0 ">
+                        <p class="m-0 mt-1">Tổng tiền: </p>
+                      </div>
+                      <div class="col-sm-3 p-0">
+                        <h5 class="m-0 sum">{{eachPhieuDat.Tong_tien | currency: "VND"}}</h5>
+                      </div>
+                    </div>
                     <div class="row">
                      <div class="col-sm-9 d-flex justify-content-end">
                        <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
@@ -122,20 +141,27 @@
                           {{eachPhieuDat.Trang_thai}}
                         </div>
                         <div class="row mt-3">
-                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn
-                        {{eachPhieuDat.Trang_thai}}. -->
                           <h6 class="m-0" *ngIf="sanphamdanggiaohang[i] !== undefined">
                             {{sanphamdanggiaohang[i][j]?.Ten_san_pham}}</h6>
-
                         </div>
                         <div class="row mt-2">
-                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                          <small>x{{eachSP.So_luong}}</small>
                         </div>
+
                       </div>
                     </div>
 
                   </button>
-                  <div class="container">
+                  <div class="container mb-3">
+                    <div class="row tongtien">
+                      <div class="col-sm-8"></div>
+                      <div class="col-sm-1 p-0 ">
+                        <p class="m-0 mt-1">Tổng tiền: </p>
+                      </div>
+                      <div class="col-sm-3 p-0">
+                        <h5 class="m-0 sum">{{eachPhieuDat.Tong_tien | currency: "VND"}}</h5>
+                      </div>
+                    </div>
                     <div class="row">
                      <div class="col-sm-9 d-flex justify-content-end">
                        <button name="button" type="button" class="buttondanhgia">Chi tiết</button>
@@ -174,16 +200,12 @@
                           Giao hàng thành công
                         </div>
                         <div class="row mt-3">
-                          <!-- Xin chào {{eachPhieuDat.Ho_ten}}, đơn hàng {{eachPhieuDat._id}} của bạn đã giao hàng thành
-                          công. -->
+
                           <h6 class="m-0" *ngIf="sanphamdanhgia[i] !== undefined">{{sanphamdanhgia[i][j]?.Ten_san_pham}}
                           </h6>
                         </div>
                         <div class="row mt-2">
                           <small>x{{eachSP.So_luong}}</small>
-                        </div>
-                        <div class="row mt-2">
-                          <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
                         </div>
                       </div>
 
@@ -201,31 +223,31 @@
                       </div>
                     </div>
                     <div class="row tongtien">
-                      <div class="col-sm-8"></div>
-                      <div class="col-sm-4 p-0">
-                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] != 0">Đánh
-                          giá</button>
-                        <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] === 0">Cập nhật
-                          đánh giá</button>
+                      <div class="col-sm-6"></div>
+                      <div class="col-sm-6 p-0">
+                        <div class="row">
+                          <div class="col-sm-6 d-flex justify-content-end">
+                            <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] != 0">Đánh
+                              giá</button>
+                            <button name="button" type="button" class="buttondanhgia" *ngIf="arrdanhgia[i] === 0">Cập nhật
+                              đánh giá</button>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="col-sm-12">
+                              <div class="row d-flex justify-content-end">
+                                <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
+                              </div>
+                              <div class="row d-flex justify-content-end">
+                                <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
-                  <div class="container">
-                    <div class="row">
-                     <div class="col-sm-9 d-flex justify-content-end">
 
-                     </div>
-                     <div class="col-sm-3">
-                       <div class="row d-flex justify-content-end">
-                         <small> Mã đơn hàng <strong>{{eachPhieuDat._id}}</strong> </small>
-                       </div>
-                       <div class="row d-flex justify-content-end">
-                         <small>{{eachPhieuDat.Ngay_cap_nhat | date:"MM/dd/yyyy h:mma"}}</small>
-                       </div>
-                     </div>
-                    </div>
-
-                    </div>
                 </div>
               </div>
             </div>
