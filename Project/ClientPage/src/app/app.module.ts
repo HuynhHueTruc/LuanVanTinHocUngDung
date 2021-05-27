@@ -17,6 +17,7 @@ import { DefautGuard } from '../guard/defaut.guard';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   // Khai báo các component, directive, pile của module này
@@ -41,7 +42,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     RouterModule,
     NbInputModule,
     NbTabsetModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    NgbModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // Các dịch vụ, mà các component khác có thể sử dụng

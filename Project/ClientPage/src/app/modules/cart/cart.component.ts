@@ -129,11 +129,17 @@ export class CartComponent implements OnInit {
 
   // Mở Dialog xác nhận xóa giỏ hàng
   Xoa(index) {
-    console.log(index)
     this.arrSanPham.splice(index, 1);
     this.giohang[0].San_Pham.splice(index, 1);
     this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
     this.TongTien()
+    this.checked.splice(Number.parseInt(index), 1)
+    this.lengthchecked -= 1
+    this.lengthdssanpham -= 1
+    if (this.lengthdssanpham === 0){
+      this.checkAll = false
+      document.getElementById('divbutton').style.display = 'none';
+    }
   }
 
   XoaTatCa() {
@@ -158,7 +164,6 @@ export class CartComponent implements OnInit {
 
     } else {
       this.checkAll = true;
-      // this.TongTien()
       this.checked = [];
       for (let i = 0; i < this.lengthdssanpham; i++) {
         this.checked.push(true);

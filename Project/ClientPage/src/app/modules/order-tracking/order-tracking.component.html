@@ -201,7 +201,7 @@
                     <div class="row tongtien">
                       <div class="col-sm-7"></div>
                       <div class="col-sm-2 p-0 d-flex justify-content-end">
-                        <button name="button" type="button" class="buttondanhgia" (click)="ChuyenTrangBinhLuan(eachPhieuDat)" *ngIf="arrdanhgia[i] != 0">Đánh
+                        <button name="button" type="button" class="buttondanhgia" (click)="open(content)" *ngIf="arrdanhgia[i] != 0">Đánh
                           giá</button>
                         <button name="button" type="button" class="buttondanhgia" (click)="ChuyenTrangBinhLuan(eachPhieuDat)" *ngIf="arrdanhgia[i] === 0">Cập nhật
                           đánh giá</button>
@@ -225,3 +225,20 @@
 
       </nb-card-body>
     </nb-card>
+
+<!-- Modal -->
+<div class="container" id="modals" >
+  <ng-template #content let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">BÌNH LUẬN</h4>
+    </div>
+    <div class="modal-body">
+     abc
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="Comment()">Hoàn thành</button>
+      <button type="button" class="btn btn-secondary" (click)="Huy()">Hủy</button>
+    </div>
+    </div>
+  </ng-template>
+
+</div>

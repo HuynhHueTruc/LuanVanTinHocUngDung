@@ -8,6 +8,7 @@ import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
 import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NbIconConfig } from '@nebular/theme';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-tracking',
@@ -38,11 +39,13 @@ export class OrderTrackingComponent implements OnInit {
   soluongdanggiaohang = 0
   soluongdanhgia = 0
 
+  danhgia = []
+
   arrdanhgia = []
   trang_thai = ''
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
 
-  constructor(private phieudatService: PhieudatService, private hoadonService: HoadonbanhangService, private sanphamService: SanphamService, private router: Router) { }
+  constructor(private phieudatService: PhieudatService, private hoadonService: HoadonbanhangService, private sanphamService: SanphamService, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -207,7 +210,25 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   ChuyenTrangBinhLuan(eachPhieuDat) {
+    this.danhgia = eachPhieuDat
+    console.log(this.danhgia)
     this.router.navigateByUrl(`/bill_manegement/comment/${eachPhieuDat._id}`);
   }
 
+    // Hàm mở Dialog Tạo
+    open(content) {
+
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
+
+    }
+
+
+  Comment(){
+
+  }
+
+  Huy(){
+    this.modalService.dismissAll();
+    location.reload();
+  }
 }
