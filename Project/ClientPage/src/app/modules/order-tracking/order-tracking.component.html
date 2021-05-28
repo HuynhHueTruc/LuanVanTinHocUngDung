@@ -210,9 +210,9 @@
                     <div class="row tongtien">
                       <div class="col-sm-7"></div>
                       <div class="col-sm-2 p-0 d-flex justify-content-end">
-                        <button name="button" type="button" class="buttondanhgia" (click)="open(content)" *ngIf="arrdanhgia[i] != 0">Đánh
+                        <button name="button" type="button" class="buttondanhgia" (click)="open(content)" *ngIf="arrdanhgia[i] === 0">Đánh
                           giá</button>
-                        <button name="button" type="button" class="buttondanhgia" (click)="ChuyenTrangBinhLuan(eachPhieuDat)" *ngIf="arrdanhgia[i] === 0">Cập nhật
+                        <button name="button" type="button" class="buttondanhgia" (click)="open(content)" *ngIf="arrdanhgia[i] !== 0">Cập nhật
                           đánh giá</button>
                       </div>
                       <div class="col-sm-3">

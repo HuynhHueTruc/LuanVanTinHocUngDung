@@ -130,7 +130,6 @@ export class OrderTrackingComponent implements OnInit {
           this.soluongdanhgia += 1
         }
       }
-
       for (const l in this.dschoxacnhan) {
         for (const k in this.dschoxacnhan[l].San_Pham) {
           hinhanh.push({ SanPham_id: this.dschoxacnhan[l].San_Pham[k].SanPham_id, Hinh_anh: '', Ten_san_pham: '' })
@@ -207,12 +206,6 @@ export class OrderTrackingComponent implements OnInit {
     this.router.navigateByUrl(`/bill_manegement/order_tracking_detail/${eachPhieuDat._id}`);
   }
 
-  ChuyenTrangBinhLuan(eachPhieuDat) {
-    this.danhgia = eachPhieuDat
-    console.log(this.danhgia)
-    this.router.navigateByUrl(`/bill_manegement/comment/${eachPhieuDat._id}`);
-  }
-
     // Hàm mở Dialog Tạo
     open(content) {
 
@@ -227,6 +220,5 @@ export class OrderTrackingComponent implements OnInit {
 
   Huy(){
     this.modalService.dismissAll();
-    location.reload();
   }
 }

@@ -54,8 +54,8 @@ const routes: Routes = [
         { path: 'changepassword', component: ChangepasswordComponent }
       ]
   },
-  { path: 'forgotpassword', component: ForgotpasswordComponent, canActivate: [DefautGuard] },
-  { path: 'cart', component: CartComponent, canActivate: [DefautGuard] },
+  { path: 'forgotpassword', component: ForgotpasswordComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
   { path: 'posts', component: PostsComponent },
