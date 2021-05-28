@@ -283,25 +283,31 @@
         <div class="row d-flex justify-content-center">
           <div class="stars">
             <form action="">
-              <input class="star star-5" id="star-{{j}}-a" type="radio" name="star" />
+              <input class="star star-5" id="star-{{j}}-a" type="radio" name="star" (click)="DemSoSao(j, 5)"/>
               <label class="star star-5" for="star-{{j}}-a"></label>
-              <input class="star star-4" id="star-{{j}}-b" type="radio" name="star"/>
+              <input class="star star-4" id="star-{{j}}-b" type="radio" name="star" (click)="DemSoSao(j, 4)"/>
               <label class="star star-4" for="star-{{j}}-b"></label>
-              <input class="star star-3" id="star-{{j}}-c" type="radio" name="star"/>
+              <input class="star star-3" id="star-{{j}}-c" type="radio" name="star" (click)="DemSoSao(j, 3)"/>
               <label class="star star-3" for="star-{{j}}-c"></label>
-              <input class="star star-2" id="star-{{j}}-d" type="radio" name="star"/>
+              <input class="star star-2" id="star-{{j}}-d" type="radio" name="star" (click)="DemSoSao(j, 2)"/>
               <label class="star star-2" for="star-{{j}}-d"></label>
-              <input class="star star-1" id="star-{{j}}-e" type="radio" name="star"/>
+              <input class="star star-1" id="star-{{j}}-e" type="radio" name="star" (click)="DemSoSao(j, 1)"/>
               <label class="star star-1" for="star-{{j}}-e"></label>
             </form>
           </div>
+        </div>
+        <div class="row">
+          <textarea class="textcomment" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé"></textarea>
+        </div>
+        <div class="row">
+          <input type="file" class="form-control-file" id="imgcomment" name='files[]' multiple="multiple" (change)="UpdateImg()">
         </div>
         </div>
 
 
       </div>
     <div class="modal-footer">
-      <button type="button" class="btn comment" (click)="Comment()">Hoàn thành</button>
+      <button type="button" class="btn comment" (click)="DanhGia()">Hoàn thành</button>
       <button type="button" class="btn btn-secondary" (click)="Huy()">Hủy</button>
     </div>
     </div>
