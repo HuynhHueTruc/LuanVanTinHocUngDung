@@ -46,11 +46,17 @@
               </div>
             </div>
           </div>
-          <div class="card-body ">
-            <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
-            <div class="d-flex justify-content-center mt-2">
-              <p class="giasale">{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+          <div class="card-body">
+            <div class="row d-flex justify-content-center">
+              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
             </div>
+            <div class="row d-flex justify-content-center">
+              <div class="d-flex justify-content-center mt-2">
+                <p class="giasale">{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+              </div>
+            </div>
+
+
           </div>
 
         </div>
@@ -63,8 +69,8 @@
     <div class="row col-wrap">
       <div class="col-12">
         <p class="title-khuyenmai">HOT</p>
-        <hr class="p-hr">
-        <p class="title">Sản phẩm bán chạy</p>
+        <hr class="p-hr mb-3">
+        <p class="title ">Sản phẩm bán chạy</p>
       </div>
     </div>
     <div class="carousel sanphambanchay" *ngIf="sanphambanchays.length > 0">
@@ -82,10 +88,15 @@
             </div>
           </div>
           <div class="card-body">
-            <h6 class="card-title ">{{eachSP.Ten_san_pham }}</h6>
-            <div class="d-flex justify-content-center mt-2">
-              <p class="giasale">{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+            <div class="row d-flex justify-content-center">
+              <h6 class="card-title ">{{eachSP.Ten_san_pham }}</h6>
             </div>
+            <div class="row d-flex justify-content-center">
+              <div class="d-flex justify-content-center mt-2">
+                <p class="giasale">{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -215,7 +226,7 @@
   </div>
 
   <!-- Row gợi ý -->
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-12">
       <p class="title-gt"></p>
       <p class="title-goiy">Dành cho bạn!</p>
@@ -238,4 +249,4 @@
     <div class="col goiy goiy">
       Gợi ý 5
     </div>
-  </div>
+  </div> -->
