@@ -95,8 +95,8 @@
                 <td >{{arrdiachi[i].Xa_Phuong}}, {{arrdiachi[i].Huyen_Quan}}, {{arrdiachi[i].Tinh_ThanhPho}}</td>
                 <td class="content">{{eachNCC.So_dien_thoai}}</td>
                 <td class="content">{{eachNCC.Email}}</td>
-               <td class="d-flex justify-content-center">
-                <div class="form-group d-flex align-items-center">
+               <td class="content d-flex justify-content-center dmn">
+                <div class=" d-flex align-items-center">
                   <select class="form-control " id="SanPhamSelect" >
                     <option *ngFor="let eachNCC of thongtindanhmucnho[i]; let i = index;" value={{eachNCC.DMN_id}}>{{eachNCC.Ten_danh_muc_nho}}</option>
                   </select>
@@ -136,7 +136,7 @@
 <div class="container" id="modals" >
   <ng-template #content let-modal >
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">TẠO TÀI KHOẢN NHÀ CUNG CẤP</h4>
+      <h4 class="modal-title" id="modal-basic-title">THÊM NHÀ CUNG CẤP</h4>
     </div>
     <div class="modal-body">
       <form #staffFormCreate="ngForm" name="DangKyTaiKhoanNhaCungCap">
@@ -244,7 +244,7 @@
 <div class="container" id="modals_update" >
   <ng-template #content_update let-modal >
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT TÀI KHOẢN NHÀ CUNG CẤP</h4>
+      <h4 class="modal-title" id="modal-basic-title-update">CẬP NHẬT THÔNG TIN NHÀ CUNG CẤP</h4>
     </div>
     <div class="modal-body">
       <form #supplierFormCreate="ngForm" >

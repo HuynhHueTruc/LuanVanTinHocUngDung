@@ -173,11 +173,11 @@ export class OrderComponent implements OnInit {
       this.TaoHoaDonBan(phieudat)
       let so_luong;
       let arr_sp = [];
-      this.sanphamService.getListSanPham().subscribe((res: any) =>{
+      this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
-        for (const i in phieudat.San_Pham){
-          for(const j in this.sanphams){
-            if (phieudat.San_Pham[i].SanPham_id === this.sanphams[j]._id){
+        for (const i in phieudat.San_Pham) {
+          for (const j in this.sanphams) {
+            if (phieudat.San_Pham[i].SanPham_id === this.sanphams[j]._id) {
               so_luong = this.sanphams[j].So_luong - phieudat.San_Pham[i].So_luong
               this.sanphams[j].So_luong = so_luong
               arr_sp.push(this.sanphams[j])
@@ -365,10 +365,10 @@ export class OrderComponent implements OnInit {
 
 
   //Hủy thêm sản phẩm
-Huy(){
-  this.lstsanpham.splice(0, this.lstsanpham.length)
-  this.modalService.dismissAll()
-}
+  Huy() {
+    this.lstsanpham.splice(0, this.lstsanpham.length)
+    this.modalService.dismissAll()
+  }
 
   HienThiQuanHuyen_XaPhuong(evt, diachi) {
     if (evt === null) {
@@ -530,20 +530,20 @@ Huy(){
     }
   }
 
-  open(content){
+  open(content) {
     this.phieudat = new PhieuDatModel()
-    this.phieudat.Dia_chi = {Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: ''};
-    this.phieudat.San_Pham = [{SanPham_id: '', So_luong: 0, Gia_ban: 0}]
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.phieudat.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
+    this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false,  size: 'lg' });
 
     // this.blockerrmessage();
   }
 
-  blockerrmessage(){
-    document.getElementById('mes_huyen_quan').style.display = 'block'
-    document.getElementById('mes_xa_phuong').style.display = 'block'
-    document.getElementById('errVanChuyen').style.display = 'block'
-    document.getElementById('errThanhToan').style.display = 'block'
+  blockerrmessage(flag) {
+    document.getElementById('mes_huyen_quan').style.display = flag
+    document.getElementById('mes_xa_phuong').style.display = flag
+    document.getElementById('errVanChuyen').style.display = flag
+    document.getElementById('errThanhToan').style.display = flag
 
   }
 
@@ -567,7 +567,6 @@ Huy(){
         this.thanhtoantmp.push(this.dsphuongthucthanhtoan[i])
       }
     }
-console.log(this.thanhtoantmp)
     this.lstsanpham = eachPhieuDat.San_Pham
     for (const j in this.lstsanpham) {
       for (const i in this.dssanpham) {
@@ -580,9 +579,9 @@ console.log(this.thanhtoantmp)
     for (const i in this.arrSanPham) {
       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
     }
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false,  size: 'lg' });
     this.ThanhPho(null, this.phieudat.Dia_chi);
-    this.err_message_update()
+    this.blockerrmessage('none')
 
   }
 
@@ -633,7 +632,7 @@ console.log(this.thanhtoantmp)
     this.dsSP = new SanPhamThemModel()
     this.modalService.open(content_info_product_plus, {
       ariaLabelledBy: 'modal-basic-title-info-mail-plus',
-      backdrop: 'static', keyboard: false
+      backdrop: 'static', keyboard: false,  size: 'lg'
     });
   }
 
@@ -761,7 +760,7 @@ console.log(this.thanhtoantmp)
   }
 
   // Cập nhật danh sách sản phẩm trong update
-  CapNhatDSSanPham(content_update) {
+  CapNhatDSSanPham(content) {
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
@@ -777,7 +776,7 @@ console.log(this.thanhtoantmp)
           }
         }
 
-        this.sanphamService.getListSanPham().subscribe((res: any) =>{
+        this.sanphamService.getListSanPham().subscribe((res: any) => {
           this.sanphams = res.sanphams
           for (const j in this.sanphams) {
             if (this.sanphams[j]._id === this.dsSP.SanPham_id) {
@@ -801,8 +800,8 @@ console.log(this.thanhtoantmp)
                 this.dsSP = new SanPhamThemModel()
                 this.So_luong = 0
                 this.modalService.dismissAll()
-                this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
-                this.err_message_update()
+                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false,  size: 'lg' });
+                this.blockerrmessage('none')
               }
             }
           }
@@ -813,53 +812,47 @@ console.log(this.thanhtoantmp)
     }
   }
 
-  err_message_update() {
-    document.getElementById('errVanChuyen').style.display = 'none'
-    document.getElementById('errThanhToan').style.display = 'none'
-    document.getElementById('mes_huyen_quan').style.display = 'none';
-    document.getElementById('mes_xa_phuong').style.display = 'none';
-    document.getElementById('errListSanPham').style.display = 'none'
-  }
 
-   // Thêm sản phẩm vào list
-ThemSanPham(content){
-  if (this.sanphamtmp[0] === undefined || this.So_luong <= 0){
-    alert('Vui lòng nhập đầy đủ thông tin!')
-  }else{
-    if (this.KiemTraTrungSanPham(this.sanphamtmp)){
-      for (const i in this.sanphamtmp){
-        this.dsSP.SanPham_id = this.sanphamtmp[i]._id
-        this.dsSP.Ten_san_pham = this.sanphamtmp[i].Ten_san_pham
-        this.dsSP.So_luong = this.So_luong
-      }
-     this.lstsanpham.push(this.dsSP)
-     this.sum = 0
-    for (const i in this.lstsanpham){
-      for (const j in this.dssanpham){
-        if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id){
-          this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
+
+  // Thêm sản phẩm vào list
+  ThemSanPham(content) {
+    if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
+      alert('Vui lòng nhập đầy đủ thông tin!')
+    } else {
+      if (this.KiemTraTrungSanPham(this.sanphamtmp)) {
+        for (const i in this.sanphamtmp) {
+          this.dsSP.SanPham_id = this.sanphamtmp[i]._id
+          this.dsSP.Ten_san_pham = this.sanphamtmp[i].Ten_san_pham
+          this.dsSP.So_luong = this.So_luong
         }
+        this.lstsanpham.push(this.dsSP)
+        this.sum = 0
+        for (const i in this.lstsanpham) {
+          for (const j in this.dssanpham) {
+            if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
+              this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
+            }
+          }
+        }
+        this.phieudat.Tong_tien = this.sum
+        this.dsSP = new SanPhamThemModel()
+        this.So_luong = 0
+        this.modalService.dismissAll()
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+      } else {
+        alert('Sản phẩm này đã được thêm vào danh sách!')
       }
     }
-     this.phieudat.Tong_tien =  this.sum
-     this.dsSP = new SanPhamThemModel()
-     this.So_luong = 0
-    this.modalService.dismissAll()
-     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
-    }else {
-      alert('Sản phẩm này đã được thêm vào danh sách!')
-    }
   }
-}
 
-// Thêm hóa đơn
-ThemPhieuDat(){
-  let sum = 0
+  // Thêm hóa đơn
+  ThemPhieuDat() {
+    let sum = 0
 
-  this.getthongtintaikhoan()
-  this.phieudat.KhachHang_id = this.taikhoan.Nhan_vien_id
-  this.phieudat.Trang_thai = 'Đã duyệt'
-  this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
+    this.getthongtintaikhoan()
+    this.phieudat.KhachHang_id = this.taikhoan.Nhan_vien_id
+    this.phieudat.Trang_thai = 'Đã duyệt'
+    this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
     for (const i in this.arrSanPham) {
       for (const j in this.dssanpham) {
         if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
@@ -867,14 +860,14 @@ ThemPhieuDat(){
         }
       }
     }
-  for (const s in this.phieudat.San_Pham) {
-    this.sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
-  }
-  this.phieudat.Tong_tien = this.sum
-  if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined){
-    this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
-    this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
-  }
+    for (const s in this.phieudat.San_Pham) {
+      this.sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
+    }
+    this.phieudat.Tong_tien = this.sum
+    if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
+      this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
+      this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
+    }
     this.KTNull(this.phieudat)
     if (this.KiemTraThongTin) {
       this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
@@ -892,7 +885,7 @@ ThemPhieuDat(){
       })
     }
 
-}
+  }
 
   // Cập nhật phiếu đặt
   CapNhat() {
@@ -931,14 +924,14 @@ ThemPhieuDat(){
 
 
   // Update số lượng Sản phẩm
-  CapNhatSoLuongSanPham(){
+  CapNhatSoLuongSanPham() {
     let so_luong;
     let arr_sp = [];
-    this.sanphamService.getListSanPham().subscribe((res: any) =>{
+    this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.sanphams = res.sanphams
-      for (const i in this.phieudat.San_Pham){
-        for(const j in this.sanphams){
-          if (this.phieudat.San_Pham[i].SanPham_id === this.sanphams[j]._id){
+      for (const i in this.phieudat.San_Pham) {
+        for (const j in this.sanphams) {
+          if (this.phieudat.San_Pham[i].SanPham_id === this.sanphams[j]._id) {
             so_luong = this.sanphams[j].So_luong - this.phieudat.San_Pham[i].So_luong
             this.sanphams[j].So_luong = so_luong
             arr_sp.push(this.sanphams[j])
@@ -1020,7 +1013,7 @@ ThemPhieuDat(){
     this.flag = index
     this.sanphamtmp.push(sp)
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false })
+    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false,  size: 'lg' })
     this.ErrMessage()
   }
 
@@ -1030,7 +1023,7 @@ ThemPhieuDat(){
     this.sanphamtmp.push(sp)
 
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false })
+    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false,  size: 'lg' })
     this.ErrMessage()
   }
   ErrMessage() {
@@ -1067,7 +1060,7 @@ ThemPhieuDat(){
     return index
   }
 
-// Chỉnh sửa sản phẩm khi cập nhật
+  // Chỉnh sửa sản phẩm khi cập nhật
   ChinhSuaSanPham(content_update) {
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
@@ -1103,7 +1096,7 @@ ThemPhieuDat(){
         }
       }
 
-      this.sanphamService.getListSanPham().subscribe((res: any) =>{
+      this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
         for (const j in this.sanphams) {
           if (this.lstsanpham[Number.parseInt(this.flag)].SanPham_id === this.sanphams[j]._id) {
@@ -1126,7 +1119,7 @@ ThemPhieuDat(){
   }
 
   //Chỉnh sửa sản phẩm khi thêm
-  CapNhatListSanPham(content){
+  CapNhatListSanPham(content) {
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
@@ -1161,7 +1154,7 @@ ThemPhieuDat(){
         }
       }
 
-      this.sanphamService.getListSanPham().subscribe((res: any) =>{
+      this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
         for (const j in this.sanphams) {
           if (this.lstsanpham[Number.parseInt(this.flag)].SanPham_id === this.sanphams[j]._id) {
@@ -1187,11 +1180,11 @@ ThemPhieuDat(){
   XoaDSSanPham(content, _id, index, type?) {
 
     this.arrSanPham.splice(Number.parseInt(index), 1)
-    if (type !== 'new'){
+    if (type !== 'new') {
       this.dsphieudat[this.index_update].San_Pham.splice(Number.parseInt(index), 1)
       this.thongtinsanpham[this.index_update].splice(Number.parseInt(index), 1)
 
-    }else{
+    } else {
       this.lstsanpham.splice(Number.parseInt(index), 1)
     }
     console.log(this.arrSanPham, this.lstsanpham)

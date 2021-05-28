@@ -55,10 +55,10 @@ export class AreaComponent implements OnInit {
 
       for (const i in this.dshoadon) {
         for (const j in this.dshoadon[i].San_Pham) {
-          this.sanphams.push({ SanPham_id: this.dshoadon[i].San_Pham[j].SanPham_id, So_luong: this.dshoadon[i].San_Pham[j].So_luong, Gia_ban: this.dshoadon[i].San_Pham[j].Gia_ban, Thoi_gian_ban: this.dshoadon[i].Ngay_lap })
+          this.sanphams.push({ SanPham_id: this.dshoadon[i].San_Pham[j].SanPham_id, So_luong: this.dshoadon[i].San_Pham[j].So_luong, Gia_ban: this.dshoadon[i].San_Pham[j].Gia_ban, Thoi_gian_ban: this.dshoadon[i].Ngay_cap_nhat })
         }
       }
-
+console.log(this.sanphams)
       for (const i in this.sanphams) {
 
           if (new Date(this.sanphams[i].Thoi_gian_ban).getFullYear() === this.nam) {
@@ -162,6 +162,7 @@ export class AreaComponent implements OnInit {
     }
     this.RawHighcharts()
     this.DoanhThu()
+    console.log(this.dataHighcharts)
   }
 
   GiaBan(eachSanPham) {
