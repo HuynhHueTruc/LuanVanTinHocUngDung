@@ -297,10 +297,15 @@
           </div>
         </div>
         <div class="row">
-          <textarea class="textcomment" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé"></textarea>
+          <textarea class="textcomment" id="txtarea-{{j}}" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé"></textarea>
+        </div>
+        <div class="row">
+          <div class="col-sm-2 mt-3 mb-3" *ngFor="let hinhanh of danhgia[j]?.Hinh_anh; let h = index" id="avatarcomment">
+            <img id="imagecomment" src={{hinhanh.url}} >
+          </div>
         </div>
         <div class="row mt-2">
-          <input type="file" class="form-control" type="file" id="imgcomment" name='files[]' multiple="multiple" (change)="UpdateImg()">
+          <input type="file" class="form-control-file" type="file" id="imgcomment-{{j}}" name='files[]' multiple="multiple" (change)="UploadImg(j)">
         </div>
         </div>
 

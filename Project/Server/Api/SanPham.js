@@ -106,6 +106,42 @@ route.put('/sanpham/capnhatsanpham/:_id', async(req, res) => {
     });
 });
 
+// Tạo đánh giá sản phẩm
+route.post('/sanpham/danhgiasanpham', async(req, res) => {
+//    const {SanPham_id, Noi_dung, Hinh_anh, So_diem, KhachHang_id} = req.body
+const arrdanhgia = req.body
+   const Ngay_danh_gia = dateFormat()
+   const Ngay_cap_nhat = dateFormat()
+   for (const i in arrdanhgia){
+    SanPhamModel.findOne({
+            _id: arrdanhgia[i].SanPham_id
+        }).then(data => {
+            if (data.Danh_gia[0] === undefined){
+                return SanPhamModel.updateOne({
+                    _id: arrdanhgia[i].SanPham_id
+                }, {
+                    Danh_gia: arrdanhgia[i]
+                    });
+            }else{
+                for (const j in data.Danh_gia){
+                    data.Danh_gia[j] = arrdanhgia[i]
+                    return SanPhamModel.updateOne({
+                        _id: arrdanhgia[i].SanPham_id
+                    }, {
+                        Danh_gia: data.Danh_gia
+                        });
+                    }
+            }
+        }).then(data => {
+        res.json('Cập nhật đánh giá sản phẩm thành công!');
+    }).catch(err => {
+        res.json(err);
+
+    });
+   }
+});
+
+
 // Hàm cập nhật số lượng
 route.post('/sanpham/capnhatsanpham/soluong', async(req, res) => {
     const arrSanPham = req.body;

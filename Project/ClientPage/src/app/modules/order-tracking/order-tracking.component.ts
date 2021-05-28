@@ -53,7 +53,7 @@ export class OrderTrackingComponent implements OnInit {
 
 
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
- // Your web app's Firebase configuration
+  // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig = {
     apiKey: "AIzaSyB5XhGTH_qmY-E5SKq0x9xvvadjtqPeXQQ",
@@ -70,13 +70,13 @@ export class OrderTrackingComponent implements OnInit {
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.getdsphieudat()
-      // Initialize Firebase
-      if (!firebase.apps.length) {
-        firebase.initializeApp(this.firebaseConfig);
-        firebase.analytics();
-      } else {
-        firebase.app(); // if already initialized, use that one
-      }
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(this.firebaseConfig);
+      firebase.analytics();
+    } else {
+      firebase.app(); // if already initialized, use that one
+    }
   }
 
   getdsphieudat() {
@@ -240,50 +240,56 @@ export class OrderTrackingComponent implements OnInit {
     this.sanphamdanhgia = eachPhieuDat
     this.current = index
     for (const j in this.sanphamdanhgia.San_Pham) {
-      this.danhgia.push({ SanPham_id: this.sanphamdanhgia.San_Pham[j].SanPham_id, Noi_dung: '', Hinh_anh: '', KhachHang_id: this.datalogin.Khach_hang_id, So_diem: 0 })
-      this.arrsodiem.push(0)
+      this.danhgia.push({ SanPham_id: this.sanphamdanhgia.San_Pham[j].SanPham_id, Noi_dung: '', Hinh_anh: [{ url: '' }], KhachHang_id: this.datalogin.Khach_hang_id, So_diem: 0 })
     }
-    console.log(this.sanphamdanhgia)
-    console.log(this.danhgia, this.arrsodiem)
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
   }
 
   DemSoSao(index, count) {
-    this.arrsodiem[index] = count
+    this.danhgia[index].So_diem = count
   }
 
-   UpdateImg() {
-    const f = document.querySelector('#imgcomment') as HTMLInputElement;
+  UploadImg(index) {
+    const ref = firebase.storage().ref();
+    const f = document.getElementById('imgcomment-' + index) as HTMLInputElement;
     const file = f.files;
-    if (file === undefined) {
-      this.updateimg = false
-    } else {
-      this.updateimg = true
-
+    let length = file.length;
+    for (let i = 0; i < length; i++) {
+      if (typeof file[i] === 'object') {
+        const name = new Date() + '-' + file[i].name;
+        const metadata = {
+          contentType: file[i].type
+        };
+        const task = ref.child(name).put(file[i], metadata);
+        task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            document.getElementById('avatarcomment').style.display = 'block'
+            this.danhgia[index].Hinh_anh.push({ url: url })
+          }
+          );
+      }
     }
+
   }
-
-  // CapNhatDanhGia() {
-  //   if (this.updateimg) {
-  //     this.CapNhatVaLuuDanhGia();
-  //   }
-  //     this.thongtincuahangService.updateThongTinCuaHang(this.thongtincuahang).subscribe(dt => {
-  //       window.alert(dt);
-  //       this.updateimg = false
-  //     });
-
-  // }
-
-  // CapNhatVaLuuDanhGia(){
-
-  // }
 
   DanhGia() {
-
+    let html;
+    for (const i in this.danhgia) {
+      html = document.getElementById('txtarea-' + i) as HTMLInputElement
+      const content_comment = html.value
+      this.danhgia[i].Noi_dung = content_comment
+      this.danhgia[i].Hinh_anh.splice(0, 1)
+    }
+    this.sanphamService.DanhGiaSanPham(this.danhgia).subscribe(data =>{
+      alert(data)
+      location.reload()
+    })
 
   }
 
   Huy() {
     this.modalService.dismissAll();
+    location.reload()
   }
 }
