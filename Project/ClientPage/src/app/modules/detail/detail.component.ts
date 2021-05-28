@@ -59,7 +59,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   arrSoLuongBan = [];
   dsphieudat: PhieuDatModel
   sum = 0;
-
+  arrSanPhamThanhToan = []
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
     private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService, private phieudatServcie: PhieudatService) { }
@@ -364,5 +364,16 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.isLoading = true;
   }
 
+
+  Checkout() {
+
+      this.arrSanPhamThanhToan = this.sanphamdetail
+      this.arrSanPhamThanhToan[0].So_luong = this.So_luong
+      console.log(this.arrSanPhamThanhToan)
+
+      this.giohangService.setArrSP(this.arrSanPhamThanhToan)
+      this.router.navigateByUrl('/checkout')
+
+  }
 
 }

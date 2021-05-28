@@ -36,6 +36,8 @@ export class CheckoutComponent implements OnInit {
   vanchuyen = [];
   thanhtoan = [];
   giavanchuyen = 0;
+  isgiohang = false
+
   dropdownSettings: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
   private valueFromChildSubscription: Subscription;
@@ -86,18 +88,38 @@ export class CheckoutComponent implements OnInit {
 
   getgiohang() {
     this.giohang = []
-
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
-      for (const i in this.arrSanPhamThanhToan) {
-        for (const j in this.giohang[0].San_Pham) {
-          if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
-            this.sanphamthanhtoan.push(this.giohang[0].San_Pham[j])
-            this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
+      // for (const i in this.arrSanPhamThanhToan) {
+      //   for (const j in this.giohang[0].San_Pham) {
+      //     if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
+      //       this.sanphamthanhtoan.push(this.giohang[0].San_Pham[j])
+      //       this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
+      //     }
+      //   }
+      // }
+      // this.TongTien()
+      if (this.giohang[0].San_Pham[0] === undefined) {
+        // Mua trực tiếp trên detail
+        this.sanphamthanhtoan.push(this.arrSanPhamThanhToan[0])
+        this.TongTien()
+      } else {
+        for (const i in this.arrSanPhamThanhToan) {
+          for (const j in this.giohang[0].San_Pham) {
+            if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
+              this.isgiohang = true
+              this.sanphamthanhtoan.push(this.giohang[0].San_Pham[j])
+              this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
+            } else {
+              // Mua trực tiếp trên detail
+              this.sanphamthanhtoan.push(this.arrSanPhamThanhToan[0])
+              this.TongTien()
+            }
           }
         }
+        this.TongTien()
       }
-      this.TongTien()
+
     });
   }
 
@@ -224,7 +246,7 @@ export class CheckoutComponent implements OnInit {
 
   DatHang() {
     this.phieudat = new PhieuDatModel();
-    this.phieudat.San_Pham = [{SanPham_id: '', So_luong: 0, Gia_ban: 0}]
+    this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
     this.phieudat.KhachHang_id = this.datalogin.Khach_hang_id
     this.phieudat.Ho_ten = this.datalogin.Ho_ten
     this.phieudat.Dia_chi = this.datalogin.Dia_chi
@@ -236,21 +258,31 @@ export class CheckoutComponent implements OnInit {
     for (const i in this.arrSanPhamThanhToan) {
       this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
     }
-    this.phieudat.San_Pham.splice(0,1);
+    this.phieudat.San_Pham.splice(0, 1);
 
-    for (const j in this.giohang[0].San_Pham){
-      for (const k in this.arrSanPhamThanhToan){
-        if (this.giohang[0].San_Pham[j].SanPham_id === this.arrSanPhamThanhToan[k]._id){
-          this.giohang[0].San_Pham.splice(Number.parseInt(j), 1);
+    if (this.isgiohang) {
+      for (const j in this.giohang[0].San_Pham) {
+        for (const k in this.arrSanPhamThanhToan) {
+          if (this.giohang[0].San_Pham[j].SanPham_id === this.arrSanPhamThanhToan[k]._id) {
+            this.giohang[0].San_Pham.splice(Number.parseInt(j), 1);
+          }
         }
       }
     }
- this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+
+    this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
       alert('Đặt hàng thành công!')
       this.arrSanPhamThanhToan = []
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       this.giohangService.data = null
-      this.router.navigateByUrl('/cart')
+      if (this.isgiohang) {
+        this.router.navigateByUrl('/cart')
+      } else {
+        // console.log(this.sanphamthanhtoan)
+        // let _id = this.sanphamthanhtoan[0]._id
+        this.router.navigateByUrl('/default');
+
+      }
 
     })
     // console.log(this.giohang[0].San_Pham)

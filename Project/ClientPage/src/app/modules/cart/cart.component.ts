@@ -79,7 +79,6 @@ export class CartComponent implements OnInit {
 
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
-      // console.log(this.sanphams)
       this.lengthdssanpham = this.giohang[0].San_Pham.length;
       for (const length in this.giohang[0].San_Pham) {
         if (this.giohang[0].San_Pham.hasOwnProperty(length)) {
@@ -105,6 +104,7 @@ export class CartComponent implements OnInit {
           }
         }
       }
+      console.log(this.arrSanPham)
       this.getdskhuyenmai();
     });
   }
@@ -370,7 +370,6 @@ export class CartComponent implements OnInit {
     } else {
       this.giohangService.setArrSP(this.arrSanPhamThanhToan)
       this.router.navigateByUrl('/checkout')
-
     }
   }
 }
