@@ -339,7 +339,6 @@ async function sendMail(arruser, noi_dung, chu_de, callback){
 route.post('/khachhang/guiOTP', async(req, res) => {
     try {
         const arrThongTin = req.body;
-        console.log(arrThongTin)
         let a =  setInterval(function(){
             const key = getRndInteger(100001, 999999)
             arrThongTin.Ma_so = key

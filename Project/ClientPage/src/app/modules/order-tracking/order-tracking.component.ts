@@ -117,7 +117,6 @@ export class OrderTrackingComponent implements OnInit {
               }
             }
           }
-
         }
         tmp = hinhanh
         this.sanphamdanhgia.push(tmp)
@@ -194,7 +193,6 @@ export class OrderTrackingComponent implements OnInit {
           }
         }
       }
-
     })
   }
 

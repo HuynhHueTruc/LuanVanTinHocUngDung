@@ -134,8 +134,8 @@ export class CartComponent implements OnInit {
     this.giohangService.CapNhatSoLuong(this.giohang[0]).subscribe()
     this.TongTien()
     this.checked.splice(Number.parseInt(index), 1)
-    // this.lengthchecked -= 1
-    this.lengthdssanpham -= 1
+    this.lengthchecked = this.checked.length;
+    this.lengthdssanpham = this.giohang[0].San_Pham.length;
     if (this.lengthdssanpham === 0){
       this.checkAll = false
       document.getElementById('divbutton').style.display = 'none';
