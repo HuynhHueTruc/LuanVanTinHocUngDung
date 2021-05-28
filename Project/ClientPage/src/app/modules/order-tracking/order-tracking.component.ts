@@ -10,9 +10,9 @@ import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NbIconConfig } from '@nebular/theme';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import firebase from 'firebase/app';
-// import 'firebase/storage';
-// import 'firebase/analytics';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/analytics';
 
 @Component({
   selector: 'app-order-tracking',
@@ -55,15 +55,15 @@ export class OrderTrackingComponent implements OnInit {
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
  // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  // firebaseConfig = {
-  //   apiKey: "AIzaSyB5XhGTH_qmY-E5SKq0x9xvvadjtqPeXQQ",
-  //   authDomain: "managementimagesgreenlife.firebaseapp.com",
-  //   projectId: "managementimagesgreenlife",
-  //   storageBucket: "managementimagesgreenlife.appspot.com",
-  //   messagingSenderId: "206299427924",
-  //   appId: "1:206299427924:web:63b6f139ee2c4d059f69c1",
-  //   measurementId: "G-QZHVZRPBCT"
-  // };
+  firebaseConfig = {
+    apiKey: "AIzaSyB5XhGTH_qmY-E5SKq0x9xvvadjtqPeXQQ",
+    authDomain: "managementimagesgreenlife.firebaseapp.com",
+    projectId: "managementimagesgreenlife",
+    storageBucket: "managementimagesgreenlife.appspot.com",
+    messagingSenderId: "206299427924",
+    appId: "1:206299427924:web:63b6f139ee2c4d059f69c1",
+    measurementId: "G-QZHVZRPBCT"
+  };
 
   constructor(private phieudatService: PhieudatService, private hoadonService: HoadonbanhangService, private sanphamService: SanphamService, private router: Router, private modalService: NgbModal) { }
 
@@ -71,12 +71,12 @@ export class OrderTrackingComponent implements OnInit {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.getdsphieudat()
       // Initialize Firebase
-      // if (!firebase.apps.length) {
-      //   firebase.initializeApp(this.firebaseConfig);
-      //   firebase.analytics();
-      // } else {
-      //   firebase.app(); // if already initialized, use that one
-      // }
+      if (!firebase.apps.length) {
+        firebase.initializeApp(this.firebaseConfig);
+        firebase.analytics();
+      } else {
+        firebase.app(); // if already initialized, use that one
+      }
   }
 
   getdsphieudat() {
