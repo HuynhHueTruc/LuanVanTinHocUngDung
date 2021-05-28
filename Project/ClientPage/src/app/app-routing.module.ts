@@ -1,6 +1,5 @@
 import { OrderTrackingDetailsComponent } from './modules/order-tracking-details/order-tracking-details.component';
 import { BillManagementComponent } from './modules/bill-management/bill-management.component';
-import { CommentComponent } from './modules/comment/comment.component';
 import { OrderTrackingComponent } from './modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { DetailComponent } from './modules/detail/detail.component';
@@ -64,7 +63,6 @@ const routes: Routes = [
       [
         { path: '', component: OrderTrackingComponent },
         { path: 'order_tracking', component: OrderTrackingComponent },
-        { path: 'comment/:_id', component: CommentComponent },
         { path: 'order_tracking_detail/:_id', component: OrderTrackingDetailsComponent },
       ]
   },

@@ -1,3 +1,4 @@
+import { DanhGiaModel } from './../../../models/SanPham/danhgia';
 import { Router } from '@angular/router';
 import { AnhDaiDienModel } from './../../../models/SanPham/anhdaidien';
 import { SanPhamModel } from './../../../models/SanPham/sanpham';
@@ -29,18 +30,19 @@ export class OrderTrackingComponent implements OnInit {
   dscholayhang = []
   dsdanggiaohang = []
 
-  sanphamchoxacnhan: AnhDaiDienModel[] = []
-  sanphamcholayhang: AnhDaiDienModel[] = []
-  sanphamdanggiaohang: AnhDaiDienModel[] = []
-  sanphamdanhgia: AnhDaiDienModel[] = []
+  dssanphamchoxacnhan: AnhDaiDienModel[] = []
+  dssanphamcholayhang: AnhDaiDienModel[] = []
+  dssanphamdanggiaohang: AnhDaiDienModel[] = []
+  dssanphamdanhgia: AnhDaiDienModel[] = []
 
   soluongchoxacnhan = 0
   soluongcholayhang = 0
   soluongdanggiaohang = 0
   soluongdanhgia = 0
 
-  danhgia = []
-
+  danhgia: DanhGiaModel[] =[]
+  sanphamdanhgia: PhieuDatModel
+  current: any
   arrdanhgia = []
   trang_thai = ''
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
@@ -119,7 +121,7 @@ export class OrderTrackingComponent implements OnInit {
           }
         }
         tmp = hinhanh
-        this.sanphamdanhgia.push(tmp)
+        this.dssanphamdanhgia.push(tmp)
         hinhanh = []
         this.arrdanhgia.push(count)
         count = 0
@@ -135,7 +137,7 @@ export class OrderTrackingComponent implements OnInit {
           hinhanh.push({ SanPham_id: this.dschoxacnhan[l].San_Pham[k].SanPham_id, Hinh_anh: '', Ten_san_pham: '' })
         }
         tmp = hinhanh
-        this.sanphamchoxacnhan.push(tmp)
+        this.dssanphamchoxacnhan.push(tmp)
         hinhanh = []
       }
 
@@ -144,7 +146,7 @@ export class OrderTrackingComponent implements OnInit {
           hinhanh.push({ SanPham_id: this.dscholayhang[k].San_Pham[l].SanPham_id, Hinh_anh: '', Ten_san_pham: '' })
         }
         tmp = hinhanh
-        this.sanphamcholayhang.push(tmp)
+        this.dssanphamcholayhang.push(tmp)
         hinhanh = []
       }
 
@@ -153,41 +155,41 @@ export class OrderTrackingComponent implements OnInit {
           hinhanh.push({ SanPham_id: this.dsdanggiaohang[m].San_Pham[l].SanPham_id, Hinh_anh: '', Ten_san_pham: '' })
         }
         tmp = hinhanh
-        this.sanphamdanggiaohang.push(tmp)
+        this.dssanphamdanggiaohang.push(tmp)
         hinhanh = []
       }
 
       for (const j in this.dssanpham) {
-        for (const h in this.sanphamdanhgia) {
-          for (const k in this.sanphamdanhgia[h]) {
-            if (this.sanphamdanhgia[h][k].SanPham_id === this.dssanpham[j]._id) {
-              this.sanphamdanhgia[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
-              this.sanphamdanhgia[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
+        for (const h in this.dssanphamdanhgia) {
+          for (const k in this.dssanphamdanhgia[h]) {
+            if (this.dssanphamdanhgia[h][k].SanPham_id === this.dssanpham[j]._id) {
+              this.dssanphamdanhgia[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
+              this.dssanphamdanhgia[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
             }
           }
 
         }
-        for (const h in this.sanphamchoxacnhan) {
-          for (const k in this.sanphamchoxacnhan[h]) {
-            if (this.sanphamchoxacnhan[h][k].SanPham_id === this.dssanpham[j]._id) {
-              this.sanphamchoxacnhan[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
-              this.sanphamchoxacnhan[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
+        for (const h in this.dssanphamchoxacnhan) {
+          for (const k in this.dssanphamchoxacnhan[h]) {
+            if (this.dssanphamchoxacnhan[h][k].SanPham_id === this.dssanpham[j]._id) {
+              this.dssanphamchoxacnhan[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
+              this.dssanphamchoxacnhan[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
             }
           }
         }
-        for (const h in this.sanphamcholayhang) {
-          for (const k in this.sanphamcholayhang[h]) {
-            if (this.sanphamcholayhang[h][k].SanPham_id === this.dssanpham[j]._id) {
-              this.sanphamcholayhang[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
-              this.sanphamcholayhang[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
+        for (const h in this.dssanphamcholayhang) {
+          for (const k in this.dssanphamcholayhang[h]) {
+            if (this.dssanphamcholayhang[h][k].SanPham_id === this.dssanpham[j]._id) {
+              this.dssanphamcholayhang[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
+              this.dssanphamcholayhang[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
             }
           }
         }
-        for (const h in this.sanphamdanggiaohang) {
-          for (const k in this.sanphamdanggiaohang) {
-            if (this.sanphamdanggiaohang[h][k].SanPham_id === this.dssanpham[j]._id) {
-              this.sanphamdanggiaohang[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
-              this.sanphamdanggiaohang[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
+        for (const h in this.dssanphamdanggiaohang) {
+          for (const k in this.dssanphamdanggiaohang) {
+            if (this.dssanphamdanggiaohang[h][k].SanPham_id === this.dssanpham[j]._id) {
+              this.dssanphamdanggiaohang[h][k].Hinh_anh = this.dssanpham[j].Hinh_anh
+              this.dssanphamdanggiaohang[h][k].Ten_san_pham = this.dssanpham[j].Ten_san_pham
             }
           }
         }
@@ -207,14 +209,22 @@ export class OrderTrackingComponent implements OnInit {
   }
 
     // Hàm mở Dialog Tạo
-    open(content) {
+    open(content, eachPhieuDat, index) {
 
+      this.sanphamdanhgia = new PhieuDatModel()
+      this.sanphamdanhgia = eachPhieuDat
+      this.current = index
+        for (const j in this.sanphamdanhgia.San_Pham){
+          this.danhgia.push({SanPham_id: this.sanphamdanhgia.San_Pham[j].SanPham_id, Noi_dung: '', Hinh_anh: '', KhachHang_id: this.datalogin.Khach_hang_id, So_diem: 0})
+        }
+        console.log(this.sanphamdanhgia)
+      console.log(this.danhgia)
       this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
-
     }
 
 
   Comment(){
+
 
   }
 
