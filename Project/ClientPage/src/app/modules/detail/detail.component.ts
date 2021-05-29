@@ -367,12 +367,16 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   Checkout() {
 
+    if (this.KHService.isLoggedIn){
       this.arrSanPhamThanhToan = this.sanphamdetail
       this.arrSanPhamThanhToan[0].So_luong = this.So_luong
-      console.log(this.arrSanPhamThanhToan)
 
       this.giohangService.setArrSP(this.arrSanPhamThanhToan)
       this.router.navigateByUrl('/checkout')
+
+    }else{
+      this.router.navigateByUrl('/login')
+    }
 
   }
 
