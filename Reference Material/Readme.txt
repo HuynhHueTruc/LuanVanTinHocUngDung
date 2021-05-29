@@ -39,7 +39,7 @@ Timer trong nodejs: https://freetuts.net/timers-trong-nodejs-2216.html
 Thống kê truy cập: https://huongdan.haravan.com/blogs/tai-lieu-huong-dan/1000108610-huong-dan-them-code-thong-ke-truy-cap
 select multil: https://www.npmjs.com/package/ng-multiselect-dropdown
 Realtime database and change stream in mongodb: https://www.youtube.com/watch?v=n9Du-oESxCg; https://www.youtube.com/watch?v=DvnzeCfYg0s
-
+Angular doc: https://www.syncfusion.com/succinctly-free-ebooks/angular-succinctly/dev-environment
 ckfinder:
 https://ckeditor.com/cke4/addon/popup
 https://ckeditor.com/docs/ckeditor4/latest/guide/dev_file_browse_upload.html
