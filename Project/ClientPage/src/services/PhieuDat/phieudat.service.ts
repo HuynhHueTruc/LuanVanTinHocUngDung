@@ -17,17 +17,24 @@ export class PhieudatService {
     return this.refreshPage;
   }
 
-  getListPhieuDat(): Observable<PhieuDatModel[]>{
+  getListPhieuDat(): Observable<PhieuDatModel[]> {
     return this.http.get<PhieuDatModel[]>('http://localhost:3000/phieudat/thongtin').pipe();
   }
 
-  ThemPhieuDat(phieudat: PhieuDatModel): Observable<PhieuDatModel[]>{
+  ThemPhieuDat(phieudat: PhieuDatModel): Observable<PhieuDatModel[]> {
     return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/taomoi', phieudat)
-    .pipe(
-      tap(() => {
-        this.refreshPage.next();
-      })
-    );
-   }
+      .pipe(
+        tap(() => {
+          this.refreshPage.next();
+        })
+      );
+  }
 
+  XoaPhieuDat(_id: string): Observable<PhieuDatModel[]> {
+    return this.http.delete<PhieuDatModel[]>(`${'http://localhost:3000/phieudat/xoaphieudat'}/${_id}`).pipe();
+  }
+
+  GuiEmailTaiKhoan(dsSanPham, KhachHang): Observable<PhieuDatModel[]>{
+    return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/guiemailphieudat', {dsSanPham, KhachHang}).pipe();
+  }
 }

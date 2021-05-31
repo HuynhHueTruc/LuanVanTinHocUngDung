@@ -76,7 +76,6 @@ export class CartComponent implements OnInit {
 
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
-      console.log(this.giohang)
       this.lengthdssanpham = this.giohang[0].San_Pham.length;
       for (const length in this.giohang[0].San_Pham) {
         if (this.giohang[0].San_Pham.hasOwnProperty(length)) {
@@ -363,6 +362,7 @@ export class CartComponent implements OnInit {
   }
 
   Checkout() {
+    console.log(this.arrSanPhamThanhToan)
     for (const i in this.arrSanPhamThanhToan){
       for (const j in this.giohang[0].San_Pham){
         if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id){

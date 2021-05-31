@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const route = express()
 
 const nodemailer = require('nodemailer')
+const details = require('../src/models/GmailModel')
+
 var dateFormat = require('dateformat'); 
 var now = new Date();
 dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
@@ -161,5 +163,59 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
         })
     }    
 })
+
+// Hàm gửi email theo nội dung tự tạo
+route.post('/phieudat/guiemailphieudat', async(req, res) => {
+    const dsSanPham = req.body.dsSanPham;
+    const KhachHang = req.body.KhachHang;
+
+    sendMail(dsSanPham, KhachHang, info => {
+        console.log(`Email đã được gửi!`)
+        // res.json(info)
+    }).then(data =>{
+        res.json(data)
+    }).catch(err =>{
+        res.json(err)
+    })
+})
+
+async function sendMail(dsSanPham, KhachHang, callback){
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com", //pop.gmail.com, port 110
+        port: 587, //143, 587, 25
+        secure: false,
+        auth: {
+            user: details.Tai_khoan,
+            pass: details.Mat_khau
+        }
+    })
+        let mailOption = {
+            from: '"GreenLife Shop"',
+            to: KhachHang.Email,
+            subject: "Chào mừng bạn đến với GreenLife Shop!",
+            html: `<h1>Xin chào ${KhachHang.Ho_ten}</h1>
+            <h4>Cảm ơn bạn đã tin tưởng GreenLife Shop.</h4>
+            <h4>Đây là đơn hàng bạn vừa đặt, hãy kiểm tra lại thông tin nhé!</h4>
+            <table border = 1>
+
+            <tr bgcolor=#b9c9fe><th>STT</th><th>Mã đơn hàng</th><th>Sản phẩm</th><th>Số lượng </th><th>Giá</th><th>Khuyến mãi</th><th>Giá thành tiền</th></tr>
+            
+            <tr *ngFor="let eachSP of dsSanPham; let j = index">
+            <td>j + 1</td>
+            <td>eachSP._id</td>
+            <td>eachSP.Ten_san_pham</td>
+            <td>eachSP.So_luong</td>
+            <td>eachSP.Gia</td>
+            <td>khuyen mai</td>
+            <td>thanhf tien</td>
+            </tr>
+            </table>
+            <h4>Shop sẽ xác nhận đơn hàng của bạn trong vòng 24 giờ</h4>
+            <h4>Chúc bạn có những trãi nghiệm thật tốt với GreenLife!</h4><br>
+            <h3>GreenLife Shop!</h3>`
+        }   
+        let info = await transporter.sendMail(mailOption);
+        callback(info);   
+}
 //Export biến route để server.js có thể gọi các api được viết
 module.exports = route;

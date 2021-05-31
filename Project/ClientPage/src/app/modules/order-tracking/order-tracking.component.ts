@@ -50,7 +50,7 @@ export class OrderTrackingComponent implements OnInit {
   arrsodiem = []
   trang_thai = ''
   updateimg = false;
-
+  phieudat: PhieuDatModel
 
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
   // Your web app's Firebase configuration
@@ -69,6 +69,10 @@ export class OrderTrackingComponent implements OnInit {
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
+    this.phieudatService.getRefeshPage().subscribe(() => {
+      this.getdsphieudat()
+    })
+
     this.getdsphieudat()
     // Initialize Firebase
     if (!firebase.apps.length) {
@@ -219,6 +223,7 @@ export class OrderTrackingComponent implements OnInit {
           }
         }
       }
+
     })
   }
 
@@ -281,11 +286,22 @@ export class OrderTrackingComponent implements OnInit {
       this.danhgia[i].Noi_dung = content_comment
       this.danhgia[i].Hinh_anh.splice(0, 1)
     }
-    this.sanphamService.DanhGiaSanPham(this.danhgia).subscribe(data =>{
+    this.sanphamService.DanhGiaSanPham(this.danhgia).subscribe(data => {
       alert(data)
       location.reload()
     })
 
+  }
+
+  open_delete(content_delete, sanpham) {
+    this.phieudat = sanpham
+    this.modalService.open(content_delete, { ariaLabelledBy: 'modal-delete-title', backdrop: 'static', keyboard: false });
+  }
+
+  HuyDonChoXacNhan() {
+
+    this.phieudatService.XoaPhieuDat(this.phieudat._id).subscribe()
+    this.Huy()
   }
 
   Huy() {

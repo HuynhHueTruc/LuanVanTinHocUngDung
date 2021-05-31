@@ -55,7 +55,6 @@ route.get('/khachhang', async(req, res) => {
 
 
 route.post('/khachhang/dangky', async(req, res) => {
-console.log(req.body.So_thich)
     var Khach_hang_id = req.body.Khach_hang_id;
     var Ho_ten = req.body.Ho_ten;
     var Ngay_sinh = req.body.Ngay_sinh
