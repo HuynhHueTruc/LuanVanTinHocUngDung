@@ -99,6 +99,7 @@ export class CheckoutComponent implements OnInit {
       //   }
       // }
       // this.TongTien()
+      console.log(this.arrSanPhamThanhToan)
       if (this.giohang[0].San_Pham[0] === undefined) {
         // Mua trực tiếp trên detail
         this.sanphamthanhtoan.push(this.arrSanPhamThanhToan[0])
@@ -207,7 +208,7 @@ export class CheckoutComponent implements OnInit {
     this.arrSanPham = []
     for (const i in this.arrSanPhamThanhToan) {
       this.KiemTraKhuyeMai(this.arrSanPhamThanhToan[i])
-      this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[i].Gia - this.arrSanPhamThanhToan[i].Gia * this.giatrikhuyenmai) * this.sanphamthanhtoan[i].So_luong
+      this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[i].Gia - this.arrSanPhamThanhToan[i].Gia * this.giatrikhuyenmai) * this.arrSanPhamThanhToan[i].So_luong
     }
   }
 
@@ -234,14 +235,14 @@ export class CheckoutComponent implements OnInit {
     document.getElementById('changevanchuyen1').style.display = 'block'
     document.getElementById('changevanchuyen').style.display = 'none'
     document.getElementById('doivanchuyen').style.display = 'block'
-    document.getElementById('luuvanchuyen').style.display = 'none'
+    // document.getElementById('luuvanchuyen').style.display = 'none'
   }
 
   LuuThanhToan() {
     document.getElementById('changethanhtoan1').style.display = 'block'
     document.getElementById('changethanhtoan').style.display = 'none'
     document.getElementById('doithanhtoan').style.display = 'block'
-    document.getElementById('luuthanhtoan').style.display = 'none'
+    // document.getElementById('luuthanhtoan').style.display = 'none'
   }
 
   DatHang() {
@@ -251,8 +252,18 @@ export class CheckoutComponent implements OnInit {
     this.phieudat.Ho_ten = this.datalogin.Ho_ten
     this.phieudat.Dia_chi = this.datalogin.Dia_chi
     this.phieudat.So_dien_thoai = this.datalogin.So_dien_thoai
-    this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
-    this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
+    if (this.thanhtoan[0] === undefined){
+      alert('Vui lòng chọn hình thức thanh toán')
+    }else{
+      this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
+      this.LuuThanhToan()
+    }
+    if (this.vanchuyen[0] === undefined){
+      alert('Vui lòng chọn hình thức vận chuyển')
+    }else{
+      this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
+      this.LuuVanChuyen()
+    }
     this.phieudat.Trang_thai = 'Chưa duyệt'
     this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
     for (const i in this.arrSanPhamThanhToan) {
