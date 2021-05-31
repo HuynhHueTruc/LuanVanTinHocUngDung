@@ -61,6 +61,7 @@
       <div class="col-sm-6 p-0" *ngIf="KiemTraKhuyeMai(eachSP)">
         {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
       </div>
+
       <!-- Hiển thị giá tiền cho sản phẩm không có khuyến mãi -->
       <div class="col-sm-6 p-0" *ngIf="!KiemTraKhuyeMai(eachSP)">
         {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}

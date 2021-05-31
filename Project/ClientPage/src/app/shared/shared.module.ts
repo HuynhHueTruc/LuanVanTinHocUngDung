@@ -14,13 +14,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    SuggestionsComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { RouterModule } from '@angular/router';
   exports: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    SuggestionsComponent
   ]
 })
 export class SharedModule { }

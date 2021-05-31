@@ -63,15 +63,15 @@
 
       <!-- Hiển thị giá tiền ban đầu khi sản phẩm có khuyến mãi -->
       <div class="col-sm-3 d-flex justify-content-center align-items-center">
-        <div class="col-sm-6 p-0 khuyenmai" *ngIf="KiemTraKhuyeMai(eachSP)">
+        <div class="col-sm-6 p-0 khuyenmai" *ngIf="KiemTraKhuyenMai(eachSP)">
           {{eachSP.Gia | currency: "VND"}}
         </div>
         <!-- Hiển thị giá sau khi khuyến mãi -->
-        <div class="col-sm-6 p-0" *ngIf="KiemTraKhuyeMai(eachSP)">
+        <div class="col-sm-6 p-0" *ngIf="KiemTraKhuyenMai(eachSP)">
           {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
         </div>
         <!-- Hiển thị giá tiền cho sản phẩm không có khuyến mãi -->
-        <div class="col-sm-6 p-0" *ngIf="!KiemTraKhuyeMai(eachSP)">
+        <div class="col-sm-6 p-0" *ngIf="!KiemTraKhuyenMai(eachSP)">
           {{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}
         </div>
       </div>

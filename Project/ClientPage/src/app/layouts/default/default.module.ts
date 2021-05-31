@@ -60,7 +60,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     CheckoutComponent,
     OrderTrackingComponent,
     BillManagementComponent,
-    OrderTrackingDetailsComponent
+    OrderTrackingDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-6">
         <br>
-        <img class="image" src="{{loaicay?.Hinh_anh}}" class="img-fluid" alt="Không tìm thấy sản phẩm nào trogn danh mục này">
+        <img class="image" src="{{loaicay?.Hinh_anh}}" class="img-fluid"
+          alt="Không tìm thấy sản phẩm nào trogn danh mục này">
       </div>
       <div class="col-6 ">
         <p class="title-gt">Giới thiệu</p>
@@ -27,7 +28,7 @@
   <div>
     <div class="row">
       <div class="col-sm-3 " *ngFor="let eachSP of dscaycanh; let i = index">
-        <div class="container"  >
+        <div class="container">
           <a (click)="ProductDetail(eachSP)">
             <div class="card d-flex justify-content-center goiy">
               <img class="card-img-top" src="{{eachSP.Hinh_anh}}" alt="Card image cap">
@@ -35,23 +36,23 @@
                 <h5 class="card-title">{{eachSP.Ten_san_pham }}</h5>
                 <div class="container p-0">
                   <div class="row" *ngIf="KiemTraKhuyeMai(eachSP)">
-                      <small class="card-text khuyenmai">{{eachSP.Gia | currency: "VND"}}</small>
+                    <small class="card-text khuyenmai">{{eachSP.Gia | currency: "VND"}}</small>
 
-                      &nbsp;
-                      <small class="cart-text sale"> -{{giatrikhuyenmai*100}}%</small>
+                    &nbsp;
+                    <small class="cart-text sale"> -{{giatrikhuyenmai*100}}%</small>
                   </div>
                   <div class="row" *ngIf="!KiemTraKhuyeMai(eachSP)">
-                      <small class="card-text khuyenmai"></small>
-                      &nbsp;
-                      <small class="cart-text sale"></small>
+                    <small class="card-text khuyenmai"></small>
+                    &nbsp;
+                    <small class="cart-text sale"></small>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-sm-6 p-0">
-                    <p class="card-text" >{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                    <p class="card-text">{{eachSP.Gia - eachSP.Gia*giatrikhuyenmai | currency: "VND"}}</p>
                   </div>
-                  <div class="col-sm-6  p-0" >
+                  <div class="col-sm-6  p-0">
                     <p class="card-text daban"> Đã bán {{arrSoLuongBan[i]?.So_luong_ban}}</p>
                   </div>
                 </div>
@@ -64,4 +65,6 @@
       </div>
     </div>
   </div>
+  <app-suggestions></app-suggestions>
+
 </div>

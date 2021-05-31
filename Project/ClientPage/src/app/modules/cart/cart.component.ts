@@ -20,9 +20,6 @@ import { Observable, interval, Subscription } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   message: string;
-
-
-
   href = '';
   sanpham_id;
   datalogin: any;
@@ -79,6 +76,7 @@ export class CartComponent implements OnInit {
 
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
+      console.log(this.giohang)
       this.lengthdssanpham = this.giohang[0].San_Pham.length;
       for (const length in this.giohang[0].San_Pham) {
         if (this.giohang[0].San_Pham.hasOwnProperty(length)) {
@@ -104,7 +102,6 @@ export class CartComponent implements OnInit {
           }
         }
       }
-      console.log(this.arrSanPham)
       this.getdskhuyenmai();
     });
   }
@@ -226,6 +223,7 @@ export class CartComponent implements OnInit {
     for (const i in this.arrSanPham) {
       this.KiemTraKhuyeMai(this.arrSanPham[i])
       this.tong_tien = this.tong_tien + (this.arrSanPham[i].Gia - this.arrSanPham[i].Gia * this.giatrikhuyenmai) * this.giohang[0].San_Pham[i].So_luong
+      // this.arrSanPham[i].So_luong = this.giohang[0].San_Pham[i].So_luong
     }
     for (const j in this.arrSanPham) {
       if (!this.checked[j]) {
@@ -365,6 +363,13 @@ export class CartComponent implements OnInit {
   }
 
   Checkout() {
+    for (const i in this.arrSanPhamThanhToan){
+      for (const j in this.giohang[0].San_Pham){
+        if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id){
+          this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
+        }
+      }
+    }
     if (this.arrSanPhamThanhToan === undefined || this.arrSanPhamThanhToan[0] === undefined) {
       alert('Vui lòng chọn sản phẩm thanh toán!')
     } else {

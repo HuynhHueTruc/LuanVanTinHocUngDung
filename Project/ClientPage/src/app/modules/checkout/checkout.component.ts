@@ -1,3 +1,4 @@
+import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
 import { PhuongthucthanhtoanService } from './../../../services/PhuongThucThanhToan/phuongthucthanhtoan.service';
@@ -46,35 +47,39 @@ export class CheckoutComponent implements OnInit {
     private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService) { }
 
   ngOnInit(): void {
-
-
-    this.getdshinhthucvanchuyen();
-    this.getdsphuongthucthanhtoan();
-
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.arrSanPhamThanhToan = this.giohangService.getArrSP();
-    this.getdskhuyenmai();
-    this.getgiohang();
+    if (this.arrSanPhamThanhToan === null) {
+      alert('Lỗi: Bạn chưa chọn sản phẳm để thanh toán!')
+      this.router.navigateByUrl('/default');
+    } else {
+      this.getdshinhthucvanchuyen();
+      this.getdsphuongthucthanhtoan();
+      this.getdskhuyenmai();
+      this.getgiohang()
+      this.TongTien()
 
-    this.dropdownSettings = {
-      singleSelection: true,
-      idField: '_id',
-      textField: 'Ten_hinh_thuc',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
+      this.dropdownSettings = {
+        singleSelection: true,
+        idField: '_id',
+        textField: 'Ten_hinh_thuc',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
 
-    this.dropdownSettingsThanhToan = {
-      singleSelection: true,
-      idField: '_id',
-      textField: 'Ten_phuong_thuc',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
+      this.dropdownSettingsThanhToan = {
+        singleSelection: true,
+        idField: '_id',
+        textField: 'Ten_phuong_thuc',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
+    }
+
   }
 
   // Lấy danh sách khuyến mãi
@@ -90,40 +95,19 @@ export class CheckoutComponent implements OnInit {
     this.giohang = []
     this.giohangService.getGioHang(this.datalogin).subscribe(dt => {
       this.giohang = dt;
-      // for (const i in this.arrSanPhamThanhToan) {
-      //   for (const j in this.giohang[0].San_Pham) {
-      //     if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
-      //       this.sanphamthanhtoan.push(this.giohang[0].San_Pham[j])
-      //       this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
-      //     }
-      //   }
-      // }
-      // this.TongTien()
-      console.log(this.arrSanPhamThanhToan)
       if (this.giohang[0].San_Pham[0] === undefined) {
-        // Mua trực tiếp trên detail
-        this.sanphamthanhtoan.push(this.arrSanPhamThanhToan[0])
-        this.TongTien()
+        this.isgiohang = false
       } else {
         for (const i in this.arrSanPhamThanhToan) {
           for (const j in this.giohang[0].San_Pham) {
             if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
               this.isgiohang = true
-              this.sanphamthanhtoan.push(this.giohang[0].San_Pham[j])
-              this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
-            } else {
-              // Mua trực tiếp trên detail
-              this.sanphamthanhtoan.push(this.arrSanPhamThanhToan[0])
-              this.TongTien()
             }
           }
         }
-        this.TongTien()
       }
-
     });
   }
-
 
   getdshinhthucvanchuyen() {
     this.hinhthucvanchuyenService.getListHinhThucVanChuyen().subscribe((res: any) => {
@@ -152,7 +136,6 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-
   onItemDeSelect(item: any) {
     document.getElementById('errVanChuyen').style.display = 'block'
 
@@ -169,7 +152,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
-  KiemTraKhuyeMai(eachSP) {
+  KiemTraKhuyenMai(eachSP) {
     this.arrKhuyenMai = [];
     this.giatrikhuyenmai = 0;
     let bool = false;
@@ -189,7 +172,6 @@ export class CheckoutComponent implements OnInit {
         }
       }
     }
-
     for (const i in this.arrKhuyenMai) {
       if (this.arrKhuyenMai.hasOwnProperty(i)) {
         if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
@@ -200,15 +182,53 @@ export class CheckoutComponent implements OnInit {
       }
 
     }
+    // console.log(eachSP)
     return bool;
+  }
+
+   // Chọn khuyến mãi cao nhất của từng sản phẩm
+   KiemTraSPKhuyenMai(eachSP, index) {
+    this.dskhuyenmai = []
+    this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
+      this.dskhuyenmai = res.khuyenmais;
+      this.arrKhuyenMai = [];
+      this.giatrikhuyenmai = 0;
+
+      for (const i in this.dskhuyenmai) {
+        if (this.dskhuyenmai.hasOwnProperty(i)) {
+          for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+            if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+              if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+                if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                  && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                  this.arrKhuyenMai.push(this.dskhuyenmai[i]);
+                }
+              }
+
+            }
+          }
+        }
+      }
+      for (const i in this.arrKhuyenMai) {
+        if (this.arrKhuyenMai.hasOwnProperty(i)) {
+          if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
+            this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
+            this.khuyenmai = this.arrKhuyenMai[i];
+          }
+        }
+      }
+      // Tính tiền
+      this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[index].Gia - this.arrSanPhamThanhToan[index].Gia * this.giatrikhuyenmai) * this.arrSanPhamThanhToan[index].So_luong
+
+    });
+
   }
 
   TongTien() {
     this.tong_tien = 0;
     this.arrSanPham = []
     for (const i in this.arrSanPhamThanhToan) {
-      this.KiemTraKhuyeMai(this.arrSanPhamThanhToan[i])
-      this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[i].Gia - this.arrSanPhamThanhToan[i].Gia * this.giatrikhuyenmai) * this.arrSanPhamThanhToan[i].So_luong
+       this.KiemTraSPKhuyenMai(this.arrSanPhamThanhToan[i], i)
     }
   }
 
@@ -252,15 +272,15 @@ export class CheckoutComponent implements OnInit {
     this.phieudat.Ho_ten = this.datalogin.Ho_ten
     this.phieudat.Dia_chi = this.datalogin.Dia_chi
     this.phieudat.So_dien_thoai = this.datalogin.So_dien_thoai
-    if (this.thanhtoan[0] === undefined){
+    if (this.thanhtoan[0] === undefined) {
       alert('Vui lòng chọn hình thức thanh toán')
-    }else{
+    } else {
       this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
       this.LuuThanhToan()
     }
-    if (this.vanchuyen[0] === undefined){
+    if (this.vanchuyen[0] === undefined) {
       alert('Vui lòng chọn hình thức vận chuyển')
-    }else{
+    } else {
       this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
       this.LuuVanChuyen()
     }
@@ -280,24 +300,14 @@ export class CheckoutComponent implements OnInit {
         }
       }
     }
-
     this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
       alert('Đặt hàng thành công!')
       this.arrSanPhamThanhToan = []
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       this.giohangService.data = null
-      if (this.isgiohang) {
-        this.router.navigateByUrl('/cart')
-      } else {
-        // console.log(this.sanphamthanhtoan)
-        // let _id = this.sanphamthanhtoan[0]._id
-        this.router.navigateByUrl('/default');
-
-      }
+        this.router.navigateByUrl('/bill_manegement')
 
     })
-    // console.log(this.giohang[0].San_Pham)
-    // console.log(this.arrSanPhamThanhToan)
   }
 
 

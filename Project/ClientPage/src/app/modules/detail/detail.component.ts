@@ -62,7 +62,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   arrSanPhamThanhToan = []
   constructor(private router: Router, private sanphamService: SanphamService, private hoadonbanService: HoadonbanhangService,
     private khuyenmaiService: KhuyenmaiService, private thongtincuahangService: ThongtincuahangService, private giohangService: GiohangService,
-    private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService, private phieudatServcie: PhieudatService) { }
+    private danhmucService: DanhmucService, private loaicayService: LoaicayService, private KHService: KhachhangService, private phieudatService: PhieudatService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -82,7 +82,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   }
 
   getdsphieudat() {
-    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
     })
   }
@@ -266,7 +266,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   // Tăng số lượng sản phẩm đặt mua
   ThemSoLuong() {
     this.sum = 0;
-    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
 
       for (const i in this.dsphieudat) {
@@ -295,10 +295,27 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong() {
-    if (this.So_luong <= 0) {
-      const sl = document.getElementById('So_luong') as HTMLInputElement;
-      sl.value = '';
-    }
+    const sl = document.getElementById('So_luong') as HTMLInputElement;
+
+    this.sum = 0;
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
+      this.dsphieudat = res.phieudats;
+
+      for (const i in this.dsphieudat) {
+        for (const j in this.dsphieudat[i].San_Pham) {
+          if (this.sanpham_id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+            this.sum += this.dsphieudat[i].San_Pham[j].So_luong
+          }
+        }
+      }
+      if (this.So_luong <= 0) {
+
+        sl.value = '';
+      }else{
+        sl.value = (this.sanphamdetail[0].So_luong -  this.sum).toString();
+      }
+    })
+
   }
 
   // Trả về số lượng mặt định khi con trỏ chuột nằm ngoài input trong khi giá trị input chưa hợp lệ
@@ -308,7 +325,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
       this.So_luong = 1;
     }
 
-    this.phieudatServcie.getListPhieuDat().subscribe((res: any) => {
+    this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
 
       for (const i in this.dsphieudat) {
@@ -329,19 +346,19 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   CapNhatSoLuongSanPhamTrung(sanpham) {
 
     let bool = false
-      for (const i in this.giohang[0].San_Pham) {
-        if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
-          if ((this.giohang[0].San_Pham[i].So_luong + this.So_luong) > (this.sanphamdetail[0].So_luong - this.sum)) {
-            this.giohang[0].San_Pham[i].So_luong = this.sanphamdetail[0].So_luong - this.sum
+    for (const i in this.giohang[0].San_Pham) {
+      if (this.giohang[0].San_Pham[i].SanPham_id === sanpham._id) {
+        if ((this.giohang[0].San_Pham[i].So_luong + this.So_luong) > (this.sanphamdetail[0].So_luong - this.sum)) {
+          this.giohang[0].San_Pham[i].So_luong = this.sanphamdetail[0].So_luong - this.sum
 
-          } else {
-            this.giohang[0].San_Pham[i].So_luong += this.So_luong
-          }
-
-          return true
         } else {
-          bool = false
+          this.giohang[0].San_Pham[i].So_luong += this.So_luong
         }
+
+        return true
+      } else {
+        bool = false
+      }
     }
     return bool
   }
@@ -367,14 +384,14 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
   Checkout() {
 
-    if (this.KHService.isLoggedIn){
+    if (this.KHService.isLoggedIn) {
       this.arrSanPhamThanhToan = this.sanphamdetail
       this.arrSanPhamThanhToan[0].So_luong = this.So_luong
 
       this.giohangService.setArrSP(this.arrSanPhamThanhToan)
       this.router.navigateByUrl('/checkout')
 
-    }else{
+    } else {
       this.router.navigateByUrl('/login')
     }
 
