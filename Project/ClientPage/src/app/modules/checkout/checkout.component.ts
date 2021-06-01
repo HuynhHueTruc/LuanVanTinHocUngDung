@@ -38,7 +38,7 @@ export class CheckoutComponent implements OnInit {
   thanhtoan = [];
   giavanchuyen = 0;
   isgiohang = false
-
+  arrgiatrikhuyenmai = []
   dropdownSettings: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
   private valueFromChildSubscription: Subscription;
@@ -186,8 +186,8 @@ export class CheckoutComponent implements OnInit {
     return bool;
   }
 
-   // Chọn khuyến mãi cao nhất của từng sản phẩm
-   KiemTraSPKhuyenMai(eachSP, index) {
+  // Chọn khuyến mãi cao nhất của từng sản phẩm
+  KiemTraSPKhuyenMai(eachSP, index) {
     this.dskhuyenmai = []
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
@@ -204,7 +204,6 @@ export class CheckoutComponent implements OnInit {
                   this.arrKhuyenMai.push(this.dskhuyenmai[i]);
                 }
               }
-
             }
           }
         }
@@ -213,13 +212,13 @@ export class CheckoutComponent implements OnInit {
         if (this.arrKhuyenMai.hasOwnProperty(i)) {
           if (this.giatrikhuyenmai < this.arrKhuyenMai[i].Gia_tri) {
             this.giatrikhuyenmai = this.arrKhuyenMai[i].Gia_tri;
+            this.arrgiatrikhuyenmai[index] = this.giatrikhuyenmai
             this.khuyenmai = this.arrKhuyenMai[i];
           }
         }
       }
       // Tính tiền
       this.tong_tien = this.tong_tien + (this.arrSanPhamThanhToan[index].Gia - this.arrSanPhamThanhToan[index].Gia * this.giatrikhuyenmai) * this.arrSanPhamThanhToan[index].So_luong
-
     });
 
   }
@@ -227,9 +226,12 @@ export class CheckoutComponent implements OnInit {
   TongTien() {
     this.tong_tien = 0;
     this.arrSanPham = []
+    this.arrgiatrikhuyenmai = []
     for (const i in this.arrSanPhamThanhToan) {
-       this.KiemTraSPKhuyenMai(this.arrSanPhamThanhToan[i], i)
+      this.arrgiatrikhuyenmai.push(0)
+      this.KiemTraSPKhuyenMai(this.arrSanPhamThanhToan[i], i)
     }
+
   }
 
   ThayDoiThongTin() {
@@ -240,14 +242,14 @@ export class CheckoutComponent implements OnInit {
     document.getElementById('changevanchuyen1').style.display = 'none'
     document.getElementById('changevanchuyen').style.display = 'block'
     document.getElementById('doivanchuyen').style.display = 'none'
-    document.getElementById('luuvanchuyen').style.display = 'block'
+    // document.getElementById('luuvanchuyen').style.display = 'block'
   }
 
   DoiThanhToan() {
     document.getElementById('changethanhtoan1').style.display = 'none'
     document.getElementById('changethanhtoan').style.display = 'block'
     document.getElementById('doithanhtoan').style.display = 'none'
-    document.getElementById('luuthanhtoan').style.display = 'block'
+    // document.getElementById('luuthanhtoan').style.display = 'block'
 
   }
 
@@ -300,12 +302,16 @@ export class CheckoutComponent implements OnInit {
         }
       }
     }
+  
+ 
     this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+    
+      this.phieudatService.GuiEmailPhieuDat( this.phieudat._id, this.phieudat.San_Pham, this.datalogin, this.arrgiatrikhuyenmai).subscribe()
       alert('Đặt hàng thành công!')
       this.arrSanPhamThanhToan = []
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       this.giohangService.data = null
-        this.router.navigateByUrl('/bill_manegement')
+      this.router.navigateByUrl('/bill_manegement')
 
     })
   }
