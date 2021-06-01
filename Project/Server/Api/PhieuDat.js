@@ -14,8 +14,10 @@ const { ObjectID } = require('bson');
 // Dùng cho phương thức posts
 var bodyParser = require('body-parser');
 const PhieuDatModel = require('../src/models/PhieuDatModel');
+const SanPhamModel = require('../src/models/SanPhamModel');
 route.use(bodyParser.urlencoded({extended: false}))
 route.use(bodyParser.json())
+
 // route.use(cors({origin: "*"}))
 
 // Tạo API lấy dữ liệu từ MongoDB về
@@ -164,22 +166,88 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
     }    
 })
 
+// // Hàm gửi email theo nội dung tự tạo
+// route.post('/phieudat/guiemailphieudat', async(req, res) => {
+//     const dsSanPham = req.body.dsSanPham;
+//     const KhachHang = req.body.KhachHang;
+
+//     sendMail(dsSanPham, KhachHang, info => {
+//         console.log(`Email đã được gửi!`)
+//     }).then(data =>{
+//         res.json(data)
+//     }).catch(err =>{
+//         res.json(err)
+//     })
+// })
+
+// async function sendMail(dsSanPham, KhachHang, callback){
+//     let transporter = nodemailer.createTransport({
+//         host: "smtp.gmail.com", //pop.gmail.com, port 110
+//         port: 587, //143, 587, 25
+//         secure: false,
+//         auth: {
+//             user: details.Tai_khoan,
+//             pass: details.Mat_khau
+//         }
+//     })
+//         let mailOption = {
+//             from: '"GreenLife Shop"',
+//             to: KhachHang.Email,
+//             subject: "Chào mừng bạn đến với GreenLife Shop!",
+//             html: `<h1>Xin chào ${KhachHang.Ho_ten}</h1>
+//             <h4>Cảm ơn bạn đã tin tưởng GreenLife Shop.</h4>
+//             <h4>Đây là đơn hàng bạn vừa đặt, hãy kiểm tra lại thông tin nhé!</h4>
+//             <textarea> ${dsSanPham}</textarea>
+//             <h4>Shop sẽ xác nhận đơn hàng của bạn trong vòng 24 giờ</h4>
+//             <h4>Chúc bạn có những trãi nghiệm thật tốt với GreenLife!</h4><br>
+//             <h3>GreenLife Shop!</h3>`
+//         }   
+//         let info = await transporter.sendMail(mailOption);
+//         callback(info);   
+// }
+
 // Hàm gửi email theo nội dung tự tạo
 route.post('/phieudat/guiemailphieudat', async(req, res) => {
     const dsSanPham = req.body.dsSanPham;
     const KhachHang = req.body.KhachHang;
-
-    sendMail(dsSanPham, KhachHang, info => {
-        console.log(`Email đã được gửi!`)
-        // res.json(info)
-    }).then(data =>{
-        res.json(data)
-    }).catch(err =>{
-        res.json(err)
-    })
+    // const arrTenSP = []
+    // let source = [{src: ''}]
+    // for (let i = 0; i < dsSanPham.length; i++){
+    //     SanPhamModel.findOne({
+    //         _id: dsSanPham[i].SanPham_id
+    //     }).then(data => {
+    //         arrTenSP.push(data.Ten_san_pham)
+    //         source[0].src += `<tr><td>${i + 1}</td><td>${arrTenSP[i]}</td><td>${dsSanPham[i].So_luong}</td><td>${dsSanPham[i].Gia_ban}</td><td>khuyen mai</td><td>thanh tien</td></tr>`
+    //     })
+    // }
+ 
+    findResult(dsSanPham).then(function(result){ // call then() here to capture result in async function
+        sendMail(dsSanPham, KhachHang, result, info => {
+                    console.log(`Email đã được gửi!`)
+                }).then(data =>{
+                    res.json(data)
+                }).catch(err =>{
+                    res.json(err)
+                })
+      })
 })
 
-async function sendMail(dsSanPham, KhachHang, callback){
+async function findResult(dsSanPham) {
+    const arrTenSP = []
+    let source = [{src: ''}]
+    for (let i = 0; i < dsSanPham.length; i++){
+        result = await SanPhamModel.findOne({
+            _id: dsSanPham[i].SanPham_id
+        }).then(data => {
+            arrTenSP.push(data.Ten_san_pham)
+            source[0].src += `<tr><td>${i + 1}</td><td>${arrTenSP[i]}</td><td>${dsSanPham[i].So_luong}</td><td>${dsSanPham[i].Gia_ban}</td><td>khuyen mai</td><td>thanh tien</td></tr>`
+        })
+    }
+
+    return {arrTenSP, source}
+  }
+
+async function sendMail(dsSanPham, KhachHang, result, callback){
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com", //pop.gmail.com, port 110
         port: 587, //143, 587, 25
@@ -196,23 +264,25 @@ async function sendMail(dsSanPham, KhachHang, callback){
             html: `<h1>Xin chào ${KhachHang.Ho_ten}</h1>
             <h4>Cảm ơn bạn đã tin tưởng GreenLife Shop.</h4>
             <h4>Đây là đơn hàng bạn vừa đặt, hãy kiểm tra lại thông tin nhé!</h4>
-            <table border = 1>
+            <h4>Mã đơn hàng</h4>
+            <table border="1">
 
-            <tr bgcolor=#b9c9fe><th>STT</th><th>Mã đơn hàng</th><th>Sản phẩm</th><th>Số lượng </th><th>Giá</th><th>Khuyến mãi</th><th>Giá thành tiền</th></tr>
-            
-            <tr *ngFor="let eachSP of dsSanPham; let j = index">
-            <td>j + 1</td>
-            <td>eachSP._id</td>
-            <td>eachSP.Ten_san_pham</td>
-            <td>eachSP.So_luong</td>
-            <td>eachSP.Gia</td>
-            <td>khuyen mai</td>
-            <td>thanhf tien</td>
+            <tbody>
+            <tr bgcolor="#b9c9fe">
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng </th>
+            <th>Giá</th>
+            <th>Khuyến mãi</th>
+            <th>Giá thành tiền</th>
             </tr>
+            ${result.source[0].src}
+            </tbody>
             </table>
             <h4>Shop sẽ xác nhận đơn hàng của bạn trong vòng 24 giờ</h4>
             <h4>Chúc bạn có những trãi nghiệm thật tốt với GreenLife!</h4><br>
             <h3>GreenLife Shop!</h3>`
+          
         }   
         let info = await transporter.sendMail(mailOption);
         callback(info);   
