@@ -52,7 +52,7 @@ export class OrderTrackingComponent implements OnInit {
   updateimg = false;
   phieudat: PhieuDatModel
   flag: any
-
+  imagePath = []
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -264,6 +264,7 @@ export class OrderTrackingComponent implements OnInit {
     for (let i = 0; i < length; i++) {
       if (typeof file[i] === 'object') {
         const name = new Date() + '-' + file[i].name;
+        this.imagePath.push('../../../assets/'+file[i].name)
         const metadata = {
           contentType: file[i].type
         };
@@ -271,7 +272,7 @@ export class OrderTrackingComponent implements OnInit {
         task
           .then(snapshot => snapshot.ref.getDownloadURL())
           .then(url => {
-            document.getElementById('avatarcomment').style.display = 'block'
+            document.getElementById('imagecomment' + i).style.display = 'block'
             this.danhgia[index].Hinh_anh.push({ url: url })
           }
           );
