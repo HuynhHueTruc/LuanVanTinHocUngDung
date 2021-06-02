@@ -2,6 +2,8 @@ const express = require('express');
     // const { identity, result } = require('lodash')
 const mongoose = require('mongoose');
 const SanPhamModel = require('../src/models/SanPhamModel.js');
+const KhachHangModel = require('../src/models/KhachHangModel.js');
+
     // const route = express.Router()
 const route = express();
 const db = mongoose.connection;
@@ -108,39 +110,59 @@ route.put('/sanpham/capnhatsanpham/:_id', async(req, res) => {
 
 // Tạo đánh giá sản phẩm
 route.post('/sanpham/danhgiasanpham', async(req, res) => {
-//    const {SanPham_id, Noi_dung, Hinh_anh, So_diem, KhachHang_id} = req.body
-const arrdanhgia = req.body
+const arrdanhgia = req.body.danhgia
+const Khach_hang_id = req.body.Khach_hang_id
+const flag = req.body.flag
+console.log(arrdanhgia)
    const Ngay_danh_gia = dateFormat()
    const Ngay_cap_nhat = dateFormat()
    for (const i in arrdanhgia){
     SanPhamModel.findOne({
             _id: arrdanhgia[i].SanPham_id
         }).then(data => {
+           if (flag === 0){
+            KhachHangModel.findOne({
+                Khach_hang_id: Khach_hang_id
+            }).then(data => {
+                KhachHangModel.updateOne({
+                    Khach_hang_id: Khach_hang_id
+                }, {
+                    Tich_diem: (data.Tich_diem + 1)
+                }).then(dt => {
+                    
+                })
+            })
+           }
             if (data.Danh_gia[0] === undefined){
-                return SanPhamModel.updateOne({
+                 SanPhamModel.updateOne({
                     _id: arrdanhgia[i].SanPham_id
                 }, {
                     Danh_gia: arrdanhgia[i]
-                    });
+                    }).then(dt =>{})
             }else{
                 for (const j in data.Danh_gia){
+                   if (data.Danh_gia[j].KhachHang_id === Khach_hang_id){
                     data.Danh_gia[j] = arrdanhgia[i]
-                    return SanPhamModel.updateOne({
-                        _id: arrdanhgia[i].SanPham_id
-                    }, {
-                        Danh_gia: data.Danh_gia
-                        });
+                    SanPhamModel.updateOne({
+                       _id: arrdanhgia[i].SanPham_id
+                   }, {
+                       Danh_gia: data.Danh_gia
+                       }).then(dt =>{
+                       })
+                   }
                     }
             }
         }).then(data => {
-        res.json('Cập nhật đánh giá sản phẩm thành công!');
-    }).catch(err => {
+            res.json('Cập nhật sản phẩm thành công!');
+        }).catch(err => {
         res.json(err);
-
     });
    }
 });
 
+// .then(data => {
+//     res.json('Cập nhật sản phẩm thành công!');
+// })
 
 // Hàm cập nhật số lượng
 route.post('/sanpham/capnhatsanpham/soluong', async(req, res) => {

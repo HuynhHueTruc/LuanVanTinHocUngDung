@@ -51,6 +51,7 @@ export class OrderTrackingComponent implements OnInit {
   trang_thai = ''
   updateimg = false;
   phieudat: PhieuDatModel
+  flag: any
 
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
   // Your web app's Firebase configuration
@@ -239,11 +240,12 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   // Hàm mở Dialog Tạo
-  open(content, eachPhieuDat, index) {
+  open(content, eachPhieuDat, index, flag) {
 
     this.sanphamdanhgia = new PhieuDatModel()
     this.sanphamdanhgia = eachPhieuDat
     this.current = index
+    this.flag = flag
     for (const j in this.sanphamdanhgia.San_Pham) {
       this.danhgia.push({ SanPham_id: this.sanphamdanhgia.San_Pham[j].SanPham_id, Noi_dung: '', Hinh_anh: [{ url: '' }], KhachHang_id: this.datalogin.Khach_hang_id, So_diem: 0 })
     }
@@ -275,7 +277,6 @@ export class OrderTrackingComponent implements OnInit {
           );
       }
     }
-
   }
 
   DanhGia() {
@@ -286,7 +287,7 @@ export class OrderTrackingComponent implements OnInit {
       this.danhgia[i].Noi_dung = content_comment
       this.danhgia[i].Hinh_anh.splice(0, 1)
     }
-    this.sanphamService.DanhGiaSanPham(this.danhgia).subscribe(data => {
+    this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
       alert(data)
       location.reload()
     })

@@ -213,10 +213,10 @@
                       <div class="col-sm-7"></div>
                       <div class="col-sm-2 p-0 d-flex justify-content-end">
                         <button name="button" type="button" class="buttondanhgia"
-                          (click)="open(content, eachPhieuDat, i)" *ngIf="arrdanhgia[i] === 0">Đánh
+                          (click)="open(content, eachPhieuDat, i, 0)" *ngIf="arrdanhgia[i] === 0">Đánh
                           giá</button>
                         <button name="button" type="button" class="buttondanhgia"
-                          (click)="open(content, eachPhieuDat, i)" *ngIf="arrdanhgia[i] !== 0">Cập nhật
+                          (click)="open(content, eachPhieuDat, i, 1)" *ngIf="arrdanhgia[i] !== 0">Cập nhật
                           đánh giá</button>
                       </div>
                       <div class="col-sm-3">

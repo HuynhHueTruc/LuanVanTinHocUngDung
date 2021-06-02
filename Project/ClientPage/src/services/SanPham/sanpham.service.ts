@@ -15,7 +15,7 @@ export class SanphamService {
     return this.http.get<SanPhamModel[]>('http://localhost:3000/sanpham/thongtin').pipe();
   }
 
-  DanhGiaSanPham(danhgia): Observable<DanhGiaModel[]>{
-    return this.http.post<DanhGiaModel[]>('http://localhost:3000/sanpham/danhgiasanpham', danhgia).pipe();
+  DanhGiaSanPham(danhgia, Khach_hang_id, flag): Observable<DanhGiaModel[]>{
+    return this.http.post<DanhGiaModel[]>('http://localhost:3000/sanpham/danhgiasanpham', {danhgia, Khach_hang_id, flag}).pipe();
    }
 }
