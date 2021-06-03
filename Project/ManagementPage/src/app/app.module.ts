@@ -18,7 +18,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DatePipe } from '@angular/common';
 
-
 // import { AngularFirestore } from '@angular/fire/firestore/firestore';
 // import { CKEditorModule } from 'ckeditor4-angular'; Này là full
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -49,7 +48,6 @@ import { DatePipe } from '@angular/common';
     CKEditorModule,
     NbInputModule,
     NbTreeGridModule,
-
   ],
   providers: [
     DefautGuard,

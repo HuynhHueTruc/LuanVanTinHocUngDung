@@ -13,13 +13,15 @@ mat-drawer{
   width: 20%;
 }
 
-mat-drawer-container{
-  height: 100%;
-}
+// mat-drawer-container{
+//   height: 100%;
+// }
 
 mat-drawer-content{
 }
 .mat-icon-button{
   background-color: transparent;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}

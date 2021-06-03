@@ -45,6 +45,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -103,7 +104,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NgMultiSelectDropDownModule.forRoot(),
     Ng2SmartTableModule,
     NbCardModule,
-
+    NgxPaginationModule
   ]
 })
 export class DefaultModule { }

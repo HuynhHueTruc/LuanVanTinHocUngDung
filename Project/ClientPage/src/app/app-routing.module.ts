@@ -1,4 +1,3 @@
-import { OrderTrackingDetailsComponent } from './modules/order-tracking-details/order-tracking-details.component';
 import { BillManagementComponent } from './modules/bill-management/bill-management.component';
 import { OrderTrackingComponent } from './modules/order-tracking/order-tracking.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
@@ -63,7 +62,7 @@ const routes: Routes = [
       [
         { path: '', component: OrderTrackingComponent },
         { path: 'order_tracking', component: OrderTrackingComponent },
-        { path: 'order_tracking_detail/:_id', component: OrderTrackingDetailsComponent },
+        
       ]
   },
 

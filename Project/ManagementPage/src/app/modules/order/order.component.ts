@@ -39,7 +39,8 @@ export class OrderComponent implements OnInit {
   dssanpham: SanPhamModel;
   sanphams: SanPhamModel;
   arrSanPham: SanPhamModel[] = [];
-  // lstSanPham= [];
+  phieudats: PhieuDatModel[] = []
+
   dshinhthucvanchuyen: HinhThucVanChuyenModel;
   dsphuongthucthanhtoan: PhuongThucThanhToanModel;
   checked = [];
@@ -78,6 +79,9 @@ export class OrderComponent implements OnInit {
   KiemTraThongTin = false;
   Trang_thai = []
   taikhoan: any
+  hienthi = false
+  p: number = 1;
+  tongphieudat = 0
   colors = [{ status: "Chưa duyệt", color: "darkgreen" }, { status: "Đã duyệt", color: "darkblue" },
   { status: "Đang được đóng gói", color: "orange" }, { status: "Xuất kho", color: "orange" }, { status: "Đang vận chuyển", color: "orange" },
   { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" }, { status: "Giao hàng thất bại", color: "brown" }]
@@ -120,6 +124,17 @@ export class OrderComponent implements OnInit {
 
   }
 
+  
+  ChuyenTrang(number) {
+    this.dsphieudat = []
+    for (let i = 0; i < 5; i++) {
+      if ((this.phieudats[((number - 1) * 5) + i]) !== undefined){
+        this.dsphieudat.push(this.phieudats[((number - 1) * 5) + i]);
+
+      }
+    }
+  }
+
   // Lấy thông tin tài khoản hiện đang thao tác
   getthongtintaikhoan() {
     this.taikhoan = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -128,8 +143,9 @@ export class OrderComponent implements OnInit {
   getdsphieudat() {
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
 
-      this.dsphieudat = res.phieudats;
-
+      this.phieudats = res.phieudats;
+      this.tongphieudat = this.phieudats.length
+      this.ChuyenTrang(1)
       for (const i in this.dsphieudat) {
         this.Trang_thai.push(this.dsphieudat[i].Trang_thai)
       }
@@ -156,7 +172,6 @@ export class OrderComponent implements OnInit {
           this.arrdiachi.push(this.dsdiachi[dc][0]);
         }
       }
-      // this.TrangThai()
     })
 
   }
@@ -1195,5 +1210,18 @@ export class OrderComponent implements OnInit {
     } else {
       document.getElementById('errListSanPham').style.display = 'none'
     }
+  }
+
+  HienThiMa(){
+    this.hienthi = true
+    document.getElementById('AnMa').style.display = 'block'
+    document.getElementById('HienThiMa').style.display = 'none'
+  }
+
+  AnMa(){
+    this.hienthi = false
+    document.getElementById('AnMa').style.display = 'none'
+    document.getElementById('HienThiMa').style.display = 'block'
+
   }
 }

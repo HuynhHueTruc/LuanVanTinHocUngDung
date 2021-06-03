@@ -135,24 +135,22 @@
     width: 100%;
   }
 
-
   .them_hoa_don{
     border: none;
     background-color: transparent;
     margin-left: 65%;
   }
 
-  .controlcheckbox{
-    background-color: transparent;
-    border: none;
-  }
-
   .ds{
-    height: 567.4px;
+    height: 573px;
     overflow-x:auto;
     overflow-y:auto;
   }
-
+  
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
   .addsanpham{
     max-height: 245px;
     overflow-x:auto;
@@ -160,7 +158,8 @@
   }
 
   .dssanpham{
-    height: 150px;
+    max-height: 200px;
+    width: 500px;
     overflow-x:auto;
     overflow-y:auto;
 
@@ -250,21 +249,9 @@ span.SanPham{
   display: none;
 }
 
-// #errVanChuyen{
-//   display: none;
-// }
-
-// #errThanhToan{
-//   display: none;
-// }
-
-// #mes_huyen_quan{
-//   display: none;
-// }
-
-// #mes_xa_phuong{
-//   display: none;
-// }
+#AnMa{
+  display: none;
+}
 
 #errListSanPham{
   display: none;
@@ -282,4 +269,18 @@ span.SanPham{
 
 .status{
   width: max-content;
+}
+
+.maphieudat{
+  display: none;
+}
+
+#pagination {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.diachi{
+  width: 200px;
 }
