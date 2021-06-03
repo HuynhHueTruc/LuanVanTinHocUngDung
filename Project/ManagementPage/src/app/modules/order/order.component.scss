@@ -115,6 +115,9 @@
 
   .setwidth{
     width: 100% !important;
+    border-radius: 4px;
+    height: 36.4px !important;
+    padding-top: 6px !important;
   }
 
   .button{
@@ -138,7 +141,7 @@
   .them_hoa_don{
     border: none;
     background-color: transparent;
-    margin-left: 65%;
+    // margin-left: 65%;
   }
 
   .ds{
@@ -284,3 +287,4 @@ span.SanPham{
 .diachi{
   width: 200px;
 }
+

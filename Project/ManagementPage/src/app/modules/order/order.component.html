@@ -208,13 +208,11 @@
       <form #shipFormCreate="ngForm">
         <div class="row">
           <div class="col-sm-6">
-            <div class="row"> <label class="col-sm-12 col-form-label">Tên khách hàng:</label></div>
             <div class="form-group row">
-
               <div class="col-sm-12">
                 <input type="text" [class.is-invalid]="Khach_hang.invalid && Khach_hang.touched" #Khach_hang="ngModel"
                   class="form-control " id="Khach_hang" [(ngModel)]="phieudat.Ho_ten" name="Khach_hang"
-                  placeholder=" Enter name customer" required>
+                  placeholder="Tên khách hàng" required>
               </div>
               <div class="mess-err" *ngIf="Khach_hang.errors && (Khach_hang.invalid || Khach_hang.touched)">
                 <small class="err text-danger" *ngIf="Khach_hang.errors.required"> Tên khách hàng không được trống!
@@ -222,13 +220,11 @@
               </div>
             </div>
 
-            <div class="row"> <label class="col-sm-12 col-form-label">Số điện thoại:</label></div>
             <div class="form-group row">
-
               <div class="col-sm-12">
                 <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"
                   #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai"
-                  [(ngModel)]="phieudat.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter your number phone"
+                  [(ngModel)]="phieudat.So_dien_thoai" name="So_dien_thoai" placeholder="Số điện thoại"
                   required>
               </div>
               <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
@@ -238,11 +234,9 @@
               </div>
             </div>
 
-            <div class="row"> <label class="col-sm-12 col-form-label">Vận chuyển</label></div>
             <div class="form-group row">
-
               <div class="col-sm-12">
-                <ng-multiselect-dropdown name="ngShippingSelect" [placeholder]="'--- Product ---'"
+                <ng-multiselect-dropdown name="ngShippingSelect" [placeholder]="'--- Vận chuyển ---'"
                   [(ngModel)]="vanchuyentmp" [settings]="dropdownSettingsVanChuyen" [data]="dshinhthucvanchuyen"
                   (onSelect)="onItemSelectVanChuyen($event)" (onDeSelect)="onItemDeSelectVanChuyen($event)">
                 </ng-multiselect-dropdown>
@@ -252,15 +246,10 @@
               </div>
 
             </div>
-
-
-          </div>
-          <div class="col-sm-6">
-            <div class="row"> <label class="col-sm-12 col-form-label">Thanh toán:</label></div>
+            
             <div class="form-group row">
-
               <div class="col-sm-12">
-                <ng-multiselect-dropdown name="ngPaymentSelect" [placeholder]="'--- Product ---'"
+                <ng-multiselect-dropdown name="ngPaymentSelect" [placeholder]="'--- Thanh toán ---'"
                   [(ngModel)]="thanhtoantmp" [settings]="dropdownSettingsThanhToan" [data]="dsphuongthucthanhtoan"
                   (onSelect)="onItemSelectThanhToan($event)" (onDeSelect)="onItemDeSelectThanhToan($event)">
                 </ng-multiselect-dropdown>
@@ -269,15 +258,18 @@
                 <small id="errThanhToan" class="err text-danger">Bạn chưa chọn phương thức thanh toán! </small>
               </div>
             </div>
-            <div class="row"> <label class="col-sm-12 col-form-label">Địa chỉ:</label></div>
+          </div>
+
+          <div class="col-sm-6">
+           
+
             <div class="form-group row" ngModelGroup="Dia_chi">
 
               <div class="col-sm-12">
-                <small>Thành phố</small>
-                <select id="provinces" [(ngModel)]="phieudat.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
+                <select  id="provinces" [(ngModel)]="phieudat.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
                   name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth"
                   (change)="ThanhPho($event, null)">
-                  <option class="item" selected disabled value="">-- Provinces --</option>
+                  <option class="item" selected disabled value="">-- Thành phố --</option>
                   <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
                     {{eachThanhPho.name}}</option>
                 </select>
@@ -285,11 +277,10 @@
                   <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
                 </div>
 
-                <small>Huyện/Quận</small>
                 <select id="districts" [(ngModel)]="phieudat.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel"
-                  name="calc_shipping_district" class="form-control form-control-sm border-non setwidth"
+                  name="calc_shipping_district" class="form-control form-control-sm border-non setwidth mt-3"
                   (change)="QuanHuyen($event)">
-                  <option class="item" selected value="">-- District --</option>
+                  <option class="item" selected value="">-- Huyện/Quận --</option>
                   <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
                     {{eachQuanHuyen.name}}</option>
                 </select>
@@ -297,11 +288,10 @@
                   <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
                 </div>
 
-                <small>Xã/Phường</small>
                 <select id="ward" [(ngModel)]="phieudat.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
-                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth"
+                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
                   (change)="XaPhuong(null)">
-                  <option class="item" selected value="">-- Ward --</option>
+                  <option class="item" selected value="">-- Xã/Phường --</option>
                   <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
                     {{eachXaPhuong.name}}</option>
                 </select>
@@ -314,16 +304,19 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Thông tin sản phẩm:</label>
+          <div class="col-sm-6">
+            <label>Thông tin sản phẩm:</label>
+          </div>
+          <div class="col-sm-6 d-flex justify-content-end">
+            <button class="them_hoa_don" (click)="open_product_plus(content_info_product_plus)">
+              <i class="fas fa-plus">
+                Thêm sản phẩm
+              </i>
+            </button>
+          </div>
         </div>
 
-        <div class="form-group row">
-          <button class="them_hoa_don" (click)="open_product_plus(content_info_product_plus)">
-            <i class="fas fa-plus">
-              Thêm sản phẩm
-            </i>
-          </button>
-        </div>
+    
         <div class="form-group row">
           <div class="col-sm-12">
             <div class="card addsanpham">
