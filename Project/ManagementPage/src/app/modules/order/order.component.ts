@@ -124,16 +124,17 @@ export class OrderComponent implements OnInit {
 
   }
 
-  
+
   ChuyenTrang(number) {
     this.dsphieudat = []
     for (let i = 0; i < 5; i++) {
-      if ((this.phieudats[((number - 1) * 5) + i]) !== undefined){
+      if ((this.phieudats[((number - 1) * 5) + i]) !== undefined) {
         this.dsphieudat.push(this.phieudats[((number - 1) * 5) + i]);
 
       }
     }
   }
+
 
   // Lấy thông tin tài khoản hiện đang thao tác
   getthongtintaikhoan() {
@@ -319,8 +320,6 @@ export class OrderComponent implements OnInit {
     this.xaphuongs.splice(0, this.xaphuongs.length);
 
     if (e === null) {
-      document.getElementById('mes_tinh_thanhpho').style.display = 'none';
-
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
@@ -330,7 +329,6 @@ export class OrderComponent implements OnInit {
               if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
                 if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
                   this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-
                 }
               }
             }
@@ -350,17 +348,12 @@ export class OrderComponent implements OnInit {
       this.HienThiQuanHuyen_XaPhuong(null, diachi);
     }
     else {
-      document.getElementById('mes_tinh_thanhpho').style.display = 'none';
-
       this.phieudat.Dia_chi.Huyen_Quan = '';
       this.phieudat.Dia_chi.Xa_Phuong = '';
 
       e.preventDefault();
       const target = e.target;
       this.thanhpho = target.value;
-
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
 
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
@@ -378,7 +371,6 @@ export class OrderComponent implements OnInit {
     }
   }
 
-
   //Hủy thêm sản phẩm
   Huy() {
     this.lstsanpham.splice(0, this.lstsanpham.length)
@@ -386,14 +378,6 @@ export class OrderComponent implements OnInit {
   }
 
   HienThiQuanHuyen_XaPhuong(evt, diachi) {
-    if (evt === null) {
-      document.getElementById('mes_xa_phuong').style.display = 'none';
-
-    } else {
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-      this.phieudat.Dia_chi.Xa_Phuong = '';
-    }
-
     // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
     this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
     this.quanhuyens.splice(0, this.quanhuyens.length);
@@ -425,22 +409,21 @@ export class OrderComponent implements OnInit {
         }
       }
     }
-    this.KiemTraDiaChiUpdate();
   }
 
-  KiemTraDiaChiUpdate() {
-    if (this.phieudat.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      this.phieudat.Dia_chi.Xa_Phuong = '';
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
+  // KiemTraDiaChiUpdate() {
+  //   if (this.phieudat.Dia_chi.Huyen_Quan !== '') {
+  //     document.getElementById('mes_huyen_quan').style.display = 'none';
+  //   } else {
+  //     this.phieudat.Dia_chi.Xa_Phuong = '';
+  //     document.getElementById('mes_huyen_quan').style.display = 'block';
+  //     document.getElementById('mes_xa_phuong').style.display = 'block';
 
-    }
-  }
+  //   }
+  // }
   // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
   QuanHuyen(e) {
-    document.getElementById('mes_xa_phuong').style.display = 'block';
+    this.phieudat.Dia_chi.Xa_Phuong = '';
     this.xaphuongs.splice(0, this.xaphuongs.length);
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     e.preventDefault();
@@ -462,34 +445,26 @@ export class OrderComponent implements OnInit {
       }
     } else {
       this.xaphuongs.splice(0, this.xaphuongs.length);
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
-    }
-
-    if (this.phieudat.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      document.getElementById('mes_huyen_quan').style.display = 'block';
     }
   }
 
-  // Kiểm tra chọn xã phường
-  XaPhuong(diachi?) {
-    if (diachi === null) {
-      if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
-      } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-      }
-    } else {
-      if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
-      } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-      }
-    }
+  // // Kiểm tra chọn xã phường
+  // XaPhuong(diachi?) {
+  //   if (diachi === null) {
+  //     if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
+  //       document.getElementById('mes_xa_phuong').style.display = 'none';
+  //     } else {
+  //       document.getElementById('mes_xa_phuong').style.display = 'block';
+  //     }
+  //   } else {
+  //     if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
+  //       document.getElementById('mes_xa_phuong').style.display = 'none';
+  //     } else {
+  //       document.getElementById('mes_xa_phuong').style.display = 'block';
+  //     }
+  //   }
 
-  }
+  // }
   // Hàm chuyển đổi tiếng Việt sang tiếng Anh
   removeAccents(str) {
     return str.normalize('NFD')
@@ -545,25 +520,21 @@ export class OrderComponent implements OnInit {
     }
   }
 
+
   open(content) {
     this.phieudat = new PhieuDatModel()
     this.phieudat.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false,  size: 'lg' });
-
-    // this.blockerrmessage();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
   }
 
   blockerrmessage(flag) {
-    document.getElementById('mes_huyen_quan').style.display = flag
-    document.getElementById('mes_xa_phuong').style.display = flag
     document.getElementById('errVanChuyen').style.display = flag
     document.getElementById('errThanhToan').style.display = flag
-
   }
 
+
   open_update(content_update, eachPhieuDat, index_update) {
-    // this.lstsanpham = []
     // Lưu chỉ số phiếu đặt được update
     this.index_update = index_update,
       this.UnChecked();
@@ -590,13 +561,12 @@ export class OrderComponent implements OnInit {
         }
       }
     }
-    // // Gán số lượng sản phẩm bằng số lượng trong phiếu đặt
+    // Gán số lượng sản phẩm bằng số lượng trong phiếu đặt
     for (const i in this.arrSanPham) {
       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
     }
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false,  size: 'lg' });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
     this.ThanhPho(null, this.phieudat.Dia_chi);
-    this.blockerrmessage('none')
 
   }
 
@@ -647,7 +617,18 @@ export class OrderComponent implements OnInit {
     this.dsSP = new SanPhamThemModel()
     this.modalService.open(content_info_product_plus, {
       ariaLabelledBy: 'modal-basic-title-info-mail-plus',
-      backdrop: 'static', keyboard: false,  size: 'lg'
+      backdrop: 'static', keyboard: false
+    });
+  }
+
+  open_list_product_update(content_info_product_update) {
+    this.So_luong = 0
+    this.Gia_ban = 0;
+    this.sanphamtmp = []
+    this.dsSP = new SanPhamThemModel()
+    this.modalService.open(content_info_product_update, {
+      ariaLabelledBy: 'modal-basic-title-info-mail-update',
+      backdrop: 'static', keyboard: false
     });
   }
 
@@ -746,36 +727,42 @@ export class OrderComponent implements OnInit {
 
   // Hàm kiểm tra thông tin
   KTNull(pd: PhieuDatModel) {
-    const hoten = this.phieudat.Ho_ten;
-    const diachi = this.phieudat.Dia_chi;
-    const sdt = this.phieudat.So_dien_thoai;
-    const hinhthucvanchuyen = this.phieudat.VanChuyen_id;
-    const phuongthucthanhtoan = this.phieudat.ThanhToan_id;
-    const sanpham = this.phieudat.San_Pham[0]
-    const thongtinphieudat = [];
-    thongtinphieudat.push(hoten, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
-      diachi.Xa_Phuong, sdt, hinhthucvanchuyen, phuongthucthanhtoan);
-    for (const i in thongtinphieudat) {
-      if (thongtinphieudat.hasOwnProperty(i)) {
-        if (thongtinphieudat[i] === '' || thongtinphieudat[i] === undefined || thongtinphieudat[i] === null) {
-          window.alert('Hãy nhập đầy đủ thông tin!');
-          this.KiemTraThongTin = false;
-          break;
-        } else {
-          this.KiemTraThongTin = true;
+
+    if (this.thanhtoantmp[0] !== undefined && this.vanchuyentmp[0] !== undefined) {
+      this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
+      this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
+      const hoten = this.phieudat.Ho_ten;
+      const diachi = this.phieudat.Dia_chi;
+      const sdt = this.phieudat.So_dien_thoai;
+      const hinhthucvanchuyen = this.phieudat.VanChuyen_id;
+      const phuongthucthanhtoan = this.phieudat.ThanhToan_id;
+      const sanpham = this.phieudat.San_Pham[0]
+      const thongtinphieudat = [];
+      thongtinphieudat.push(hoten, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
+        diachi.Xa_Phuong, sdt, hinhthucvanchuyen, phuongthucthanhtoan);
+      for (const i in thongtinphieudat) {
+        if (thongtinphieudat.hasOwnProperty(i)) {
+          if (thongtinphieudat[i] === '' || thongtinphieudat[i] === undefined || thongtinphieudat[i] === null) {
+            window.alert('Hãy nhập đầy đủ thông tin!');
+            this.KiemTraThongTin = false;
+            break;
+          } else {
+            this.KiemTraThongTin = true;
+          }
         }
       }
+      if (sanpham === undefined || sanpham === null) {
+        document.getElementById('errListSanPham').style.display = 'block'
+        this.KiemTraThongTin = false;
+      } else {
+        document.getElementById('errListSanPham').style.display = 'none'
+      }
     }
-    if (sanpham === undefined || sanpham === null) {
-      document.getElementById('errListSanPham').style.display = 'block'
-      this.KiemTraThongTin = false;
-    } else {
-      document.getElementById('errListSanPham').style.display = 'none'
-    }
+
   }
 
   // Cập nhật danh sách sản phẩm trong update
-  CapNhatDSSanPham(content) {
+  CapNhatDSSanPham(content_update) {
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
@@ -815,8 +802,8 @@ export class OrderComponent implements OnInit {
                 this.dsSP = new SanPhamThemModel()
                 this.So_luong = 0
                 this.modalService.dismissAll()
-                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false,  size: 'lg' });
-                this.blockerrmessage('none')
+                this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
+                // this.blockerrmessage('none')
               }
             }
           }
@@ -826,8 +813,6 @@ export class OrderComponent implements OnInit {
       }
     }
   }
-
-
 
   // Thêm sản phẩm vào list
   ThemSanPham(content) {
@@ -840,20 +825,46 @@ export class OrderComponent implements OnInit {
           this.dsSP.Ten_san_pham = this.sanphamtmp[i].Ten_san_pham
           this.dsSP.So_luong = this.So_luong
         }
-        this.lstsanpham.push(this.dsSP)
-        this.sum = 0
-        for (const i in this.lstsanpham) {
-          for (const j in this.dssanpham) {
-            if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-              this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
+       
+        this.phieudat.Tong_tien = this.sum
+        this.sanphamService.getListSanPham().subscribe((res: any) => {
+          this.sanphams = res.sanphams
+          for (const j in this.sanphams) {
+            if (this.sanphams[j]._id === this.dsSP.SanPham_id) {
+              if (this.sanphams[j].So_luong < this.dsSP.So_luong) {
+                document.getElementById('errSoLuongMax').style.display = 'block'
+                this.dsSP = new SanPhamThemModel()
+              } else {
+                document.getElementById('errSoLuongMax').style.display = 'none'
+                this.lstsanpham.push(this.dsSP)
+                this.sum = 0
+                for (const i in this.lstsanpham) {
+                  for (const j in this.dssanpham) {
+                    if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
+                      this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
+                    }
+                  }
+                }
+                this.arrSanPham = []
+
+                for (const j in this.lstsanpham) {
+                  for (const i in this.sanphams) {
+                    if (this.sanphams[i]._id === this.lstsanpham[j].SanPham_id) {
+                      this.arrSanPham.push(this.sanphams[i])
+                      this.arrSanPham[j].So_luong = this.lstsanpham[j].So_luong
+                    }
+                  }
+                }
+
+                this.dsSP = new SanPhamThemModel()
+                this.So_luong = 0
+                this.modalService.dismissAll()
+                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
+                // this.blockerrmessage('none')
+              }
             }
           }
-        }
-        this.phieudat.Tong_tien = this.sum
-        this.dsSP = new SanPhamThemModel()
-        this.So_luong = 0
-        this.modalService.dismissAll()
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+        })
       } else {
         alert('Sản phẩm này đã được thêm vào danh sách!')
       }
@@ -904,9 +915,8 @@ export class OrderComponent implements OnInit {
 
   // Cập nhật phiếu đặt
   CapNhat() {
+
     this.sum = 0
-    this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
-    this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
     this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
     for (const i in this.arrSanPham) {
       for (const j in this.dssanpham) {
@@ -915,7 +925,6 @@ export class OrderComponent implements OnInit {
         }
       }
     }
-    // console.log(this.phieudat.San_Pham)
     for (const s in this.phieudat.San_Pham) {
       this.sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
     }
@@ -958,55 +967,61 @@ export class OrderComponent implements OnInit {
     })
   }
 
-  // Xử lý khi thay đổi trong thẻ select
-  onItemSelect(item: any, i?) {
-    if (i === 0) {
-      document.getElementById('errSanPham').style.display = 'none'
-    } else {
-      if (i === 1) {
-        if (this.sanphamtmp[0] === undefined) {
-          document.getElementById('SanPham').style.display = 'block'
-        } else {
-          document.getElementById('SanPham').style.display = 'none'
-        }
-      }
-    }
+  // // Xử lý khi thay đổi trong thẻ select
+  // onItemSelect(item: any, i?) {
+  //   if (i === 0) {
+  //     document.getElementById('errSanPham').style.display = 'none'
+  //   } else {
+  //     if (i === 1) {
+  //       if (this.sanphamtmp[0] === undefined) {
+  //         document.getElementById('SanPham').style.display = 'block'
+  //       } else {
+  //         document.getElementById('SanPham').style.display = 'none'
+  //       }
+  //     }
+  //   }
 
 
-  }
+  // }
 
-  onItemDeSelect(item: any, i?) {
-    if (this.sanphamtmp[0] === undefined) {
+  // onItemDeSelect(item: any, i?) {
+  //   if (this.sanphamtmp[0] === undefined) {
 
-      if (i === 0) {
-        document.getElementById('errSanPham').style.display = 'block'
-      } else {
-        if (i === 1) {
-          document.getElementById('SanPham').style.display = 'none'
-        }
-      }
-    }
+  //     if (i === 0) {
+  //       document.getElementById('errSanPham').style.display = 'block'
+  //     } else {
+  //       if (i === 1) {
+  //         document.getElementById('SanPham').style.display = 'none'
+  //       }
+  //     }
+  //   }
 
-  }
+  // }
 
-  // Chọn hình thức vận chuyển trong thẻ select
-  onItemSelectVanChuyen(item: any, i?) {
-    document.getElementById('errVanChuyen').style.display = 'none'
-  }
+  // // Chọn hình thức vận chuyển trong thẻ select
+  // onItemSelectVanChuyen(item: any, i?) {
+  //   console.log(this.vanchuyentmp.length)
+  //   // document.getElementById('errVanChuyen').style.display = 'none'
+  // }
 
-  onItemDeSelectVanChuyen(item: any, i?) {
-    document.getElementById('errVanChuyen').style.display = 'block'
+  // onItemDeSelectVanChuyen(item: any, i?) {
+  //   // document.getElementById('errVanChuyen').style.display = 'block'
+  //   console.log(this.vanchuyentmp.length)
+  // }
 
-  }
+  // // Chọn hình thức vận chuyển trong thẻ select
+  // onItemSelectThanhToan(item: any, i?) {
+  //   // document.getElementById('errThanhToan').style.display = 'none'
+  //   console.log(this.thanhtoantmp.length)
 
-  // Chọn hình thức vận chuyển trong thẻ select
-  onItemSelectThanhToan(item: any, i?) {
-    document.getElementById('errThanhToan').style.display = 'none'
-  }
+  // }
 
-  onItemDeSelectThanhToan(item: any, i?) {
-    document.getElementById('errThanhToan').style.display = 'block'
-  }
+  // onItemDeSelectThanhToan(item: any, i?) {
+  //   // document.getElementById('errThanhToan').style.display = 'block'
+  //   console.log(this.thanhtoantmp.length)
+  //   return this.thanhtoantmp.length <= 0
+
+  // }
 
   // Đóng dialog
   DongModal() {
@@ -1014,21 +1029,21 @@ export class OrderComponent implements OnInit {
     location.reload();
   }
 
-  // Kiểm tra số lượng và giá có lớn hơn 0 hay không
-  KiemTraGiaTri() {
-    if (this.So_luong <= 0) {
-      document.getElementById('errSoLuong').style.display = 'block'
-    } else {
-      document.getElementById('errSoLuong').style.display = 'none'
-    }
-  }
+  // // Kiểm tra số lượng và giá có lớn hơn 0 hay không
+  // KiemTraGiaTri() {
+  //   if (this.So_luong <= 0) {
+  //     document.getElementById('errSoLuong').style.display = 'block'
+  //   } else {
+  //     document.getElementById('errSoLuong').style.display = 'none'
+  //   }
+  // }
 
   open_product_update(content_product_update, sp, index) {
     this.sanphamtmp = []
     this.flag = index
     this.sanphamtmp.push(sp)
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false,  size: 'lg' })
+    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false, size: 'lg' })
     this.ErrMessage()
   }
 
@@ -1038,7 +1053,7 @@ export class OrderComponent implements OnInit {
     this.sanphamtmp.push(sp)
 
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false,  size: 'lg' })
+    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false, size: 'lg' })
     this.ErrMessage()
   }
   ErrMessage() {
@@ -1180,7 +1195,7 @@ export class OrderComponent implements OnInit {
               this.arrSanPham[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
-              this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+              this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
               // this.blockerrmessage();
             }
           }
@@ -1212,13 +1227,13 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  HienThiMa(){
+  HienThiMa() {
     this.hienthi = true
     document.getElementById('AnMa').style.display = 'block'
     document.getElementById('HienThiMa').style.display = 'none'
   }
 
-  AnMa(){
+  AnMa() {
     this.hienthi = false
     document.getElementById('AnMa').style.display = 'none'
     document.getElementById('HienThiMa').style.display = 'block'
