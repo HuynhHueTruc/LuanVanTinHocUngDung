@@ -133,9 +133,9 @@
                               <tbody>
                                 <tr *ngFor="let eachSanPham of thongtinsanpham[i]; let j = index">
                                   <td class="content">{{j + 1}}</td>
-                                  <td class="content">{{eachSanPham.Ten_san_pham}}</td>
-                                  <td class="content">{{eachPhieuDat.San_Pham[j].So_luong}}</td>
-                                  <td class="content">{{eachPhieuDat.San_Pham[j].Gia_ban }}</td>
+                                  <td class="content">{{eachSanPham?.Ten_san_pham}}</td>
+                                  <td class="content" *ngIf="eachPhieuDat?.San_Pham[j] !== undefined">{{eachPhieuDat?.San_Pham[j].So_luong}}</td>
+                                  <td class="content" *ngIf="eachPhieuDat?.San_Pham[j] !== undefined">{{eachPhieuDat?.San_Pham[j].Gia_ban }}</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -143,9 +143,9 @@
                         </div>
 
                       </td>
-                      <td class="content">{{eachPhieuDat.KhachHang_id}}</td>
-                      <td class="content">{{eachPhieuDat.Ho_ten}}</td>
-                      <td class="content">{{eachPhieuDat.So_dien_thoai}}</td>
+                      <td class="content">{{eachPhieuDat?.KhachHang_id}}</td>
+                      <td class="content">{{eachPhieuDat?.Ho_ten}}</td>
+                      <td class="content">{{eachPhieuDat?.So_dien_thoai}}</td>
                       <td class="content ">
                         <div class="diachi">
                           {{arrdiachi[i].Xa_Phuong}}, {{arrdiachi[i].Huyen_Quan}}, {{arrdiachi[i].Tinh_ThanhPho}}
@@ -153,9 +153,9 @@
                       </td>
                       <td class="content">{{thongtinvanchuyen[i]?.Ten_hinh_thuc}}</td>
                       <td class="content">{{thongtinthanhtoan[i]?.Ten_phuong_thuc}}</td>
-                      <td class="content">{{eachPhieuDat.Tong_tien | currency: "VND"}}</td>
-                      <td class="content">{{eachPhieuDat.Ngay_nhan | date:'dd/MM/yyyy'}}</td>
-                      <td class="content">{{eachPhieuDat.Ngay_cap_nhat | date:'dd/MM/yyyy'}}</td>
+                      <td class="content">{{eachPhieuDat?.Tong_tien | currency: "VND"}}</td>
+                      <td class="content">{{eachPhieuDat?.Ngay_nhan | date:'dd/MM/yyyy'}}</td>
+                      <td class="content">{{eachPhieuDat?.Ngay_cap_nhat | date:'dd/MM/yyyy'}}</td>
                       <td>
                         <div class="form-group d-flex align-items-center status">
                           <select class="form-control form-control-sm border-non setwidth" id="StatusSelect"
@@ -584,7 +584,7 @@
 <div class="container" id="modals_category">
   <ng-template #content_info_product_update let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-info-mail-update">THÊM SẢN PHẨM 2</h4>
+      <h4 class="modal-title" id="modal-basic-title-info-mail-update">THÊM SẢN PHẨM </h4>
     </div>
     <div class="modal-body">
       <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
@@ -593,9 +593,7 @@
           <div class="col-sm-12">
 
             <ng-multiselect-dropdown name="ngDMNSelect" [placeholder]="'--- Tên sản phẩm ---'"
-              [settings]="dropdownSettings" [(ngModel)]="sanphamtmp" [data]="dssanpham"
-              (onSelect)="onItemSelect($event, 1)" (onSelectAll)="onSelectAll($event, 1)"
-              (onDeSelect)="onItemDeSelect($event, 1)" (onDeSelectAll)="onDeSelectAll($event, 1)">
+              [settings]="dropdownSettings" [(ngModel)]="sanphamtmp" [data]="dssanpham">
             </ng-multiselect-dropdown>
           </div>
           <div class="mess-err">
@@ -633,9 +631,8 @@
       <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Sản phẩm:</label>
-          <div class="col-sm-8">
-            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+          <div class="col-sm-12">
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Sản phẩm ---'" [(ngModel)]="sanphamtmp"
               [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 0)"
               (onSelectAll)="onSelectAll($event, 0)" (onDeSelect)="onItemDeSelect($event, 0)"
               (onDeSelectAll)="onDeSelectAll($event, 0)">
@@ -647,10 +644,9 @@
 
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số lượng:</label>
-          <div class="col-sm-8">
-            <input type="number" (keyup)="KiemTraGiaTri()" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong">
+          <div class="col-sm-12">
+            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
+              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
@@ -681,9 +677,8 @@
       <form #staffFormInfoEmailPlus="ngForm" name="InfoMailPlus">
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Sản phẩm:</label>
-          <div class="col-sm-8">
-            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+          <div class="col-sm-12">
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Sản phẩm ---'" [(ngModel)]="sanphamtmp"
               [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 0)"
               (onDeSelect)="onItemDeSelect($event, 0)">
             </ng-multiselect-dropdown>
@@ -694,10 +689,9 @@
 
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số lượng:</label>
-          <div class="col-sm-8">
+          <div class="col-sm-12">
             <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong">
+              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>

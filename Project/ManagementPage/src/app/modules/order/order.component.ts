@@ -124,13 +124,35 @@ export class OrderComponent implements OnInit {
 
   }
 
-
   ChuyenTrang(number) {
     this.dsphieudat = []
     for (let i = 0; i < 5; i++) {
       if ((this.phieudats[((number - 1) * 5) + i]) !== undefined) {
         this.dsphieudat.push(this.phieudats[((number - 1) * 5) + i]);
 
+      }
+    }
+    for (const i in this.dsphieudat) {
+      this.Trang_thai.push(this.dsphieudat[i].Trang_thai)
+    }
+    for (const length in this.dsphieudat) {
+      if (this.dsphieudat.hasOwnProperty(length)) {
+        this.checked.push(false);
+      }
+    }
+    this.getdsHinhThucVanChuyen(this.dsphieudat)
+    this.getdsPhuongThucThanhToan(this.dsphieudat)
+    this.getdsSanPham(this.dsphieudat)
+
+    for (const dc in this.dsphieudat) {
+      if (this.dsphieudat.hasOwnProperty(dc)) {
+        this.dsdiachi.push(this.dsphieudat[dc].Dia_chi);
+      }
+    }
+
+    for (const dc in this.dsdiachi) {
+      if (this.dsdiachi.hasOwnProperty(dc)) {
+        this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
   }
@@ -147,32 +169,10 @@ export class OrderComponent implements OnInit {
       this.phieudats = res.phieudats;
       this.tongphieudat = this.phieudats.length
       this.ChuyenTrang(1)
-      for (const i in this.dsphieudat) {
-        this.Trang_thai.push(this.dsphieudat[i].Trang_thai)
-      }
       // hỗ trợ searchbykeywword và searchbysex
       this.dsphieudatsearch = res.phieudats;
       this.lengthdsphieudat = this.dsphieudat.length;
-      for (const length in this.dsphieudat) {
-        if (this.dsphieudat.hasOwnProperty(length)) {
-          this.checked.push(false);
-        }
-      }
-      this.getdsHinhThucVanChuyen(this.dsphieudat)
-      this.getdsPhuongThucThanhToan(this.dsphieudat)
-      this.getdsSanPham(this.dsphieudat)
 
-      for (const dc in this.dsphieudat) {
-        if (this.dsphieudat.hasOwnProperty(dc)) {
-          this.dsdiachi.push(this.dsphieudat[dc].Dia_chi);
-        }
-      }
-
-      for (const dc in this.dsdiachi) {
-        if (this.dsdiachi.hasOwnProperty(dc)) {
-          this.arrdiachi.push(this.dsdiachi[dc][0]);
-        }
-      }
     })
 
   }
@@ -411,16 +411,7 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  // KiemTraDiaChiUpdate() {
-  //   if (this.phieudat.Dia_chi.Huyen_Quan !== '') {
-  //     document.getElementById('mes_huyen_quan').style.display = 'none';
-  //   } else {
-  //     this.phieudat.Dia_chi.Xa_Phuong = '';
-  //     document.getElementById('mes_huyen_quan').style.display = 'block';
-  //     document.getElementById('mes_xa_phuong').style.display = 'block';
 
-  //   }
-  // }
   // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
   QuanHuyen(e) {
     this.phieudat.Dia_chi.Xa_Phuong = '';
@@ -448,23 +439,6 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  // // Kiểm tra chọn xã phường
-  // XaPhuong(diachi?) {
-  //   if (diachi === null) {
-  //     if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
-  //       document.getElementById('mes_xa_phuong').style.display = 'none';
-  //     } else {
-  //       document.getElementById('mes_xa_phuong').style.display = 'block';
-  //     }
-  //   } else {
-  //     if (this.phieudat.Dia_chi.Xa_Phuong !== '') {
-  //       document.getElementById('mes_xa_phuong').style.display = 'none';
-  //     } else {
-  //       document.getElementById('mes_xa_phuong').style.display = 'block';
-  //     }
-  //   }
-
-  // }
   // Hàm chuyển đổi tiếng Việt sang tiếng Anh
   removeAccents(str) {
     return str.normalize('NFD')
@@ -520,19 +494,12 @@ export class OrderComponent implements OnInit {
     }
   }
 
-
   open(content) {
     this.phieudat = new PhieuDatModel()
     this.phieudat.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
   }
-
-  blockerrmessage(flag) {
-    document.getElementById('errVanChuyen').style.display = flag
-    document.getElementById('errThanhToan').style.display = flag
-  }
-
 
   open_update(content_update, eachPhieuDat, index_update) {
     // Lưu chỉ số phiếu đặt được update
@@ -700,7 +667,6 @@ export class OrderComponent implements OnInit {
     }
   }
 
-
   // Hàm kiểm tra sản phẩm này đã được nhập chưa
   KiemTraTrungSanPham(sp) {
     let bool = false
@@ -803,7 +769,6 @@ export class OrderComponent implements OnInit {
                 this.So_luong = 0
                 this.modalService.dismissAll()
                 this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
-                // this.blockerrmessage('none')
               }
             }
           }
@@ -825,7 +790,7 @@ export class OrderComponent implements OnInit {
           this.dsSP.Ten_san_pham = this.sanphamtmp[i].Ten_san_pham
           this.dsSP.So_luong = this.So_luong
         }
-       
+
         this.phieudat.Tong_tien = this.sum
         this.sanphamService.getListSanPham().subscribe((res: any) => {
           this.sanphams = res.sanphams
@@ -860,7 +825,6 @@ export class OrderComponent implements OnInit {
                 this.So_luong = 0
                 this.modalService.dismissAll()
                 this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
-                // this.blockerrmessage('none')
               }
             }
           }
@@ -887,18 +851,24 @@ export class OrderComponent implements OnInit {
       }
     }
     for (const s in this.phieudat.San_Pham) {
-      this.sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
+      sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
     }
-    this.phieudat.Tong_tien = this.sum
+    this.phieudat.Tong_tien = sum
+    
     if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
       this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
+    for (const i in this.dshinhthucvanchuyen){
+      if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id){
+        this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+      }
+    }
       this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
     }
     this.KTNull(this.phieudat)
     if (this.KiemTraThongTin) {
       this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
         if (JSON.stringify(dt) === '"Tạo phiếu đặt thành công!"') {
-          this.CapNhatSoLuongSanPham()
+          // this.CapNhatSoLuongSanPham()
           this.DongModal();
         }
         else {
@@ -930,6 +900,11 @@ export class OrderComponent implements OnInit {
     }
     this.phieudat.Tong_tien = this.sum
     this.KTNull(this.phieudat);
+    for (const i in this.dshinhthucvanchuyen){
+      if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id){
+        this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+      }
+    }
     if (this.KiemTraThongTin) {
       this.phieudatService.CapNhatPhieuDat(this.phieudat).subscribe(dt => {
         if (JSON.stringify(dt) === '"Cập nhật phiếu đặt thành công!"') {
@@ -967,83 +942,19 @@ export class OrderComponent implements OnInit {
     })
   }
 
-  // // Xử lý khi thay đổi trong thẻ select
-  // onItemSelect(item: any, i?) {
-  //   if (i === 0) {
-  //     document.getElementById('errSanPham').style.display = 'none'
-  //   } else {
-  //     if (i === 1) {
-  //       if (this.sanphamtmp[0] === undefined) {
-  //         document.getElementById('SanPham').style.display = 'block'
-  //       } else {
-  //         document.getElementById('SanPham').style.display = 'none'
-  //       }
-  //     }
-  //   }
-
-
-  // }
-
-  // onItemDeSelect(item: any, i?) {
-  //   if (this.sanphamtmp[0] === undefined) {
-
-  //     if (i === 0) {
-  //       document.getElementById('errSanPham').style.display = 'block'
-  //     } else {
-  //       if (i === 1) {
-  //         document.getElementById('SanPham').style.display = 'none'
-  //       }
-  //     }
-  //   }
-
-  // }
-
-  // // Chọn hình thức vận chuyển trong thẻ select
-  // onItemSelectVanChuyen(item: any, i?) {
-  //   console.log(this.vanchuyentmp.length)
-  //   // document.getElementById('errVanChuyen').style.display = 'none'
-  // }
-
-  // onItemDeSelectVanChuyen(item: any, i?) {
-  //   // document.getElementById('errVanChuyen').style.display = 'block'
-  //   console.log(this.vanchuyentmp.length)
-  // }
-
-  // // Chọn hình thức vận chuyển trong thẻ select
-  // onItemSelectThanhToan(item: any, i?) {
-  //   // document.getElementById('errThanhToan').style.display = 'none'
-  //   console.log(this.thanhtoantmp.length)
-
-  // }
-
-  // onItemDeSelectThanhToan(item: any, i?) {
-  //   // document.getElementById('errThanhToan').style.display = 'block'
-  //   console.log(this.thanhtoantmp.length)
-  //   return this.thanhtoantmp.length <= 0
-
-  // }
-
   // Đóng dialog
   DongModal() {
     this.modalService.dismissAll();
     location.reload();
   }
 
-  // // Kiểm tra số lượng và giá có lớn hơn 0 hay không
-  // KiemTraGiaTri() {
-  //   if (this.So_luong <= 0) {
-  //     document.getElementById('errSoLuong').style.display = 'block'
-  //   } else {
-  //     document.getElementById('errSoLuong').style.display = 'none'
-  //   }
-  // }
 
   open_product_update(content_product_update, sp, index) {
     this.sanphamtmp = []
     this.flag = index
     this.sanphamtmp.push(sp)
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false, size: 'lg' })
+    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false})
     this.ErrMessage()
   }
 
@@ -1053,7 +964,7 @@ export class OrderComponent implements OnInit {
     this.sanphamtmp.push(sp)
 
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false, size: 'lg' })
+    this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false })
     this.ErrMessage()
   }
   ErrMessage() {
@@ -1137,7 +1048,7 @@ export class OrderComponent implements OnInit {
               this.arrSanPham[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
-              this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false });
+              this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
             }
           }
         }
@@ -1196,7 +1107,6 @@ export class OrderComponent implements OnInit {
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
               this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
-              // this.blockerrmessage();
             }
           }
         }
