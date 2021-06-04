@@ -15,6 +15,8 @@ const { ObjectID } = require('bson');
 var bodyParser = require('body-parser');
 const PhieuDatModel = require('../src/models/PhieuDatModel');
 const SanPhamModel = require('../src/models/SanPhamModel');
+const KhachHangModel = require('../src/models/KhachHangModel');
+
 route.use(bodyParser.urlencoded({extended: false}))
 route.use(bodyParser.json())
 
@@ -105,7 +107,7 @@ route.put('/phieudat/capnhatphieudat/:_id', async(req, res) => {
     PhieuDatModel.findOne({
         _id: _id
     }).then(data => {
-          return PhieuDatModel.updateOne({
+           PhieuDatModel.updateOne({
                 _id: _id
             }, {
                 KhachHang_id: KhachHang_id,
@@ -117,10 +119,10 @@ route.put('/phieudat/capnhatphieudat/:_id', async(req, res) => {
                 Trang_thai: Trang_thai, Tong_tien: Tong_tien,
                 San_Pham: San_Pham,
                 Ngay_cap_nhat : Ngay_cap_nhat,
-                }).then(data => {
-                    res.json('Cập nhật phiếu đặt thành công!')
-                })
+                }).then(data => {})
                
+    }).then(data => {
+        res.json('Cập nhật phiếu đặt thành công!')
     }).catch(err => {
         res.json('Không tìm thấy phiếu đặt này!')
 
@@ -164,13 +166,11 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
 
 // Hàm gửi email phiếu đặt
 route.post('/phieudat/guiemailphieudat', async(req, res) => {
-    const _id = req.body._id
-    const dsSanPham = req.body.dsSanPham;
-    const KhachHang = req.body.KhachHang;
+    const phieudat = req.body.phieudat;
     const arrgiatrikhuyenmai = req.body.arrgiatrikhuyenmai
 
-    findResult(dsSanPham, arrgiatrikhuyenmai).then(function(result){ 
-        sendMail(_id, dsSanPham, KhachHang, result, info => {
+    findResult(phieudat, arrgiatrikhuyenmai).then(function(result){ 
+        sendMail(phieudat, result, info => {
                     console.log(`Email đã được gửi!`)
                 }).then(data =>{
                     res.json(data)
@@ -180,9 +180,16 @@ route.post('/phieudat/guiemailphieudat', async(req, res) => {
       })
 })
 
-async function findResult(dsSanPham, arrgiatrikhuyenmai) {
+async function findResult(phieudat, arrgiatrikhuyenmai) {
     const arrTenSP = []
+    const dsSanPham = phieudat.San_Pham
     let source = [{src: ''}]
+    let email = KhachHangModel.findOne({
+        Khach_hang_id: phieudat.KhachHang_id
+    }).then(data => {
+        email = data.Email
+    })
+
     for (let i = 0; i < dsSanPham.length; i++){
         result = await SanPhamModel.findOne({
             _id: dsSanPham[i].SanPham_id
@@ -192,10 +199,10 @@ async function findResult(dsSanPham, arrgiatrikhuyenmai) {
         })
     }
 
-    return {arrTenSP, source}
+    return {arrTenSP, source, email}
   }
 
-async function sendMail(_id, dsSanPham, KhachHang, result, callback){
+async function sendMail(phieudat, result, callback){
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com", //pop.gmail.com, port 110
         port: 587, //143, 587, 25
@@ -205,14 +212,13 @@ async function sendMail(_id, dsSanPham, KhachHang, result, callback){
             pass: details.Mat_khau
         }
     })
+                // <h4>Mã đơn hàng của bạn: ${phieudat._id}</h4>
         let mailOption = {
             from: '"GreenLife Shop"',
-            to: KhachHang.Email,
+            to: result.email,
             subject: "Chào mừng bạn đến với GreenLife Shop!",
-            html: `<h1>Xin chào ${KhachHang.Ho_ten}</h1>
+            html: `<h3>Xin chào ${phieudat.Ho_ten}</h3>
             <h4>Cảm ơn bạn đã tin tưởng GreenLife Shop.</h4>
-            <h4>Đây là đơn hàng bạn vừa đặt, hãy kiểm tra lại thông tin nhé!</h4>
-            <h4>Mã đơn hàng của bạn: ${_id}</h4>
             <table border="1">
             <tbody>
             <tr bgcolor="#b9c9fe">
@@ -226,7 +232,8 @@ async function sendMail(_id, dsSanPham, KhachHang, result, callback){
             ${result.source[0].src}
             </tbody>
             </table>
-            <h4>Shop sẽ xác nhận đơn hàng của bạn trong vòng 24 giờ</h4>
+            <h4>Trạng thái: ${phieudat.Trang_thai}</h4>
+            <h4>Shop sẽ thực hiện quy trình tiếp theo trong vòng 24 giờ</h4>
             <h4>Chúc bạn có những trãi nghiệm thật tốt với GreenLife!</h4><br>
             <h3>GreenLife Shop!</h3>`
           

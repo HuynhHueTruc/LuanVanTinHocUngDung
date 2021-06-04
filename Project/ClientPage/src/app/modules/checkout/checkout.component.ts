@@ -303,10 +303,9 @@ export class CheckoutComponent implements OnInit {
       }
     }
   
- 
+
     this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
-    
-      this.phieudatService.GuiEmailPhieuDat( this.phieudat._id, this.phieudat.San_Pham, this.datalogin, this.arrgiatrikhuyenmai).subscribe()
+      this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
       alert('Đặt hàng thành công!')
       this.arrSanPhamThanhToan = []
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()

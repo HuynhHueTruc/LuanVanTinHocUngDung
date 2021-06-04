@@ -19,6 +19,8 @@ import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 import { Component, OnInit } from '@angular/core';
+import { KhuyenmaiService } from 'src/services/KhuyenMai/khuyenmai.service';
+import { KhuyenMaiModel } from 'src/models/KhuyenMai/khuyenmai';
 
 @Component({
   selector: 'app-order',
@@ -82,11 +84,14 @@ export class OrderComponent implements OnInit {
   hienthi = false
   p: number = 1;
   tongphieudat = 0
+  dskhuyenmai: KhuyenMaiModel[] = []
+  arrgiatrikhuyenmai = []
   colors = [{ status: "Chưa duyệt", color: "darkgreen" }, { status: "Đã duyệt", color: "darkblue" },
   { status: "Đang được đóng gói", color: "orange" }, { status: "Xuất kho", color: "orange" }, { status: "Đang vận chuyển", color: "orange" },
   { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" }, { status: "Giao hàng thất bại", color: "brown" }]
+  
   constructor(private phieudatService: PhieudatService, private hinhthucvanchuyenService: HinhthucvanchuyenService, private phuongthucthanhtoanService: PhuongthucthanhtoanService,
-    private sanphamService: SanphamService, private modalService: NgbModal, private diachiService: DiachiService, private hoadonbanService: HoadonbanhangService) { }
+    private sanphamService: SanphamService, private modalService: NgbModal, private diachiService: DiachiService, private hoadonbanService: HoadonbanhangService, private khuyenmaiService: KhuyenmaiService) { }
 
 
   ngOnInit(): void {
@@ -187,17 +192,68 @@ export class OrderComponent implements OnInit {
     return this.colors.filter(item => item.status === status)[0].color
   }
 
+    // Chọn khuyến mãi cao nhất của từng sản phẩm
+    KiemTraSPKhuyenMai(eachSP, index) {
+      this.dskhuyenmai = []
+      this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
+        this.dskhuyenmai = res.khuyenmais;
+       let arrKhuyenMai = [];
+        let giatrikhuyenmai = 0;
+  
+        for (const i in this.dskhuyenmai) {
+          if (this.dskhuyenmai.hasOwnProperty(i)) {
+            for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+              if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+                if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+                  if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                    && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                    arrKhuyenMai.push(this.dskhuyenmai[i]);
+                  }
+                }
+              }
+            }
+          }
+        }
+        for (const i in arrKhuyenMai) {
+          if (arrKhuyenMai.hasOwnProperty(i)) {
+            if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
+              this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
+            }
+          }
+        }
+        console.log(this.arrgiatrikhuyenmai)
+      });
+  
+    }
+
   //Đổi trạng thái
   DoiTrangThai(phieudat, index, content_change_status) {
+    let sanphams = []
     this.phieudat = phieudat
     if (this.Trang_thai[index] === 'Giao hàng thành công') {
       this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });
     } else {
       phieudat.Trang_thai = this.Trang_thai[index]
-      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe()
+      
+      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt =>{
+        for (const j in this.dssanpham){
+          for (const h in phieudat.San_Pham){
+            if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id){
+              sanphams.push(this.dssanpham[j])
+            }
+          }
+        }
+       for(const i in sanphams){
+         this.arrgiatrikhuyenmai.push(0)
+         this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
+       }
+        this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data =>{
+          location.reload()
+        })
+
+      })
     }
   }
-
 
   // Chuyển phiếu đặt thành hóa đơn bán hàng
   async TaoHoaDonBan() {

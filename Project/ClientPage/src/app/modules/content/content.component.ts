@@ -318,8 +318,9 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   ChuyenTrang(number) {
     this.loaicays = []
     this.arrSoLuongBan = 0;
-    if ((this.dsloaicay[((number - 1) * 5) + i]) !== undefined) {
-      for (let i = 0; i < 4; i++) {
+
+    for (let i = 0; i < 4; i++) {
+      if ((this.dsloaicay[((number - 1) * 4) + i]) !== undefined) {
         this.loaicays.push(this.dsloaicay[((number - 1) * 4) + i]);
       }
     }

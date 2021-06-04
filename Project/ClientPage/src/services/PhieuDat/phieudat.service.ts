@@ -31,10 +31,10 @@ export class PhieudatService {
   }
 
   XoaPhieuDat(_id: string): Observable<PhieuDatModel[]> {
-    return this.http.delete<PhieuDatModel[]>(`${'http://localhost:3000/phieudat/xoaphieudat'}/${_id}`).pipe();
+    return this.http.delete<PhieuDatModel[]>(`${'http://localhost:3000/phieudat/xoaphieudat'}/${_id}`) .pipe();
   }
 
-  GuiEmailPhieuDat(_id, dsSanPham, KhachHang, arrgiatrikhuyenmai): Observable<PhieuDatModel[]>{
-    return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/guiemailphieudat', {_id, dsSanPham, KhachHang, arrgiatrikhuyenmai}).pipe();
+  GuiEmailPhieuDat(phieudat, arrgiatrikhuyenmai): Observable<PhieuDatModel[]>{
+    return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/guiemailphieudat', {phieudat, arrgiatrikhuyenmai}).pipe();
   }
 }

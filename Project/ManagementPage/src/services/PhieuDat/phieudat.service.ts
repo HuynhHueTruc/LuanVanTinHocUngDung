@@ -54,5 +54,8 @@ export class PhieudatService {
       })
     );
    }
-
+   
+   GuiEmailPhieuDat(phieudat, arrgiatrikhuyenmai): Observable<PhieuDatModel[]>{
+    return this.http.post<PhieuDatModel[]>('http://localhost:3000/phieudat/guiemailphieudat', {phieudat, arrgiatrikhuyenmai}).pipe();
+  }
 }
