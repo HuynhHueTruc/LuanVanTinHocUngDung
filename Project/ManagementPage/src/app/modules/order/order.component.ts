@@ -183,53 +183,42 @@ export class OrderComponent implements OnInit {
   }
 
   //Đổi trạng thái
-  DoiTrangThai(phieudat, index, content_create_bill) {
+  DoiTrangThai(phieudat, index, content_change_status) {
+    this.phieudat = phieudat
     if (this.Trang_thai[index] === 'Giao hàng thành công') {
-      // this.modalService.open(content_create_bill, { ariaLabelledBy: 'modal-basic-title-bill', backdrop: 'static', keyboard: false });
-      this.TaoHoaDonBan(phieudat)
-      let so_luong;
-      let arr_sp = [];
-      this.sanphamService.getListSanPham().subscribe((res: any) => {
-        this.sanphams = res.sanphams
-        for (const i in phieudat.San_Pham) {
-          for (const j in this.sanphams) {
-            if (phieudat.San_Pham[i].SanPham_id === this.sanphams[j]._id) {
-              so_luong = this.sanphams[j].So_luong - phieudat.San_Pham[i].So_luong
-              this.sanphams[j].So_luong = so_luong
-              arr_sp.push(this.sanphams[j])
-            }
-          }
-        }
-        this.sanphamService.CapNhatSoLuongSanPham(arr_sp).subscribe()
-      })
-      location.reload()
+      this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });
     } else {
       phieudat.Trang_thai = this.Trang_thai[index]
       this.phieudatService.CapNhatPhieuDat(phieudat).subscribe()
     }
   }
 
+
   // Chuyển phiếu đặt thành hóa đơn bán hàng
-  TaoHoaDonBan(phieudat) {
+  async TaoHoaDonBan() {
     this.hoadonban = new HoaDonBanHangModel()
     this.getthongtintaikhoan()
-    this.hoadonban._id = phieudat._id
+    this.hoadonban._id = this.phieudat._id
     this.hoadonban.NhanVien_id = this.taikhoan.Nhan_vien_id
-    this.hoadonban.Dia_chi = phieudat.Dia_chi
-    this.hoadonban.Ho_ten = phieudat.Ho_ten
-    this.hoadonban.KhachHang_id = phieudat.KhachHang_id
-    this.hoadonban.Ngay_cap_nhat = phieudat.Ngay_cap_nhat
-    this.hoadonban.San_Pham = phieudat.San_Pham
-    this.hoadonban.So_dien_thoai = phieudat.So_dien_thoai
-    this.hoadonban.ThanhToan_id = phieudat.ThanhToan_id
-    this.hoadonban.VanChuyen_id = phieudat.VanChuyen_id
-    this.hoadonban.Tong_tien = phieudat.Tong_tien
+    this.hoadonban.Dia_chi = this.phieudat.Dia_chi
+    this.hoadonban.Ho_ten = this.phieudat.Ho_ten
+    this.hoadonban.KhachHang_id = this.phieudat.KhachHang_id
+    this.hoadonban.Ngay_cap_nhat = this.phieudat.Ngay_cap_nhat
+    this.hoadonban.San_Pham = this.phieudat.San_Pham
+    this.hoadonban.So_dien_thoai = this.phieudat.So_dien_thoai
+    this.hoadonban.ThanhToan_id = this.phieudat.ThanhToan_id
+    this.hoadonban.VanChuyen_id = this.phieudat.VanChuyen_id
+    this.hoadonban.Tong_tien = this.phieudat.Tong_tien
     this.hoadonbanService.ThemHoaDonBanHang(this.hoadonban).subscribe()
-    this.phieudatService.XoaPhieuDat(phieudat._id).subscribe()
+    this.phieudatService.XoaPhieuDat(this.phieudat._id).subscribe()
+    await this.CapNhatSoLuongSanPham()
+    this.modalService.dismissAll();
+    location.reload()
   }
 
   //Không tạo hóa đơn bán hàng
   KhongTaoHoaDon() {
+    this.phieudat = new PhieuDatModel()
     this.modalService.dismissAll()
     location.reload()
   }
@@ -410,7 +399,6 @@ export class OrderComponent implements OnInit {
       }
     }
   }
-
 
   // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
   QuanHuyen(e) {
@@ -854,14 +842,14 @@ export class OrderComponent implements OnInit {
       sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
     }
     this.phieudat.Tong_tien = sum
-    
+
     if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
       this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
-    for (const i in this.dshinhthucvanchuyen){
-      if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id){
-        this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+      for (const i in this.dshinhthucvanchuyen) {
+        if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id) {
+          this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+        }
       }
-    }
       this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
     }
     this.KTNull(this.phieudat)
@@ -900,8 +888,8 @@ export class OrderComponent implements OnInit {
     }
     this.phieudat.Tong_tien = this.sum
     this.KTNull(this.phieudat);
-    for (const i in this.dshinhthucvanchuyen){
-      if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id){
+    for (const i in this.dshinhthucvanchuyen) {
+      if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id) {
         this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
       }
     }
@@ -909,8 +897,8 @@ export class OrderComponent implements OnInit {
       this.phieudatService.CapNhatPhieuDat(this.phieudat).subscribe(dt => {
         if (JSON.stringify(dt) === '"Cập nhật phiếu đặt thành công!"') {
           if (this.phieudat.Trang_thai === 'Giao hàng thành công') {
-            this.TaoHoaDonBan(this.phieudat)
-            this.CapNhatSoLuongSanPham()
+            this.TaoHoaDonBan()
+            // this.CapNhatSoLuongSanPham()
           }
           this.DongModal();
         } else {
@@ -920,7 +908,6 @@ export class OrderComponent implements OnInit {
     }
 
   }
-
 
   // Update số lượng Sản phẩm
   CapNhatSoLuongSanPham() {
@@ -948,13 +935,12 @@ export class OrderComponent implements OnInit {
     location.reload();
   }
 
-
   open_product_update(content_product_update, sp, index) {
     this.sanphamtmp = []
     this.flag = index
     this.sanphamtmp.push(sp)
     this.So_luong = this.lstsanpham[index].So_luong
-    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false})
+    this.modalService.open(content_product_update, { ariaLabelledBy: 'modal-basic-title-product-update', backdrop: 'static', keyboard: false })
     this.ErrMessage()
   }
 
@@ -967,6 +953,7 @@ export class OrderComponent implements OnInit {
     this.modalService.open(content_product_update2, { ariaLabelledBy: 'modal-basic-title-product-update2', backdrop: 'static', keyboard: false })
     this.ErrMessage()
   }
+
   ErrMessage() {
     if (this.sanphamtmp[0] === undefined) {
       document.getElementById('errSanPham').style.display = 'block'

@@ -160,7 +160,7 @@
                         <div class="form-group d-flex align-items-center status">
                           <select class="form-control form-control-sm border-non setwidth" id="StatusSelect"
                             [ngStyle]="{'color':getColor(Trang_thai[i])}" [(ngModel)]="Trang_thai[i]" name="trang_thai"
-                            #trang_thai="ngModel" (change)="DoiTrangThai(eachPhieuDat, i, content_create_bill)">
+                            #trang_thai="ngModel" (change)="DoiTrangThai(eachPhieuDat, i, content_change_status)">
                             <option class="item" value="Chưa duyệt" default>Chưa duyệt</option>
                             <option class="item" value="Đã duyệt">Đã duyệt</option>
                             <option class="item" value="Đang được đóng gói">Đang được đóng gói</option>
@@ -730,9 +730,9 @@
 
 <!-- Dialog xác nhận  -->
 <div class="container" id="modals_create_bill">
-  <ng-template #content_create_bill let-modal>
+  <ng-template #content_change_status let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-bill">XÁC NHẬN</h4>
+      <h4 class="modal-title" id="modal-change-status-title">XÁC NHẬN</h4>
     </div>
     <div class="modal-body">
       <h6>Bạn có muốn tạo hóa đơn không?</h6>
