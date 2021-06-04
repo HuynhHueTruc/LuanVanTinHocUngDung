@@ -73,7 +73,7 @@ route.post('/phieudat/taomoi', async(req, res) => {
     var Ngay_cap_nhat = dateFormat();
 
         // Kiểm tra email đã tồn tại chưa
-       return PhieuDatModel.create({
+        PhieuDatModel.create({
             _id: _id,
             KhachHang_id: KhachHang_id,
             Ho_ten: Ho_ten,
@@ -153,13 +153,9 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
     for (let i = 0; i < length; i++){
         PhieuDatModel.deleteOne({
         _id: arrPhieuDat[i]
-        }).then(data => {
-        // if (data.deletedCount === 0){
-        //      res.json('Phiếu đặt này không tồn tại!');
-        // }
-        // else{
+        }).then(data => {})
+        .then(data => {
             res.json('Xóa phiếu đặt thành công!');
-        // }
         }).catch(err => {
         res.json({message: err});
         })

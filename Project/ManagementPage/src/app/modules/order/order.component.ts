@@ -90,6 +90,11 @@ export class OrderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.phieudatService.getRefeshPage().subscribe(() => {
+      this.getdsphieudat()
+      this.geteachDiaDiem()
+    })
     this.getdsphieudat()
     this.geteachDiaDiem()
     this.dropdownSettings = {
@@ -220,7 +225,6 @@ export class OrderComponent implements OnInit {
   KhongTaoHoaDon() {
     this.phieudat = new PhieuDatModel()
     this.modalService.dismissAll()
-    location.reload()
   }
 
   // Lấy thông tin sản phẩm
@@ -552,7 +556,8 @@ export class OrderComponent implements OnInit {
     this.PhieuDatChecked();
     this.phieudatService.XoaNhieuPhieuDat(this.arrPhieuDat_ID).subscribe(data_xoanhieu => {
       if (JSON.stringify(data_xoanhieu) === '"Xóa phiếu đặt thành công!"') {
-        this.DongModal();
+        this.modalService.dismissAll()
+        this.KTCheckedAll()
       } else {
         window.alert(data_xoanhieu);
       }
@@ -560,9 +565,7 @@ export class OrderComponent implements OnInit {
   }
 
   XoaPhieuDat(_id: string) {
-    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => {
-      location.reload();
-    });
+    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => { });
   }
 
   open_product_plus(content_info_product_plus) {
@@ -629,14 +632,14 @@ export class OrderComponent implements OnInit {
     if (this.checkAll) {
       this.checkAll = false;
       this.checked = [];
-      for (let i = 0; i < this.lengthdsphieudat; i++) {
+      for (let i = 0; i < this.dsphieudat.length; i++) {
         this.checked.push(false);
         document.getElementById('divbutton').style.display = 'none';
       }
     } else {
       this.checkAll = true;
       this.checked = [];
-      for (let i = 0; i < this.lengthdsphieudat; i++) {
+      for (let i = 0; i < this.dsphieudat.length; i++) {
         this.checked.push(true);
         document.getElementById('divbutton').style.display = 'block';
       }
@@ -826,7 +829,6 @@ export class OrderComponent implements OnInit {
   // Thêm hóa đơn
   ThemPhieuDat() {
     let sum = 0
-
     this.getthongtintaikhoan()
     this.phieudat.KhachHang_id = this.taikhoan.Nhan_vien_id
     this.phieudat.Trang_thai = 'Đã duyệt'
@@ -856,8 +858,7 @@ export class OrderComponent implements OnInit {
     if (this.KiemTraThongTin) {
       this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
         if (JSON.stringify(dt) === '"Tạo phiếu đặt thành công!"') {
-          // this.CapNhatSoLuongSanPham()
-          this.DongModal();
+          this.modalService.dismissAll()
         }
         else {
           window.alert(dt);
@@ -868,12 +869,10 @@ export class OrderComponent implements OnInit {
         }
       })
     }
-
   }
 
   // Cập nhật phiếu đặt
   CapNhat() {
-
     this.sum = 0
     this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
     for (const i in this.arrSanPham) {
@@ -898,9 +897,8 @@ export class OrderComponent implements OnInit {
         if (JSON.stringify(dt) === '"Cập nhật phiếu đặt thành công!"') {
           if (this.phieudat.Trang_thai === 'Giao hàng thành công') {
             this.TaoHoaDonBan()
-            // this.CapNhatSoLuongSanPham()
           }
-          this.DongModal();
+          this.modalService.dismissAll()
         } else {
           window.alert(dt);
         }
@@ -932,7 +930,6 @@ export class OrderComponent implements OnInit {
   // Đóng dialog
   DongModal() {
     this.modalService.dismissAll();
-    location.reload();
   }
 
   open_product_update(content_product_update, sp, index) {
@@ -1114,8 +1111,6 @@ export class OrderComponent implements OnInit {
     } else {
       this.lstsanpham.splice(Number.parseInt(index), 1)
     }
-    console.log(this.arrSanPham, this.lstsanpham)
-
     // for (const i in this.arrSanPham){
     if (this.arrSanPham.length === 0) {
       document.getElementById('errListSanPham').style.display = 'block'

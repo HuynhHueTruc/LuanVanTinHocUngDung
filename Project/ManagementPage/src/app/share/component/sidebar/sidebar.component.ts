@@ -22,6 +22,10 @@ export class SidebarComponent implements OnInit {
       document.getElementById('Quyen_SD').style.display = 'none';
 
     }
+    this.phieudatService.getRefeshPage().subscribe(() => {
+      this.getSLphieudat();
+
+    })
     this.getSLphieudat();
   }
 
