@@ -311,7 +311,6 @@ export class CheckoutComponent implements OnInit {
       this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
       this.giohangService.data = null
       this.router.navigateByUrl('/bill_manegement')
-
     })
   }
 

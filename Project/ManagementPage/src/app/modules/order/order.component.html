@@ -207,30 +207,18 @@
       <form #shipFormCreate="ngForm">
         <div class="row">
           <div class="col-sm-6">
+        
             <div class="form-group row">
               <div class="col-sm-12">
-                <input type="text" [class.is-invalid]="Khach_hang.invalid && Khach_hang.touched" #Khach_hang="ngModel"
-                  class="form-control " id="Khach_hang" [(ngModel)]="phieudat.Ho_ten" name="Khach_hang"
-                  placeholder="Tên khách hàng" required>
+                <ng-multiselect-dropdown name="ngKhachHangSelect" [placeholder]="'--- ID khách hàng ---'"
+                  [(ngModel)]="IDKhachHang" [settings]="dropdownSettingsKhachHang" [data]="dskhachhang" >
+                </ng-multiselect-dropdown>
               </div>
-              <div class="mess-err" *ngIf="Khach_hang.errors && (Khach_hang.invalid || Khach_hang.touched)">
-                <small class="err text-danger" *ngIf="Khach_hang.errors.required"> Tên khách hàng không được trống!
-                </small>
+              <div class="mess-err">
+                <small id="errVanChuyen" class="err text-danger" *ngIf="IDKhachHang.length <= 0">Bạn chưa chọn khách hàng! </small>
               </div>
             </div>
 
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"
-                  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai"
-                  [(ngModel)]="phieudat.So_dien_thoai" name="So_dien_thoai" placeholder="Số điện thoại" required>
-              </div>
-              <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
-                <small class="err text-danger" *ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống!
-                </small>
-                <small class="err text-danger" *ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp lệ!</small>
-              </div>
-            </div>
 
             <div class="form-group row">
               <div class="col-sm-12">
@@ -244,6 +232,9 @@
               </div>
             </div>
 
+          
+          </div>
+          <div class="col-sm-6">
             <div class="form-group row">
               <div class="col-sm-12">
                 <ng-multiselect-dropdown name="ngPaymentSelect" [placeholder]="'--- Thanh toán ---'"
@@ -255,9 +246,6 @@
                   thức thanh toán! </small>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-
             <div class="form-group row" ngModelGroup="Dia_chi">
 
               <div class="col-sm-12">

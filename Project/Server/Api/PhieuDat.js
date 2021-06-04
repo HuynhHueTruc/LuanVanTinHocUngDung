@@ -168,7 +168,6 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
 route.post('/phieudat/guiemailphieudat', async(req, res) => {
     const phieudat = req.body.phieudat;
     const arrgiatrikhuyenmai = req.body.arrgiatrikhuyenmai
-
     findResult(phieudat, arrgiatrikhuyenmai).then(function(result){ 
         sendMail(phieudat, result, info => {
                     console.log(`Email đã được gửi!`)
@@ -183,13 +182,14 @@ route.post('/phieudat/guiemailphieudat', async(req, res) => {
 async function findResult(phieudat, arrgiatrikhuyenmai) {
     const arrTenSP = []
     const dsSanPham = phieudat.San_Pham
+    let email = ''
     let source = [{src: ''}]
-    let email = KhachHangModel.findOne({
+    KhachHangModel.findOne({
         Khach_hang_id: phieudat.KhachHang_id
     }).then(data => {
         email = data.Email
+        console.log(email)
     })
-
     for (let i = 0; i < dsSanPham.length; i++){
         result = await SanPhamModel.findOne({
             _id: dsSanPham[i].SanPham_id
@@ -219,6 +219,7 @@ async function sendMail(phieudat, result, callback){
             subject: "Chào mừng bạn đến với GreenLife Shop!",
             html: `<h3>Xin chào ${phieudat.Ho_ten}</h3>
             <h4>Cảm ơn bạn đã tin tưởng GreenLife Shop.</h4>
+            <h4>Đơn hàng của bạn:</h4>
             <table border="1">
             <tbody>
             <tr bgcolor="#b9c9fe">

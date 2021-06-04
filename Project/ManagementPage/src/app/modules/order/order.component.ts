@@ -11,7 +11,11 @@ import { SanphamService } from './../../../services/SanPham/sanpham.service';
 import { PhuongthucthanhtoanService } from './../../../services/PhuongThucThanhToan/phuongthucthanhtoan.service';
 import { HinhthucvanchuyenService } from './../../../services/HinhThucVanChuyen/hinhthucvanchuyen.service';
 import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
+import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
+
 import { SanPhamModel } from './../../../models/SanPham/sanpham';
+import { KhachHangModel } from './../../../models/KhachHang/khachhang';
+
 import { PhuongThucThanhToanModel } from './../../../models/PhuongThucThanhToan/phuongthucthanhtoan';
 import { DiaChiDKModle } from './../../../models/DiaChi/Diachi_DK';
 import { HinhThucVanChuyenModel } from './../../../models/HinhThucVanChuyen/hinhthucvanchuyen';
@@ -54,11 +58,11 @@ export class OrderComponent implements OnInit {
   vanchuyentmp = []
   thanhtoantmp = []
   phieudatID: string;
-
   phieudat: PhieuDatModel
   dropdownSettings: IDropdownSettings;
   dropdownSettingsVanChuyen: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
+  dropdownSettingsKhachHang: IDropdownSettings;
 
   So_luong = 0;
   Gia_ban = 0
@@ -75,7 +79,8 @@ export class OrderComponent implements OnInit {
   xaphuongs: XaPhuongModel[] = [];
   arrxaphuong: XaPhuongModel[] = [];
   diachi: DiaChiDKModle[] = [];
-
+  IDKhachHang = []
+  dskhachhang: KhachHangModel[] = []
   thanhpho: string;
   quanhuyen: string;
   KiemTraThongTin = false;
@@ -89,9 +94,10 @@ export class OrderComponent implements OnInit {
   colors = [{ status: "Chưa duyệt", color: "darkgreen" }, { status: "Đã duyệt", color: "darkblue" },
   { status: "Đang được đóng gói", color: "orange" }, { status: "Xuất kho", color: "orange" }, { status: "Đang vận chuyển", color: "orange" },
   { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" }, { status: "Giao hàng thất bại", color: "brown" }]
-  
+
   constructor(private phieudatService: PhieudatService, private hinhthucvanchuyenService: HinhthucvanchuyenService, private phuongthucthanhtoanService: PhuongthucthanhtoanService,
-    private sanphamService: SanphamService, private modalService: NgbModal, private diachiService: DiachiService, private hoadonbanService: HoadonbanhangService, private khuyenmaiService: KhuyenmaiService) { }
+    private sanphamService: SanphamService, private modalService: NgbModal, private diachiService: DiachiService, private hoadonbanService: HoadonbanhangService, private khuyenmaiService: KhuyenmaiService,
+    private khachhangService: KhachhangService) { }
 
 
   ngOnInit(): void {
@@ -99,9 +105,12 @@ export class OrderComponent implements OnInit {
     this.phieudatService.getRefeshPage().subscribe(() => {
       this.getdsphieudat()
       this.geteachDiaDiem()
+      this.getdsKhachHang()
+      this.p = 1
     })
     this.getdsphieudat()
     this.geteachDiaDiem()
+    this.getdsKhachHang()
     this.dropdownSettings = {
       singleSelection: true,
       idField: '_id',
@@ -132,10 +141,21 @@ export class OrderComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    this.dropdownSettingsKhachHang = {
+      singleSelection: true,
+      idField: 'Khach_hang_id',
+      textField: 'Khach_hang_id',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   }
 
   ChuyenTrang(number) {
     this.dsphieudat = []
+    this.Trang_thai = []
     for (let i = 0; i < 5; i++) {
       if ((this.phieudats[((number - 1) * 5) + i]) !== undefined) {
         this.dsphieudat.push(this.phieudats[((number - 1) * 5) + i]);
@@ -167,6 +187,11 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  getdsKhachHang() {
+    this.khachhangService.getListKhachHang().subscribe((res: any) => {
+      this.dskhachhang = res.khachhangs
+    })
+  }
 
   // Lấy thông tin tài khoản hiện đang thao tác
   getthongtintaikhoan() {
@@ -192,39 +217,38 @@ export class OrderComponent implements OnInit {
     return this.colors.filter(item => item.status === status)[0].color
   }
 
-    // Chọn khuyến mãi cao nhất của từng sản phẩm
-    KiemTraSPKhuyenMai(eachSP, index) {
-      this.dskhuyenmai = []
-      this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
-        this.dskhuyenmai = res.khuyenmais;
-       let arrKhuyenMai = [];
-        let giatrikhuyenmai = 0;
-  
-        for (const i in this.dskhuyenmai) {
-          if (this.dskhuyenmai.hasOwnProperty(i)) {
-            for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
-              if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
-                if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
-                  if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
-                    && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-                    arrKhuyenMai.push(this.dskhuyenmai[i]);
-                  }
+  // Chọn khuyến mãi cao nhất của từng sản phẩm
+  KiemTraSPKhuyenMai(eachSP, index) {
+    this.dskhuyenmai = []
+    this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
+      this.dskhuyenmai = res.khuyenmais;
+      let arrKhuyenMai = [];
+      let giatrikhuyenmai = 0;
+
+      for (const i in this.dskhuyenmai) {
+        if (this.dskhuyenmai.hasOwnProperty(i)) {
+          for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+            if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+              if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+                if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                  && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                  arrKhuyenMai.push(this.dskhuyenmai[i]);
                 }
               }
             }
           }
         }
-        for (const i in arrKhuyenMai) {
-          if (arrKhuyenMai.hasOwnProperty(i)) {
-            if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
-              this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
-            }
+      }
+      for (const i in arrKhuyenMai) {
+        if (arrKhuyenMai.hasOwnProperty(i)) {
+          if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
+            this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
           }
         }
-        console.log(this.arrgiatrikhuyenmai)
-      });
-  
-    }
+      }
+    });
+
+  }
 
   //Đổi trạng thái
   DoiTrangThai(phieudat, index, content_change_status) {
@@ -234,21 +258,20 @@ export class OrderComponent implements OnInit {
       this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });
     } else {
       phieudat.Trang_thai = this.Trang_thai[index]
-      
-      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt =>{
-        for (const j in this.dssanpham){
-          for (const h in phieudat.San_Pham){
-            if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id){
+      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt => {
+        for (const j in this.dssanpham) {
+          for (const h in phieudat.San_Pham) {
+            if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id) {
               sanphams.push(this.dssanpham[j])
             }
           }
         }
-       for(const i in sanphams){
-         this.arrgiatrikhuyenmai.push(0)
-         this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
-       }
-        this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data =>{
-          location.reload()
+        for (const i in sanphams) {
+          this.arrgiatrikhuyenmai.push(0)
+          this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
+        }
+        this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {
+          // location.reload()
         })
 
       })
@@ -546,10 +569,16 @@ export class OrderComponent implements OnInit {
     this.phieudat = new PhieuDatModel()
     this.phieudat.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
+    this.vanchuyentmp = []
+    this.thanhtoantmp = []
+    this.IDKhachHang = []
+    this.lstsanpham = []
+    this.arrSanPham = []
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
   }
 
   open_update(content_update, eachPhieuDat, index_update) {
+    this.arrSanPham = []
     // Lưu chỉ số phiếu đặt được update
     this.index_update = index_update,
       this.UnChecked();
@@ -740,10 +769,10 @@ export class OrderComponent implements OnInit {
 
   // Hàm kiểm tra thông tin
   KTNull(pd: PhieuDatModel) {
-
     if (this.thanhtoantmp[0] !== undefined && this.vanchuyentmp[0] !== undefined) {
       this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
       this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
+      const _idKH = this.phieudat.KhachHang_id
       const hoten = this.phieudat.Ho_ten;
       const diachi = this.phieudat.Dia_chi;
       const sdt = this.phieudat.So_dien_thoai;
@@ -751,7 +780,7 @@ export class OrderComponent implements OnInit {
       const phuongthucthanhtoan = this.phieudat.ThanhToan_id;
       const sanpham = this.phieudat.San_Pham[0]
       const thongtinphieudat = [];
-      thongtinphieudat.push(hoten, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
+      thongtinphieudat.push(_idKH, hoten, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
         diachi.Xa_Phuong, sdt, hinhthucvanchuyen, phuongthucthanhtoan);
       for (const i in thongtinphieudat) {
         if (thongtinphieudat.hasOwnProperty(i)) {
@@ -826,8 +855,10 @@ export class OrderComponent implements OnInit {
     }
   }
 
+
   // Thêm sản phẩm vào list
   ThemSanPham(content) {
+
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
@@ -883,48 +914,61 @@ export class OrderComponent implements OnInit {
   }
 
   // Thêm hóa đơn
-  ThemPhieuDat() {
+  async ThemPhieuDat() {
+    let khachhang = new KhachHangModel()
     let sum = 0
-    this.getthongtintaikhoan()
-    this.phieudat.KhachHang_id = this.taikhoan.Nhan_vien_id
-    this.phieudat.Trang_thai = 'Đã duyệt'
-    this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
-    for (const i in this.arrSanPham) {
-      for (const j in this.dssanpham) {
-        if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
-          this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+    if (this.IDKhachHang[0] !== undefined) {
+      for (const i in this.dskhachhang) {
+        if (this.dskhachhang[i].Khach_hang_id === this.IDKhachHang[0].Khach_hang_id) {
+          khachhang = this.dskhachhang[i]
+          break
         }
       }
-    }
-    for (const s in this.phieudat.San_Pham) {
-      sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
-    }
-    this.phieudat.Tong_tien = sum
-
-    if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
-      this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
-      for (const i in this.dshinhthucvanchuyen) {
-        if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id) {
-          this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+      this.getthongtintaikhoan()
+      this.phieudat.KhachHang_id = khachhang.Khach_hang_id
+      this.phieudat.Ho_ten = khachhang.Ho_ten
+      this.phieudat.So_dien_thoai = khachhang.So_dien_thoai
+      this.phieudat.Trang_thai = 'Đã duyệt'
+      this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
+      for (const i in this.arrSanPham) {
+        for (const j in this.dssanpham) {
+          if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
+            this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+          }
         }
       }
-      this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
-    }
-    this.KTNull(this.phieudat)
-    if (this.KiemTraThongTin) {
-      this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
-        if (JSON.stringify(dt) === '"Tạo phiếu đặt thành công!"') {
-          this.modalService.dismissAll()
-        }
-        else {
-          window.alert(dt);
-          this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
-          this.lstsanpham.splice(0, this.lstsanpham.length)
-          this.modalService.dismissAll()
+     
+      for (const s in this.phieudat.San_Pham) {
+        sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
+      }
+      this.phieudat.Tong_tien = sum
 
+      if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
+        this.phieudat.VanChuyen_id = this.vanchuyentmp[0]._id
+        for (const i in this.dshinhthucvanchuyen) {
+          if (this.dshinhthucvanchuyen[i]._id === this.vanchuyentmp[0]._id) {
+            this.phieudat.Tong_tien += this.dshinhthucvanchuyen[i].Gia
+          }
         }
-      })
+        this.phieudat.ThanhToan_id = this.thanhtoantmp[0]._id
+      }
+      this.KTNull(this.phieudat)
+      if (this.KiemTraThongTin) {
+        this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+          if (JSON.stringify(dt) === '"Tạo phiếu đặt thành công!"') {
+            this.modalService.dismissAll()
+          }
+          else {
+            window.alert(dt);
+            this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
+            this.lstsanpham.splice(0, this.lstsanpham.length)
+            this.modalService.dismissAll()
+
+          }
+        })
+      }
     }
+
   }
 
   // Cập nhật phiếu đặt
