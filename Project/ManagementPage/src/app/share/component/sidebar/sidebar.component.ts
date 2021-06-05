@@ -2,6 +2,7 @@ import { PhieuDatModel } from './../../../../models/PhieuDat/phieudat';
 import { PhieudatService } from './../../../../services/PhieuDat/phieudat.service';
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,13 +24,16 @@ export class SidebarComponent implements OnInit {
 
     }
     this.phieudatService.getRefeshPage().subscribe(() => {
-      this.getSLphieudat();
-
+      // this.getSLphieudat();
+      const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+      const subscribe = source.subscribe(val => this.getSLphieudat(val)); 
     })
-    this.getSLphieudat();
+    // this.getSLphieudat();
+    const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+    const subscribe = source.subscribe(val => this.getSLphieudat(val)); 
   }
 
-  getSLphieudat() {
+  getSLphieudat(val) {
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.phieudat = res.phieudats;
       this.So_luong_phieu_dat = this.phieudat.length

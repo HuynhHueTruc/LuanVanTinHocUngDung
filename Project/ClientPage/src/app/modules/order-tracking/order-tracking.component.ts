@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/analytics';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-order-tracking',
@@ -72,9 +73,14 @@ export class OrderTrackingComponent implements OnInit {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.phieudatService.getRefeshPage().subscribe(() => {
       this.getdsphieudat()
-    })
+      // const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+      // getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
 
+    })
     this.getdsphieudat()
+    // const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+    // getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
+
     // Initialize Firebase
     if (!firebase.apps.length) {
       firebase.initializeApp(this.firebaseConfig);
@@ -84,6 +90,21 @@ export class OrderTrackingComponent implements OnInit {
     }
   }
 
+  // ReloadDSPhieuDat(){
+  //   this.lstphieudat = new PhieuDatModel()
+  //   this.dsphieudat = []
+  //   this.dschoxacnhan = []
+  //   this.dscholayhang = []
+  //   this.dsdanggiaohang = []
+  //   this.dsdanhgia = []
+  //   this.arrdanhgia = []
+  //   this.dssanphamcholayhang = []
+  //   this.dssanphamchoxacnhan = []
+  //   this.dssanphamdanggiaohang = []
+  //   this.dssanphamdanhgia = []
+  //   this.soluongdanhgia = 0
+  //   this.getdsphieudat()
+  // }
   getdsphieudat() {
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.lstphieudat = res.phieudats;

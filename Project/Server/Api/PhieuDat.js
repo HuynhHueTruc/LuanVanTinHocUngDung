@@ -188,7 +188,6 @@ async function findResult(phieudat, arrgiatrikhuyenmai) {
         Khach_hang_id: phieudat.KhachHang_id
     }).then(data => {
         email = data.Email
-        console.log(email)
     })
     for (let i = 0; i < dsSanPham.length; i++){
         result = await SanPhamModel.findOne({

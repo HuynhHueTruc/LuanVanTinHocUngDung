@@ -12,20 +12,17 @@ import { PhuongthucthanhtoanService } from './../../../services/PhuongThucThanhT
 import { HinhthucvanchuyenService } from './../../../services/HinhThucVanChuyen/hinhthucvanchuyen.service';
 import { PhieudatService } from './../../../services/PhieuDat/phieudat.service';
 import { KhachhangService } from './../../../services/KhachHang/khachhang.service';
-
 import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
-
 import { PhuongThucThanhToanModel } from './../../../models/PhuongThucThanhToan/phuongthucthanhtoan';
 import { DiaChiDKModle } from './../../../models/DiaChi/Diachi_DK';
 import { HinhThucVanChuyenModel } from './../../../models/HinhThucVanChuyen/hinhthucvanchuyen';
 import { PhieuDatModel } from './../../../models/PhieuDat/phieudat';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-
 import { Component, OnInit } from '@angular/core';
 import { KhuyenmaiService } from 'src/services/KhuyenMai/khuyenmai.service';
 import { KhuyenMaiModel } from 'src/models/KhuyenMai/khuyenmai';
-
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -63,10 +60,8 @@ export class OrderComponent implements OnInit {
   dropdownSettingsVanChuyen: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
   dropdownSettingsKhachHang: IDropdownSettings;
-
   So_luong = 0;
   Gia_ban = 0
-
   flag: string
   isdelete = false
   dsSP: SanPhamThemModel
@@ -93,23 +88,27 @@ export class OrderComponent implements OnInit {
   arrgiatrikhuyenmai = []
   colors = [{ status: "Chưa duyệt", color: "darkgreen" }, { status: "Đã duyệt", color: "darkblue" },
   { status: "Đang được đóng gói", color: "orange" }, { status: "Xuất kho", color: "orange" }, { status: "Đang vận chuyển", color: "orange" },
-  { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" }, { status: "Giao hàng thất bại", color: "brown" }]
+  { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" },
+  { status: "Giao hàng thất bại", color: "brown" }]
 
   constructor(private phieudatService: PhieudatService, private hinhthucvanchuyenService: HinhthucvanchuyenService, private phuongthucthanhtoanService: PhuongthucthanhtoanService,
     private sanphamService: SanphamService, private modalService: NgbModal, private diachiService: DiachiService, private hoadonbanService: HoadonbanhangService, private khuyenmaiService: KhuyenmaiService,
     private khachhangService: KhachhangService) { }
 
-
   ngOnInit(): void {
 
     this.phieudatService.getRefeshPage().subscribe(() => {
-      this.getdsphieudat()
+      const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+      getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
       this.geteachDiaDiem()
       this.getdsKhachHang()
       this.getdsKhuyenMai()
-      this.p = 1
+
+      const source = timer(1000, 60000); // Trên thực tế là 864000000 (1 ngày)
+      const subscribe = source.subscribe(val => this.TuDongDuyetHoaDon(val));
     })
-    this.getdsphieudat()
+    const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+    getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
     this.geteachDiaDiem()
     this.getdsKhachHang()
     this.getdsKhuyenMai()
@@ -154,6 +153,34 @@ export class OrderComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+    const subscribe = source.subscribe(val => this.TuDongDuyetHoaDon(val));
+  }
+
+  ReloadDSPhieuDat(){
+    this.getdsphieudat()
+    this.ChuyenTrang(this.p)
+  }
+  async TuDongDuyetHoaDon(t) {
+    let sanphams = []
+    for (const i in this.phieudats) {
+      if ((new Date().getDay() - new Date(this.phieudats[i].Ngay_cap_nhat).getDay() >= 1) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
+        this.phieudats[i].Trang_thai = 'Đã duyệt'
+        this.phieudatService.CapNhatPhieuDat(this.phieudats[i]).subscribe(dt => { })
+        for (const j in this.dssanpham) {
+          for (const h in this.phieudats[i].San_Pham) {
+            if (this.dssanpham[j]._id === this.phieudats[i].San_Pham[h].SanPham_id) {
+              sanphams.push(this.dssanpham[j])
+            }
+          }
+        }
+        for (const i in sanphams) {
+          this.arrgiatrikhuyenmai.push(0)
+          await this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
+        }
+        this.phieudatService.GuiEmailPhieuDat(this.phieudats[i], this.arrgiatrikhuyenmai).subscribe(data => { })
+      }
+    }
   }
 
   ChuyenTrang(number) {
@@ -206,16 +233,15 @@ export class OrderComponent implements OnInit {
 
       this.phieudats = res.phieudats;
       this.tongphieudat = this.phieudats.length
-      this.ChuyenTrang(1)
+      this.ChuyenTrang(this.p)
       // hỗ trợ searchbykeywword và searchbysex
       this.dsphieudatsearch = res.phieudats;
       this.lengthdsphieudat = this.dsphieudat.length;
-
     })
 
   }
 
-  getdsKhuyenMai(){
+  getdsKhuyenMai() {
     this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
       this.dskhuyenmai = res.khuyenmais;
     });
@@ -228,36 +254,36 @@ export class OrderComponent implements OnInit {
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraSPKhuyenMai(eachSP, index) {
-      let arrKhuyenMai = [];
-      let giatrikhuyenmai = 0;
+    let arrKhuyenMai = [];
+    let giatrikhuyenmai = 0;
 
-      for (const i in this.dskhuyenmai) {
-        if (this.dskhuyenmai.hasOwnProperty(i)) {
-          for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
-            if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
-              if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
-                if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
-                  && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
-                  arrKhuyenMai.push(this.dskhuyenmai[i]);
-                }
+    for (const i in this.dskhuyenmai) {
+      if (this.dskhuyenmai.hasOwnProperty(i)) {
+        for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
+          if (this.dskhuyenmai[i].Danh_muc_nho.hasOwnProperty(j)) {
+            if (this.dskhuyenmai[i].Danh_muc_nho[j].DMN_id === eachSP.Danh_Muc[0].DMN_id) {
+              if (new Date(this.dskhuyenmai[i].Ngay_bat_dau).getTime() < new Date().getTime()
+                && new Date(this.dskhuyenmai[i].Ngay_ket_thuc).getTime() > new Date().getTime()) {
+                arrKhuyenMai.push(this.dskhuyenmai[i]);
               }
             }
           }
         }
       }
-      for (const i in arrKhuyenMai) {
-        if (arrKhuyenMai.hasOwnProperty(i)) {
-          if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
-            giatrikhuyenmai = arrKhuyenMai[i].Gia_tri;
-            this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
-          }
+    }
+    for (const i in arrKhuyenMai) {
+      if (arrKhuyenMai.hasOwnProperty(i)) {
+        if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
+          giatrikhuyenmai = arrKhuyenMai[i].Gia_tri;
+          this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
         }
       }
+    }
 
   }
 
   //Đổi trạng thái
- async DoiTrangThai(phieudat, index, content_change_status) {
+  async DoiTrangThai(phieudat, index, content_change_status) {
     let sanphams = []
     this.phieudat = phieudat
     this.arrgiatrikhuyenmai = []
@@ -940,16 +966,16 @@ export class OrderComponent implements OnInit {
       for (const i in this.arrSanPham) {
         this.arrgiatrikhuyenmai.push(0)
         for (const j in this.dssanpham) {
-        
+
           if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
             this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
-           await this.KiemTraSPKhuyenMai(this.dssanpham[j], Number.parseInt(i))
+            await this.KiemTraSPKhuyenMai(this.dssanpham[j], Number.parseInt(i))
 
           }
         }
       }
       for (const s in this.phieudat.San_Pham) {
-        sum += this.phieudat.San_Pham[s].So_luong * (this.phieudat.San_Pham[s].Gia_ban -this.phieudat.San_Pham[s].Gia_ban*this.arrgiatrikhuyenmai[s])
+        sum += this.phieudat.San_Pham[s].So_luong * (this.phieudat.San_Pham[s].Gia_ban - this.phieudat.San_Pham[s].Gia_ban * this.arrgiatrikhuyenmai[s])
       }
 
       this.phieudat.Tong_tien = sum
