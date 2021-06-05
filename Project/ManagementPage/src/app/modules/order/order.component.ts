@@ -106,11 +106,14 @@ export class OrderComponent implements OnInit {
       this.getdsphieudat()
       this.geteachDiaDiem()
       this.getdsKhachHang()
+      this.getdsKhuyenMai()
       this.p = 1
     })
     this.getdsphieudat()
     this.geteachDiaDiem()
     this.getdsKhachHang()
+    this.getdsKhuyenMai()
+
     this.dropdownSettings = {
       singleSelection: true,
       idField: '_id',
@@ -212,6 +215,12 @@ export class OrderComponent implements OnInit {
 
   }
 
+  getdsKhuyenMai(){
+    this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
+      this.dskhuyenmai = res.khuyenmais;
+    });
+
+  }
   // Trả về màu sắc cho trạng thái được hiển thị trên table
   getColor(status) {
     return this.colors.filter(item => item.status === status)[0].color
@@ -219,9 +228,6 @@ export class OrderComponent implements OnInit {
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
   KiemTraSPKhuyenMai(eachSP, index) {
-    this.dskhuyenmai = []
-    this.khuyenmaiService.getListKhuyenMai().subscribe((res: any) => {
-      this.dskhuyenmai = res.khuyenmais;
       let arrKhuyenMai = [];
       let giatrikhuyenmai = 0;
 
@@ -242,38 +248,37 @@ export class OrderComponent implements OnInit {
       for (const i in arrKhuyenMai) {
         if (arrKhuyenMai.hasOwnProperty(i)) {
           if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
+            giatrikhuyenmai = arrKhuyenMai[i].Gia_tri;
             this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
           }
         }
       }
-    });
 
   }
 
   //Đổi trạng thái
-  DoiTrangThai(phieudat, index, content_change_status) {
+ async DoiTrangThai(phieudat, index, content_change_status) {
     let sanphams = []
     this.phieudat = phieudat
+    this.arrgiatrikhuyenmai = []
     if (this.Trang_thai[index] === 'Giao hàng thành công') {
       this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });
     } else {
       phieudat.Trang_thai = this.Trang_thai[index]
-      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt => {
-        for (const j in this.dssanpham) {
-          for (const h in phieudat.San_Pham) {
-            if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id) {
-              sanphams.push(this.dssanpham[j])
-            }
+      this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt => { })
+      for (const j in this.dssanpham) {
+        for (const h in phieudat.San_Pham) {
+          if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id) {
+            sanphams.push(this.dssanpham[j])
           }
         }
-        for (const i in sanphams) {
-          this.arrgiatrikhuyenmai.push(0)
-          this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
-        }
-        this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {
-          // location.reload()
-        })
-
+      }
+      for (const i in sanphams) {
+        this.arrgiatrikhuyenmai.push(0)
+        await this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
+      }
+      this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {
+        // location.reload()
       })
     }
   }
@@ -869,7 +874,7 @@ export class OrderComponent implements OnInit {
           this.dsSP.So_luong = this.So_luong
         }
 
-        this.phieudat.Tong_tien = this.sum
+        // this.phieudat.Tong_tien = this.sum
         this.sanphamService.getListSanPham().subscribe((res: any) => {
           this.sanphams = res.sanphams
           for (const j in this.sanphams) {
@@ -881,13 +886,13 @@ export class OrderComponent implements OnInit {
                 document.getElementById('errSoLuongMax').style.display = 'none'
                 this.lstsanpham.push(this.dsSP)
                 this.sum = 0
-                for (const i in this.lstsanpham) {
-                  for (const j in this.dssanpham) {
-                    if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-                      this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
-                    }
-                  }
-                }
+                // for (const i in this.lstsanpham) {
+                //   for (const j in this.dssanpham) {
+                //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
+                //       this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
+                //     }
+                //   }
+                // }
                 this.arrSanPham = []
 
                 for (const j in this.lstsanpham) {
@@ -917,6 +922,8 @@ export class OrderComponent implements OnInit {
   async ThemPhieuDat() {
     let khachhang = new KhachHangModel()
     let sum = 0
+    let sanphams = []
+    this.arrgiatrikhuyenmai = []
     if (this.IDKhachHang[0] !== undefined) {
       for (const i in this.dskhachhang) {
         if (this.dskhachhang[i].Khach_hang_id === this.IDKhachHang[0].Khach_hang_id) {
@@ -931,16 +938,20 @@ export class OrderComponent implements OnInit {
       this.phieudat.Trang_thai = 'Đã duyệt'
       this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
       for (const i in this.arrSanPham) {
+        this.arrgiatrikhuyenmai.push(0)
         for (const j in this.dssanpham) {
+        
           if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
             this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+           await this.KiemTraSPKhuyenMai(this.dssanpham[j], Number.parseInt(i))
+
           }
         }
       }
-     
       for (const s in this.phieudat.San_Pham) {
-        sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
+        sum += this.phieudat.San_Pham[s].So_luong * (this.phieudat.San_Pham[s].Gia_ban -this.phieudat.San_Pham[s].Gia_ban*this.arrgiatrikhuyenmai[s])
       }
+
       this.phieudat.Tong_tien = sum
 
       if (this.vanchuyentmp[0] !== undefined && this.thanhtoantmp[0] !== undefined) {
@@ -963,13 +974,13 @@ export class OrderComponent implements OnInit {
             this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
             this.lstsanpham.splice(0, this.lstsanpham.length)
             this.modalService.dismissAll()
-
           }
         })
       }
     }
 
   }
+
 
   // Cập nhật phiếu đặt
   CapNhat() {
