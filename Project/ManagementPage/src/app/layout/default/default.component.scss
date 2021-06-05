@@ -1,9 +1,7 @@
-// div.scrollable{
-//   padding: 0px !important;
-// }
-// .sidebar{
-//   padding: 0px;
-// }
+.main{
+  height: 700px;
+}
+
 :host{
   display: flex;
   flex-direction: column;
@@ -12,10 +10,9 @@
 mat-drawer{
   width: 20%;
 }
-
-// mat-drawer-container{
-//   height: 100%;
-// }
+mat-drawer-container{
+  height: 100%;
+}
 
 mat-drawer-content{
 }

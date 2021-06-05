@@ -53,18 +53,19 @@ route.put('/danhmuc/capnhatdanhmucnho/:_id', async(req, res) => {
     DanhMucModel.findOne({
         _id: _id
     }).then(data => {
-          return DanhMucModel.updateOne({
+           DanhMucModel.updateOne({
                 _id: _id
             }, {
                 Ten_danh_muc: Ten_danh_muc,
                 Danh_muc_nho: Danh_muc_nho,
                 Thoi_gian_cap_nhat : Thoi_gian_cap_nhat,
+              
+                }).then(dt => {
+                    console.log(dt)
                 })
                
     }).then(data => {
         res.json('Cập nhật danh mục thành công!')
-        console.log('Cập nhật danh mục thành công!')
-
     }).catch(err => {
         res.json('Không tìm thấy danh mục này!')
 

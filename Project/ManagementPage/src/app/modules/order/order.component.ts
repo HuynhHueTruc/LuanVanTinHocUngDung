@@ -96,7 +96,6 @@ export class OrderComponent implements OnInit {
     private khachhangService: KhachhangService) { }
 
   ngOnInit(): void {
-
     this.phieudatService.getRefeshPage().subscribe(() => {
       const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
       getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
@@ -161,6 +160,7 @@ export class OrderComponent implements OnInit {
     this.getdsphieudat()
     this.ChuyenTrang(this.p)
   }
+  
   async TuDongDuyetHoaDon(t) {
     let sanphams = []
     for (const i in this.phieudats) {

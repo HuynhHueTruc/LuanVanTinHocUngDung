@@ -24,9 +24,15 @@ export class CategoryComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
   loaicaytmp = []
   Ten_loai_cay = ''
+  danhmucs: DanhMucModel[] = []
+  p: number = 1
+  hienthi = false
   constructor(private danhmucService: DanhmucService, private modalService: NgbModal, private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
+    this.danhmucService.getRefeshPage().subscribe(() => {
+      this.getdsdanhmuc()
+    })
     this.getdsdanhmuc()
 
     this.dropdownSettings = {
@@ -44,6 +50,8 @@ export class CategoryComponent implements OnInit {
     this.danhmucService.getListDanhMuc().subscribe((res: any) => {
       this.dsdanhmuc = res.danhmucs;
       this.dsdanhmucsearch = res.danhmucs;
+      this.danhmucs = res.danhmucs
+      this.ChuyenTrang(this.p)
       this.getdsloaicay()
     })
   }
@@ -131,14 +139,7 @@ export class CategoryComponent implements OnInit {
   // Kiểm tra trùng id trong mảng danhmucnho
   KiemTraTrungDMN_id(tendanhmucnho) {
     let bool = true
-    // for (const i in this.danhmuc.Danh_muc_nho) {
-    //   if (this.danhmuc.Danh_muc_nho[i].Ten_danh_muc_nho === tendanhmucnho){
-    //     bool = false
-    //     return bool
-    //   }else{
-    //     bool = true
-    //   }
-    // }
+
     for (const i in this.dsdanhmuc) {
       for (const j in this.dsdanhmuc[i].Danh_muc_nho) {
         if (this.dsdanhmuc[i].Danh_muc_nho[j].Ten_danh_muc_nho === tendanhmucnho) {
@@ -208,7 +209,32 @@ export class CategoryComponent implements OnInit {
 
   CapNhatDanhMuc() {
     this.danhmucService.CapNhatDanhMucNho(this.danhmuc).subscribe()
-    this.DongModal()
+    this.modalService.dismissAll()
 
+  }
+
+    
+  HienThiMa() {
+    this.hienthi = true
+    document.getElementById('AnMa').style.display = 'block'
+    document.getElementById('HienThiMa').style.display = 'none'
+  }
+
+  AnMa() {
+    this.hienthi = false
+    document.getElementById('AnMa').style.display = 'none'
+    document.getElementById('HienThiMa').style.display = 'block'
+
+  }
+
+  ChuyenTrang(number) {
+    this.dsdanhmuc = []
+    for (let i = 0; i < 5; i++) {
+      if ((this.danhmucs[((number - 1) * 5) + i]) !== undefined) {
+        this.dsdanhmuc.push(this.danhmucs[((number - 1) * 5) + i]);
+      }
+    }
+
+    this.getdsloaicay()
   }
 }

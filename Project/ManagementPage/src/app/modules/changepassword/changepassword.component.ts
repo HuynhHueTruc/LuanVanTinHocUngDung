@@ -105,10 +105,8 @@ export class ChangepasswordComponent implements OnInit {
     const mkc = JSON.parse(localStorage.getItem('loggedInAcount'));
     if (this.KiemTraUniCode()) {
       if (mkc.Mat_khau === this.mat_khau_cu) {
-
         document.getElementById('err_khong_trung_mat_khau_cu').style.display = 'none';
-
-        if (this.XacNhanMatKhauMoi()) {
+        if (this.XacNhanMatKhauMoi(mkc.Mat_khau)) {
           this.nhanvien.Mat_khau = this.mat_khau_moi;
           this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
 
@@ -124,24 +122,25 @@ export class ChangepasswordComponent implements OnInit {
       }
       else {
         document.getElementById('err_khong_trung_mat_khau_cu').style.display = 'block';
-        this.XacNhanMatKhauMoi();
+        // this.XacNhanMatKhauMoi(mkc.Mat_khau);
       }
     }
-
   }
 
-  XacNhanMatKhauMoi() {
-    if (this.mat_khau_moi === this.xac_nhan_mat_khau_moi) {
-
-      document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'none';
-
-      this.nhanvien.Mat_khau = this.mat_khau_moi;
-      return true;
-
-    } else {
-      document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'block';
-      return false;
+  XacNhanMatKhauMoi(matkhaucu) {
+    if (matkhaucu === this.mat_khau_moi){
+      alert('Vui lòng thay đổi mật khác mật khẩu cũ!')
+    }else{
+      if (this.mat_khau_moi === this.xac_nhan_mat_khau_moi) {
+        document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'none';
+        this.nhanvien.Mat_khau = this.mat_khau_moi;
+        return true;
+      } else {
+        document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'block';
+        return false;
+      }
     }
+    
   }
 
   KiemTraUniCode() {
