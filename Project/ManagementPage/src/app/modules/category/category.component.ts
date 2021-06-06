@@ -48,11 +48,12 @@ export class CategoryComponent implements OnInit {
 
   getdsdanhmuc() {
     this.danhmucService.getListDanhMuc().subscribe((res: any) => {
-      this.dsdanhmuc = res.danhmucs;
+      // this.dsdanhmuc = res.danhmucs;
       this.dsdanhmucsearch = res.danhmucs;
       this.danhmucs = res.danhmucs
-      this.ChuyenTrang(this.p)
       this.getdsloaicay()
+      this.ChuyenTrang(this.p)
+      
     })
   }
 
@@ -156,7 +157,7 @@ export class CategoryComponent implements OnInit {
   //Nếu không có Loai-cay thì không hiển thị tiêu đề Loại cây trong table
   KiemTraLoaiCay(danhmuc) {
     for (const i in danhmuc.Danh_muc_nho) {
-      if (danhmuc.Danh_muc_nho[i].Loai_cay === undefined) {
+      if (danhmuc.Danh_muc_nho[i].Loai_cay === undefined || danhmuc.Danh_muc_nho[i].Loai_cay === '') {
         return false
       } else {
         return true
@@ -167,7 +168,7 @@ export class CategoryComponent implements OnInit {
 
   // Nếu không có Loai_cay thì không hiển thị nội dung trống trong table
   KiemTraLoaiCay_id(eachDMN) {
-    if (eachDMN.Loai_cay === undefined) {
+    if (eachDMN.Loai_cay === undefined || eachDMN.Loai_cay === '') {
       return false
     } else {
       for (const i in this.dsloaicay){
@@ -208,8 +209,9 @@ export class CategoryComponent implements OnInit {
 
 
   CapNhatDanhMuc() {
-    this.danhmucService.CapNhatDanhMucNho(this.danhmuc).subscribe()
-    this.modalService.dismissAll()
+    this.danhmucService.CapNhatDanhMucNho(this.danhmuc).subscribe(dt => {
+      this.modalService.dismissAll()
+    })
 
   }
 
@@ -234,7 +236,5 @@ export class CategoryComponent implements OnInit {
         this.dsdanhmuc.push(this.danhmucs[((number - 1) * 5) + i]);
       }
     }
-
-    this.getdsloaicay()
   }
 }

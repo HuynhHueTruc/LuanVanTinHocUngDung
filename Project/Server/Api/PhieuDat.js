@@ -136,12 +136,7 @@ route.delete('/phieudat/xoaphieudat/:_id', async(req, res) => {
     PhieuDatModel.deleteOne({
         _id: _id
     }).then(data => {
-        // if (data.deletedCount === 0){
-        //      res.json('Phiếu đặt này không tồn tại!');
-        // }
-        // else{
             res.json('Xóa phiếu đặt thành công!');
-        // }
     }).catch(err => {
         res.json({message: err});
     })
@@ -155,10 +150,8 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
     for (let i = 0; i < length; i++){
         PhieuDatModel.deleteOne({
         _id: arrPhieuDat[i]
-        }).then(data => {})
-        .then(data => {
-            res.json('Xóa phiếu đặt thành công!');
-        }).catch(err => {
+        }).then(data => {res.json('Xóa phiếu đặt thành công!');})
+        .catch(err => {
         res.json({message: err});
         })
     }    

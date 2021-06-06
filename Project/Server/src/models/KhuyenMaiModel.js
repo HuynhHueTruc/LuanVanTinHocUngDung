@@ -8,7 +8,7 @@ let KhuyenMaiSchema = new mongoose.Schema({
    Ngay_bat_dau: Date,
    Ngay_ket_thuc: Date, 
    Danh_muc_nho: [{
-    DMN_id: mongoose.Schema.ObjectId
+    DMN_id: String
    }],
    Thoi_gian_tao: Date,
    Thoi_gian_cap_nhat: Date

@@ -5,7 +5,7 @@ let HoaDonBanHangSchema = new mongoose.Schema({
     _id: mongoose.Schema.ObjectId,
     NhanVien_id: String,
     San_Pham: [{
-        SanPham_id: mongoose.Schema.ObjectId,
+        SanPham_id: String,
         So_luong: Number,
         Gia_ban: Number
     }],
@@ -17,8 +17,8 @@ let HoaDonBanHangSchema = new mongoose.Schema({
         Huyen_Quan: String,
         Tinh_ThanhPho: String
     }],
-    VanChuyen_id: mongoose.Schema.ObjectId,
-    ThanhToan_id: mongoose.Schema.ObjectId,
+    VanChuyen_id: String,
+    ThanhToan_id: String,
     Tong_tien: Number,
     Ngay_cap_nhat: Date
 });

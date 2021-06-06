@@ -14,7 +14,7 @@ let NhaCungCapSchema = new mongoose.Schema({
     So_dien_thoai: String,
     Danh_muc_cung_cap: [
         {
-            DMN_id: mongoose.Schema.ObjectId
+            DMN_id: String
         }
     ],
     Thoi_gian_tao: Date,

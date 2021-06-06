@@ -42,6 +42,7 @@ export class OrderComponent implements OnInit {
   dssanpham: SanPhamModel;
   sanphams: SanPhamModel;
   arrSanPham: SanPhamModel[] = [];
+  arrSanPhamReload: SanPhamModel[] = []
   phieudats: PhieuDatModel[] = []
 
   dshinhthucvanchuyen: HinhThucVanChuyenModel;
@@ -104,7 +105,7 @@ export class OrderComponent implements OnInit {
       this.getdsKhuyenMai()
 
       const source = timer(1000, 60000); // Trên thực tế là 864000000 (1 ngày)
-      const subscribe = source.subscribe(val => this.TuDongDuyetHoaDon(val));
+      source.subscribe(val => this.TuDongDuyetHoaDon());
     })
     const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
     getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
@@ -153,15 +154,15 @@ export class OrderComponent implements OnInit {
     };
 
     const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
-    const subscribe = source.subscribe(val => this.TuDongDuyetHoaDon(val));
+    source.subscribe(val => this.TuDongDuyetHoaDon());
   }
 
-  ReloadDSPhieuDat(){
+  ReloadDSPhieuDat() {
     this.getdsphieudat()
     this.ChuyenTrang(this.p)
   }
-  
-  async TuDongDuyetHoaDon(t) {
+
+  async TuDongDuyetHoaDon() {
     let sanphams = []
     for (const i in this.phieudats) {
       if ((new Date().getDay() - new Date(this.phieudats[i].Ngay_cap_nhat).getDay() >= 1) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
@@ -215,6 +216,7 @@ export class OrderComponent implements OnInit {
         this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
+
   }
 
   getdsKhachHang() {
@@ -233,7 +235,10 @@ export class OrderComponent implements OnInit {
 
       this.phieudats = res.phieudats;
       this.tongphieudat = this.phieudats.length
-      this.ChuyenTrang(this.p)
+      if (this.dsphieudat.length === 0){
+        this.p = 1
+      }
+        this.ChuyenTrang(this.p)
       // hỗ trợ searchbykeywword và searchbysex
       this.dsphieudatsearch = res.phieudats;
       this.lengthdsphieudat = this.dsphieudat.length;
@@ -256,7 +261,6 @@ export class OrderComponent implements OnInit {
   KiemTraSPKhuyenMai(eachSP, index) {
     let arrKhuyenMai = [];
     let giatrikhuyenmai = 0;
-
     for (const i in this.dskhuyenmai) {
       if (this.dskhuyenmai.hasOwnProperty(i)) {
         for (const j in this.dskhuyenmai[i].Danh_muc_nho) {
@@ -279,7 +283,6 @@ export class OrderComponent implements OnInit {
         }
       }
     }
-
   }
 
   //Đổi trạng thái
@@ -303,9 +306,7 @@ export class OrderComponent implements OnInit {
         this.arrgiatrikhuyenmai.push(0)
         await this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
       }
-      this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {
-        // location.reload()
-      })
+      this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {})
     }
   }
 
@@ -360,7 +361,6 @@ export class OrderComponent implements OnInit {
     this.phuongthucthanhtoanService.getListPhuongThucThanhToan().subscribe((res: any) => {
       this.dsphuongthucthanhtoan = res.phuongthucthanhtoans;
       this.compareThanhToan_id(dshoadon)
-
     })
   }
 
@@ -383,6 +383,7 @@ export class OrderComponent implements OnInit {
 
   // Tìm đối tượng so khớp
   compareThanhToan_id(dshoadon) {
+    this.thongtinthanhtoan = []
     for (const dmn in dshoadon) {
       for (const sp in this.dsphuongthucthanhtoan) {
         if (dshoadon[dmn].ThanhToan_id === this.dsphuongthucthanhtoan[sp]._id) {
@@ -394,7 +395,7 @@ export class OrderComponent implements OnInit {
 
   // Tìm đối tượng so khớp
   compareVanChuyen_id(dshoadon) {
-    // this.thongtinvanchuyen = []
+    this.thongtinvanchuyen = []
     for (const dmn in dshoadon) {
       for (const sp in this.dshinhthucvanchuyen) {
         if (dshoadon[dmn].VanChuyen_id === this.dshinhthucvanchuyen[sp]._id) {
@@ -413,21 +414,17 @@ export class OrderComponent implements OnInit {
 
   // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
   ThanhPho(e?, diachi?) {
-
     // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
     this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
     this.quanhuyens.splice(0, this.quanhuyens.length);
-
     // Clear lại xã phường
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
-
     if (e === null) {
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
             this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-
             for (const arr2 in this.arrquanhuyen1[0]) {
               if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
                 if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
@@ -436,10 +433,8 @@ export class OrderComponent implements OnInit {
               }
             }
             this.arrxaphuong.push(this.quanhuyens[0].wards);
-
             for (const arr in this.arrxaphuong[0]) {
               if (this.arrxaphuong[0].hasOwnProperty(arr)) {
-
                 if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
                   this.xaphuongs.push(this.arrxaphuong[0][arr]);
                 }
@@ -453,11 +448,9 @@ export class OrderComponent implements OnInit {
     else {
       this.phieudat.Dia_chi.Huyen_Quan = '';
       this.phieudat.Dia_chi.Xa_Phuong = '';
-
       e.preventDefault();
       const target = e.target;
       this.thanhpho = target.value;
-
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === this.thanhpho) {
@@ -470,7 +463,6 @@ export class OrderComponent implements OnInit {
           }
         }
       }
-
     }
   }
 
@@ -486,7 +478,6 @@ export class OrderComponent implements OnInit {
     this.quanhuyens.splice(0, this.quanhuyens.length);
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
-
     for (const qh in this.thanhphos) {
       if (this.thanhphos.hasOwnProperty(qh)) {
         if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
@@ -499,7 +490,6 @@ export class OrderComponent implements OnInit {
         }
       }
     }
-
     for (const xp in this.quanhuyens) {
       if (this.quanhuyens.hasOwnProperty(xp)) {
         if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
@@ -523,7 +513,6 @@ export class OrderComponent implements OnInit {
     const target = e.target;
     this.quanhuyen = target.value;
     if (this.quanhuyen !== '') {
-
       for (const xp in this.quanhuyens) {
         if (this.quanhuyens.hasOwnProperty(xp)) {
           if (this.quanhuyens[xp].name === this.quanhuyen) {
@@ -557,7 +546,6 @@ export class OrderComponent implements OnInit {
       this.getdsphieudat();
     } else {
       this.dsphieudat = this.dsphieudat.filter(res => {
-
         const khachhang = this.removeAccents(res.KhachHang_id);
         const hoten = this.removeAccents(res.Ho_ten);
         const maso = this.removeAccents(res._id);
@@ -597,6 +585,7 @@ export class OrderComponent implements OnInit {
   }
 
   open(content) {
+    this.UnChecked();
     this.phieudat = new PhieuDatModel()
     this.phieudat.Dia_chi = { Tinh_ThanhPho: '', Huyen_Quan: '', Xa_Phuong: '' };
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
@@ -604,15 +593,14 @@ export class OrderComponent implements OnInit {
     this.thanhtoantmp = []
     this.IDKhachHang = []
     this.lstsanpham = []
-    this.arrSanPham = []
+    this.arrSanPhamReload = []
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
   }
 
   open_update(content_update, eachPhieuDat, index_update) {
-    this.arrSanPham = []
     // Lưu chỉ số phiếu đặt được update
     this.index_update = index_update,
-      this.UnChecked();
+    this.UnChecked();
     this.phieudat = eachPhieuDat
     this.phieudat.Dia_chi = eachPhieuDat.Dia_chi[0];
     // Gán hình thức vận chuyển cho dropdown
@@ -621,7 +609,6 @@ export class OrderComponent implements OnInit {
         this.vanchuyentmp.push(this.dshinhthucvanchuyen[i])
       }
     }
-
     // Gán hình thức thanh toán cho dropdown
     for (const i in this.dsphuongthucthanhtoan) {
       if (this.dsphuongthucthanhtoan[i]._id === this.phieudat.ThanhToan_id) {
@@ -629,17 +616,7 @@ export class OrderComponent implements OnInit {
       }
     }
     this.lstsanpham = eachPhieuDat.San_Pham
-    for (const j in this.lstsanpham) {
-      for (const i in this.dssanpham) {
-        if (this.dssanpham[i]._id === this.lstsanpham[j].SanPham_id) {
-          this.arrSanPham.push(this.dssanpham[i])
-        }
-      }
-    }
-    // Gán số lượng sản phẩm bằng số lượng trong phiếu đặt
-    for (const i in this.arrSanPham) {
-      this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
-    }
+    this.ThongTinSanPham(this.lstsanpham)
     this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
     this.ThanhPho(null, this.phieudat.Dia_chi);
 
@@ -654,7 +631,6 @@ export class OrderComponent implements OnInit {
       this.isdelete = true;
     }
     this.modalService.open(content_delete, { ariaLabelledBy: 'modal-basic-title-notification', backdrop: 'static', keyboard: false });
-
   }
 
   // Thực hiện xóa sau khi xác nhận Dialog
@@ -674,6 +650,7 @@ export class OrderComponent implements OnInit {
       if (JSON.stringify(data_xoanhieu) === '"Xóa phiếu đặt thành công!"') {
         this.modalService.dismissAll()
         this.KTCheckedAll()
+        this.UnChecked()
       } else {
         window.alert(data_xoanhieu);
       }
@@ -681,7 +658,8 @@ export class OrderComponent implements OnInit {
   }
 
   XoaPhieuDat(_id: string) {
-    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => { });
+    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => { 
+    });
   }
 
   open_product_plus(content_info_product_plus) {
@@ -861,17 +839,7 @@ export class OrderComponent implements OnInit {
               } else {
                 document.getElementById('errSoLuongMax').style.display = 'none'
                 this.lstsanpham.push(this.dsSP)
-                this.arrSanPham = []
-
-                for (const j in this.lstsanpham) {
-                  for (const i in this.sanphams) {
-                    if (this.sanphams[i]._id === this.lstsanpham[j].SanPham_id) {
-                      this.arrSanPham.push(this.sanphams[i])
-                      this.arrSanPham[j].So_luong = this.lstsanpham[j].So_luong
-                    }
-                  }
-                }
-
+                this.ThongTinSanPham(this.lstsanpham)
                 this.dsSP = new SanPhamThemModel()
                 this.So_luong = 0
                 this.modalService.dismissAll()
@@ -886,10 +854,22 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  ThongTinSanPham(lstSanPham) {
+    this.arrSanPhamReload = []
+    for (const j in lstSanPham) {
+      for (const i in this.dssanpham) {
+        if (this.dssanpham[i]._id === this.lstsanpham[j].SanPham_id) {
+          this.arrSanPhamReload.push(this.dssanpham[i])
+          this.arrSanPhamReload[j].So_luong = this.lstsanpham[j].So_luong
+          break
+        }
+      }
+
+    }
+  }
 
   // Thêm sản phẩm vào list
   ThemSanPham(content) {
-
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
@@ -899,8 +879,6 @@ export class OrderComponent implements OnInit {
           this.dsSP.Ten_san_pham = this.sanphamtmp[i].Ten_san_pham
           this.dsSP.So_luong = this.So_luong
         }
-
-        // this.phieudat.Tong_tien = this.sum
         this.sanphamService.getListSanPham().subscribe((res: any) => {
           this.sanphams = res.sanphams
           for (const j in this.sanphams) {
@@ -911,25 +889,7 @@ export class OrderComponent implements OnInit {
               } else {
                 document.getElementById('errSoLuongMax').style.display = 'none'
                 this.lstsanpham.push(this.dsSP)
-                this.sum = 0
-                // for (const i in this.lstsanpham) {
-                //   for (const j in this.dssanpham) {
-                //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-                //       this.sum += this.lstsanpham[i].So_luong * this.dssanpham[j].Gia
-                //     }
-                //   }
-                // }
-                this.arrSanPham = []
-
-                for (const j in this.lstsanpham) {
-                  for (const i in this.sanphams) {
-                    if (this.sanphams[i]._id === this.lstsanpham[j].SanPham_id) {
-                      this.arrSanPham.push(this.sanphams[i])
-                      this.arrSanPham[j].So_luong = this.lstsanpham[j].So_luong
-                    }
-                  }
-                }
-
+                this.ThongTinSanPham(this.lstsanpham)
                 this.dsSP = new SanPhamThemModel()
                 this.So_luong = 0
                 this.modalService.dismissAll()
@@ -937,6 +897,7 @@ export class OrderComponent implements OnInit {
               }
             }
           }
+          this.ThongTinSanPham(this.lstsanpham)
         })
       } else {
         alert('Sản phẩm này đã được thêm vào danh sách!')
@@ -948,7 +909,7 @@ export class OrderComponent implements OnInit {
   async ThemPhieuDat() {
     let khachhang = new KhachHangModel()
     let sum = 0
-    let sanphams = []
+    // let sanphams = []
     this.arrgiatrikhuyenmai = []
     if (this.IDKhachHang[0] !== undefined) {
       for (const i in this.dskhachhang) {
@@ -963,12 +924,12 @@ export class OrderComponent implements OnInit {
       this.phieudat.So_dien_thoai = khachhang.So_dien_thoai
       this.phieudat.Trang_thai = 'Đã duyệt'
       this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
-      for (const i in this.arrSanPham) {
+      for (const i in this.arrSanPhamReload) {
         this.arrgiatrikhuyenmai.push(0)
         for (const j in this.dssanpham) {
 
-          if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
-            this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+          if (this.arrSanPhamReload[i]._id === this.dssanpham[j]._id) {
+            this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPhamReload[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
             await this.KiemTraSPKhuyenMai(this.dssanpham[j], Number.parseInt(i))
 
           }
@@ -1009,18 +970,19 @@ export class OrderComponent implements OnInit {
 
 
   // Cập nhật phiếu đặt
-  CapNhat() {
+  async CapNhat() {
     this.sum = 0
     this.phieudat.San_Pham.splice(0, this.phieudat.San_Pham.length)
-    for (const i in this.arrSanPham) {
+    for (const i in this.arrSanPhamReload) {
       for (const j in this.dssanpham) {
-        if (this.arrSanPham[i]._id === this.dssanpham[j]._id) {
-          this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPham[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+        if (this.arrSanPhamReload[i]._id === this.dssanpham[j]._id) {
+          this.phieudat.San_Pham.push({ SanPham_id: this.dssanpham[j]._id, So_luong: this.arrSanPhamReload[i].So_luong, Gia_ban: this.dssanpham[j].Gia })
+          await this.KiemTraSPKhuyenMai(this.dssanpham[j], Number.parseInt(i))
         }
       }
     }
     for (const s in this.phieudat.San_Pham) {
-      this.sum += this.phieudat.San_Pham[s].So_luong * this.phieudat.San_Pham[s].Gia_ban
+      this.sum += this.phieudat.San_Pham[s].So_luong * (this.phieudat.San_Pham[s].Gia_ban - this.phieudat.San_Pham[s].Gia_ban * this.arrgiatrikhuyenmai[s])
     }
     this.phieudat.Tong_tien = this.sum
     this.KTNull(this.phieudat);
@@ -1148,15 +1110,16 @@ export class OrderComponent implements OnInit {
 
         }
       }
-      this.arrSanPham = []
-      for (const i in this.lstsanpham) {
-        for (const j in this.dssanpham) {
-          if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-            this.arrSanPham.push(this.dssanpham[j])
-            this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
-          }
-        }
-      }
+      this.ThongTinSanPham(this.lstsanpham)
+      // this.arrSanPham = []
+      // for (const i in this.lstsanpham) {
+      //   for (const j in this.dssanpham) {
+      //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
+      //       this.arrSanPham.push(this.dssanpham[j])
+      //       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
+      //     }
+      //   }
+      // }
 
       this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
@@ -1166,7 +1129,7 @@ export class OrderComponent implements OnInit {
             if (this.lstsanpham[Number.parseInt(this.flag)].So_luong > this.sanphams[j].So_luong) {
               document.getElementById('errKhongDuSoLuong').style.display = 'block'
             } else {
-              this.arrSanPham[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
+              this.arrSanPhamReload[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
               this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
@@ -1206,15 +1169,17 @@ export class OrderComponent implements OnInit {
 
         }
       }
-      this.arrSanPham = []
-      for (const i in this.lstsanpham) {
-        for (const j in this.dssanpham) {
-          if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-            this.arrSanPham.push(this.dssanpham[j])
-            this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
-          }
-        }
-      }
+      this.ThongTinSanPham(this.lstsanpham)
+
+      // this.arrSanPham = []
+      // for (const i in this.lstsanpham) {
+      //   for (const j in this.dssanpham) {
+      //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
+      //       this.arrSanPham.push(this.dssanpham[j])
+      //       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
+      //     }
+      //   }
+      // }
 
       this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
@@ -1224,7 +1189,7 @@ export class OrderComponent implements OnInit {
             if (this.lstsanpham[Number.parseInt(this.flag)].So_luong > this.sanphams[j].So_luong) {
               document.getElementById('errKhongDuSoLuong').style.display = 'block'
             } else {
-              this.arrSanPham[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
+              this.arrSanPhamReload[Number.parseInt(this.flag)].So_luong = this.lstsanpham[Number.parseInt(this.flag)].So_luong
               document.getElementById('errKhongDuSoLuong').style.display = 'none'
               this.modalService.dismissAll()
               this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
@@ -1240,7 +1205,7 @@ export class OrderComponent implements OnInit {
   // Xoá sản phẩm trong danh sách
   XoaDSSanPham(content, _id, index, type?) {
 
-    this.arrSanPham.splice(Number.parseInt(index), 1)
+    this.arrSanPhamReload.splice(Number.parseInt(index), 1)
     if (type !== 'new') {
       this.dsphieudat[this.index_update].San_Pham.splice(Number.parseInt(index), 1)
       this.thongtinsanpham[this.index_update].splice(Number.parseInt(index), 1)
@@ -1249,7 +1214,7 @@ export class OrderComponent implements OnInit {
       this.lstsanpham.splice(Number.parseInt(index), 1)
     }
     // for (const i in this.arrSanPham){
-    if (this.arrSanPham.length === 0) {
+    if (this.arrSanPhamReload.length === 0) {
       document.getElementById('errListSanPham').style.display = 'block'
     } else {
       document.getElementById('errListSanPham').style.display = 'none'
