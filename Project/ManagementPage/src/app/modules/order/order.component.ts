@@ -216,7 +216,7 @@ export class OrderComponent implements OnInit {
         this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
-
+    this.UnChecked()
   }
 
   getdsKhachHang() {
@@ -235,10 +235,10 @@ export class OrderComponent implements OnInit {
 
       this.phieudats = res.phieudats;
       this.tongphieudat = this.phieudats.length
-      if (this.dsphieudat.length === 0){
+      if (this.dsphieudat.length === 0) {
         this.p = 1
       }
-        this.ChuyenTrang(this.p)
+      this.ChuyenTrang(this.p)
       // hỗ trợ searchbykeywword và searchbysex
       this.dsphieudatsearch = res.phieudats;
       this.lengthdsphieudat = this.dsphieudat.length;
@@ -306,7 +306,7 @@ export class OrderComponent implements OnInit {
         this.arrgiatrikhuyenmai.push(0)
         await this.KiemTraSPKhuyenMai(sanphams[i], Number.parseInt(i))
       }
-      this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => {})
+      this.phieudatService.GuiEmailPhieuDat(phieudat, this.arrgiatrikhuyenmai).subscribe(data => { })
     }
   }
 
@@ -580,6 +580,7 @@ export class OrderComponent implements OnInit {
         this.thongtinsanpham.reverse()
         this.thongtinthanhtoan.reverse()
         this.thongtinvanchuyen.reverse()
+        this.ChuyenTrang(this.p)
       }
     }
   }
@@ -600,7 +601,7 @@ export class OrderComponent implements OnInit {
   open_update(content_update, eachPhieuDat, index_update) {
     // Lưu chỉ số phiếu đặt được update
     this.index_update = index_update,
-    this.UnChecked();
+      this.UnChecked();
     this.phieudat = eachPhieuDat
     this.phieudat.Dia_chi = eachPhieuDat.Dia_chi[0];
     // Gán hình thức vận chuyển cho dropdown
@@ -658,7 +659,7 @@ export class OrderComponent implements OnInit {
   }
 
   XoaPhieuDat(_id: string) {
-    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => { 
+    this.phieudatService.XoaPhieuDat(_id).subscribe(data_xoa => {
     });
   }
 
@@ -1107,20 +1108,9 @@ export class OrderComponent implements OnInit {
         } else {
           // Nếu trùng ở document khác thì không cho cập nhật
           alert('Sản phẩm này đã có trong phiếu đặt')
-
         }
       }
       this.ThongTinSanPham(this.lstsanpham)
-      // this.arrSanPham = []
-      // for (const i in this.lstsanpham) {
-      //   for (const j in this.dssanpham) {
-      //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-      //       this.arrSanPham.push(this.dssanpham[j])
-      //       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
-      //     }
-      //   }
-      // }
-
       this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
         for (const j in this.sanphams) {
@@ -1148,7 +1138,6 @@ export class OrderComponent implements OnInit {
     if (this.sanphamtmp[0] === undefined || this.So_luong <= 0) {
       alert('Vui lòng nhập đầy đủ thông tin!')
     } else {
-
       // // Lấy chỉ số sản phẩm trùng
       const index = this.SanPhamIndex(this.sanphamtmp)
       // = -1 là chưa có trong lstsanpham => có thể cập nhật
@@ -1170,17 +1159,6 @@ export class OrderComponent implements OnInit {
         }
       }
       this.ThongTinSanPham(this.lstsanpham)
-
-      // this.arrSanPham = []
-      // for (const i in this.lstsanpham) {
-      //   for (const j in this.dssanpham) {
-      //     if (this.lstsanpham[i].SanPham_id === this.dssanpham[j]._id) {
-      //       this.arrSanPham.push(this.dssanpham[j])
-      //       this.arrSanPham[i].So_luong = this.lstsanpham[i].So_luong
-      //     }
-      //   }
-      // }
-
       this.sanphamService.getListSanPham().subscribe((res: any) => {
         this.sanphams = res.sanphams
         for (const j in this.sanphams) {
@@ -1197,10 +1175,7 @@ export class OrderComponent implements OnInit {
           }
         }
       })
-
-
     }
-
   }
   // Xoá sản phẩm trong danh sách
   XoaDSSanPham(content, _id, index, type?) {

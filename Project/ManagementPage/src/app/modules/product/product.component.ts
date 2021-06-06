@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit {
 
   sanpham: SanPhamModel;
   danhmuc: DanhMucModel;
+  sanphams: SanPhamModel[] = []
 
   dssanpham: SanPhamModel[] = [];
   dssanphamsearch: SanPhamModel[] = [];
@@ -44,7 +45,9 @@ export class ProductComponent implements OnInit {
   url: any;
   noi_dung = '';
   arrSanPham_ID = [];
-
+  hienthi = false
+  p: number = 1;
+  imagePath = 'https://cdn.iconscout.com/icon/free/png-256/gallery-187-902099.png'
   firebaseConfig = {
     apiKey: "AIzaSyB5XhGTH_qmY-E5SKq0x9xvvadjtqPeXQQ",
     authDomain: "managementimagesgreenlife.firebaseapp.com",
@@ -58,6 +61,10 @@ export class ProductComponent implements OnInit {
   constructor(private modalService: NgbModal, private sanphamService: SanphamService, private danhmucService: DanhmucService, private hoadonnhapService: HoadonnhaphangService) { }
 
   ngOnInit(): void {
+    this.sanphamService.getRefeshPage().subscribe(() => {
+      this.getdsSanPham();
+    })
+
     this.getdsSanPham();
     this.dropdownSettings = {
       singleSelection: true,
@@ -82,8 +89,6 @@ export class ProductComponent implements OnInit {
     this.sanphamService.getListSanPham().subscribe((res: any) => {
       this.sanpham = res.sanphams;
       this.dssanpham = res.sanphams;
-
-
       // hỗ trợ searchbykeywword và searchbysex
       this.dssanphamsearch = res.sanphams;
       // Lưu độ dài của danh sách  để làm checkbox
@@ -93,7 +98,10 @@ export class ProductComponent implements OnInit {
           this.checked.push(false);
         }
       }
-      this.getdsDanhMucNho(this.dssanpham)
+      if (this.sanphams.length === 0) {
+        this.p = 1
+      }
+      this.ChuyenTrang(this.p)
     })
   }
   // Lấy danh sách danh mục
@@ -119,6 +127,7 @@ export class ProductComponent implements OnInit {
     const f = document.querySelector('#photo') as HTMLInputElement;
     const file = f.files[0];
     if (file !== undefined) {
+      this.imagePath = '../../../assets/' + file.name
       document.getElementById('err_upload').style.display = 'none';
       this.choosefile = true;
     } else {
@@ -188,12 +197,12 @@ export class ProductComponent implements OnInit {
 
   // Hàm tìm kiếm theo tên hoặc id
   SearchByKeyWord() {
-    this.dssanpham = this.dssanphamsearch;
+    this.sanphams = this.dssanphamsearch;
     const text = this.removeAccents(this.keyword);
     if (text === '') {
       this.getdsSanPham();
     } else {
-      this.dssanpham = this.dssanpham.filter(res => {
+      this.sanphams = this.sanphams.filter(res => {
         const ten = this.removeAccents(res.Ten_san_pham);
         const maso = this.removeAccents(res._id);
         const tmp2 = text.replace(/·/g, '');
@@ -206,20 +215,21 @@ export class ProductComponent implements OnInit {
         }
       });
 
-      this.compareDMN_id(this.dssanpham);
+      this.compareDMN_id(this.sanphams);
     }
   }
 
   SearchByOption(value) {
-    this.dssanpham = this.dssanphamsearch;
+    this.sanphams = this.dssanphamsearch;
     value.preventDefault();
     const target = value.target.value;
     if (target === 'Cũ nhất') {
       this.getdsSanPham();
     } else {
       if (target === 'Mới nhất') {
-        this.dssanpham.reverse();
+        this.sanphams.reverse();
         this.thongtindanhmucnho.reverse();
+        this.ChuyenTrang(this.p)
       }
     }
   }
@@ -235,14 +245,14 @@ export class ProductComponent implements OnInit {
     if (this.checkAll) {
       this.checkAll = false;
       this.checked = [];
-      for (let i = 0; i < this.lengthdssanpham; i++) {
+      for (let i = 0; i < this.sanphams.length; i++) {
         this.checked.push(false);
         document.getElementById('divbutton').style.display = 'none';
       }
     } else {
       this.checkAll = true;
       this.checked = [];
-      for (let i = 0; i < this.lengthdssanpham; i++) {
+      for (let i = 0; i < this.sanphams.length; i++) {
         this.checked.push(true);
         document.getElementById('divbutton').style.display = 'block';
       }
@@ -255,7 +265,7 @@ export class ProductComponent implements OnInit {
     this.danhmuctmp = []
     this.noi_dung = ''
     this.UnChecked();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
     // Gán giá trị rỗng ban đầu
     this.sanpham = new SanPhamModel();
     this.sanpham.Danh_Muc = [{ DMN_id: '' }]
@@ -265,13 +275,14 @@ export class ProductComponent implements OnInit {
   open_update(content_update, sanphamUpdate) {
     this.choosefile = true
     this.UnChecked();
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg'  });
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
     // Gán giá trị rỗng ban đầu cho nhanvien, nếu không sẽ báo lỗi không đọc được undefine
     this.sanpham = new SanPhamModel();
     this.sanpham = sanphamUpdate;
     this.noi_dung = this.sanpham.Mo_ta
-    for (const i in this.subdanhmuc){
-      if (this.subdanhmuc[i].DMN_id === this.sanpham.Danh_Muc[0].DMN_id){
+    this.imagePath = this.sanpham.Hinh_anh
+    for (const i in this.subdanhmuc) {
+      if (this.subdanhmuc[i].DMN_id === this.sanpham.Danh_Muc[0].DMN_id) {
         this.danhmuctmp.push(this.subdanhmuc[i])
       }
     }
@@ -304,15 +315,15 @@ export class ProductComponent implements OnInit {
   }
 
   onItemDeSelect(item: any, i?) {
-        if (this.danhmuctmp[0] === undefined) {
-          if (i === 0) {
-            document.getElementById('errTaoDanhMuc').style.display = 'block'
-          } else {
-            if (i === 1) {
-              document.getElementById('DanhMucNho').style.display = 'none'
-            }
-          }
+    if (this.danhmuctmp[0] === undefined) {
+      if (i === 0) {
+        document.getElementById('errTaoDanhMuc').style.display = 'block'
+      } else {
+        if (i === 1) {
+          document.getElementById('DanhMucNho').style.display = 'none'
         }
+      }
+    }
 
   }
 
@@ -338,7 +349,8 @@ export class ProductComponent implements OnInit {
         }
         this.sanphamService.ThemSanPham(this.sanpham).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo sản phẩm thành công!"') {
-            this.DongModal();
+            // this.DongModal();
+            this.modalService.dismissAll()
           }
           else {
             window.alert(data_them);
@@ -346,15 +358,15 @@ export class ProductComponent implements OnInit {
           }
         });
       }
-
-
     }
   }
 
   // Đóng dialog
   DongModal() {
     this.modalService.dismissAll();
-    location.reload();
+    this.sanpham = new SanPhamModel()
+    this.imagePath = 'https://cdn.iconscout.com/icon/free/png-256/gallery-187-902099.png'
+    // location.reload();
   }
   // Hàm kiểm tra thông tin
   KTNull(sanpham: SanPhamModel) {
@@ -363,26 +375,27 @@ export class ProductComponent implements OnInit {
     const thongtinsanpham = [];
     thongtinsanpham.push(Ten_san_pham, sanpham.Gia, sanpham.Hinh_anh);
     for (const i in thongtinsanpham) {
-     if (Gia > 0 && Gia != null){
-      if (thongtinsanpham.hasOwnProperty(i)) {
-        if (thongtinsanpham[i] === undefined || thongtinsanpham[i] === '' || thongtinsanpham[i] === null) {
-          window.alert('Hãy nhập đầy đủ thông tin!');
-          this.KiemTraThongTin = false;
-          break;
-        } else {
-          this.KiemTraThongTin = true;
+      if (Gia > 0 && Gia != null) {
+        if (thongtinsanpham.hasOwnProperty(i)) {
+          if (thongtinsanpham[i] === undefined || thongtinsanpham[i] === '' || thongtinsanpham[i] === null) {
+            window.alert('Hãy nhập đầy đủ thông tin!');
+            this.KiemTraThongTin = false;
+            break;
+          } else {
+            this.KiemTraThongTin = true;
+          }
         }
+      } else {
+        document.getElementById('errGia').style.display = 'block'
       }
-     }else{
-       document.getElementById('errGia').style.display = 'block'
-     }
     }
   }
 
-  KiemTraSoNguyen(){
-    if (this.sanpham.Gia <0 || this.sanpham.Gia === null){
+  KiemTraSoNguyen() {
+
+    if (this.sanpham.Gia < 0 || this.sanpham.Gia === null || this.sanpham.Gia === -0) {
       document.getElementById('errGia').style.display = 'block'
-    }else{
+    } else {
       document.getElementById('errGia').style.display = 'none'
 
     }
@@ -436,7 +449,7 @@ export class ProductComponent implements OnInit {
     for (const kt in this.checked) {
       if (this.checked.hasOwnProperty(kt)) {
         if (this.checked[kt] === true) {
-          this.arrSanPham_ID.push(this.dssanpham[kt]._id);
+          this.arrSanPham_ID.push(this.sanphams[kt]._id);
         }
       }
     }
@@ -447,7 +460,8 @@ export class ProductComponent implements OnInit {
     this.SanPhamChecked();
     this.sanphamService.XoaNhieuSanPham(this.arrSanPham_ID).subscribe(data_xoanhieu => {
       if (JSON.stringify(data_xoanhieu) === '"Xóa sản phẩm thành công!"') {
-        this.DongModal();
+        //this.DongModal();
+        this.modalService.dismissAll()
       } else {
         window.alert(data_xoanhieu);
       }
@@ -457,7 +471,7 @@ export class ProductComponent implements OnInit {
   // Hàm thực hiện xóa
   XoaSanPham(_id: string) {
     this.sanphamService.XoaSanPham(_id).subscribe(data_xoa => {
-      location.reload();
+      // location.reload();
     });
   }
 
@@ -475,9 +489,9 @@ export class ProductComponent implements OnInit {
       document.getElementById('err_upload').style.display = 'block'
     }
 
-    if(sp.Gia !== null && sp.Gia > 0){
+    if (sp.Gia !== null && sp.Gia > 0) {
       document.getElementById('errGia').style.display = 'none'
-    }else{
+    } else {
       document.getElementById('errGia').style.display = 'block'
 
     }
@@ -492,7 +506,8 @@ export class ProductComponent implements OnInit {
     if (this.KiemTraThongTin) {
       this.sanphamService.CapNhatSanPham(this.sanpham).subscribe(dt => {
         if (JSON.stringify(dt) === '"Cập nhật sản phẩm thành công!"') {
-          this.DongModal();
+          //  this.DongModal();
+          this.modalService.dismissAll()
         }
         else {
           window.alert(dt);
@@ -501,4 +516,30 @@ export class ProductComponent implements OnInit {
     }
   }
 
+
+  HienThiMa() {
+    this.hienthi = true
+    document.getElementById('AnMa').style.display = 'block'
+    document.getElementById('HienThiMa').style.display = 'none'
+  }
+
+  AnMa() {
+    this.hienthi = false
+    document.getElementById('AnMa').style.display = 'none'
+    document.getElementById('HienThiMa').style.display = 'block'
+
+  }
+
+  ChuyenTrang(number) {
+    this.sanphams = []
+    for (let i = 0; i < 10; i++) {
+      if ((this.dssanpham[((number - 1) * 10) + i]) !== undefined) {
+        this.sanphams.push(this.dssanpham[((number - 1) * 10) + i]);
+      }
+    }
+    this.getdsDanhMucNho(this.sanphams)
+
+    // this.compareDMN_id(this.sanphams)
+    this.UnChecked()
+  }
 }

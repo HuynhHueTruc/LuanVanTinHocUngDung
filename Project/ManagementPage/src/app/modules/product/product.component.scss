@@ -139,12 +139,32 @@
     border: none;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
   .ds{
-    height: 552px;
+    height: 573px;
     overflow-x:auto;
     overflow-y:auto;
   }
 
+  #pagination {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+  
+  #AnMa{
+    display: none;
+  }
+
+  .controlcheckbox{
+    background-color: transparent;
+    border: none;
+  }
+  
   .tong_san_pham{
     margin: 5px 0px 0px 0px;
   }
@@ -235,5 +255,5 @@ span.DMN{
 }
 
 #DMNSelect{
-  width: 150px;
+  width: 200px;
 }
