@@ -158,7 +158,7 @@
   }
 
   .dssanpham{
-    height: 150px;
+    height: 200px;
     overflow-x:auto;
     overflow-y:auto;
 
@@ -237,4 +237,24 @@ span.DMN{
 hr{
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.controlcheckbox {
+  background-color: transparent;
+  border: none;
+}
+
+#pagination {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+#AnMa {
+  display: none;
 }

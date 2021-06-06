@@ -216,7 +216,7 @@ export class OrderComponent implements OnInit {
         this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
-    this.UnChecked()
+    // this.UnChecked()
   }
 
   getdsKhachHang() {
@@ -580,8 +580,8 @@ export class OrderComponent implements OnInit {
         this.thongtinsanpham.reverse()
         this.thongtinthanhtoan.reverse()
         this.thongtinvanchuyen.reverse()
-        this.ChuyenTrang(this.p)
       }
+      this.ChuyenTrang(this.p)
     }
   }
 
@@ -1108,6 +1108,7 @@ export class OrderComponent implements OnInit {
         } else {
           // Nếu trùng ở document khác thì không cho cập nhật
           alert('Sản phẩm này đã có trong phiếu đặt')
+
         }
       }
       this.ThongTinSanPham(this.lstsanpham)

@@ -215,6 +215,12 @@ h5{
   border: none;
 }
 
+#pagination {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
 .nguoinhan{
   border: 1px solid #BDBDBD;
   orientation: inherit;
@@ -224,6 +230,10 @@ h5{
   overflow-y:auto;
 }
 
+
+#AnMa {
+  display: none;
+}
 
 .emails{
   // border: 1px solid #BDBDBD;
@@ -245,9 +255,7 @@ span.To{
   outline:none
   // margin-left: 65%;
 }
-.them_mai:focus{
 
-}
 
 .plus{
   text-align: right;
@@ -258,7 +266,7 @@ span.To{
 }
 
 .ds{
-  height: 567.4px;
+  height: 573px;
   overflow-x:auto;
   overflow-y:auto;
 }

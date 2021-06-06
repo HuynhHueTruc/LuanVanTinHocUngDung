@@ -61,7 +61,6 @@
                         <thead>
                           <tr class="content">
                             <th class="align-middle ">STT</th>
-                            <!-- <th class="align-middle">Mã sản phẩm</th> -->
                             <th class="align-middle">Tên sản phẩm</th>
                             <th class="align-middle">Tổng số lượng</th>
                             <th class="align-middle">Giá bán</th>
@@ -69,10 +68,9 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let eachSanPham of dataHighcharts let i = index;">
-                            <td class="content d-flex justify-content-center">{{i + 1}}</td>
-                            <!-- <td class="content">{{eachSanPham._id}}</td> -->
+                            <td class="content ">{{i + 1}}</td>
                             <td class="content">{{eachSanPham.name}}</td>
-                            <td class="d-flex justify-content-center">{{(eachSanPham.y*sumAmount)/100}}</td>
+                            <td class="content">{{(eachSanPham.y*sumAmount)/100}}</td>
                             <td class="content" >{{eachSanPham.Gia}}</td>
                           </tr>
                         </tbody>

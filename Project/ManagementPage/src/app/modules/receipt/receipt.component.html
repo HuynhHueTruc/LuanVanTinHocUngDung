@@ -1,42 +1,4 @@
 <div class="container">
-  <mat-toolbar>
-
-    <mat-toolbar-row>
-
-      <div class="input-group rounded">
-        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword"
-          class="form-control search rounded" placeholder="Search" aria-label="Search"
-          aria-describedby="search-addon" />
-      </div>
-
-      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-
-        <nav class="navbar navbar-expand-md navbar-light">
-
-          <div class="collapse navbar-collapse" id="basicExampleNav4">
-
-            <ul class="navbar-nav nav-flex-icons ml-auto">
-              <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
-
-                <select class="form-control form-control-sm border-non setwidth searchselect"
-                  (change)="SearchByOption($event)">
-                  <option class="item" selected disabled value="">Tìm kiếm</option>
-                  <option class="item" value="Mới nhất">Mới nhất</option>
-                  <option class="item" value="Cũ nhất">Cũ nhất</option>
-                </select>
-              </li>
-              <li>
-                <button type="button" class="btn them_khach_hang_button" (click)="open(content)"
-                  data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
-                  + Thêm hóa đơn nhập hàng
-                </button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
 
   <!-- Đỗ dữ liệu vào bảng -->
   <div class="container">
@@ -45,9 +7,77 @@
         <div class="card">
           <div class="card">
             <div class="card-header text-center font-weight-bold">
-              <h5>THÔNG TIN HÓA ĐƠN NHẬP HÀNG</h5>
+              <div class="row">
+                <div class="col-sm-3 d-flex align-items-center">
+                  <h5>HÓA ĐƠN NHẬP HÀNG</h5>
+                </div>
+                <div class="col-sm-9">
+                  <mat-toolbar>
+
+                    <mat-toolbar-row>
+
+                      <div class="input-group rounded">
+                        <input type="text" [(ngModel)]="keyword" (ngModelChange)="SearchByKeyWord()" name="keyword"
+                          class="form-control search rounded" placeholder="Search" aria-label="Search"
+                          aria-describedby="search-addon" />
+                      </div>
+
+                      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+
+                        <nav class="navbar navbar-expand-md navbar-light">
+
+                          <div class="collapse navbar-collapse" id="basicExampleNav4">
+
+                            <ul class="navbar-nav nav-flex-icons ml-auto">
+                              <li class="nav-item dropdown notifications-nav pr-md-3 searchbar">
+
+                                <select class="form-control form-control-sm border-non setwidth searchselect"
+                                  (change)="SearchByOption($event)">
+                                  <option class="item" selected disabled value="">Tìm kiếm</option>
+                                  <option class="item" value="Mới nhất">Mới nhất</option>
+                                  <option class="item" value="Cũ nhất">Cũ nhất</option>
+                                </select>
+                              </li>
+                              <li>
+                                <button type="button" class="btn them_khach_hang_button" (click)="open(content)"
+                                  data-controls-modal="modals" data-backdrop="static" data-keyboard="false">
+                                  + Thêm hóa đơn nhập hàng
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                        </nav>
+                      </div>
+                    </mat-toolbar-row>
+                  </mat-toolbar>
+                </div>
+              </div>
             </div>
 
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-sm-3">
+                  <button (click)="HienThiMa()" class="controlcheckbox" id="HienThiMa">
+                    Hiển thị mã hóa đơn 
+                  </button>
+                  <button (click)="AnMa()" class="controlcheckbox" id="AnMa">
+                    Ẩn mã hóa đơn
+                  </button>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-center">
+                  <!-- Phân trang -->
+                  <ul id="pagination">
+                    <li *ngFor="let item of hoadon | paginate: { itemsPerPage: 5, currentPage: p }"> </li>
+                  </ul>
+  
+                  <pagination-controls (pageChange)="p = $event" (click)="ChuyenTrang(p)"></pagination-controls>
+                </div>
+                <div class="col-sm-3 d-flex justify-content-end">
+                  <p class="tong_phieu_dat">Tổng số hóa đơn: {{dshoadonsearch.length}}</p>
+                </div>
+              </div>
+            </div>
+  
             <div class="card-header button" id="divbutton">
               <button class="controlcheckbox">
                 <i class="fas fa-trash"></i>
@@ -62,7 +92,7 @@
 
                       <th class="align-middle">STT</th>
                       <th class="align-middle">Nhân viên lập</th>
-                      <th class="align-middle">Mã hóa đơn</th>
+                      <th class="align-middle" *ngIf="hienthi">Mã hóa đơn</th>
                       <th class="align-middle">
                         Thông tin sản phẩm
 
@@ -73,39 +103,39 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let eachHoaDon of dshoadonnhap; let i = index;">
+                    <tr *ngFor="let eachHoaDon of hoadons; let i = index;">
 
                       <td class="content">{{i + 1}}</td>
                       <td class="content">{{eachHoaDon.NhanVien_id}}</td>
-                      <td class="content">{{eachHoaDon._id}}</td>
-                     <td class="d-flex justify-content-center">
-                      <div class="form-group d-flex align-items-center">
+                      <td class="content" *ngIf="hienthi">{{eachHoaDon._id}}</td>
+                      <td class="content">
+                        <div class="form-group d-flex justify-content-center">
 
-                        <div class="card dssanpham">
-                          <div class="card-body">
-                            <table class="table table-bordered table-hover">
-                              <thead>
-                                <tr class="content">
-                                  <th class="align-middle">STT</th>
-                                  <th class="align-middle">Sản phẩm</th>
-                                  <th class="align-middle">Số lượng</th>
-                                  <th class="align-middle">Giá nhập</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let eachSanPham of thongtinsanpham[i]; let j = index">
-                                  <td class="content">{{j + 1}}</td>
-                                  <td class="content">{{eachSanPham.Ten_san_pham}}</td>
-                                  <td class="content">{{eachHoaDon.San_Pham[j].So_luong}}</td>
-                                  <td class="content">{{eachHoaDon.San_Pham[j].Gia_nhap}}</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                          <div class="card dssanpham">
+                            <div class="card-body">
+                              <table class="table table-bordered table-hover">
+                                <thead>
+                                  <tr class="content">
+                                    <th class="align-middle">STT</th>
+                                    <th class="align-middle">Sản phẩm</th>
+                                    <th class="align-middle">Số lượng</th>
+                                    <th class="align-middle">Giá nhập</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let eachSanPham of thongtinsanpham[i]; let j = index">
+                                    <td class="content">{{j + 1}}</td>
+                                    <td class="content">{{eachSanPham.Ten_san_pham}}</td>
+                                    <td class="content">{{eachHoaDon.San_Pham[j].So_luong}}</td>
+                                    <td class="content">{{eachHoaDon.San_Pham[j].Gia_nhap}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
-                        </div>
 
-                      </div>
-                     </td>
+                        </div>
+                      </td>
                       <td class="content">{{eachHoaDon.Chu_thich}}</td>
                       <td class="content">{{eachHoaDon.Tong_tien}}</td>
                       <td class="content">{{eachHoaDon.Ngay_nhap | date:'shortDate'}}</td>
@@ -121,7 +151,6 @@
     </div>
   </div>
 </div>
-<p class="tong_hoa_don_nhap">Tổng số hóa đơn nhập hàng: {{dshoadonnhap.length}}</p>
 
 <!-- Dialog tạo -->
 <div class="container" id="modals">
@@ -226,8 +255,7 @@
           <div class="col-sm-8">
             <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
               [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 1)"
-               (onDeSelect)="onItemDeSelect($event, 1)"
-             >
+              (onDeSelect)="onItemDeSelect($event, 1)">
             </ng-multiselect-dropdown>
           </div>
           <div class="mess-err">

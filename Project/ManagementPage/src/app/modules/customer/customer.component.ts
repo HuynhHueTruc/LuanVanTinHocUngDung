@@ -59,7 +59,6 @@ export class CustomerComponent implements OnInit {
   chu_de = '';
   noi_dung = '';
   chu_tai_khoan = '';
-  // gioitinh: string;
   // Biến lưu trữ từ khóa tìm kiếm
   keyword: string;
 
@@ -78,13 +77,18 @@ export class CustomerComponent implements OnInit {
   is_edit = false;
   so_thich = []
   dropdownSettings: IDropdownSettings;
-
+  hienthi = false
+  p: number = 1
+  khachhangs: KhachHangModel[] = []
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
   constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
     private loaicayService: LoaicayService) { }
 
   ngOnInit(): void {
+    this.KHService.getRefeshPage().subscribe(dt => {
+      this.getdskhachhang();
+    })
     this.getdskhachhang();
     this.geteachDiaDiem();
     this.getloaicay();
@@ -101,31 +105,18 @@ export class CustomerComponent implements OnInit {
 
   // Hàm lấy danh sách khách hàng
   getdskhachhang() {
+    // this.dsdiachi = []
+    // this.arrdiachi = []
     this.KHService.getListKhachHang().subscribe((res: any) => {
       this.dskhachhang = res.khachhangs;
       // hỗ trợ searchbykeywword và searchbysex
       this.dskhachhangsearch = res.khachhangs;
       // Lưu độ dài của danh sách khách hàng để làm checkbox
       this.lengthdskhachhang = this.dskhachhang.length;
-
-      for (const khachhang in this.dskhachhang) {
-        if (this.dskhachhang.hasOwnProperty(khachhang)) {
-          this.dsdiachi.push(this.dskhachhang[khachhang].Dia_chi);
-        }
+      if (this.khachhangs.length === 0) {
+        this.p = 1
       }
-
-      for (const dc in this.dsdiachi) {
-        if (this.dsdiachi.hasOwnProperty(dc)) {
-          this.arrdiachi.push(this.dsdiachi[dc][0]);
-        }
-      }
-      // Thiết lập mảng giá trị checked = false cho các đối tượng
-      for (const length in this.dskhachhang) {
-        if (this.dskhachhang.hasOwnProperty(length)) {
-          this.checked.push(false);
-        }
-      }
-      // console.log(this.checked);
+      this.ChuyenTrang(this.p)
     });
 
 
@@ -134,56 +125,9 @@ export class CustomerComponent implements OnInit {
   getloaicay() {
     this.loaicayService.getListLoaiCay().subscribe((res: any) => {
       this.dsloaicay = res.loaicays
-      // console.log(this.dsloaicay)
-
     })
   }
 
-  //Chọn nhiều phần tử trong thẻ select
-  onItemSelect(item: any, i?) {
-    // i = 0 là tạo mới, = 1 là cập nhật
-    if (i === 0) {
-      document.getElementById('errTaoMoi').style.display = 'none'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'none'
-      }
-    }
-  }
-
-  onSelectAll(items: any, i?) {
-    this.so_thich = items
-    if (i === 0) {
-      document.getElementById('errTaoMoi').style.display = 'none'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'none'
-      }
-    }
-
-  }
-
-  onDeSelectAll(items: any, i?) {
-    this.so_thich = items
-
-    if (i === 0) {
-      document.getElementById('errTaoMoi').style.display = 'block'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'block'
-      }
-    }
-  }
-
-  onItemDeSelect(item: any, i?) {
-    if (i === 0) {
-      document.getElementById('errTaoMoi').style.display = 'block'
-    } else {
-      if (i === 1) {
-        document.getElementById('CapNhat').style.display = 'block'
-      }
-    }
-  }
 
   // Hàm lấy thông tin thành phố
   geteachDiaDiem() {
@@ -389,14 +333,14 @@ export class CustomerComponent implements OnInit {
     if (this.checkAll) {
       this.checkAll = false;
       this.checked = [];
-      for (let i = 0; i < this.lengthdskhachhang; i++) {
+      for (let i = 0; i < this.khachhangs.length; i++) {
         this.checked.push(false);
         document.getElementById('divbutton').style.display = 'none';
       }
     } else {
       this.checkAll = true;
       this.checked = [];
-      for (let i = 0; i < this.lengthdskhachhang; i++) {
+      for (let i = 0; i < this.khachhangs.length; i++) {
         this.checked.push(true);
         document.getElementById('divbutton').style.display = 'block';
       }
@@ -448,10 +392,10 @@ export class CustomerComponent implements OnInit {
     for (const kt in this.checked) {
       if (this.checked.hasOwnProperty(kt)) {
         if (this.checked[kt] === true) {
-          this.arrEmailKH.push(this.dskhachhang[kt].Email);
-          this.arrKhachHangID.push(this.dskhachhang[kt].Khach_hang_id);
-          this.arrMatKhauKH.push(this.dskhachhang[kt].Mat_khau);
-          this.arrTenKH.push(this.dskhachhang[kt].Ho_ten);
+          this.arrEmailKH.push(this.khachhangs[kt].Email);
+          this.arrKhachHangID.push(this.khachhangs[kt].Khach_hang_id);
+          this.arrMatKhauKH.push(this.khachhangs[kt].Mat_khau);
+          this.arrTenKH.push(this.khachhangs[kt].Ho_ten);
         }
       }
     }
@@ -475,7 +419,8 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
     this.UnChecked();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg'  });
+    this.so_thich = []
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
     this.RandomMatKhau();
     // Gán giá trị rỗng ban đầu cho khachhang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
@@ -491,7 +436,8 @@ export class CustomerComponent implements OnInit {
   // Hàm mở Dialog Cập nhật tài khoản
   open_update(content_update, khachhangUpdate) {
     this.UnChecked();
-    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg'  });
+    this.so_thich = []
+    this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title-update', backdrop: 'static', keyboard: false, size: 'lg' });
     // Gán giá trị rỗng ban đầu cho khachang, nếu không sẽ báo lỗi không đọc được undefine
     this.khachhang = new KhachHangModel();
     khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
@@ -646,8 +592,8 @@ export class CustomerComponent implements OnInit {
 
             this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
             alert(data_them)
-            this.DongModal();
-
+            //  this.DongModal();
+            this.modalService.dismissAll()
           }
           else {
             window.alert(data_them);
@@ -660,23 +606,36 @@ export class CustomerComponent implements OnInit {
     }
   }
 
-  HuyThemKhachHang() {
-    this.so_thich = []
-    this.DongModal()
-  }
   // Hàm thực hiện xóa nhân viên
   XoaKhachHang(Khach_hang_id: string) {
+    for (const i in this.khachhangs) {
+
+      if (this.khachhangs[i].Khach_hang_id === Khach_hang_id) {
+        this.khachhangs.splice(Number.parseInt(i), 1)
+      }
+
+    }
     this.KHService.XoaKhachHang(Khach_hang_id).subscribe(data_xoa => {
-      location.reload();
+      this.giohangService.XoaGioHang(Khach_hang_id).subscribe()
     });
   }
 
   // Hàm xóa nhiều nhân viên
   XoaNhieuKhachHang() {
     this.KhachHangChecked();
+    for (const i in this.khachhangs) {
+      for (const j in this.arrKhachHangID) {
+        if (this.khachhangs[i].Khach_hang_id === this.arrKhachHangID[j]) {
+          this.khachhangs.splice(Number.parseInt(i), 1)
+        }
+      }
+    }
     this.KHService.XoaNhieuKhachHang(this.arrKhachHangID).subscribe(data_xoanhieukh => {
       if (JSON.stringify(data_xoanhieukh) === '"Xóa tài khoản khách hàng thành công!"') {
-        this.DongModal();
+        this.giohangService.XoaNhieuGioHang(this.arrKhachHangID).subscribe()
+        this.KTCheckedAll()
+        this.UnChecked()
+        this.modalService.dismissAll()
       } else {
         window.alert(data_xoanhieukh);
       }
@@ -722,12 +681,12 @@ export class CustomerComponent implements OnInit {
   }
   // Hàm tìm kiếm theo tên hoặc id
   SearchByKeyWord() {
-    this.dskhachhang = this.dskhachhangsearch;
+    this.khachhangs = this.dskhachhangsearch;
     const text = this.removeAccents(this.keyword);
     if (text === '') {
       this.getdskhachhang();
     } else {
-      this.dskhachhang = this.dskhachhang.filter(res => {
+      this.khachhangs = this.khachhangs.filter(res => {
         const hoten = this.removeAccents(res.Ho_ten);
         const maso = this.removeAccents(res.Khach_hang_id);
         const tmp2 = text.replace(/·/g, '');
@@ -743,21 +702,22 @@ export class CustomerComponent implements OnInit {
   }
 
   SearchByOption(value) {
-    this.dskhachhang = this.dskhachhangsearch;
+    this.khachhangs = this.dskhachhangsearch;
     value.preventDefault();
     const target = value.target.value;
     if (target === 'Tất cả' || target === 'Cũ nhất') {
       this.getdskhachhang();
     } else {
       if (target === 'Mới nhất') {
-        this.dskhachhang.reverse();
+        this.khachhangs.reverse();
       } else {
         const text = this.removeAccents(target);
-        this.dskhachhang = this.dskhachhang.filter(res => {
+        this.khachhangs = this.khachhangs.filter(res => {
           const gioitinh = this.removeAccents(res.Gioi_tinh);
           return gioitinh.match(text);
         });
       }
+      // this.ChuyenTrang(this.p)
     }
   }
 
@@ -782,5 +742,49 @@ export class CustomerComponent implements OnInit {
       return true
     }
 
+  }
+
+
+  HienThiMa() {
+    this.hienthi = true
+    document.getElementById('AnMa').style.display = 'block'
+    document.getElementById('HienThiMa').style.display = 'none'
+  }
+
+  AnMa() {
+    this.hienthi = false
+    document.getElementById('AnMa').style.display = 'none'
+    document.getElementById('HienThiMa').style.display = 'block'
+
+  }
+
+  ChuyenTrang(number) {
+    this.khachhangs = []
+    this.dsdiachi = []
+    this.arrdiachi = []
+    for (let i = 0; i < 5; i++) {
+      if ((this.dskhachhang[((number - 1) * 5) + i]) !== undefined) {
+        this.khachhangs.push(this.dskhachhang[((number - 1) * 5) + i]);
+      }
+    }
+    // Thiết lập mảng giá trị checked = false cho các đối tượng
+    for (const length in this.khachhangs) {
+      if (this.khachhangs.hasOwnProperty(length)) {
+        this.checked.push(false);
+      }
+    }
+
+    for (const khachhang in this.khachhangs) {
+      if (this.khachhangs.hasOwnProperty(khachhang)) {
+        this.dsdiachi.push(this.khachhangs[khachhang].Dia_chi);
+      }
+    }
+
+    for (const dc in this.dsdiachi) {
+      if (this.dsdiachi.hasOwnProperty(dc)) {
+        this.arrdiachi.push(this.dsdiachi[dc][0]);
+      }
+    }
+    this.UnChecked()
   }
 }

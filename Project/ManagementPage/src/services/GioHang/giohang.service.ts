@@ -13,4 +13,14 @@ export class GiohangService {
   ThemGioHang(khach_hang_id): Observable<GioHangModel[]>{
     return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/taomoi', khach_hang_id).pipe();
    }
+
+   XoaGioHang(khach_hang_id): Observable<GioHangModel[]>{
+    return this.http.delete<GioHangModel[]>(`${'http://localhost:3000/giohang/xoa'}/${khach_hang_id}`).pipe();
+   }
+
+   XoaNhieuGioHang(arrKhachHangID): Observable<GioHangModel[]>{
+    return this.http.post<GioHangModel[]>('http://localhost:3000/giohang/xoanhieugiohang', arrKhachHangID).pipe(
+    
+   );
+  }
 }

@@ -88,7 +88,7 @@
                 <td class="content">{{eachKhuyenMai._id}}</td>
                 <td>{{eachKhuyenMai.Ten_khuyen_mai}}</td>
                 <td>{{eachKhuyenMai.Gia_tri}}</td>
-                <td class="d-flex justify-content-center">
+                <td class="content">
                   <div class="form-group d-flex align-items-center">
                     <!-- (change)="ChangeDMN()" -->
                     <select class="form-control " id="DMNSelect" >
@@ -101,7 +101,7 @@
                 <td class="content">{{eachKhuyenMai.Thoi_gian_tao | date:'shortDate'}}</td>
                 <td class="content">{{eachKhuyenMai.Thoi_gian_cap_nhat | date: 'shortDate'}}</td>
 
-                <td class="content d-flex justify-content-center">
+                <td class="content ">
                   <span class="action">
                     <button class="buttonicon" (click)="open_update(content_update, eachKhuyenMai)" data-controls-modal="modals_update" data-backdrop="static" data-keyboard="false">
                       <i class="far fa-edit m-1"></i>

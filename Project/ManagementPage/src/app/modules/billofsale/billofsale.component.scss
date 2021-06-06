@@ -159,9 +159,17 @@
 
   .dssanpham{
     height: 150px;
+    width: 500px;
     overflow-x:auto;
     overflow-y:auto;
 
+  }
+
+  .diachi{
+    width: 150px;
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   .tong_hoa_don_ban{
@@ -237,4 +245,20 @@ span.DMN{
 hr{
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.controlcheckbox {
+  background-color: transparent;
+  border: none;
+}
+
+#pagination {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+#AnMa {
+  display: none;
 }

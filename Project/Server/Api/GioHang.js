@@ -128,5 +128,44 @@ route.put('/giohang/capnhat/soluong/:_id', async(req, res) => {
 })
 
 
+// Hàm xóa một đối tượng 
+route.delete('/giohang/xoa/:khach_hang_id', async(req, res) => {
+    const Khach_hang_id = req.params.khach_hang_id;
+    GioHangModel.deleteOne({
+        KhachHang_id: Khach_hang_id
+    }).then(data => {
+        if (data.deletedCount === 0){
+             res.json('Giỏ hàng này không tồn tại!');
+        }
+        else{
+            res.json('Xóa giỏ hàng thành công!');
+        }
+    }).catch(err => {
+        // res.status(500).json('Lỗi server!')
+        res.json({message: error});
+    })
+})
+
+// Hàm xóa nhiều đối tượng 
+route.post('/giohang/xoanhieugiohang', async(req, res) => {
+    const arrKhachHang = req.body;
+    let length = arrKhachHang.length;
+    for (let i = 0; i < length; i++){
+        GioHangModel.deleteOne({
+        KhachHang_id: arrKhachHang[i]
+        }).then(data => {
+        if (data.deletedCount === 0){
+             res.json('Tài khoản khách hàng này không tồn tại!');
+        }
+        else{
+            res.json('Xóa tài khoản khách hàng thành công!');
+        }
+        }).catch(err => {
+        res.json({message: err});
+        })
+    }
+    
+})
+
 //Export biến route để server.js có thể gọi các api được viết
 module.exports = route;
