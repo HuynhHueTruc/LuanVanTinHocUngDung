@@ -329,7 +329,7 @@ export class OrderComponent implements OnInit {
     this.phieudatService.XoaPhieuDat(this.phieudat._id).subscribe()
     await this.CapNhatSoLuongSanPham()
     this.modalService.dismissAll();
-    location.reload()
+    // location.reload()
   }
 
   //Không tạo hóa đơn bán hàng

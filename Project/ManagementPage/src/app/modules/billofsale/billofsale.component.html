@@ -125,7 +125,7 @@
                              <td class="content">{{j + 1}}</td>
                              <td class="content">{{eachSanPham.Ten_san_pham}}</td>
                              <td class="content">{{eachHoaDon.San_Pham[j].So_luong}}</td>
-                             <td class="content">{{eachHoaDon.San_Pham[j].Gia_ban}}</td>
+                             <td class="content">{{eachHoaDon.San_Pham[j].Gia_ban | currency: "VND"}}</td>
                            </tr>
                          </tbody>
                        </table>
@@ -140,7 +140,7 @@
                 </div></td>
                 <td class="content">{{thongtinvanchuyen[i]?.Ten_hinh_thuc}}</td>
                 <td class="content">{{thongtinthanhtoan[i]?.Ten_phuong_thuc}}</td>
-                <td class="content">{{eachHoaDon.Tong_tien}}</td>
+                <td class="content">{{eachHoaDon.Tong_tien | currency: "VND"}}</td>
                 <td class="content">{{eachHoaDon.Ngay_cap_nhat | date:'shortDate'}}</td>
               </tr>
             </tbody>

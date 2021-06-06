@@ -8,3 +8,14 @@
     overflow-x:auto;
     overflow-y:auto;
 }
+
+#chitiet{
+  background-color: transparent;
+  color: darkcyan;
+  border: none;
+
+}
+
+#chitiet:focus{
+  outline: none;
+}

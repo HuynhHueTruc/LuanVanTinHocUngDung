@@ -135,7 +135,7 @@
                                   <td class="content">{{j + 1}}</td>
                                   <td class="content">{{eachSanPham?.Ten_san_pham}}</td>
                                   <td class="content" *ngIf="eachPhieuDat?.San_Pham[j] !== undefined">{{eachPhieuDat?.San_Pham[j].So_luong}}</td>
-                                  <td class="content" *ngIf="eachPhieuDat?.San_Pham[j] !== undefined">{{eachPhieuDat?.San_Pham[j].Gia_ban }}</td>
+                                  <td class="content" *ngIf="eachPhieuDat?.San_Pham[j] !== undefined">{{eachPhieuDat?.San_Pham[j].Gia_ban | currency: "VND"}}</td>
                                 </tr>
                               </tbody>
                             </table>
