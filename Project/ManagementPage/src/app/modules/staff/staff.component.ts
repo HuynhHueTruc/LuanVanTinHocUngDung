@@ -122,7 +122,9 @@ export class StaffComponent implements OnInit {
       this.dsnhanviensearch = res.nhanviens;
       // Lưu độ dài của danh sách nhân viên để làm checkbox
       this.lengthdsnhanvien = this.dsnhanvien.length;
-
+      if (this.nhanviens.length === 0) {
+        this.p = 1
+      }
       this.ChuyenTrang(this.p)
       // console.log(this.checked);
     });
@@ -456,8 +458,7 @@ export class StaffComponent implements OnInit {
   // Hàm thực hiện xóa nhân viên
   XoaNhanVien(Nhan_vien_id: string) {
     this.NVService.XoaNhanVien(Nhan_vien_id).subscribe(data_xoa => {
-      window.alert(data_xoa);
-      location.reload();
+      this.modalService.dismissAll()
     });
   }
 
@@ -466,9 +467,9 @@ export class StaffComponent implements OnInit {
     this.NhanVienChecked();
     this.NVService.XoaNhieuNhanVien(this.arrNhanVienID).subscribe(data_xoanhieunv => {
       if (JSON.stringify(data_xoanhieunv) === '"Xóa tài khoản nhân viên thành công!"') {
-        this.DongModal();
+        //this.DongModal();
         // location.reload();
-        // this.modalService.dismissAll();
+       this.modalService.dismissAll();
       } else {
         window.alert(data_xoanhieunv);
       }
@@ -570,6 +571,7 @@ export class StaffComponent implements OnInit {
         }
       });
     }
+    this.DiaChi()
   }
 
   SearchByOption(value) {
@@ -588,7 +590,7 @@ export class StaffComponent implements OnInit {
           return gioitinh.match(text);
         });
       }
-      // this.ChuyenTrang(this.p)
+     this.DiaChi()
     }
   }
 
@@ -616,17 +618,9 @@ export class StaffComponent implements OnInit {
 
   }
 
-  ChuyenTrang(number) {
-    this.nhanviens = []
+  DiaChi(){
     this.dsdiachi = []
     this.arrdiachi = []
-    this.checked = []
-    for (let i = 0; i < 10; i++) {
-      if ((this.dsnhanvien[((number - 1) * 10) + i]) !== undefined) {
-        this.nhanviens.push(this.dsnhanvien[((number - 1) * 10) + i]);
-      }
-    }
-    this.UnChecked()
     for (const nhanvien in this.nhanviens) {
       if (this.nhanviens.hasOwnProperty(nhanvien)) {
         this.dsdiachi.push(this.nhanviens[nhanvien].Dia_chi);
@@ -638,6 +632,20 @@ export class StaffComponent implements OnInit {
         this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
+  }
+
+  ChuyenTrang(number) {
+    this.nhanviens = []
+    // this.dsdiachi = []
+    // this.arrdiachi = []
+    this.checked = []
+    for (let i = 0; i < 10; i++) {
+      if ((this.dsnhanvien[((number - 1) * 10) + i]) !== undefined) {
+        this.nhanviens.push(this.dsnhanvien[((number - 1) * 10) + i]);
+      }
+    }
+    this.UnChecked()
+    this.DiaChi()
     // Thiết lập mảng giá trị checked = false cho các đối tượng
     for (const length in this.nhanviens) {
       if (this.nhanviens.hasOwnProperty(length)) {

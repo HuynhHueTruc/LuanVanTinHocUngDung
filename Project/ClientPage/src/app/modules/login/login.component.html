@@ -50,88 +50,87 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-sm-5">
-                        <div class="group"> <label for="user" class="label">Tên đăng nhập</label>
+                        <div class="group"> 
+                          <!-- <label for="user" class="label">Tên đăng nhập</label> -->
                           <input type="text" class="input"
                             [class.is-invalid]="Ten_dang_nhap.invalid && Ten_dang_nhap.touched" #Ten_dang_nhap="ngModel"
                             pattern="^[A-Za-z0-9 _-]{8,32}$" id="Ten_dang_nhap" [(ngModel)]="khachhang.Khach_hang_id"
-                            name="Ten_dang_nhap" placeholder="User name" required>
+                            name="Ten_dang_nhap" placeholder="Tên đăng nhập" required>
                           <div class="mess-err"
                             *ngIf="Ten_dang_nhap.errors && (Ten_dang_nhap.invalid || Ten_dang_nhap.touched)">
-                            <small class="err text-danger" *ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập không
-                              được trống! </small>
+                            <small class="err text-danger" *ngIf="Ten_dang_nhap.errors.required"> Tên đăng nhập đang trống! </small>
                             <small class="err text-danger" *ngIf="Ten_dang_nhap.errors.pattern"> Tên đăng nhập không
-                              được có dấu. Độ dài tên đăng nhập trong khoảng 8 đến 32 ký tự! </small>
+                              có dấu và độ dài trong khoảng 8 đến 32 ký tự! </small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Họ và tên</label>
+                          <!-- <label for="pass" class="label">Họ và tên</label> -->
                           <input type="text" [class.is-invalid]="Ho_ten.invalid && Ho_ten.touched" #Ho_ten="ngModel"
                             class="input" id="Ho_ten" [(ngModel)]="khachhang.Ho_ten" name="Ho_ten"
-                            placeholder="Your full name" required>
+                            placeholder="Họ và tên" required>
                           <div class="mess-err" *ngIf="Ho_ten.errors && (Ho_ten.invalid || Ho_ten.touched)">
-                            <small class="err text-danger" *ngIf="Ho_ten.errors.required"> Họ tên không được trống!
+                            <small class="err text-danger" *ngIf="Ho_ten.errors.required"> Họ tên đang trống!
                             </small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Ngày sinh</label>
+                          <!-- <label for="pass" class="label">Ngày sinh</label> -->
                           <input type="date" [class.is-invalid]="NgaySinh.invalid && NgaySinh.touched"
                             #NgaySinh="ngModel" class="input" id="NgaySinh" [(ngModel)]="khachhang.Ngay_sinh"
-                            name="NgaySinh" placeholder="Date of birth" (change)="ChangeDate($event)">
+                            name="NgaySinh" placeholder="Ngày sinh" (change)="ChangeDate($event)">
                           <div class="mess-err">
-                            <small id="errNgaySinh" class="err text-danger"> Bạn chưa chọn ngày sinh! </small>
+                            <small id="errNgaySinh" class="err text-danger"> Ngày sinh chưa được chọn! </small>
                             <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">CMND/CCCD</label>
+                          <!-- <label for="pass" class="label">CMND/CCCD</label> -->
                           <input type="text" [class.is-invalid]="CMND_CCCD.invalid && CMND_CCCD.touched"
                             #CMND_CCCD="ngModel" pattern="^[0-9]{8,12}" class="input" id="CMND_CCCD"
                             [(ngModel)]="khachhang.CMND_CCCD" name="CMND_CCCD"
-                            placeholder=" Enter your identity card number" required>
+                            placeholder="CMND/CCCD" required>
                           <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
                             <small class="err text-danger" *ngIf="CMND_CCCD.errors.required"> Chứng minh nhân dân/căn
-                              cước công dân không được trống! </small>
+                              cước công dân đang trống! </small>
                             <small class="err text-danger" *ngIf="CMND_CCCD.errors.pattern"> Độ dài số chứng minh nhân
-                              dân/căn cước công dân có 8 hoặc 12 số!</small>
+                              dân/căn cước công dân có 9 hoặc 12 số!</small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Email</label>
+                          <!-- <label for="pass" class="label">Email</label> -->
                           <input type="email" [class.is-invalid]="Email.invalid && Email.touched" #Email="ngModel"
                             pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="input" id="Email"
-                            [(ngModel)]="khachhang.Email" name="Email" placeholder="Your email" required>
+                            [(ngModel)]="khachhang.Email" name="Email" placeholder="Địa chỉ Email" required>
                           <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
-                            <small class="err text-danger" *ngIf="Email.errors.required"> Email không được trống!
+                            <small class="err text-danger" *ngIf="Email.errors.required"> Email đang trống!
                             </small>
                             <small class="err text-danger" *ngIf="Email.errors.pattern"> Chưa đúng định dạng Email!
                             </small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Số điện thoại</label>
+                          <!-- <label for="pass" class="label">Số điện thoại</label> -->
                           <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"
                             #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="input" id="So_dien_thoai"
-                            [(ngModel)]="khachhang.So_dien_thoai" name="So_dien_thoai" placeholder=" Your number phone"
+                            [(ngModel)]="khachhang.So_dien_thoai" name="So_dien_thoai" placeholder="Số điện thoại"
                             required>
                           <div class="mess-err"
                             *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
-                            <small class="err text-danger" *ngIf="So_dien_thoai.errors.required"> Số điện thoại không
-                              được trống! </small>
+                            <small class="err text-danger" *ngIf="So_dien_thoai.errors.required"> Số điện thoại đang trống! </small>
                             <small class="err text-danger" *ngIf="So_dien_thoai.errors.pattern"> Số điện thoại chưa hợp
                               lệ!</small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Giới tính</label>
+                          <!-- <label for="pass" class="label">Giới tính</label> -->
                           <select id="Gioi_tinh" class="input" (change)="KTGioiTinh()" [(ngModel)]="khachhang.Gioi_tinh"
                             name="GioiTinh">
-                            <option class="item" selected disabled hidden value=""> -- Sex --</option>
+                            <option class="item" selected disabled hidden value=""> -- Giới tính --</option>
                             <option class="item" value="Nam">Nam</option>
                             <option class="item" value="Nữ">Nữ</option>
                           </select>
                           <div class="mess-err">
-                            <small id="mes_gioitinh" class="err text-danger"> Bạn chưa chọn giới tính! </small>
+                            <small id="mes_gioitinh" class="err text-danger"> Giới tính chưa được chọn! </small>
                           </div>
                         </div>
                       </div>
@@ -140,48 +139,48 @@
                       <div class="col-sm-6">
 
                         <div class="group">
-                          <label for="pass" class="label">Địa chỉ: Tỉnh/Thành phố</label>
+                          <label for="pass" class="label">Địa chỉ: </label>
                           <select id="provinces" [(ngModel)]="khachhang.Dia_chi.Tinh_ThanhPho"
                             name="calc_shipping_provinces" class="input" (change)="ThanhPho($event)">
-                            <option class="item" selected disabled value="">-- Provinces --</option>
+                            <option class="item" selected disabled value="">-- Tỉnh/Thành phố --</option>
                             <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
                               {{eachThanhPho.name}}</option>
                           </select>
                           <div class="mess-err">
-                            <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố!
+                            <small id="mes_tinh_thanhpho" class="err text-danger"> Tỉnh/Thành phố chưa được chọn!
                             </small>
                           </div>
                           <br>
 
-                          <label for="pass" class="label">Huyện/Quận</label>
+                          <!-- <label for="pass" class="label">Huyện/Quận</label> -->
                           <select id="districts" [(ngModel)]="khachhang.Dia_chi.Huyen_Quan"
                             name="calc_shipping_district" class="input" (change)="QuanHuyen($event)">
-                            <option class="item" selected value="">-- District --</option>
+                            <option class="item" selected value="">-- Huyện/Quận --</option>
                             <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
                               {{eachQuanHuyen.name}}</option>
 
                           </select>
                           <div class="mess-err">
-                            <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
+                            <small id="mes_huyen_quan" class="err text-danger"> Huyện/Quận chưa được chọn! </small>
                           </div>
 
                           <br>
-                          <label for="pass" class="label">Xã/Phường</label>
+                          <!-- <label for="pass" class="label">Xã/Phường</label> -->
                           <select id="ward" [(ngModel)]="khachhang.Dia_chi.Xa_Phuong" name="calc_shipping_ward"
                             class="input" (change)="XaPhuong(null)">
-                            <option class="item" selected value="">-- Ward --</option>
+                            <option class="item" selected value="">-- Xã/Phường --</option>
                             <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
                               {{eachXaPhuong.name}}</option>
                           </select>
                           <div class="mess-err">
-                            <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
+                            <small id="mes_xa_phuong" class="errdiachi text-danger">Xã/Phường chưa được chọn! </small>
                           </div>
                         </div>
                         <br>
                         <div class="group ">
-                          <label for="pass" class="label">Loại cây yêu thích:</label>
+                          <!-- <label for="pass" class="label">Loại cây yêu thích:</label> -->
 
-                            <ng-multiselect-dropdown class="input" name="ngInterestsSelect" [placeholder]="'--- Interests ---'" style="border: none;"
+                            <ng-multiselect-dropdown class="input" name="ngInterestsSelect" [placeholder]="'--- Loại cây yêu thích ---'" style="border: none;"
                             [(ngModel)]="so_thich"
                               [settings]="dropdownSettings" [data]="dsloaicay" (onSelect)="onItemSelect($event)"
                               (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)"
@@ -189,20 +188,20 @@
                             </ng-multiselect-dropdown>
 
                           <div class="mess-err">
-                            <small id="errTaoMoi" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+                            <small id="errTaoMoi" class="err text-danger"> Danh mục loại cây chưa được chọn! </small>
                           </div>
                         </div>
 
                         <div class="group">
-                          <label for="pass" class="label">Mật khẩu</label>
+                          <!-- <label for="pass" class="label">Mật khẩu</label> -->
                           <input type="password" (keyup)="KiemTraMatKhau()"
                             [class.is-invalid]="Mat_khau_moi.invalid && Mat_khau_moi.touched" #Mat_khau_moi="ngModel"
                             class="input" id="Mat_khau_moi" [(ngModel)]="mat_khau_moi" name="Mat_khau_moi"
-                            placeholder="Your new password" minlength="8" maxlength="32" required>
+                            placeholder="Mật khẩu" minlength="8" maxlength="32" required>
 
                           <div class="mess-err"
                             *ngIf="Mat_khau_moi.errors && (Mat_khau_moi.invalid || Mat_khau_moi.touched)">
-                            <small class="err text-danger" *ngIf="Mat_khau_moi.errors.required"> Mật khẩu không được
+                            <small class="err text-danger" *ngIf="Mat_khau_moi.errors.required"> Mật khẩu đang
                               trống! </small>
                             <small class="err text-danger" *ngIf="Mat_khau_moi.errors.minlength "> Mật khẩu nằm trong
                               khoảng độ dài ký tự từ 8 đến 32 </small>
@@ -212,16 +211,16 @@
                           </div>
 
                           <br>
-                          <label for="pass" class="label">Xác nhận mật khẩu</label>
+                          <!-- <label for="pass" class="label">Xác nhận mật khẩu</label> -->
                           <input type="password" (keyup)="KiemTraMatKhau()"
                             [class.is-invalid]="Xac_nhan_mat_khau.invalid && Xac_nhan_mat_khau.touched"
                             #Xac_nhan_mat_khau="ngModel" class="input " id="Xac_nhan_mat_khau"
                             [(ngModel)]="xac_nhan_mat_khau_moi" name="Xac_nhan_mat_khau"
-                            placeholder="Your confirm password" minlength="8" maxlength="32" required>
+                            placeholder="Xác nhận mật khẩu" minlength="8" maxlength="32" required>
                         </div>
                         <div class="mess-err"
                           *ngIf="Xac_nhan_mat_khau.errors && (Xac_nhan_mat_khau.invalid || Xac_nhan_mat_khau.touched)">
-                          <small class="err text-danger" *ngIf="Xac_nhan_mat_khau.errors.required"> Mật khẩu không được
+                          <small class="err text-danger" *ngIf="Xac_nhan_mat_khau.errors.required"> Mật khẩu xác nhận đang
                             trống! </small>
                           <small class="err text-danger" *ngIf="Xac_nhan_mat_khau.errors.minlength"> Mật khẩu nằm trong
                             khoảng độ dài ký tự từ 8 đến 32 </small>

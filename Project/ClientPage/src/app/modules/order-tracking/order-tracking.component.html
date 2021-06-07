@@ -305,10 +305,10 @@
                 <textarea class="textcomment" id="txtarea-{{j}}"
                   placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé"></textarea>
               </div>
-              <div class="row">
-                <div class="col-sm-2 mt-3 mb-3" *ngFor="let hinhanh of imagePath; let h = index"
+              <div class="row" >
+                <div class="col-sm-2 mt-3 mb-3"  *ngFor="let hinhanh of imagePath[j]; let h = index"
                   id="avatarcomment">
-                  <img id="imagecomment-{{h}}" [src]="hinhanh" class="imagecomment">
+                  <img [src]="hinhanh" id="imagecomment-{{j}}-{{h}}" class="imagecomment">
                 </div>
               </div>
               <div class="row mt-2">

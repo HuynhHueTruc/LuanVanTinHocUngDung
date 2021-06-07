@@ -77,6 +77,10 @@ export class OrderTrackingComponent implements OnInit {
       // getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
 
     })
+    this.sanphamService.getRefeshPage().subscribe(() => {
+      this.getdsphieudat()
+
+    })
     this.getdsphieudat()
     // const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
     // getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
@@ -262,12 +266,13 @@ export class OrderTrackingComponent implements OnInit {
 
   // Hàm mở Dialog Tạo
   open(content, eachPhieuDat, index, flag) {
-
+    this.imagePath = []
     this.sanphamdanhgia = new PhieuDatModel()
     this.sanphamdanhgia = eachPhieuDat
     this.current = index
     this.flag = flag
     for (const j in this.sanphamdanhgia.San_Pham) {
+      this.imagePath.push([])
       this.danhgia.push({ SanPham_id: this.sanphamdanhgia.San_Pham[j].SanPham_id, Noi_dung: '', Hinh_anh: [{ url: '' }], KhachHang_id: this.datalogin.Khach_hang_id, So_diem: 0 })
     }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
@@ -278,6 +283,7 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   UploadImg(index) {
+    this.imagePath[index] = []
     const ref = firebase.storage().ref();
     const f = document.getElementById('imgcomment-' + index) as HTMLInputElement;
     const file = f.files;
@@ -285,7 +291,7 @@ export class OrderTrackingComponent implements OnInit {
     for (let i = 0; i < length; i++) {
       if (typeof file[i] === 'object') {
         const name = new Date() + '-' + file[i].name;
-        this.imagePath.push('../../../assets/'+file[i].name)
+        this.imagePath[index].push('../../../assets/' + file[i].name)
         const metadata = {
           contentType: file[i].type
         };
@@ -293,12 +299,13 @@ export class OrderTrackingComponent implements OnInit {
         task
           .then(snapshot => snapshot.ref.getDownloadURL())
           .then(url => {
-            document.getElementById('imagecomment' + i).style.display = 'block'
+            document.getElementById('imagecomment-' + index + '-' + i).style.display = 'block'
             this.danhgia[index].Hinh_anh.push({ url: url })
           }
           );
       }
     }
+
   }
 
   DanhGia() {
@@ -311,7 +318,8 @@ export class OrderTrackingComponent implements OnInit {
     }
     this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
       alert(data)
-      location.reload()
+      this.modalService.dismissAll()
+      // location.reload()
     })
 
   }

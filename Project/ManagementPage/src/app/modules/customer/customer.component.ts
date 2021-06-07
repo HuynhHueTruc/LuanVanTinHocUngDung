@@ -87,9 +87,9 @@ export class CustomerComponent implements OnInit {
   CMND_pattern = "[0-9]{9,12}"
 
   constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
-    private loaicayService: LoaicayService,  private formBuilder: FormBuilder,) { }
+    private loaicayService: LoaicayService, private formBuilder: FormBuilder,) { }
 
-    form: FormGroup;
+  form: FormGroup;
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -166,69 +166,48 @@ export class CustomerComponent implements OnInit {
     }
     return this.text;
   }
-    // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
-    ThanhPho(e?, diachi?) {
-      // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
-      this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
-      this.quanhuyens.splice(0, this.quanhuyens.length);
-      // Clear lại xã phường
-      this.arrxaphuong.splice(0, this.arrxaphuong.length);
-      this.xaphuongs.splice(0, this.xaphuongs.length);
-      if (e === null) {
-        for (const qh in this.thanhphos) {
-          if (this.thanhphos.hasOwnProperty(qh)) {
-            if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
-              this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-              for (const arr2 in this.arrquanhuyen1[0]) {
-                if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
-                  if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
-                    this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-                  }
-                }
-              }
-              this.arrxaphuong.push(this.quanhuyens[0].wards);
-              for (const arr in this.arrxaphuong[0]) {
-                if (this.arrxaphuong[0].hasOwnProperty(arr)) {
-                  if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
-                    this.xaphuongs.push(this.arrxaphuong[0][arr]);
-                  }
-                }
-              }
-            }
-          }
-        }
-        this.HienThiQuanHuyen_XaPhuong(null, diachi);
-      }
-      else {
-        this.khachhang.Dia_chi.Huyen_Quan = '';
-        this.khachhang.Dia_chi.Xa_Phuong = '';
-        e.preventDefault();
-        const target = e.target;
-        this.thanhpho = target.value;
-        for (const qh in this.thanhphos) {
-          if (this.thanhphos.hasOwnProperty(qh)) {
-            if (this.thanhphos[qh].name === this.thanhpho) {
-              this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-              for (const arr2 in this.arrquanhuyen1[0]) {
-                if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+  // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
+  ThanhPho(e?, diachi?) {
+    // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
+    this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
+    this.quanhuyens.splice(0, this.quanhuyens.length);
+    // Clear lại xã phường
+    this.arrxaphuong.splice(0, this.arrxaphuong.length);
+    this.xaphuongs.splice(0, this.xaphuongs.length);
+    if (e === null) {
+      for (const qh in this.thanhphos) {
+        if (this.thanhphos.hasOwnProperty(qh)) {
+          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
+            this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+            for (const arr2 in this.arrquanhuyen1[0]) {
+              if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+                if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
                   this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
                 }
               }
             }
+            this.arrxaphuong.push(this.quanhuyens[0].wards);
+            for (const arr in this.arrxaphuong[0]) {
+              if (this.arrxaphuong[0].hasOwnProperty(arr)) {
+                if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
+                  this.xaphuongs.push(this.arrxaphuong[0][arr]);
+                }
+              }
+            }
           }
         }
       }
+      this.HienThiQuanHuyen_XaPhuong(null, diachi);
     }
-
-    HienThiQuanHuyen_XaPhuong(evt, diachi) {
-      // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
-      this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
-      this.quanhuyens.splice(0, this.quanhuyens.length);
-      this.arrxaphuong.splice(0, this.arrxaphuong.length);
-      this.xaphuongs.splice(0, this.xaphuongs.length);
+    else {
+      this.khachhang.Dia_chi.Huyen_Quan = '';
+      this.khachhang.Dia_chi.Xa_Phuong = '';
+      e.preventDefault();
+      const target = e.target;
+      this.thanhpho = target.value;
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
-          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
+          if (this.thanhphos[qh].name === this.thanhpho) {
             this.arrquanhuyen1.push(this.thanhphos[qh].districts);
             for (const arr2 in this.arrquanhuyen1[0]) {
               if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
@@ -238,9 +217,53 @@ export class CustomerComponent implements OnInit {
           }
         }
       }
+    }
+  }
+
+  HienThiQuanHuyen_XaPhuong(evt, diachi) {
+    // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
+    this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
+    this.quanhuyens.splice(0, this.quanhuyens.length);
+    this.arrxaphuong.splice(0, this.arrxaphuong.length);
+    this.xaphuongs.splice(0, this.xaphuongs.length);
+    for (const qh in this.thanhphos) {
+      if (this.thanhphos.hasOwnProperty(qh)) {
+        if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
+          this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+          for (const arr2 in this.arrquanhuyen1[0]) {
+            if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+              this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
+            }
+          }
+        }
+      }
+    }
+    for (const xp in this.quanhuyens) {
+      if (this.quanhuyens.hasOwnProperty(xp)) {
+        if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
+          this.arrxaphuong.push(this.quanhuyens[xp].wards);
+          for (const arr2 in this.arrxaphuong[0]) {
+            if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
+              this.xaphuongs.push(this.arrxaphuong[0][arr2]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
+  QuanHuyen(e) {
+    this.khachhang.Dia_chi.Xa_Phuong = '';
+    this.xaphuongs.splice(0, this.xaphuongs.length);
+    this.arrxaphuong.splice(0, this.arrxaphuong.length);
+    e.preventDefault();
+    const target = e.target;
+    this.quanhuyen = target.value;
+    if (this.quanhuyen !== '') {
       for (const xp in this.quanhuyens) {
         if (this.quanhuyens.hasOwnProperty(xp)) {
-          if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
+          if (this.quanhuyens[xp].name === this.quanhuyen) {
             this.arrxaphuong.push(this.quanhuyens[xp].wards);
             for (const arr2 in this.arrxaphuong[0]) {
               if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
@@ -250,33 +273,10 @@ export class CustomerComponent implements OnInit {
           }
         }
       }
-    }
-  
-    // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
-    QuanHuyen(e) {
-      this.khachhang.Dia_chi.Xa_Phuong = '';
+    } else {
       this.xaphuongs.splice(0, this.xaphuongs.length);
-      this.arrxaphuong.splice(0, this.arrxaphuong.length);
-      e.preventDefault();
-      const target = e.target;
-      this.quanhuyen = target.value;
-      if (this.quanhuyen !== '') {
-        for (const xp in this.quanhuyens) {
-          if (this.quanhuyens.hasOwnProperty(xp)) {
-            if (this.quanhuyens[xp].name === this.quanhuyen) {
-              this.arrxaphuong.push(this.quanhuyens[xp].wards);
-              for (const arr2 in this.arrxaphuong[0]) {
-                if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
-                  this.xaphuongs.push(this.arrxaphuong[0][arr2]);
-                }
-              }
-            }
-          }
-        }
-      } else {
-        this.xaphuongs.splice(0, this.xaphuongs.length);
-      }
     }
+  }
   // Hàm xử lý sự kiện checked tại ô checkbox tổng
   KTCheckedAll() {
     if (this.checkAll) {
@@ -392,10 +392,9 @@ export class CustomerComponent implements OnInit {
     khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
     this.khachhang = khachhangUpdate;
     this.khachhang.Dia_chi = khachhangUpdate.Dia_chi[0];
-    console.log(this.khachhang.Dia_chi.Huyen_Quan)
-    for (const i in this.dsloaicay){
-      for (const j in khachhangUpdate.So_thich){
-        if (this.dsloaicay[i]._id === khachhangUpdate.So_thich[j].Loai_cay){
+    for (const i in this.dsloaicay) {
+      for (const j in khachhangUpdate.So_thich) {
+        if (this.dsloaicay[i]._id === khachhangUpdate.So_thich[j].Loai_cay) {
           this.so_thich.push(this.dsloaicay[i])
         }
       }
@@ -486,43 +485,7 @@ export class CustomerComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // // Hàm kiểm tra thông tin
-  // KTNull(khachhang: KhachHangModel) {
-  //   const hoten = khachhang.Ho_ten;
-  //   const ngaysinh = khachhang.Ngay_sinh;
-  //   const KHId = khachhang.Khach_hang_id;
-  //   const diachi = khachhang.Dia_chi;
-  //   const gioitinh = khachhang.Gioi_tinh;
-  //   const sdt = khachhang.So_dien_thoai;
-  //   const email = khachhang.Email;
-  //   const cmnd = khachhang.CMND_CCCD;
-  //   const matkhau = khachhang.Mat_khau;
-  //   const sothich = khachhang.So_thich
-  //   const thongtinkhachhang = [];
-  //   thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
-  //     diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
-  //   for (const i in thongtinkhachhang) {
-  //     if (thongtinkhachhang.hasOwnProperty(i)) {
-  //       if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null || sothich.length <= 0) {
-  //         window.alert('Hãy nhập đầy đủ thông tin!');
-  //         this.KiemTraThongTin = false;
-  //         break;
-  //       } else {
-  //         this.KiemTraThongTin = true;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // // Hàm kiểm tra giá trị giới tính
-  // KTGioiTinh() {
-  //   if (this.khachhang.Gioi_tinh !== '') {
-  //     document.getElementById('mes_gioitinh').style.display = 'none';
-  //   } else {
-  //     document.getElementById('mes_gioitinh').style.display = 'block';
-
-  //   }
-  // }
+ 
 
   // Hàm thực hiện thêm tài khoản nhân viên
   ThemKhachHang() {
@@ -537,24 +500,24 @@ export class CustomerComponent implements OnInit {
       this.khachhang.So_thich.splice(0, 1)
       // this.KTNull(this.khachhang);
       // if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
-        this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
-          if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
-            this.ThongTinGuiEmailTaiKhoan.push({
-              Khach_hang_id: this.khachhang.Khach_hang_id, Email: this.khachhang.Email,
-              Ho_ten: this.khachhang.Ho_ten, Mat_khau: this.khachhang.Mat_khau
-            });
-            // Tạo giỏ hàng
-            this.giohangService.ThemGioHang({ KhachHang_id: this.khachhang.Khach_hang_id }).subscribe()
+      this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
+        if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
+          this.ThongTinGuiEmailTaiKhoan.push({
+            Khach_hang_id: this.khachhang.Khach_hang_id, Email: this.khachhang.Email,
+            Ho_ten: this.khachhang.Ho_ten, Mat_khau: this.khachhang.Mat_khau
+          });
+          // Tạo giỏ hàng
+          this.giohangService.ThemGioHang({ KhachHang_id: this.khachhang.Khach_hang_id }).subscribe()
 
-            this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
-            alert(data_them)
-            //  this.DongModal();
-            this.modalService.dismissAll()
-          }
-          else {
-            window.alert(data_them);
-          }
-        });
+          this.GuiMailKhachHang(this.ThongTinGuiEmailTaiKhoan);
+          alert(data_them)
+          //  this.DongModal();
+          this.modalService.dismissAll()
+        }
+        else {
+          window.alert(data_them);
+        }
+      });
       // }
 
     } catch (error) {
@@ -602,13 +565,13 @@ export class CustomerComponent implements OnInit {
   CapNhatKhachHang() {
     // this.KTNull(this.khachhang);
     // if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
-      this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
-        if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
-          this.DongModal();
-        } else {
-          window.alert(data_capnhat);
-        }
-      });
+    this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
+      if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
+        this.DongModal();
+      } else {
+        window.alert(data_capnhat);
+      }
+    });
     // }
   }
 
@@ -630,6 +593,7 @@ export class CustomerComponent implements OnInit {
 
   // Hàm chuyển đổi tiếng Việt sang tiếng Anh
   removeAccents(str) {
+    console.log(str)
     return str.normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd').replace(/Đ/g, 'D')
@@ -642,7 +606,7 @@ export class CustomerComponent implements OnInit {
     if (text === '') {
       this.getdskhachhang();
     } else {
-      this.khachhangs = this.khachhangs.filter(res => {
+      this.khachhangs = this.dskhachhangsearch.filter(res => {
         const hoten = this.removeAccents(res.Ho_ten);
         const maso = this.removeAccents(res.Khach_hang_id);
         const tmp2 = text.replace(/·/g, '');
@@ -655,6 +619,7 @@ export class CustomerComponent implements OnInit {
         }
       });
     }
+    this.DiaChi()
   }
 
   SearchByOption(value) {
@@ -668,25 +633,15 @@ export class CustomerComponent implements OnInit {
         this.khachhangs.reverse();
       } else {
         const text = this.removeAccents(target);
-        this.khachhangs = this.khachhangs.filter(res => {
+        this.khachhangs = this.dskhachhangsearch.filter(res => {
           const gioitinh = this.removeAccents(res.Gioi_tinh);
           return gioitinh.match(text);
         });
       }
-      // this.ChuyenTrang(this.p)
+     this.DiaChi()
     }
   }
-
-  // // Bắt sự kiện chọn ngày
-  // ChangeDate(e) {
-  //   e.preventDefault();
-  //   const target = e.target;
-  //   if (target.id === 'NgaySinh') {
-  //     document.getElementById('errNgaySinh').style.display = 'none'
-  //   }
-  //   this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
-  // }
-
+ 
 
   KiemTraNgaySinh(ngaysinh) {
     if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
@@ -713,10 +668,26 @@ export class CustomerComponent implements OnInit {
 
   }
 
-  ChuyenTrang(number) {
-    this.khachhangs = []
+  DiaChi(){
     this.dsdiachi = []
     this.arrdiachi = []
+    for (const khachhang in this.khachhangs) {
+      if (this.khachhangs.hasOwnProperty(khachhang)) {
+        this.dsdiachi.push(this.khachhangs[khachhang].Dia_chi);
+      }
+    }
+    for (const dc in this.dsdiachi) {
+      if (this.dsdiachi.hasOwnProperty(dc)) {
+        this.arrdiachi.push(this.dsdiachi[dc][0]);
+      }
+    }
+  }
+
+  ChuyenTrang(number) {
+    this.khachhangs = []
+    // this.dsdiachi = []
+    // this.arrdiachi = []
+    this.checked = []
     for (let i = 0; i < 5; i++) {
       if ((this.dskhachhang[((number - 1) * 5) + i]) !== undefined) {
         this.khachhangs.push(this.dskhachhang[((number - 1) * 5) + i]);
@@ -729,17 +700,8 @@ export class CustomerComponent implements OnInit {
       }
     }
 
-    for (const khachhang in this.khachhangs) {
-      if (this.khachhangs.hasOwnProperty(khachhang)) {
-        this.dsdiachi.push(this.khachhangs[khachhang].Dia_chi);
-      }
-    }
-
-    for (const dc in this.dsdiachi) {
-      if (this.dsdiachi.hasOwnProperty(dc)) {
-        this.arrdiachi.push(this.dsdiachi[dc][0]);
-      }
-    }
+    this.DiaChi()
+   
     this.UnChecked()
   }
 }

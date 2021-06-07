@@ -14,7 +14,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
-import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 
 
 @NgModule({
@@ -22,7 +21,6 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    SuggestionsComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +47,6 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    SuggestionsComponent
   ]
 })
 export class SharedModule { }

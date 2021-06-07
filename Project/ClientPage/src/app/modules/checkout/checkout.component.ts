@@ -302,7 +302,7 @@ export class CheckoutComponent implements OnInit {
         }
       }
     }
-  
+
 
     this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
       this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()

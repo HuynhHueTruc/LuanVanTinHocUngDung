@@ -152,7 +152,7 @@ NhanVienModel.findOne({
                 res.json('Email nhân viên này đã tồn tại!');
             }else{
                 // 2 điều kiện trên đều thỏa sẽ tạo ra và return về một đối tượng Khách hàng mới và lưu vào DB
-                return NhanVienModel.create({
+                 NhanVienModel.create({
                     Nhan_vien_id : Nhan_vien_id,
                     Ma_so: Ma_so,
                     Ho_ten : Ho_ten,
@@ -166,7 +166,7 @@ NhanVienModel.findOne({
                     Quyen_su_dung : Quyen_su_dung,
                     Thoi_gian_tao : Thoi_gian_tao,
                     Thoi_gian_cap_nhat : Thoi_gian_cap_nhat,
-                })
+                }).then(dt =>{})
             }
         })
         .then(data => { // ĐỐi tượng nếu tạo thành công sẽ được return về và lưu trong data, sau đó thông báo thành công
