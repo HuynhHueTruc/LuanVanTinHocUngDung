@@ -1,21 +1,21 @@
-.chart{
+.chart {
   height: 100%;
   width: 100%;
 }
 
-.ds{
-  height: 550px;
-    overflow-x:auto;
-    overflow-y:auto;
+.ds {
+  max-height: 550px;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
-#chitiet{
+#chitiet {
   background-color: transparent;
   color: darkcyan;
   border: none;
 
 }
 
-#chitiet:focus{
+#chitiet:focus {
   outline: none;
 }

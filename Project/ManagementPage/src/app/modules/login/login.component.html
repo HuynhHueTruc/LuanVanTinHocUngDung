@@ -18,10 +18,10 @@
 
       <div class="login">
         <div class="group">
-          <input type="text" [(ngModel)]="tendangnhap" #firstname="ngModel" id="firstname" name="firstname" placeholder="Nhập họ tên của bạn!" required="">
+          <input type="text" [(ngModel)]="tendangnhap" #firstname="ngModel" id="firstname" name="firstname" placeholder="Tên đăng nhập" required="">
         </div>
         <div class="group">
-          <input type="password" [(ngModel)]="matkhau" #password="ngModel" class="lock" name="password" placeholder="Nhập mật khẩu của bạn!"  id="password1" required="">
+          <input type="password" [(ngModel)]="matkhau" #password="ngModel" class="lock" name="password" placeholder="Mật khẩu"  id="password1" required="">
         </div>
         <div class="group">
           <input type="checkbox" id="hienthimatkhau" required  [checked]="checkboxstate" (change)="An_HienMatKhau()">

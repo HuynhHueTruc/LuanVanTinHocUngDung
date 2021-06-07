@@ -48,6 +48,9 @@ export class ReceiptComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.hoadonnhapService.getRefeshPage().subscribe(() => {
+      this.getdshoadon()
+    })
     this.getdshoadon()
     this.dropdownSettings = {
       singleSelection: true,

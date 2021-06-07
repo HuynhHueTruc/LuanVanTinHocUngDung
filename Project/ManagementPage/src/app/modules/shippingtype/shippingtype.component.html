@@ -45,7 +45,15 @@
       <div class="card">
         <div class="card">
           <div class="card-header text-center font-weight-bold">
-            <h5>THÔNG TIN HÌNH THỨC VẬN CHUYỂN</h5>
+            <div class="row"> 
+              <div class="col-sm-8 d-flex justify-content-end">
+                <h5>THÔNG TIN HÌNH THỨC VẬN CHUYỂN</h5>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-end">
+                <p class="tong_hinh_thuc">Tổng số hình thức: {{dshinhthucvanchuyen.length}}</p>
+
+              </div>
+            </div>
           </div>
 
           <div class="card-header button" id="divbutton">
@@ -110,7 +118,6 @@
   </div>
 </div>
 </div>
-<p class="tong_hinh_thuc">Tổng số hình thức: {{dshinhthucvanchuyen.length}}</p>
 
 
 <!-- Dialog tạo tài khoản -->
@@ -121,20 +128,10 @@
     </div>
     <div class="modal-body">
       <form #shipFormCreate="ngForm" >
-        <!-- <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Mã số:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ma_so.invalid && Ma_so.touched" #Ma_so="ngModel" pattern="^[A-Za-z0-9 _-]{3,32}$" class="form-control " id="Ma_so"  [(ngModel)]="hinhthucvanchuyen._id"  name="Ma_so" placeholder=" Enter code" required >
-          </div>
-          <div class="mess-err" *ngIf="Ma_so.errors && (Ma_so.invalid || Ma_so.touched)">
-            <small class="err text-danger"*ngIf="Ma_so.errors.required"> Mã số không được trống! </small>
-            <small class="err text-danger"*ngIf="Ma_so.errors.pattern">  Mã số không được có dấu.  Độ dài mã só trong khoảng 3 đến 32 ký tự! </small>
-          </div>
-       </div> -->
+       
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên hình thức:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ten_hinh_thuc.invalid && Ten_hinh_thuc.touched" #Ten_hinh_thuc="ngModel"  class="form-control " id="Ten_hinh_thuc"  [(ngModel)]="hinhthucvanchuyen.Ten_hinh_thuc" name="Ten_hinh_thuc" placeholder=" Enter name shippingtype" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="Ten_hinh_thuc.invalid && Ten_hinh_thuc.touched" #Ten_hinh_thuc="ngModel"  class="form-control " id="Ten_hinh_thuc"  [(ngModel)]="hinhthucvanchuyen.Ten_hinh_thuc" name="Ten_hinh_thuc" placeholder="Tên hình thức vận chuyển" required >
           </div>
           <div class="mess-err" *ngIf="Ten_hinh_thuc.errors && (Ten_hinh_thuc.invalid || Ten_hinh_thuc.touched)">
             <small class="err text-danger"*ngIf="Ten_hinh_thuc.errors.required"> Tên hình thức không được trống! </small>
@@ -143,12 +140,11 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Chi phí:</label>
-          <div class="col-sm-8">
-            <input type="number" [class.is-invalid]="Chi_phi.invalid && Chi_phi.touched"  #Chi_phi="ngModel" class="form-control" id="Chi_phi" [(ngModel)]="hinhthucvanchuyen.Gia" name="Chi_phi" placeholder=" Enter price" required >
+          <div class="col-sm-12">
+            <input type="number" [class.is-invalid]="Chi_phi.invalid && Chi_phi.touched"  #Chi_phi="ngModel" class="form-control" id="Chi_phi" [(ngModel)]="hinhthucvanchuyen.Gia" name="Chi_phi" placeholder="Giá" required >
           </div>
           <div class="mess-err" *ngIf="Chi_phi.errors && (Chi_phi.invalid || Chi_phi.touched)">
-            <small class="err text-danger"*ngIf="Chi_phi.errors.required"> Chi phí không được trống! </small>
+            <small class="err text-danger" *ngIf="Chi_phi.errors.required"> Chi phí không được trống! </small>
           </div>
         </div>
       </form>

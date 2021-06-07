@@ -46,8 +46,28 @@
       <div class="card">
         <div class="card">
           <div class="card-header text-center font-weight-bold">
-            <h5>THÔNG TIN NHÀ CUNG CẤP</h5>
+            <div class="row">
+              <div class="col-sm-4">
+                <h5>THÔNG TIN NHÀ CUNG CẤP</h5>
+              </div>
+              <div class="col-sm-4 d-flex justify-content-center">
+               
+                  <button (click)="HienThiMa()" class="controlcheckbox" id="HienThiMa">
+                    Hiển thị mã sản phẩm
+                  </button>
+                  <button (click)="AnMa()" class="controlcheckbox" id="AnMa">
+                    Ẩn mã sản phẩm
+                  </button>
+                </div>
+              
+              <div class="col-sm-4 d-flex justify-content-end">
+                <p class="tong_nhan_vien">Tổng số nhà cung cấp: {{dsnhacungcap.length}}</p>
+              </div>
+            </div>
+           
           </div>
+
+  
 
           <div class="card-header button" id="divbutton">
             <button (click)="open_delete(content_delete, null)" class="controlcheckbox">
@@ -71,7 +91,7 @@
                   </div>
                 </th>
                 <th class="align-middle">STT</th>
-                <th class="align-middle">Mã số</th>
+                <th class="align-middle" *ngIf="hienthi">Mã số</th>
                 <th class="align-middle">Tên nhà cung cấp</th>
                 <th class="align-middle">Địa chỉ</th>
                 <th class="align-middle">Số điện thoại</th>
@@ -90,9 +110,13 @@
                   </div>
                 </td>
                 <td class="content">{{i + 1}}</td>
-                <td class="content">{{eachNCC._id}}</td>
-                <td>{{eachNCC.Ten}}</td>
-                <td >{{arrdiachi[i].Xa_Phuong}}, {{arrdiachi[i].Huyen_Quan}}, {{arrdiachi[i].Tinh_ThanhPho}}</td>
+                <td class="content" *ngIf="hienthi">{{eachNCC._id}}</td>
+                <td><div class="width">
+                  {{eachNCC.Ten}}
+                </div></td>
+                <td ><div class="width">
+                  {{arrdiachi[i].Xa_Phuong}}, {{arrdiachi[i].Huyen_Quan}}, {{arrdiachi[i].Tinh_ThanhPho}}
+                </div></td>
                 <td class="content">{{eachNCC.So_dien_thoai}}</td>
                 <td class="content">{{eachNCC.Email}}</td>
                <td class="content d-flex justify-content-center dmn">
@@ -129,7 +153,6 @@
   </div>
 </div>
 </div>
-<p class="tong_nhan_vien">Tổng số nhà cung cấp: {{dsnhacungcap.length}}</p>
 
 
 <!-- Dialog tạo -->
@@ -142,9 +165,8 @@
       <form #staffFormCreate="ngForm" name="DangKyTaiKhoanNhaCungCap">
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên nhà cung cấp:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Nha_cung_cap.invalid && Nha_cung_cap.touched" #Nha_cung_cap="ngModel"  class="form-control " id="Nha_cung_cap"  [(ngModel)]="nhacungcap.Ten" name="Ho_ten" placeholder=" Enter name supplier" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="Nha_cung_cap.invalid && Nha_cung_cap.touched" #Nha_cung_cap="ngModel"  class="form-control " id="Nha_cung_cap"  [(ngModel)]="nhacungcap.Ten" name="Ho_ten" placeholder="Tên nhà cung cấp" required >
           </div>
           <div class="mess-err" *ngIf="Nha_cung_cap.errors && (Nha_cung_cap.invalid || Nha_cung_cap.touched)">
             <small class="err text-danger"*ngIf="Nha_cung_cap.errors.required"> Tên nhà cung cấp không được trống! </small>
@@ -153,9 +175,8 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email:</label>
-          <div class="col-sm-8">
-            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhacungcap.Email" name="Email" placeholder=" Enter email supplier" required >
+          <div class="col-sm-12">
+            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhacungcap.Email" name="Email" placeholder="Địa chỉ Email" required >
           </div>
           <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
             <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
@@ -164,9 +185,8 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số điện thoại:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhacungcap.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter number phone supplier" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhacungcap.So_dien_thoai" name="So_dien_thoai" placeholder="Số điện thoại" required >
           </div>
           <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
             <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
@@ -176,46 +196,52 @@
 
 
         <div class="form-group row" ngModelGroup="Dia_chi">
-          <label class="col-sm-4 col-form-label">Địa chỉ:</label>
-          <div class="col-sm-8">
-            <small>Thành phố</small>
-            <select id="provinces" [(ngModel)]="nhacungcap.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth" (change)="ThanhPho($event, null)" >
-              <option class="item" selected disabled  value="">-- Provinces --</option>
-              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value] = "eachThanhPho.name" >{{eachThanhPho.name}}</option>
+
+          <div class="col-sm-12">
+            <select id="provinces" [(ngModel)]="nhacungcap.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
+              name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth "
+              (change)="ThanhPho($event, null)">
+              <option class="item" selected disabled value="">-- Thành phố --</option>
+              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
+                {{eachThanhPho.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+            <div class="mess-err">
+              <small id="mes_tinh_thanhpho" class="err text-danger" *ngIf="nhacungcap.Dia_chi.Tinh_ThanhPho === ''">
+                Bạn chưa chọn Tỉnh/Thành phố! </small>
             </div>
 
-            <small>Huyện/Quận</small>
-            <select id="districts"  [(ngModel)]="nhacungcap.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="QuanHuyen($event)">
-              <option class="item" selected value="">-- District --</option>
-              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value] = "eachQuanHuyen.name">{{eachQuanHuyen.name}}</option>
+            <select id="districts" [(ngModel)]="nhacungcap.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel"
+              name="calc_shipping_district" class="form-control form-control-sm border-non setwidth mt-3"
+              (change)="QuanHuyen($event)">
+              <option class="item" selected value="">-- Huyện/Quận --</option>
+              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
+                {{eachQuanHuyen.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
+            <div class="mess-err">
+              <small id="mes_huyen_quan" class="err text-danger" *ngIf="nhacungcap.Dia_chi.Huyen_Quan === ''"> Bạn
+                chưa chọn Huyện/Quận! </small>
             </div>
 
-            <small>Xã/Phường</small>
-            <select id="ward" [(ngModel)]="nhacungcap.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth" (change)="XaPhuong(null)">
-              <option class="item" selected  value="">-- Ward --</option>
-              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value] = "eachXaPhuong.name">{{eachXaPhuong.name}}</option>
+            <select id="ward" [(ngModel)]="nhacungcap.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
+              name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
+              >
+              <option class="item" selected value="">-- Xã/Phường --</option>
+              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
+                {{eachXaPhuong.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
+            <div class="mess-err">
+              <small id="mes_xa_phuong" class="errdiachi text-danger" *ngIf="nhacungcap.Dia_chi.Xa_Phuong === ''"> Bạn
+                chưa chọn Xã/Phường! </small>
             </div>
           </div>
-
         </div>
 
-
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Danh mục:</label>
-          <div class="col-sm-8">
+          <div class="col-sm-12">
 
             <ng-multiselect-dropdown
-            name="ngDMNSelect"
-            [placeholder]="'--- Category ---'"
+            name="ngDMNSelect"e
+            [placeholder]="'--- Danh mục ---'"
             [settings]="dropdownSettings"
             [data]="subdanhmuc"
             (onSelect)="onItemSelect($event, 0)"
@@ -250,9 +276,8 @@
       <form #supplierFormCreate="ngForm" >
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên nhà cung cấp:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Nha_cung_cap.invalid && Nha_cung_cap.touched" #Nha_cung_cap="ngModel"  class="form-control " id="Nha_cung_cap"  [(ngModel)]="nhacungcap.Ten" name="Ho_ten" placeholder=" Enter name supplier" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="Nha_cung_cap.invalid && Nha_cung_cap.touched" #Nha_cung_cap="ngModel"  class="form-control " id="Nha_cung_cap"  [(ngModel)]="nhacungcap.Ten" name="Ho_ten" placeholder="Tên nhà cung cấp" required >
           </div>
           <div class="mess-err" *ngIf="Nha_cung_cap.errors && (Nha_cung_cap.invalid || Nha_cung_cap.touched)">
             <small class="err text-danger"*ngIf="Nha_cung_cap.errors.required"> Tên nhà cung cấp không được trống! </small>
@@ -261,9 +286,8 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Email:</label>
-          <div class="col-sm-8">
-            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhacungcap.Email" name="Email" placeholder=" Enter email supplier" required >
+          <div class="col-sm-12">
+            <input type="email" [class.is-invalid]="Email.invalid && Email.touched"  #Email="ngModel" pattern="^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" class="form-control" id="Email" [(ngModel)]="nhacungcap.Email" name="Email" placeholder="Địa chỉ Email" required >
           </div>
           <div class="mess-err" *ngIf="Email.errors && (Email.invalid || Email.touched)">
             <small class="err text-danger"*ngIf="Email.errors.required"> Email không được trống! </small>
@@ -272,9 +296,8 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Số điện thoại:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhacungcap.So_dien_thoai" name="So_dien_thoai" placeholder=" Enter number phone supplier" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="So_dien_thoai.invalid && So_dien_thoai.touched"  #So_dien_thoai="ngModel" pattern="^0[0-9\s.-]{9}" class="form-control " id="So_dien_thoai" [(ngModel)]="nhacungcap.So_dien_thoai" name="So_dien_thoai" placeholder="Số điện thoại" required >
           </div>
           <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
             <small class="err text-danger"*ngIf="So_dien_thoai.errors.required"> Số điện thoại không được trống! </small>
@@ -284,67 +307,66 @@
 
 
         <div class="form-group row" ngModelGroup="Dia_chi">
-          <label class="col-sm-4 col-form-label">Địa chỉ:</label>
-          <div class="col-sm-8">
-            <small>Thành phố</small>
-            <select id="provinces" [(ngModel)]="nhacungcap.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth" (change)="ThanhPho($event, null)" >
-              <option class="item" selected disabled  value="">-- Provinces --</option>
-              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value] = "eachThanhPho.name" >{{eachThanhPho.name}}</option>
+
+          <div class="col-sm-12">
+            <select id="provinces" [(ngModel)]="nhacungcap.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
+              name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth "
+              (change)="ThanhPho($event, null)">
+              <option class="item" selected disabled value="">-- Thành phố --</option>
+              <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
+                {{eachThanhPho.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_tinh_thanhpho" class="err text-danger"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+            <div class="mess-err">
+              <small id="mes_tinh_thanhpho" class="err text-danger" *ngIf="nhacungcap.Dia_chi.Tinh_ThanhPho === ''">
+                Bạn chưa chọn Tỉnh/Thành phố! </small>
             </div>
 
-            <small>Huyện/Quận</small>
-            <select id="districts"  [(ngModel)]="nhacungcap.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="QuanHuyen($event)">
-              <option class="item" selected value="">-- District --</option>
-              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value] = "eachQuanHuyen.name">{{eachQuanHuyen.name}}</option>
+            <select id="districts" [(ngModel)]="nhacungcap.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel"
+              name="calc_shipping_district" class="form-control form-control-sm border-non setwidth mt-3"
+              (change)="QuanHuyen($event)">
+              <option class="item" selected value="">-- Huyện/Quận --</option>
+              <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
+                {{eachQuanHuyen.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_huyen_quan" class="err text-danger"> Bạn chưa chọn Huyện/Quận! </small>
+            <div class="mess-err">
+              <small id="mes_huyen_quan" class="err text-danger" *ngIf="nhacungcap.Dia_chi.Huyen_Quan === ''"> Bạn
+                chưa chọn Huyện/Quận! </small>
             </div>
 
-            <small>Xã/Phường</small>
-            <select id="ward" [(ngModel)]="nhacungcap.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth" (change)="XaPhuong(null)">
-              <option class="item" selected  value="">-- Ward --</option>
-              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value] = "eachXaPhuong.name">{{eachXaPhuong.name}}</option>
+            <select id="ward" [(ngModel)]="nhacungcap.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
+              name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
+              >
+              <option class="item" selected value="">-- Xã/Phường --</option>
+              <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
+                {{eachXaPhuong.name}}</option>
             </select>
-            <div class="mess-err"  >
-              <small id="mes_xa_phuong" class="errdiachi text-danger"> Bạn chưa chọn Xã/Phường! </small>
+            <div class="mess-err">
+              <small id="mes_xa_phuong" class="errdiachi text-danger" *ngIf="nhacungcap.Dia_chi.Xa_Phuong === ''"> Bạn
+                chưa chọn Xã/Phường! </small>
             </div>
           </div>
-
         </div>
-
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Danh mục khuyến mãi:</label>
-          <div class="col-sm-8">
+          <div class="col-sm-12">
 
-            <div class="form-group d-flex align-items-center" >
-              <div class="container">
-                <div class="row d-flex justify-content-end plus ">
-                  <button class="them_danh_muc" (click)="open_supplier_plus(content_info_supplier_plus)" data-controls-modal="modals_category" data-backdrop="static" data-keyboard="false">
-                   <i class="fas fa-plus">
-                     Thêm danh mục
-                   </i>
-                 </button>
-               </div>
-               <div class="row plus danhmucnho ">
-                 <span class="DMN" *ngFor="let eachDMN of DMN; let i = index">
-                   <input disabled class="emails" type="text" value={{eachDMN.Ten_danh_muc_nho}}>
-                   <sup>
-                     <button class="iconbutton controlcheckbox" (click)="XoaDanhMucNho(eachDMN)">
-                       <i class="fas fa-times"></i>
-                     </button>
-                   </sup>
-                 </span>
-               </div>
-              </div>
-            </div>
+            <ng-multiselect-dropdown
+            name="ngDMNSelect"
+            [(ngModel)]="danhmuctmp"
+            [placeholder]="'--- Danh mục ---'"
+            [settings]="dropdownSettings"
+            [data]="subdanhmuc"
+            (onSelect)="onItemSelect($event, 0)"
+            (onSelectAll)="onSelectAll($event, 0)"
+            (onDeSelect)="onItemDeSelect($event, 0)"
+            (onDeSelectAll)="onDeSelectAll($event, 0)">
+          </ng-multiselect-dropdown>
           </div>
-
+          <div class="mess-err" >
+            <small id="errTaoDanhMuc" class="err text-danger" *ngIf="danhmuctmp.length <= 0"> Bạn chưa chọn danh mục! </small>
+          </div>
         </div>
+
       </form>
     </div>
     <div class="modal-footer">

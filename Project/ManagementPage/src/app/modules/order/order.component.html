@@ -232,7 +232,6 @@
               </div>
             </div>
 
-          
           </div>
           <div class="col-sm-6">
             <div class="form-group row">
@@ -250,7 +249,7 @@
 
               <div class="col-sm-12">
                 <select id="provinces" [(ngModel)]="phieudat.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
-                  name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth"
+                  name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth "
                   (change)="ThanhPho($event, null)">
                   <option class="item" selected disabled value="">-- Thành phố --</option>
                   <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">

@@ -41,6 +41,9 @@ export class SalesComponent implements OnInit {
   constructor(private modalService: NgbModal, private khuyenmaiService: KhuyenmaiService, private danhmucService: DanhmucService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.khuyenmaiService.getRefeshPage().subscribe(dt => {
+      this.getdskhuyenmai();
+    })
     this.getdskhuyenmai();
     this.dropdownSettings = {
       singleSelection: false,
@@ -307,7 +310,8 @@ export class SalesComponent implements OnInit {
         this.khuyenmaiService.ThemKhuyenMai(this.khuyenmai).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo khuyến mãi thành công!"') {
 
-            this.DongModal();
+            // this.DongModal();
+            this.modalService.dismissAll()
           }
           else {
             window.alert(data_them);
@@ -361,7 +365,8 @@ export class SalesComponent implements OnInit {
     if (this.KiemTraThongTin && this.KiemTraNgayKhuyenMai(this.khuyenmai.Ngay_bat_dau, this.khuyenmai.Ngay_ket_thuc)) {
       this.khuyenmaiService.CapNhatKhuyenMai(this.khuyenmai).subscribe(data_capnhat => {
         if (JSON.stringify(data_capnhat) === '"Cập nhật khuyến mãi thành công!"') {
-          this.DongModal();
+         // this.DongModal();
+         this.modalService.dismissAll()
         } else {
           window.alert(data_capnhat);
         }
@@ -443,7 +448,8 @@ export class SalesComponent implements OnInit {
     this.KhuyenmaiChecked();
     this.khuyenmaiService.XoaNhieuKhuyenMai(this.arrPTTT_ID).subscribe(data_xoanhieu => {
       if (JSON.stringify(data_xoanhieu) === '"Xóa khuyến mãi thành công!"') {
-        this.DongModal();
+       // this.DongModal();
+       this.modalService.dismissAll()
       } else {
         window.alert(data_xoanhieu);
       }
@@ -453,7 +459,7 @@ export class SalesComponent implements OnInit {
   // Hàm thực hiện xóa
   XoaKhuyenmai(_id: string) {
     this.khuyenmaiService.XoaKhuyenMai(_id).subscribe(data_xoa => {
-      location.reload();
+     // location.reload();
     });
   }
 

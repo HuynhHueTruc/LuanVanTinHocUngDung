@@ -45,7 +45,15 @@
       <div class="card">
         <div class="card">
           <div class="card-header text-center font-weight-bold">
-            <h5>THÔNG TIN KHUYẾN MÃI</h5>
+            <div class="row">
+              <div class="col-sm-3">
+                <h5>THÔNG TIN KHUYẾN MÃI</h5>
+              </div>
+              <div class="col-sm-9 d-flex justify-content-end">
+                <p class="tong_khuyen_mai">Tổng số khuyến mãi: {{dskhuyenmai.length}}</p>
+              </div>
+            </div>
+           
           </div>
 
           <div class="card-header button" id="divbutton">
@@ -122,44 +130,40 @@
   </div>
 </div>
 </div>
-<p class="tong_khuyen_mai">Tổng số khuyến mãi: {{dskhuyenmai.length}}</p>
 
 
 <!-- Dialog tạo -->
 <div class="container" id="modals" >
   <ng-template #content let-modal >
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">TẠO KHUYẾN MÃI</h4>
+      <h4 class="modal-title" id="modal-basic-title">TẠO KHUYẾN MÃI MỚI</h4>
     </div>
     <div class="modal-body">
       <form #shipFormCreate="ngForm" >
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Tên khuyến mãi:</label>
-          <div class="col-sm-8">
-            <input type="text" [class.is-invalid]="Ten_khuyen_mai.invalid && Ten_khuyen_mai.touched" #Ten_khuyen_mai="ngModel"  class="form-control " id="Ten_khuyen_mai"  [(ngModel)]="khuyenmai.Ten_khuyen_mai" name="Ten_khuyen_mai" placeholder=" Enter name sales" required >
+          <div class="col-sm-12">
+            <input type="text" [class.is-invalid]="Ten_khuyen_mai.invalid && Ten_khuyen_mai.touched" #Ten_khuyen_mai="ngModel"  class="form-control " id="Ten_khuyen_mai"  [(ngModel)]="khuyenmai.Ten_khuyen_mai" name="Ten_khuyen_mai" placeholder="Tên khuyến mãi" required >
           </div>
           <div class="mess-err" *ngIf="Ten_khuyen_mai.errors && (Ten_khuyen_mai.invalid || Ten_khuyen_mai.touched)">
-            <small class="err text-danger"*ngIf="Ten_khuyen_mai.errors.required"> Tên khuyến mãi không được trống! </small>
+            <small class="err text-danger"*ngIf="Ten_khuyen_mai.errors.required"> Tên khuyến mãi đang trống! </small>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Giá trị:</label>
-          <div class="col-sm-8">
-            <input type="number" [class.is-invalid]="Gia_tri.invalid && Gia_tri.touched" #Gia_tri="ngModel"  class="form-control " id="Gia_tri"  [(ngModel)]="khuyenmai.Gia_tri" name="Gia_tri" placeholder=" Enter name discount" required >
+          <div class="col-sm-12">
+            <input type="number" [class.is-invalid]="Gia_tri.invalid && Gia_tri.touched" #Gia_tri="ngModel"  class="form-control " id="Gia_tri"  [(ngModel)]="khuyenmai.Gia_tri" name="Gia_tri" placeholder="Giá trị khuyến mãi" required >
           </div>
           <div class="mess-err" *ngIf="Gia_tri.errors && (Gia_tri.invalid || Gia_tri.touched)">
-            <small class="err text-danger"*ngIf="Gia_tri.errors.required"> Giá không được trống! </small>
+            <small class="err text-danger"*ngIf="Gia_tri.errors.required"> Giá trị khuyến mãi đang trống! </small>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Danh mục:</label>
-          <div class="col-sm-8">
+          <div class="col-sm-12">
 
             <ng-multiselect-dropdown
             name="ngDMNSelect"
-            [placeholder]="'--- Category ---'"
+            [placeholder]="'--- Danh mục sản phẩm ---'"
             [settings]="dropdownSettings"
             [data]="subdanhmuc"
             (onSelect)="onItemSelect($event, 0)"
@@ -169,29 +173,27 @@
           </ng-multiselect-dropdown>
           </div>
           <div class="mess-err" >
-            <small id="errTaoDanhMuc" class="err text-danger"> Bạn chưa chọn danh mục! </small>
+            <small id="errTaoDanhMuc" class="err text-danger"> Danh mục sản phẩm chưa được chọn! </small>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Ngày bắt đầu:</label>
-          <div class="col-sm-8">
-            <input type="date" [class.is-invalid]="Ngay_BD.invalid && Ngay_BD.touched" #Ngay_BD="ngModel"  class="form-control " id="Ngay_BD"  [(ngModel)]="khuyenmai.Ngay_bat_dau" name="Ngay_BD" placeholder=" Enter name start date" (change)="ChangeDate($event)" >
+          <div class="col-sm-12">
+            <input type="date" [class.is-invalid]="Ngay_BD.invalid && Ngay_BD.touched" #Ngay_BD="ngModel"  class="form-control " id="Ngay_BD"  [(ngModel)]="khuyenmai.Ngay_bat_dau" name="Ngay_BD" placeholder="Ngày bắt đầu" (change)="ChangeDate($event)" >
           </div>
           <div class="mess-err" >
-            <small id="errNgayBatDau" class="err text-danger"> Bạn chưa chọn ngày bắt đầu! </small>
+            <small id="errNgayBatDau" class="err text-danger"> Ngày bắt đầu chưa được chọn! </small>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Ngày kết thúc:</label>
-          <div class="col-sm-8">
-            <input type="date" [class.is-invalid]="Ngay_KT.invalid && Ngay_KT.touched" #Ngay_KT="ngModel"  class="form-control " id="Ngay_KT"  [(ngModel)]="khuyenmai.Ngay_ket_thuc" name="Ngay_KT" placeholder=" Enter name end date" (change)="ChangeDate($event)" >
+          <div class="col-sm-12">
+            <input type="date" [class.is-invalid]="Ngay_KT.invalid && Ngay_KT.touched" #Ngay_KT="ngModel"  class="form-control " id="Ngay_KT"  [(ngModel)]="khuyenmai.Ngay_ket_thuc" name="Ngay_KT" placeholder="Ngày kết thúc" (change)="ChangeDate($event)" >
           </div>
           <div class="mess-err" >
             <div class="mess-err">
               <small id="errNgayKetThuc" class="err text-danger"> Ngày kết thúc không được trước ngày bắt đầu! </small>
-              <small id="errNgayKetThuc2" class="err text-danger">  Bạn chưa chọn ngày kết thúc! </small>
+              <small id="errNgayKetThuc2" class="err text-danger"> Ngày kết thúc chưa được chọn! </small>
             </div>
           </div>
         </div>

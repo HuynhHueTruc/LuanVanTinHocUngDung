@@ -278,7 +278,7 @@
               </div>
             </div>
             <div class="row"><label class="col-sm-12 col-form-label">Địa chỉ:</label></div>
-            <div class="form-group row" ngModelGroup="Dia_chi">
+            <!-- <div class="form-group row">
               
               <div class="col-sm-12">
                
@@ -317,10 +317,49 @@
                   <small id="mes_xa_phuong" class="errdiachi text-danger"> Xã/Phường đang trống! </small>
                 </div>
               </div>
+            </div> -->
+
+            <div class="form-group row" ngModelGroup="Dia_chi">
+
+              <div class="col-sm-12">
+                <select id="provinces" [(ngModel)]="khachhang.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel"
+                  name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth "
+                  (change)="ThanhPho($event, null)">
+                  <option class="item" selected disabled value="">-- Thành phố --</option>
+                  <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
+                    {{eachThanhPho.name}}</option>
+                </select>
+                <div class="mess-err">
+                  <small id="mes_tinh_thanhpho" class="err text-danger" *ngIf="khachhang.Dia_chi.Tinh_ThanhPho === ''">
+                    Bạn chưa chọn Tỉnh/Thành phố! </small>
+                </div>
+
+                <select id="districts" [(ngModel)]="khachhang.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel"
+                  name="calc_shipping_district" class="form-control form-control-sm border-non setwidth mt-3"
+                  (change)="QuanHuyen($event)">
+                  <option class="item" selected value="">-- Huyện/Quận --</option>
+                  <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" [value]="eachQuanHuyen.name">
+                    {{eachQuanHuyen.name}}</option>
+                </select>
+                <div class="mess-err">
+                  <small id="mes_huyen_quan" class="err text-danger" *ngIf="khachhang.Dia_chi.Huyen_Quan === ''"> Bạn
+                    chưa chọn Huyện/Quận! </small>
+                </div>
+
+                <select id="ward" [(ngModel)]="khachhang.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
+                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
+                  >
+                  <option class="item" selected value="">-- Xã/Phường --</option>
+                  <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
+                    {{eachXaPhuong.name}}</option>
+                </select>
+                <div class="mess-err">
+                  <small id="mes_xa_phuong" class="errdiachi text-danger"  *ngIf="khachhang.Dia_chi.Xa_Phuong === ''" > Bạn
+                    chưa chọn Xã/Phường! </small>
+                </div>
+              </div>
             </div>
-
-
-            <div class="form-group row">
+            <div class="form-group row ">
               <div class="col-sm-12">
 
                 <ng-multiselect-dropdown name="ngInterestsSelect" [placeholder]="'--- Sở thích ---'"
@@ -547,7 +586,7 @@
 <div class="container" id="modals_mails">
   <ng-template #content_mails let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-mails">GỬI MAIL KHÁCH HÀNG</h4>
+      <h4 class="modal-title" id="modal-basic-title-mails">SOẠN MAIL</h4>
     </div>
     <div class="modal-body">
       <form #customerFormSendMail="ngForm" name="GuiMailKhachHang">
@@ -586,7 +625,7 @@
                   class="form-control " id="chu_de" [(ngModel)]="chu_de" name="chu_de" required>
               </div>
               <div class="mess-err" *ngIf="Chu_de.errors && (Chu_de.invalid || Chu_de.touched)">
-                <small class="err text-danger" *ngIf="Chu_de.errors.required">Không có chủ đề! </small>
+                <small class="err text-danger" *ngIf="Chu_de.errors.required">Chủ đề đang trống! </small>
                 <!-- <small class="err text-danger"*ngIf="Ho_ten.errors.pattern">  Độ dài tên đăng nhập trong khoảng 1 đến 100 ký tự! </small> -->
               </div>
 

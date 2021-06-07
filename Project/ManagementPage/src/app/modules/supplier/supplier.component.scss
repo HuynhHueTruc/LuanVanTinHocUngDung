@@ -113,6 +113,9 @@
 
   .setwidth{
     width: 100% !important;
+    border-radius: 4px;
+    height: 36.4px !important;
+    padding-top: 6px !important;
   }
 
   .button{
@@ -140,7 +143,7 @@
   }
 
   .ds{
-    height: 567.4px;
+    height: 594px;
     overflow-x:auto;
     overflow-y:auto;
   }
@@ -206,4 +209,14 @@
   }
 .dmn{
   height: max-content;
+}
+
+.width{
+  width: 200px;
+}
+#AnMa{
+  display: none;
+}
+::-webkit-scrollbar {
+  display: none;
 }

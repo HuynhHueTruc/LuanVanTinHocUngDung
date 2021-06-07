@@ -146,62 +146,69 @@ export class CustomerComponent implements OnInit {
     }
     return this.text;
   }
-
-  // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
-  ThanhPho(e?, diachi?) {
-
-    // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
-    this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
-    this.quanhuyens.splice(0, this.quanhuyens.length);
-
-    // Clear lại xã phường
-    this.arrxaphuong.splice(0, this.arrxaphuong.length);
-    this.xaphuongs.splice(0, this.xaphuongs.length);
-
-    if (e === null) {
-      for (const qh in this.thanhphos) {
-        if (this.thanhphos.hasOwnProperty(qh)) {
-          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
-            this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-
-            for (const arr2 in this.arrquanhuyen1[0]) {
-              if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
-                if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
-                  this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-
+    // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
+    ThanhPho(e?, diachi?) {
+      // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
+      this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
+      this.quanhuyens.splice(0, this.quanhuyens.length);
+      // Clear lại xã phường
+      this.arrxaphuong.splice(0, this.arrxaphuong.length);
+      this.xaphuongs.splice(0, this.xaphuongs.length);
+      if (e === null) {
+        for (const qh in this.thanhphos) {
+          if (this.thanhphos.hasOwnProperty(qh)) {
+            if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
+              this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+              for (const arr2 in this.arrquanhuyen1[0]) {
+                if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+                  if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
+                    this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
+                  }
+                }
+              }
+              this.arrxaphuong.push(this.quanhuyens[0].wards);
+              for (const arr in this.arrxaphuong[0]) {
+                if (this.arrxaphuong[0].hasOwnProperty(arr)) {
+                  if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
+                    this.xaphuongs.push(this.arrxaphuong[0][arr]);
+                  }
                 }
               }
             }
-            this.arrxaphuong.push(this.quanhuyens[0].wards);
-
-            for (const arr in this.arrxaphuong[0]) {
-              if (this.arrxaphuong[0].hasOwnProperty(arr)) {
-
-                if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
-                  this.xaphuongs.push(this.arrxaphuong[0][arr]);
+          }
+        }
+        this.HienThiQuanHuyen_XaPhuong(null, diachi);
+      }
+      else {
+        this.khachhang.Dia_chi.Huyen_Quan = '';
+        this.khachhang.Dia_chi.Xa_Phuong = '';
+        e.preventDefault();
+        const target = e.target;
+        this.thanhpho = target.value;
+        for (const qh in this.thanhphos) {
+          if (this.thanhphos.hasOwnProperty(qh)) {
+            if (this.thanhphos[qh].name === this.thanhpho) {
+              this.arrquanhuyen1.push(this.thanhphos[qh].districts);
+              for (const arr2 in this.arrquanhuyen1[0]) {
+                if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
+                  this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
                 }
               }
             }
           }
         }
       }
-      this.HienThiQuanHuyen_XaPhuong(null, diachi);
     }
-    else {
-      this.khachhang.Dia_chi.Huyen_Quan = '';
-      this.khachhang.Dia_chi.Xa_Phuong = '';
 
-      document.getElementById('mes_tinh_thanhpho').style.display = 'none';
-      e.preventDefault();
-      const target = e.target;
-      this.thanhpho = target.value;
-
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
+    HienThiQuanHuyen_XaPhuong(evt, diachi) {
+      // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
+      this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
+      this.quanhuyens.splice(0, this.quanhuyens.length);
+      this.arrxaphuong.splice(0, this.arrxaphuong.length);
+      this.xaphuongs.splice(0, this.xaphuongs.length);
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
-          if (this.thanhphos[qh].name === this.thanhpho) {
+          if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
             this.arrquanhuyen1.push(this.thanhphos[qh].districts);
             for (const arr2 in this.arrquanhuyen1[0]) {
               if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
@@ -211,83 +218,9 @@ export class CustomerComponent implements OnInit {
           }
         }
       }
-
-    }
-  }
-
-  HienThiQuanHuyen_XaPhuong(evt, diachi) {
-    if (evt === null) {
-      document.getElementById('mes_xa_phuong').style.display = 'none';
-
-    } else {
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-      this.khachhang.Dia_chi.Xa_Phuong = '';
-    }
-
-    // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
-    this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
-    this.quanhuyens.splice(0, this.quanhuyens.length);
-    this.arrxaphuong.splice(0, this.arrxaphuong.length);
-    this.xaphuongs.splice(0, this.xaphuongs.length);
-
-    for (const qh in this.thanhphos) {
-      if (this.thanhphos.hasOwnProperty(qh)) {
-        if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
-          this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-          for (const arr2 in this.arrquanhuyen1[0]) {
-            if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
-              this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-            }
-          }
-        }
-      }
-    }
-
-    for (const xp in this.quanhuyens) {
-      if (this.quanhuyens.hasOwnProperty(xp)) {
-        if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
-          this.arrxaphuong.push(this.quanhuyens[xp].wards);
-          for (const arr2 in this.arrxaphuong[0]) {
-            if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
-              this.xaphuongs.push(this.arrxaphuong[0][arr2]);
-            }
-          }
-        }
-      }
-    }
-    // console.log(this.xaphuongs)
-    this.KiemTraDiaChiUpdate();
-    // console.log(this.quanhuyens);
-  }
-
-  KiemTraDiaChiUpdate() {
-    if (this.khachhang.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      this.khachhang.Dia_chi.Xa_Phuong = '';
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
-    }
-  }
-  // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
-  QuanHuyen(e) {
-    document.getElementById('mes_xa_phuong').style.display = 'block';
-    this.xaphuongs.splice(0, this.xaphuongs.length);
-    this.arrxaphuong.splice(0, this.arrxaphuong.length);
-    //  console.log(this.thanhpho);
-    e.preventDefault();
-    const target = e.target;
-    // console.log(target.value);
-    this.quanhuyen = target.value;
-    // console.log(this.quanhuyen)
-    if (this.quanhuyen !== '') {
-      // console.log(this.xaphuongs)
-      // console.log(this.quanhuyen)
-
       for (const xp in this.quanhuyens) {
         if (this.quanhuyens.hasOwnProperty(xp)) {
-          if (this.quanhuyens[xp].name === this.quanhuyen) {
+          if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
             this.arrxaphuong.push(this.quanhuyens[xp].wards);
             for (const arr2 in this.arrxaphuong[0]) {
               if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
@@ -297,37 +230,33 @@ export class CustomerComponent implements OnInit {
           }
         }
       }
-    } else {
+    }
+  
+    // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
+    QuanHuyen(e) {
+      this.khachhang.Dia_chi.Xa_Phuong = '';
       this.xaphuongs.splice(0, this.xaphuongs.length);
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
-    }
-
-    if (this.khachhang.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-    }
-  }
-
-  // Kiểm tra chọn xã phường
-  XaPhuong(diachi?) {
-    if (diachi === null) {
-      if (this.khachhang.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
+      this.arrxaphuong.splice(0, this.arrxaphuong.length);
+      e.preventDefault();
+      const target = e.target;
+      this.quanhuyen = target.value;
+      if (this.quanhuyen !== '') {
+        for (const xp in this.quanhuyens) {
+          if (this.quanhuyens.hasOwnProperty(xp)) {
+            if (this.quanhuyens[xp].name === this.quanhuyen) {
+              this.arrxaphuong.push(this.quanhuyens[xp].wards);
+              for (const arr2 in this.arrxaphuong[0]) {
+                if (this.arrxaphuong[0].hasOwnProperty(arr2)) {
+                  this.xaphuongs.push(this.arrxaphuong[0][arr2]);
+                }
+              }
+            }
+          }
+        }
       } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-      }
-    } else {
-      if (this.khachhang.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
-      } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
+        this.xaphuongs.splice(0, this.xaphuongs.length);
       }
     }
-
-  }
-
   // Hàm xử lý sự kiện checked tại ô checkbox tổng
   KTCheckedAll() {
     if (this.checkAll) {

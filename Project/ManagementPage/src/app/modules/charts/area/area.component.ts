@@ -174,27 +174,28 @@ export class AreaComponent implements OnInit {
         }
       }
     }
+
     for (const i in arrKhuyenMai) {
       if (arrKhuyenMai.hasOwnProperty(i)) {
-        if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
-          giatrikhuyenmai = arrKhuyenMai[i].Gia_tri;
-          this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
+        if (new Date(arrKhuyenMai[i].Ngay_bat_dau).getTime() > new Date(eachSP.Thoi_gian_ban).getTime()
+          || new Date(arrKhuyenMai[i].Ngay_ket_thuc).getTime() < new Date(eachSP.Thoi_gian_ban).getTime()) {
+          this.arrgiatrikhuyenmai[index] = 0 // Khuyến mãi của từng sản phẩm theo thời gian của đơn hàng
+        } else {
+          if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
+            giatrikhuyenmai = arrKhuyenMai[i].Gia_tri;
+            this.arrgiatrikhuyenmai[index] = arrKhuyenMai[i].Gia_tri
+          }
         }
+
       }
     }
+    console.log(this.arrgiatrikhuyenmai)
   }
 
   DataHighChart() {
+
     let sum = 0;
     this.arrsanpham = []
-    for (const i in this.sanphambanduoc) {
-      for (const j in this.dskhuyenmai) {
-        if (new Date(this.dskhuyenmai[j].Ngay_bat_dau).getTime() > new Date(this.sanphambanduoc[i].Thoi_gian_ban).getTime()
-          || new Date(this.dskhuyenmai[j].Ngay_ket_thuc).getTime() < new Date(this.sanphambanduoc[i].Thoi_gian_ban).getTime()) {
-          this.arrgiatrikhuyenmai[i] = 0 // Khuyến mãi của từng sản phẩm theo thời gian của đơn hàng
-        }
-      }
-    }
 
     for (const i in this.thongtinsanpham) {
       for (const j in this.sanphambanduoc) {
@@ -216,6 +217,7 @@ export class AreaComponent implements OnInit {
   }
 
   TongThu() {
+
     this.tong_thu = 0
     for (const j in this.arrsanpham) {
       this.tong_thu += this.arrsanpham[j].So_luong * (this.arrsanpham[j].Gia - this.arrsanpham[j].Gia * this.arrsanpham[j].Khuyen_mai)
@@ -308,7 +310,7 @@ export class AreaComponent implements OnInit {
     };
   }
 
-  ChiTietDanhThu(content_detail){
+  ChiTietDanhThu(content_detail) {
     this.modalService.open(content_detail, { ariaLabelledBy: 'modal-detail', backdrop: 'static', keyboard: false, size: 'lg' });
 
   }
