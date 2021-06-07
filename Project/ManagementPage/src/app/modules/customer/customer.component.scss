@@ -310,3 +310,9 @@ span.To{
 #errNgaySinh2{
   display: none;
 }
+
+
+.require:after {
+  content:" *";
+  color: red;
+}

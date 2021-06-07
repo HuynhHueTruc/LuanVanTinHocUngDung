@@ -8,7 +8,7 @@ import { DiaChiDKModle } from './../../../models/DiaChi/Diachi_DK';
 import { XaPhuongModel } from './../../../models/DiaChi/xaphuong';
 import { QuanHuyenModel } from './../../../models/DiaChi/quanhuyen';
 import { DiaChiModel } from './../../../models/DiaChi/diachi';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NguoiNhanModel } from './../../../models/KhachHang/nguoinhan';
 import { ThongTinTaiKhoanEmailModel } from './../../../models/KhachHang/thongtinemail';
 import { KhachHangModel } from './../../../models/KhachHang/khachhang';
@@ -82,10 +82,30 @@ export class CustomerComponent implements OnInit {
   khachhangs: KhachHangModel[] = []
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
-  constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
-    private loaicayService: LoaicayService) { }
+  Ten_dang_nhap_pattern = "^[A-Za-z0-9 _-]{8,32}$"
+  So_dien_thoai_pattern = "^0[0-9\s.-]{9}"
+  CMND_pattern = "[0-9]{9,12}"
 
+  constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
+    private loaicayService: LoaicayService,  private formBuilder: FormBuilder,) { }
+
+    form: FormGroup;
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      // password: [null, Validators.required],
+      Ten_dang_nhap: [null, [Validators.required, Validators.pattern(this.Ten_dang_nhap_pattern)]],
+      Ho_ten: ['', Validators.required],
+      Ngay_sinh: ['', [Validators.required]],
+      So_dien_thoai: ['', [Validators.required, Validators.pattern(this.So_dien_thoai_pattern)]],
+      Gioi_tinh: ['', Validators.required],
+      CMND_CCCD: ['', [Validators.required, Validators.pattern(this.CMND_pattern)]],
+      provinces: ['', [Validators.required]],
+      districts: ['', [Validators.required]],
+      ward: ['', [Validators.required]],
+      // Mat_khau: ['', [Validators.required]],
+      so_thich: ['', [Validators.required]]
+    });
     this.KHService.getRefeshPage().subscribe(dt => {
       this.getdskhachhang();
     })
@@ -372,8 +392,15 @@ export class CustomerComponent implements OnInit {
     khachhangUpdate.Ngay_sinh = this.datePipe.transform(khachhangUpdate.Ngay_sinh, 'yyyy-MM-dd');
     this.khachhang = khachhangUpdate;
     this.khachhang.Dia_chi = khachhangUpdate.Dia_chi[0];
-    document.getElementById('errNgaySinh').style.display = 'none'
-
+    console.log(this.khachhang.Dia_chi.Huyen_Quan)
+    for (const i in this.dsloaicay){
+      for (const j in khachhangUpdate.So_thich){
+        if (this.dsloaicay[i]._id === khachhangUpdate.So_thich[j].Loai_cay){
+          this.so_thich.push(this.dsloaicay[i])
+        }
+      }
+    }
+    // this.so_thich = khachhangUpdate.So_thich
     this.ThanhPho(null, this.khachhang.Dia_chi);
 
   }
@@ -459,43 +486,43 @@ export class CustomerComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  // Hàm kiểm tra thông tin
-  KTNull(khachhang: KhachHangModel) {
-    const hoten = khachhang.Ho_ten;
-    const ngaysinh = khachhang.Ngay_sinh;
-    const KHId = khachhang.Khach_hang_id;
-    const diachi = khachhang.Dia_chi;
-    const gioitinh = khachhang.Gioi_tinh;
-    const sdt = khachhang.So_dien_thoai;
-    const email = khachhang.Email;
-    const cmnd = khachhang.CMND_CCCD;
-    const matkhau = khachhang.Mat_khau;
-    const sothich = khachhang.So_thich
-    const thongtinkhachhang = [];
-    thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
-      diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
-    for (const i in thongtinkhachhang) {
-      if (thongtinkhachhang.hasOwnProperty(i)) {
-        if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null || sothich.length <= 0) {
-          window.alert('Hãy nhập đầy đủ thông tin!');
-          this.KiemTraThongTin = false;
-          break;
-        } else {
-          this.KiemTraThongTin = true;
-        }
-      }
-    }
-  }
+  // // Hàm kiểm tra thông tin
+  // KTNull(khachhang: KhachHangModel) {
+  //   const hoten = khachhang.Ho_ten;
+  //   const ngaysinh = khachhang.Ngay_sinh;
+  //   const KHId = khachhang.Khach_hang_id;
+  //   const diachi = khachhang.Dia_chi;
+  //   const gioitinh = khachhang.Gioi_tinh;
+  //   const sdt = khachhang.So_dien_thoai;
+  //   const email = khachhang.Email;
+  //   const cmnd = khachhang.CMND_CCCD;
+  //   const matkhau = khachhang.Mat_khau;
+  //   const sothich = khachhang.So_thich
+  //   const thongtinkhachhang = [];
+  //   thongtinkhachhang.push(hoten, ngaysinh, KHId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
+  //     diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, matkhau);
+  //   for (const i in thongtinkhachhang) {
+  //     if (thongtinkhachhang.hasOwnProperty(i)) {
+  //       if (thongtinkhachhang[i] === '' || thongtinkhachhang[i] === undefined || thongtinkhachhang[i] === null || sothich.length <= 0) {
+  //         window.alert('Hãy nhập đầy đủ thông tin!');
+  //         this.KiemTraThongTin = false;
+  //         break;
+  //       } else {
+  //         this.KiemTraThongTin = true;
+  //       }
+  //     }
+  //   }
+  // }
 
-  // Hàm kiểm tra giá trị giới tính
-  KTGioiTinh() {
-    if (this.khachhang.Gioi_tinh !== '') {
-      document.getElementById('mes_gioitinh').style.display = 'none';
-    } else {
-      document.getElementById('mes_gioitinh').style.display = 'block';
+  // // Hàm kiểm tra giá trị giới tính
+  // KTGioiTinh() {
+  //   if (this.khachhang.Gioi_tinh !== '') {
+  //     document.getElementById('mes_gioitinh').style.display = 'none';
+  //   } else {
+  //     document.getElementById('mes_gioitinh').style.display = 'block';
 
-    }
-  }
+  //   }
+  // }
 
   // Hàm thực hiện thêm tài khoản nhân viên
   ThemKhachHang() {
@@ -508,8 +535,8 @@ export class CustomerComponent implements OnInit {
         this.khachhang.So_thich.push({ Loai_cay: this.so_thich[i]._id })
       }
       this.khachhang.So_thich.splice(0, 1)
-      this.KTNull(this.khachhang);
-      if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
+      // this.KTNull(this.khachhang);
+      // if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
         this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
             this.ThongTinGuiEmailTaiKhoan.push({
@@ -528,7 +555,7 @@ export class CustomerComponent implements OnInit {
             window.alert(data_them);
           }
         });
-      }
+      // }
 
     } catch (error) {
       alert(error)
@@ -573,8 +600,8 @@ export class CustomerComponent implements OnInit {
 
   // Hàm thực hiện cập nhật thông tin nhân viên
   CapNhatKhachHang() {
-    this.KTNull(this.khachhang);
-    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
+    // this.KTNull(this.khachhang);
+    // if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
       this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
         if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
           this.DongModal();
@@ -582,7 +609,7 @@ export class CustomerComponent implements OnInit {
           window.alert(data_capnhat);
         }
       });
-    }
+    // }
   }
 
   // Gửi email cho nhiều nhân viên
@@ -650,21 +677,20 @@ export class CustomerComponent implements OnInit {
     }
   }
 
-  // Bắt sự kiện chọn ngày
-  ChangeDate(e) {
-    e.preventDefault();
-    const target = e.target;
-    if (target.id === 'NgaySinh') {
-      document.getElementById('errNgaySinh').style.display = 'none'
-    }
-    this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
-  }
+  // // Bắt sự kiện chọn ngày
+  // ChangeDate(e) {
+  //   e.preventDefault();
+  //   const target = e.target;
+  //   if (target.id === 'NgaySinh') {
+  //     document.getElementById('errNgaySinh').style.display = 'none'
+  //   }
+  //   this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)
+  // }
 
 
   KiemTraNgaySinh(ngaysinh) {
     if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
       document.getElementById('errNgaySinh2').style.display = 'block'
-      document.getElementById('errNgaySinh').style.display = 'none'
       return false
     } else {
       document.getElementById('errNgaySinh2').style.display = 'none'

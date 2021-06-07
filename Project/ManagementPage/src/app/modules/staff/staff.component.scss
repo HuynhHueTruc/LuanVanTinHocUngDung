@@ -182,6 +182,9 @@ h5{
 
 .setwidth{
   width: 100% !important;
+  border-radius: 4px;
+  height: 36.4px !important;
+  padding-top: 6px !important;
 }
 
 .button{
@@ -301,3 +304,7 @@ span.To{
   display: none;
 }
 
+.require:after {
+  content:" *";
+  color: red;
+}

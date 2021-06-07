@@ -32,7 +32,7 @@ export class StaffComponent implements OnInit {
   // Chứa mật khẩu được random
   text = '';
   checkAll = false;
-  KiemTraThongTin = false;
+  // KiemTraThongTin = false;
   lengthchecked = 0;
   // Mãng ID Nhân viên, mãng mật khẩu, mãng tên nhân viên, mãng email nhân viên được check để xóa và gửi email
   arrNhanVienID = [];
@@ -77,12 +77,34 @@ export class StaffComponent implements OnInit {
   is_edit = false;
   hienthi = false
   p: number = 1
+  Ten_dang_nhap_pattern = "^[A-Za-z0-9 _-]{8,32}$"
+  So_dien_thoai_pattern = "^0[0-9\s.-]{9}"
+  CMND_pattern = "[0-9]{9,12}"
   // Đối tượng nhân viên update
   NhanVienUpdate: NhanVienModel[] = [];
   constructor(private modalService: NgbModal, private httpClient: HttpClient, private NVService: NhanvienService,
     private diachiService: DiachiService, private formBuilder: FormBuilder, private datePipe: DatePipe) { }
 
+  form: FormGroup;
+  Ten_dang_nhap = new FormControl()
+
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      // password: [null, Validators.required],
+      Ten_dang_nhap: [null, [Validators.required, Validators.pattern(this.Ten_dang_nhap_pattern)]],
+      Ho_ten: ['', Validators.required],
+      Ngay_sinh: ['', [Validators.required]],
+      So_dien_thoai: ['', [Validators.required, Validators.pattern(this.So_dien_thoai_pattern)]],
+      Gioi_tinh: ['', Validators.required],
+      CMND_CCCD: ['', [Validators.required, Validators.pattern(this.CMND_pattern)]],
+      provinces: ['', [Validators.required]],
+      districts: ['', [Validators.required]],
+      ward: ['', [Validators.required]],
+      // Mat_khau: ['', [Validators.required]],
+      QuyenSuDung: ['', [Validators.required]]
+    });
+
     this.NVService.getRefeshPage().subscribe(dt => {
       this.getdsnhanvien();
       this.geteachDiaDiem();
@@ -100,23 +122,7 @@ export class StaffComponent implements OnInit {
       this.dsnhanviensearch = res.nhanviens;
       // Lưu độ dài của danh sách nhân viên để làm checkbox
       this.lengthdsnhanvien = this.dsnhanvien.length;
-      for (const nhanvien in this.dsnhanvien) {
-        if (this.dsnhanvien.hasOwnProperty(nhanvien)) {
-          this.dsdiachi.push(this.dsnhanvien[nhanvien].Dia_chi);
-        }
-      }
 
-      for (const dc in this.dsdiachi) {
-        if (this.dsdiachi.hasOwnProperty(dc)) {
-          this.arrdiachi.push(this.dsdiachi[dc][0]);
-        }
-      }
-      // Thiết lập mảng giá trị checked = false cho các đối tượng
-      for (const length in this.dsnhanvien) {
-        if (this.dsnhanvien.hasOwnProperty(length)) {
-          this.checked.push(false);
-        }
-      }
       this.ChuyenTrang(this.p)
       // console.log(this.checked);
     });
@@ -144,34 +150,27 @@ export class StaffComponent implements OnInit {
 
   // Hàm hỗ trợ hiển thị list Thành phố trong thẻ select  + kiểm tra đã chọn tỉnh thành phố chưa
   ThanhPho(e?, diachi?) {
-
     // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
     this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
     this.quanhuyens.splice(0, this.quanhuyens.length);
-
     // Clear lại xã phường
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
-
     if (e === null) {
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
             this.arrquanhuyen1.push(this.thanhphos[qh].districts);
-
             for (const arr2 in this.arrquanhuyen1[0]) {
               if (this.arrquanhuyen1[0].hasOwnProperty(arr2)) {
                 if (this.arrquanhuyen1[0][arr2].name === diachi.Huyen_Quan) {
                   this.quanhuyens.push(this.arrquanhuyen1[0][arr2]);
-
                 }
               }
             }
             this.arrxaphuong.push(this.quanhuyens[0].wards);
-
             for (const arr in this.arrxaphuong[0]) {
               if (this.arrxaphuong[0].hasOwnProperty(arr)) {
-
                 if (this.arrxaphuong[0][arr].name === diachi.Xa_Phuong) {
                   this.xaphuongs.push(this.arrxaphuong[0][arr]);
                 }
@@ -185,15 +184,9 @@ export class StaffComponent implements OnInit {
     else {
       this.nhanvien.Dia_chi.Huyen_Quan = '';
       this.nhanvien.Dia_chi.Xa_Phuong = '';
-
-      document.getElementById('mes_tinh_thanhpho').style.display = 'none';
       e.preventDefault();
       const target = e.target;
       this.thanhpho = target.value;
-
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
       for (const qh in this.thanhphos) {
         if (this.thanhphos.hasOwnProperty(qh)) {
           if (this.thanhphos[qh].name === this.thanhpho) {
@@ -206,25 +199,16 @@ export class StaffComponent implements OnInit {
           }
         }
       }
-
     }
   }
 
+
   HienThiQuanHuyen_XaPhuong(evt, diachi) {
-    if (evt === null) {
-      document.getElementById('mes_xa_phuong').style.display = 'none';
-
-    } else {
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-      this.nhanvien.Dia_chi.Xa_Phuong = '';
-    }
-
     // Xóa mảng truy xuất quận huyện ban đầu để bắt đầu mảng mới
     this.arrquanhuyen1.splice(0, this.arrquanhuyen1.length);
     this.quanhuyens.splice(0, this.quanhuyens.length);
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
     this.xaphuongs.splice(0, this.xaphuongs.length);
-
     for (const qh in this.thanhphos) {
       if (this.thanhphos.hasOwnProperty(qh)) {
         if (this.thanhphos[qh].name === diachi.Tinh_ThanhPho) {
@@ -237,7 +221,6 @@ export class StaffComponent implements OnInit {
         }
       }
     }
-
     for (const xp in this.quanhuyens) {
       if (this.quanhuyens.hasOwnProperty(xp)) {
         if (this.quanhuyens[xp].name === diachi.Huyen_Quan) {
@@ -250,38 +233,17 @@ export class StaffComponent implements OnInit {
         }
       }
     }
-    // console.log(this.xaphuongs)
-    this.KiemTraDiaChiUpdate();
-    // console.log(this.quanhuyens);
   }
 
-  KiemTraDiaChiUpdate() {
-    if (this.nhanvien.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      this.nhanvien.Dia_chi.Xa_Phuong = '';
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-      // console.log(this.nhanvien.Dia_chi[0].Huyen_Quan)
-      // console.log(this.nhanvien.Dia_chi[0].Xa_Phuong)
-
-    }
-  }
   // Hàm hiển thị quận huyện tương ứng thành phố + kiểm tra đã chọn quận huyện chưa
   QuanHuyen(e) {
-    document.getElementById('mes_xa_phuong').style.display = 'block';
+    this.nhanvien.Dia_chi.Xa_Phuong = '';
     this.xaphuongs.splice(0, this.xaphuongs.length);
     this.arrxaphuong.splice(0, this.arrxaphuong.length);
-    //  console.log(this.thanhpho);
     e.preventDefault();
     const target = e.target;
-    // console.log(target.value);
     this.quanhuyen = target.value;
-    // console.log(this.quanhuyen)
     if (this.quanhuyen !== '') {
-      // console.log(this.xaphuongs)
-      // console.log(this.quanhuyen)
-
       for (const xp in this.quanhuyens) {
         if (this.quanhuyens.hasOwnProperty(xp)) {
           if (this.quanhuyens[xp].name === this.quanhuyen) {
@@ -296,33 +258,7 @@ export class StaffComponent implements OnInit {
       }
     } else {
       this.xaphuongs.splice(0, this.xaphuongs.length);
-      document.getElementById('mes_xa_phuong').style.display = 'block';
-
     }
-
-    if (this.nhanvien.Dia_chi.Huyen_Quan !== '') {
-      document.getElementById('mes_huyen_quan').style.display = 'none';
-    } else {
-      document.getElementById('mes_huyen_quan').style.display = 'block';
-    }
-  }
-
-  // Kiểm tra chọn xã phường
-  XaPhuong(diachi?) {
-    if (diachi === null) {
-      if (this.nhanvien.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
-      } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-      }
-    } else {
-      if (this.nhanvien.Dia_chi.Xa_Phuong !== '') {
-        document.getElementById('mes_xa_phuong').style.display = 'none';
-      } else {
-        document.getElementById('mes_xa_phuong').style.display = 'block';
-      }
-    }
-
   }
   // Hàm mở Dialog Tạo tài khoản
   open(content) {
@@ -349,7 +285,7 @@ export class StaffComponent implements OnInit {
     nhanvienUpdate.Ngay_sinh = this.datePipe.transform(nhanvienUpdate.Ngay_sinh, 'yyyy-MM-dd');
     this.nhanvien = nhanvienUpdate;
     this.nhanvien.Dia_chi = nhanvienUpdate.Dia_chi[0];
-    document.getElementById('errNgaySinh').style.display = 'none'
+    // document.getElementById('errNgaySinh').style.display = 'none'
     this.ThanhPho(null, this.nhanvien.Dia_chi);
 
   }
@@ -395,8 +331,6 @@ export class StaffComponent implements OnInit {
     this.dsNguoiNhanMail.push({ Email: this.tai_khoan, Ho_ten: this.chu_tai_khoan });
     this.modalService.dismissAll();
     this.modalService.open(content_mails, { ariaLabelledBy: 'modal-basic-title-mails', backdrop: 'static', keyboard: false, size: 'lg' });
-    // document.getElementById('modals_mails').style.display = 'none';
-    // console.log(this.dsNguoiNhanMail);
   }
 
   // Xoá email ra khỏi danh sách gửi
@@ -495,70 +429,28 @@ export class StaffComponent implements OnInit {
     }
   }
 
-  // Hàm kiểm tra thông tin
-  KTNull(nhanvien: NhanVienModel) {
-    const hoten = nhanvien.Ho_ten;
-    const ngaysinh = nhanvien.Ngay_sinh
-    const NVId = nhanvien.Nhan_vien_id;
-    const diachi = nhanvien.Dia_chi;
-    const gioitinh = nhanvien.Gioi_tinh;
-    const sdt = nhanvien.So_dien_thoai;
-    const email = nhanvien.Email;
-    const cmnd = nhanvien.CMND_CCCD;
-    const quyensd = nhanvien.Quyen_su_dung;
-    const matkhau = nhanvien.Mat_khau;
-    const thongtinnhanvien = [];
-    thongtinnhanvien.push(hoten, ngaysinh, NVId, diachi.Tinh_ThanhPho, diachi.Huyen_Quan,
-      diachi.Xa_Phuong, gioitinh, sdt, email, cmnd, quyensd, matkhau);
-    for (const i in thongtinnhanvien) {
-      if (thongtinnhanvien.hasOwnProperty(i)) {
-        if (thongtinnhanvien[i] === '' || thongtinnhanvien[i] === undefined || thongtinnhanvien[i] === null) {
-          window.alert('Hãy nhập đầy đủ thông tin!');
-          this.KiemTraThongTin = false;
-          break;
-        } else {
-          this.KiemTraThongTin = true;
-        }
-      }
-    }
-  }
-
-  // Hàm kiểm tra giá trị giới tính
-  KTGioiTinh() {
-    if (this.nhanvien.Gioi_tinh !== '') {
-      document.getElementById('mes_gioitinh').style.display = 'none';
-    } else {
-      document.getElementById('mes_gioitinh').style.display = 'block';
-
-    }
-  }
 
   // Hàm thực hiện thêm tài khoản nhân viên
   ThemNhanVien() {
     this.ThongTinGuiEmailTaiKhoan = [];
-    // let thongtin;
     this.nhanvien.Quyen_su_dung = this.QuyenSuDung;
     this.nhanvien.Mat_khau = this.text;
 
-    this.KTNull(this.nhanvien);
-
-    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)) {
-      this.NVService.ThemNhanVien(this.nhanvien).subscribe(data_them => {
-        if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
-          this.ThongTinGuiEmailTaiKhoan.push({
-            Nhan_vien_id: this.nhanvien.Nhan_vien_id, Email: this.nhanvien.Email,
-            Ho_ten: this.nhanvien.Ho_ten, Mat_khau: this.nhanvien.Mat_khau
-          });
-          // Gửi email thông tin về tài khoản a tạo cho nhân viên  vừ
-          this.GuiMailNhanVien(this.ThongTinGuiEmailTaiKhoan);
-          // this.DongModal();
-          this.modalService.dismissAll()
-        }
-        else {
-          window.alert(data_them);
-        }
-      });
-    }
+    this.NVService.ThemNhanVien(this.nhanvien).subscribe(data_them => {
+      if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {
+        this.ThongTinGuiEmailTaiKhoan.push({
+          Nhan_vien_id: this.nhanvien.Nhan_vien_id, Email: this.nhanvien.Email,
+          Ho_ten: this.nhanvien.Ho_ten, Mat_khau: this.nhanvien.Mat_khau
+        });
+        // Gửi email thông tin về tài khoản a tạo cho nhân viên  vừ
+        this.GuiMailNhanVien(this.ThongTinGuiEmailTaiKhoan);
+        this.modalService.dismissAll()
+      }
+      else {
+        window.alert(data_them);
+      }
+    });
+    // }
   }
 
   // Hàm thực hiện xóa nhân viên
@@ -588,21 +480,17 @@ export class StaffComponent implements OnInit {
     const nv = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.nhanvien.Quyen_su_dung = this.QuyenSuDung;
 
-    this.KTNull(this.nhanvien);
-    if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)) {
-      this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
-        if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"') {
-          if (nv.Nhan_vien_id === this.nhanvien.Nhan_vien_id) {
-            localStorage.setItem('loggedInAcount', JSON.stringify(this.nhanvien));
-          }
-          // this.DongModal();
-          // location.reload();
-            this.modalService.dismissAll();
-        } else {
-          window.alert(data_capnhat);
+    this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
+      if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"') {
+        if (nv.Nhan_vien_id === this.nhanvien.Nhan_vien_id) {
+          localStorage.setItem('loggedInAcount', JSON.stringify(this.nhanvien));
         }
-      });
-    }
+        this.modalService.dismissAll();
+      } else {
+        window.alert(data_capnhat);
+      }
+    });
+    // }
   }
 
   // Mãng nhân viên được check
@@ -648,9 +536,10 @@ export class StaffComponent implements OnInit {
       window.alert('Hãy nhập đầy đủ thông tin!');
     }
     else {
-      // console.log(this.dsNguoiNhanMail)
       this.NVService.GuiEmailNhanVien(this.dsNguoiNhanMail, this.noi_dung, this.chu_de).subscribe();
-      this.DongModal();
+      this.modalService.dismissAll()
+      this.chu_de = ''
+      this.noi_dung = ''
     }
   }
 
@@ -703,21 +592,9 @@ export class StaffComponent implements OnInit {
     }
   }
 
-  // Bắt sự kiện chọn ngày
-  ChangeDate(e) {
-    e.preventDefault();
-    const target = e.target;
-    if (target.id === 'NgaySinh') {
-      document.getElementById('errNgaySinh').style.display = 'none'
-    }
-    this.KiemTraNgaySinh(this.nhanvien.Ngay_sinh)
-  }
-
-
   KiemTraNgaySinh(ngaysinh) {
     if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
       document.getElementById('errNgaySinh2').style.display = 'block'
-      document.getElementById('errNgaySinh').style.display = 'none'
       return false
     } else {
       document.getElementById('errNgaySinh2').style.display = 'none'
@@ -741,12 +618,32 @@ export class StaffComponent implements OnInit {
 
   ChuyenTrang(number) {
     this.nhanviens = []
+    this.dsdiachi = []
+    this.arrdiachi = []
+    this.checked = []
     for (let i = 0; i < 10; i++) {
       if ((this.dsnhanvien[((number - 1) * 10) + i]) !== undefined) {
         this.nhanviens.push(this.dsnhanvien[((number - 1) * 10) + i]);
       }
     }
     this.UnChecked()
+    for (const nhanvien in this.nhanviens) {
+      if (this.nhanviens.hasOwnProperty(nhanvien)) {
+        this.dsdiachi.push(this.nhanviens[nhanvien].Dia_chi);
+      }
+    }
+
+    for (const dc in this.dsdiachi) {
+      if (this.dsdiachi.hasOwnProperty(dc)) {
+        this.arrdiachi.push(this.dsdiachi[dc][0]);
+      }
+    }
+    // Thiết lập mảng giá trị checked = false cho các đối tượng
+    for (const length in this.nhanviens) {
+      if (this.nhanviens.hasOwnProperty(length)) {
+        this.checked.push(false);
+      }
+    }
   }
 
 }

@@ -85,11 +85,19 @@ export class NhanvienService {
   }
 
   GuiEmailTaiKhoan(arrThongTin): Observable<ThongTinTaiKhoanEmailModel[]> {
-    return this.http.post<ThongTinTaiKhoanEmailModel[]>('http://localhost:3000/nhanvien/guiemailtaikhoan', arrThongTin).pipe();
+    return this.http.post<ThongTinTaiKhoanEmailModel[]>('http://localhost:3000/nhanvien/guiemailtaikhoan', arrThongTin).pipe(
+      tap(() => {
+        this.refreshPage.next();
+      })
+    );
   }
 
   GuiEmailNhanVien(thongtinemail, noidung, chude): Observable<ThongTinTaiKhoanEmailModel[]> {
-    return this.http.post<ThongTinTaiKhoanEmailModel[]>('http://localhost:3000/nhanvien/guiemail', { thongtinemail, noidung, chude }).pipe();
+    return this.http.post<ThongTinTaiKhoanEmailModel[]>('http://localhost:3000/nhanvien/guiemail', { thongtinemail, noidung, chude }).pipe(
+      tap(() => {
+        this.refreshPage.next();
+      })
+    );
   }
 
   GetOTP(nhanvien: NhanVienModel): Observable<NhanVienModel[]> {
