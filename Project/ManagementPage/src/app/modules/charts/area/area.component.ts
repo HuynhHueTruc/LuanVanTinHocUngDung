@@ -81,7 +81,7 @@ export class AreaComponent implements OnInit {
       }
 
       this.getdsSanPham(this.sanphambanduoc)
-
+console.log(this.sanphambanduoc)
     })
   }
 
@@ -133,12 +133,14 @@ export class AreaComponent implements OnInit {
         if (sanphambanduoc[dmn].SanPham_id === this.dssanpham[sp]._id) {
           this.arrSanPham.push(this.dssanpham[sp])
           this.arrgiatrikhuyenmai.push(0)
-          await this.KiemTraSPKhuyenMai(this.dssanpham[sp], dmn)
+          await this.KiemTraSPKhuyenMai(this.dssanpham[sp], dmn, sanphambanduoc[dmn].Thoi_gian_ban)
         }
       }
       this.thongtinsanpham.push(this.arrSanPham[0])
       this.arrSanPham = [];
     }
+    console.log(this.arrgiatrikhuyenmai)
+
     this.XoaTrungSanPham()
     this.getdsKhuyenMai()
     this.DataHighChart()
@@ -157,7 +159,7 @@ export class AreaComponent implements OnInit {
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
-  KiemTraSPKhuyenMai(eachSP, index) {
+  KiemTraSPKhuyenMai(eachSP, index, Thoi_gian_ban) {
     let arrKhuyenMai = [];
     let giatrikhuyenmai = 0;
     for (const i in this.dskhuyenmai) {
@@ -177,8 +179,8 @@ export class AreaComponent implements OnInit {
 
     for (const i in arrKhuyenMai) {
       if (arrKhuyenMai.hasOwnProperty(i)) {
-        if (new Date(arrKhuyenMai[i].Ngay_bat_dau).getTime() > new Date(eachSP.Thoi_gian_ban).getTime()
-          || new Date(arrKhuyenMai[i].Ngay_ket_thuc).getTime() < new Date(eachSP.Thoi_gian_ban).getTime()) {
+        if (new Date(arrKhuyenMai[i].Ngay_bat_dau).getTime() > new Date(Thoi_gian_ban).getTime()
+          || new Date(arrKhuyenMai[i].Ngay_ket_thuc).getTime() < new Date(Thoi_gian_ban).getTime()) {
           this.arrgiatrikhuyenmai[index] = 0 // Khuyến mãi của từng sản phẩm theo thời gian của đơn hàng
         } else {
           if (giatrikhuyenmai < arrKhuyenMai[i].Gia_tri) {
@@ -189,7 +191,6 @@ export class AreaComponent implements OnInit {
 
       }
     }
-    console.log(this.arrgiatrikhuyenmai)
   }
 
   DataHighChart() {
@@ -250,8 +251,10 @@ export class AreaComponent implements OnInit {
     this.sanphams = []
     this.sanphambanduoc = []
     this.dataHighcharts = []
+    this.arrgiatrikhuyenmai = []
     this.sumAmount = 0
     this.tong_doanh_thu = 0
+
     this.getdsHoaDonBanHang()
   }
 
@@ -266,6 +269,8 @@ export class AreaComponent implements OnInit {
     this.sanphams = []
     this.sanphambanduoc = []
     this.dataHighcharts = []
+    this.arrgiatrikhuyenmai = []
+
     this.sumAmount = 0
     this.tong_doanh_thu = 0
     this.getdsHoaDonBanHang()

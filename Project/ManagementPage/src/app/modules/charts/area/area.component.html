@@ -1,7 +1,7 @@
  <div class="container p-3 d-flex justify-content-center">
    <h2>THỐNG KÊ SẢN PHẨM BÁN ĐƯỢC</h2>
  </div>
- <div class="container chart" >
+ <div class="container chart">
    <div class="row">
      <div class="col-sm-6">
        <div class="row">
@@ -17,7 +17,6 @@
                  <option class="item" value="3">3</option>
                  <option class="item" value="4">4</option>
                  <option class="item" value="all">Cả năm</option>
-
                </select>
              </div>
 
@@ -38,12 +37,12 @@
            </div>
          </div>
        </div>
-       <div class="ng-container" >
-         <div class="align-self-center"  *ngIf ="dataHighcharts.length > 0">
+       <div class="ng-container">
+         <div class="align-self-center" *ngIf="dataHighcharts.length > 0">
            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
          </div>
-         <div class="align-self-center d-flex justify-content-center" *ngIf ="dataHighcharts.length <= 0">
-         <h6> Không có sản phẩm nào được bán trong thời gian này!</h6>
+         <div class="align-self-center d-flex justify-content-center" *ngIf="dataHighcharts.length <= 0">
+           <h6> Không có sản phẩm nào được bán trong thời gian này!</h6>
          </div>
        </div>
      </div>
@@ -79,21 +78,21 @@
                        </tbody>
                      </table>
                      <div class="row">
-                      
+
                        <div class="col-sm-12">
                          Tổng: {{tong_doanh_thu | currency: "VND"}}
                        </div>
                      </div>
                      <div class="row">
-                     
-                      <div class="col-sm-8">
-                        Tổng doanh thu (đã trừ khuyến mãi): {{tong_thu | currency: "VND"}}
-                      </div>
-                    <div class="col-sm-4">
-                      <!-- <i class="fas fa-info"></i> -->
-                      <button id="chitiet" (click)="ChiTietDanhThu(content_detail)"> Chi tiết</button>
-                    </div>
-                    </div>
+
+                       <div class="col-sm-8">
+                         Tổng doanh thu (đã trừ khuyến mãi): {{tong_thu | currency: "VND"}}
+                       </div>
+                       <div class="col-sm-4">
+                         <!-- <i class="fas fa-info"></i> -->
+                         <button id="chitiet" (click)="ChiTietDanhThu(content_detail)"> Chi tiết</button>
+                       </div>
+                     </div>
                    </div>
                  </div>
                </div>
@@ -106,47 +105,47 @@
  </div>
 
 
-<!-- Dialog xác nhận  -->
-<div class="container" id="modals_create_bill">
-  <ng-template #content_detail let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-detail">CHI TIẾT</h4>
-    </div>
-    <div class="modal-body">
-      <div class="card ds">
-        <div class="card-body">
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr class="content">
-                <th class="align-middle ">STT</th>
-                <th class="align-middle">Tên sản phẩm</th>
-                <th class="align-middle">Số lượng</th>
-                <th class="align-middle">Giá bán</th>
-                <th class="align-middle">Khuyến mãi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let eachSanPham of arrsanpham let i = index;">
-                <td class="content ">{{i + 1}}</td>
-                <td class="content">{{eachSanPham.Ten_san_pham}}</td>
-               <td class="content">{{eachSanPham.So_luong}}</td>
+ <!-- Dialog xác nhận  -->
+ <div class="container" id="modals_create_bill">
+   <ng-template #content_detail let-modal>
+     <div class="modal-header">
+       <h4 class="modal-title" id="modal-detail">CHI TIẾT</h4>
+     </div>
+     <div class="modal-body">
+       <div class="card ds">
+         <div class="card-body">
+           <table class="table table-bordered table-hover">
+             <thead>
+               <tr class="content">
+                 <th class="align-middle ">STT</th>
+                 <th class="align-middle">Tên sản phẩm</th>
+                 <th class="align-middle">Số lượng</th>
+                 <th class="align-middle">Giá bán</th>
+                 <th class="align-middle">Khuyến mãi</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr *ngFor="let eachSanPham of arrsanpham let i = index;">
+                 <td class="content ">{{i + 1}}</td>
+                 <td class="content">{{eachSanPham.Ten_san_pham}}</td>
+                 <td class="content">{{eachSanPham.So_luong}}</td>
                  <td class="content">{{eachSanPham.Gia | currency: "VND"}}</td>
-                <td class="content">{{eachSanPham.Khuyen_mai*100}} %</td>
-              </tr>
-            </tbody>
-          </table>
-      
-          <div class="row">
-          
-           <div class="col-sm-8">
-             Tổng doanh thu (đã trừ khuyến mãi): {{tong_thu | currency: "VND"}}
+                 <td class="content">{{eachSanPham.Khuyen_mai*100}} %</td>
+               </tr>
+             </tbody>
+           </table>
+
+           <div class="row">
+
+             <div class="col-sm-8">
+               Tổng doanh thu (đã trừ khuyến mãi): {{tong_thu | currency: "VND"}}
+             </div>
            </div>
          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Đóng</button>
-    </div>
-  </ng-template>
-</div>
+       </div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Đóng</button>
+     </div>
+   </ng-template>
+ </div>

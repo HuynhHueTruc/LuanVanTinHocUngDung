@@ -176,11 +176,11 @@
                 <input type="text" class="form-control " id="Ten_dang_nhap" [(ngModel)]="nhanvien.Nhan_vien_id"
                   name="Ten_dang_nhap" placeholder="Tên đăng nhập" formControlName="Ten_dang_nhap" [pattern]="Ten_dang_nhap_pattern">
               </div>
-              <!-- <div class="mess-err" >
+              <div class="mess-err" *ngIf="form.controls['Ten_dang_nhap'].invalid && (form.controls['Ten_dang_nhap'].dirty || form.controls['Ten_dang_nhap'].touched)">
             
-                <small class="err text-danger" *ngIf="Ten_dang_nhap.errors?.pattern"> Tên đăng nhập không được có dấu và độ
+                <small class="err text-danger" *ngIf="form.controls['Ten_dang_nhap'].errors.pattern"> Tên đăng nhập không được có dấu và độ
                   dài trong khoảng 8 đến 32 ký tự! </small>
-              </div> -->
+              </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-4">
@@ -201,9 +201,9 @@
                 <input type="date" class="form-control " id="NgaySinh" [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh"
                   placeholder="Ngày sinh" (change)="KiemTraNgaySinh(nhanvien.Ngay_sinh)" formControlName="Ngay_sinh">
               </div>
-              <!-- <div class="mess-err">
+              <div class="mess-err">
                 <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
-              </div> -->
+              </div>
             </div>
 
             <div class="form-group row">
@@ -212,11 +212,11 @@
               </div>
               <div class="col-sm-8">
                 <input type="email" id="email" class="form-control" formControlName="email" [(ngModel)]="nhanvien.Email"
-                  name="email" placeholder="Địa chỉ Email">
+                  name="email" placeholder="Địa chỉ Email" [pattern]="email_pattern">
               </div>
-              <!-- <div class="mess-err" >
-                <small class="err text-danger"  *ngIf="email.errors?.pattern"> Chưa đúng định dạng Email! </small>
-              </div> -->
+              <div class="mess-err" *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                <small class="err text-danger"  *ngIf="form.controls['email'].errors.pattern"> Chưa đúng định dạng Email! </small>
+              </div>
             </div>
 
             <div class="form-group row">
@@ -225,11 +225,11 @@
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai"
-                  name="So_dien_thoai" placeholder=" Số điện thoại" formControlName="So_dien_thoai">
+                  name="So_dien_thoai" placeholder=" Số điện thoại" formControlName="So_dien_thoai" [pattern]="So_dien_thoai_pattern">
               </div>
-              <!-- <div class="mess-err" email>
-                <small class="err text-danger" *ngIf="So_dien_thoai.errors?.pattern"> Số điện thoại chưa hợp lệ!</small>
-              </div> -->
+              <div class="mess-err" email *ngIf="form.controls['So_dien_thoai'].invalid && (form.controls['So_dien_thoai'].dirty || form.controls['So_dien_thoai'].touched)">
+                <small class="err text-danger"  *ngIf="form.controls['So_dien_thoai'].errors.pattern"> Số điện thoại chưa hợp lệ!</small>
+              </div>
             </div>
 
 
@@ -256,12 +256,12 @@
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD"
-                  name="CMND_CCCD" placeholder="CMND/CCCD" formControlName="CMND_CCCD">
+                  name="CMND_CCCD" placeholder="CMND/CCCD" formControlName="CMND_CCCD" [pattern]="CMND_pattern">
               </div>
-              <!-- <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
-                <small class="err text-danger" *ngIf="CMND_CCCD.errors?.pattern"> Độ dài số chứng minh nhân dân/căn cước
+              <div class="mess-err" *ngIf="form.controls['CMND_CCCD'].invalid && (form.controls['CMND_CCCD'].dirty || form.controls['CMND_CCCD'].touched)">
+                <small class="err text-danger" *ngIf="form.controls['CMND_CCCD'].errors.pattern"> Độ dài số chứng minh nhân dân/căn cước
                   công dân có 9 hoặc 12 số!</small>
-              </div> -->
+              </div>
             </div>
 
             <div class=" form-group row">
@@ -368,13 +368,13 @@
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control " id="Ten_dang_nhap" [(ngModel)]="nhanvien.Nhan_vien_id"
-                  name="Ten_dang_nhap" placeholder="Tên đăng nhập" formControlName="Ten_dang_nhap" readonly>
+                  name="Ten_dang_nhap" placeholder="Tên đăng nhập" formControlName="Ten_dang_nhap" [pattern]="Ten_dang_nhap_pattern">
               </div>
-              <!-- <div class="mess-err" >
-              
-                <small class="err text-danger" *ngIf="Ten_dang_nhap.errors?.pattern"> Tên đăng nhập không được có dấu và độ
+              <div class="mess-err" *ngIf="form.controls['Ten_dang_nhap'].invalid && (form.controls['Ten_dang_nhap'].dirty || form.controls['Ten_dang_nhap'].touched)">
+            
+                <small class="err text-danger" *ngIf="form.controls['Ten_dang_nhap'].errors.pattern"> Tên đăng nhập không được có dấu và độ
                   dài trong khoảng 8 đến 32 ký tự! </small>
-              </div> -->
+              </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-4">
@@ -384,8 +384,7 @@
                 <input type="text" class="form-control " id="Ho_ten" [(ngModel)]="nhanvien.Ho_ten" name="Ho_ten"
                   placeholder="Họ và tên" formControlName="Ho_ten">
               </div>
-          
-
+            
             </div>
 
             <div class="form-group row">
@@ -396,9 +395,9 @@
                 <input type="date" class="form-control " id="NgaySinh" [(ngModel)]="nhanvien.Ngay_sinh" name="NgaySinh"
                   placeholder="Ngày sinh" (change)="KiemTraNgaySinh(nhanvien.Ngay_sinh)" formControlName="Ngay_sinh">
               </div>
-              <!-- <div class="mess-err">
+              <div class="mess-err">
                 <small id="errNgaySinh2" class="err text-danger"> Ngày sinh chưa hợp lệ! </small>
-              </div> -->
+              </div>
             </div>
 
             <div class="form-group row">
@@ -407,11 +406,11 @@
               </div>
               <div class="col-sm-8">
                 <input type="email" id="email" class="form-control" formControlName="email" [(ngModel)]="nhanvien.Email"
-                  name="email" placeholder="Địa chỉ Email">
+                  name="email" placeholder="Địa chỉ Email" [pattern]="email_pattern">
               </div>
-              <!-- <div class="mess-err" >
-                <small class="err text-danger" *ngIf="email.errors?.pattern"> Chưa đúng định dạng Email! </small>
-              </div> -->
+              <div class="mess-err" *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                <small class="err text-danger"  *ngIf="form.controls['email'].errors.pattern"> Chưa đúng định dạng Email! </small>
+              </div>
             </div>
 
             <div class="form-group row">
@@ -420,11 +419,11 @@
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control " id="So_dien_thoai" [(ngModel)]="nhanvien.So_dien_thoai"
-                  name="So_dien_thoai" placeholder=" Số điện thoại" formControlName="So_dien_thoai">
+                  name="So_dien_thoai" placeholder=" Số điện thoại" formControlName="So_dien_thoai" [pattern]="So_dien_thoai_pattern">
               </div>
-              <!-- <div class="mess-err" *ngIf="So_dien_thoai.errors && (So_dien_thoai.invalid || So_dien_thoai.touched)">
-                <small class="err text-danger" *ngIf="So_dien_thoai.errors?.pattern"> Số điện thoại chưa hợp lệ!</small>
-              </div> -->
+              <div class="mess-err" email *ngIf="form.controls['So_dien_thoai'].invalid && (form.controls['So_dien_thoai'].dirty || form.controls['So_dien_thoai'].touched)">
+                <small class="err text-danger"  *ngIf="form.controls['So_dien_thoai'].errors.pattern"> Số điện thoại chưa hợp lệ!</small>
+              </div>
             </div>
 
 
@@ -441,29 +440,28 @@
                   <option class="item" value="Nữ">Nữ</option>
                 </select>
               </div>
-             
             </div>
+          </div>
+
+          <div class="col-sm-6">
             <div class="form-group row">
               <div class="col-sm-4">
                 <label class="require">CMND/CCCD</label>
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control is-invalid" id="CMND_CCCD" [(ngModel)]="nhanvien.CMND_CCCD"
-                  name="CMND_CCCD" placeholder="CMND/CCCD" formControlName="CMND_CCCD">
+                  name="CMND_CCCD" placeholder="CMND/CCCD" formControlName="CMND_CCCD" [pattern]="CMND_pattern">
               </div>
-              <!-- <div class="mess-err" *ngIf="CMND_CCCD.errors && (CMND_CCCD.invalid || CMND_CCCD.touched)">
-                <small class="err text-danger" *ngIf="CMND_CCCD.errors?.pattern"> Độ dài số chứng minh nhân dân/căn cước
+              <div class="mess-err" *ngIf="form.controls['CMND_CCCD'].invalid && (form.controls['CMND_CCCD'].dirty || form.controls['CMND_CCCD'].touched)">
+                <small class="err text-danger" *ngIf="form.controls['CMND_CCCD'].errors.pattern"> Độ dài số chứng minh nhân dân/căn cước
                   công dân có 9 hoặc 12 số!</small>
-              </div> -->
+              </div>
             </div>
-          </div>
-
-
-          <div class="col-sm-6">
-        
 
             <div class=" form-group row">
-              <label>Địa chỉ</label>
+              <div class="col-sm-12">
+                <label>Địa chỉ</label>
+              </div>
             </div>
 
             <div class="form-group row">
@@ -478,7 +476,7 @@
                   <option class="item" *ngFor="let eachThanhPho of thanhphos" [value]="eachThanhPho.name">
                     {{eachThanhPho.name}}</option>
                 </select>
-               
+            
               </div>
             </div>
 
@@ -496,7 +494,8 @@
                 </select>
               </div>
             </div>
-         
+          
+
             <div class="form-group row">
               <div class="col-sm-4">
                 <label class="require">Xã Phường</label>
@@ -509,7 +508,7 @@
                     {{eachXaPhuong.name}}</option>
                 </select>
               </div>
-            
+           
             </div>
 
             <div class="form-group row">
@@ -533,10 +532,8 @@
                 </div>
               </div>
             </div>
+          
           </div>
-
-
-
         </div>
       </form>
     </div>

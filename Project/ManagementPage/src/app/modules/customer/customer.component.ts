@@ -85,6 +85,7 @@ export class CustomerComponent implements OnInit {
   Ten_dang_nhap_pattern = "^[A-Za-z0-9 _-]{8,32}$"
   So_dien_thoai_pattern = "^0[0-9\s.-]{9}"
   CMND_pattern = "[0-9]{9,12}"
+  email_pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
 
   constructor(private modalService: NgbModal, private KHService: KhachhangService, private diachiService: DiachiService, private datePipe: DatePipe, private giohangService: GiohangService,
     private loaicayService: LoaicayService, private formBuilder: FormBuilder,) { }
@@ -92,9 +93,11 @@ export class CustomerComponent implements OnInit {
   form: FormGroup;
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.email_pattern)]],
       // password: [null, Validators.required],
-      Ten_dang_nhap: [null, [Validators.required, Validators.pattern(this.Ten_dang_nhap_pattern)]],
+      // Ten_dang_nhap: [null, [Validators.required, Validators.pattern(this.Ten_dang_nhap_pattern)]],
+      Ten_dang_nhap: ['', [Validators.required, Validators.pattern(this.Ten_dang_nhap_pattern)]],
+
       Ho_ten: ['', Validators.required],
       Ngay_sinh: ['', [Validators.required]],
       So_dien_thoai: ['', [Validators.required, Validators.pattern(this.So_dien_thoai_pattern)]],
@@ -606,7 +609,7 @@ export class CustomerComponent implements OnInit {
     if (text === '') {
       this.getdskhachhang();
     } else {
-      this.khachhangs = this.dskhachhangsearch.filter(res => {
+      this.khachhangs = this.khachhangs.filter(res => {
         const hoten = this.removeAccents(res.Ho_ten);
         const maso = this.removeAccents(res.Khach_hang_id);
         const tmp2 = text.replace(/·/g, '');
@@ -699,6 +702,7 @@ export class CustomerComponent implements OnInit {
         this.checked.push(false);
       }
     }
+    console.log(this.khachhangs)
 
     this.DiaChi()
    
