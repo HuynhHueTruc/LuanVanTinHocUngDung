@@ -11,6 +11,7 @@ const { ObjectID } = require('bson');
 
 // Dùng cho phương thức posts
 var bodyParser = require('body-parser');
+const KhachHangModel = require('../src/models/KhachHangModel');
 const HoaDonBanHangModel = require('../src/models/HoaDonBanHangModel');
 route.use(bodyParser.urlencoded({extended: false}))
 route.use(bodyParser.json())
@@ -64,9 +65,8 @@ route.post('/hoadonbanhang/taomoi', async(req, res) => {
     var ThanhToan_id = req.body.ThanhToan_id;
     var Tong_tien = req.body.Tong_tien;
     var Ngay_cap_nhat = req.body.Ngay_cap_nhat;
-
         // Kiểm tra email đã tồn tại chưa
-       return HoaDonBanHangModel.create({
+        HoaDonBanHangModel.create({
             _id: _id,
             NhanVien_id: NhanVien_id,
             San_Pham: San_Pham,
@@ -79,8 +79,20 @@ route.post('/hoadonbanhang/taomoi', async(req, res) => {
             Tong_tien: Tong_tien,
             Ngay_cap_nhat: Ngay_cap_nhat,
         }).then(dt => {
+            KhachHangModel.findOne({
+                Khach_hang_id: KhachHang_id
+            }).then(data => {
+                KhachHangModel.updateOne({
+                    Khach_hang_id: KhachHang_id
+                }, {
+                   Tich_diem: data.Tich_diem + (Tong_tien/100000)
+               }).then(data => {})
+            })
+           
+        }).then(dt => {
             res.json('Tạo hóa đơn bán hàng thành công!')
-        }).catch (err =>{
+        })
+        .catch (err =>{
             res.json(err)
         })
 })
