@@ -40,6 +40,7 @@ Thống kê truy cập: https://huongdan.haravan.com/blogs/tai-lieu-huong-dan/10
 select multil: https://www.npmjs.com/package/ng-multiselect-dropdown
 Realtime database and change stream in mongodb: https://www.youtube.com/watch?v=n9Du-oESxCg; https://www.youtube.com/watch?v=DvnzeCfYg0s
 Angular doc: https://www.syncfusion.com/succinctly-free-ebooks/angular-succinctly/dev-environment
+Firebase: https://console.firebase.google.com/u/0/project/managementimagesgreenlife/storage/managementimagesgreenlife.appspot.com/files
 ckfinder:
 https://ckeditor.com/cke4/addon/popup
 https://ckeditor.com/docs/ckeditor4/latest/guide/dev_file_browse_upload.html
