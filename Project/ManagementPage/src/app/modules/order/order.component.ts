@@ -98,16 +98,16 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.phieudatService.getRefeshPage().subscribe(() => {
-      const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+      const getdsphieudat = timer(1000, 5000); 
       getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
       this.geteachDiaDiem()
       this.getdsKhachHang()
       this.getdsKhuyenMai()
 
-      const source = timer(1000, 60000); // Trên thực tế là 864000000 (1 ngày)
+      const source = timer(1000, 10000); // Trên thực tế là 864000000 (1 ngày)
       source.subscribe(val => this.TuDongDuyetHoaDon());
     })
-    const getdsphieudat = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
+    const getdsphieudat = timer(1000, 5000); 
     getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
     this.geteachDiaDiem()
     this.getdsKhachHang()
@@ -165,7 +165,8 @@ export class OrderComponent implements OnInit {
   async TuDongDuyetHoaDon() {
     let sanphams = []
     for (const i in this.phieudats) {
-      if ((new Date().getDay() - new Date(this.phieudats[i].Ngay_cap_nhat).getDay() >= 1) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
+      // if ((new Date().getDay() - new Date(this.phieudats[i].Ngay_cap_nhat).getDay() >= 1) && this.phieudats[i].Trang_thai === 'Chưa duyệt') { //thực tế dùng cái này
+        if ((new Date().getTime() > new Date(this.phieudats[i].Ngay_cap_nhat).getTime()) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
         this.phieudats[i].Trang_thai = 'Đã duyệt'
         this.phieudatService.CapNhatPhieuDat(this.phieudats[i]).subscribe(dt => { })
         for (const j in this.dssanpham) {

@@ -39,7 +39,7 @@ route.get('/cuahang/thongtincuahang', async(req, res) => {
 // Tạo API cập nhật thông tin cửa hàng
 route.put('/cuahang/capnhatthongtincuahang/:_id', async(req, res) => {
    try {
-    console.log(req.body.Banner)
+    // console.log(req.body.Banner)
     const {Ten_cua_hang, Dia_chi, So_dien_thoai, Banner, Anh_dai_dien, Gioi_thieu} = req.body
     const _id = req.params._id
     ThongTinCuaHangModel.findOne({

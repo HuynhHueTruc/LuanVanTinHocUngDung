@@ -23,6 +23,8 @@ mat-nav-list{
       height: 120px;
       object-fit: cover;
       border-radius: 50%;
+      border-radius: 50%;
+  border: 2px solid darkcyan
     }
   }
 }
@@ -36,3 +38,4 @@ mat-nav-list{
 .w3-dropdown-content{
   margin-left: 15% !important;
 }
+

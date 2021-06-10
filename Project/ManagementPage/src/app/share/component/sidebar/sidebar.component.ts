@@ -3,6 +3,8 @@ import { PhieudatService } from './../../../../services/PhieuDat/phieudat.servic
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 import { timer } from 'rxjs';
+import { ThongTinCuaHangModel } from 'src/models/ThongTinCuaHang/thongtincuahang';
+import { ThongtincuahangService } from 'src/services/ThongTinCuaHang/thongtincuahang.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +15,9 @@ export class SidebarComponent implements OnInit {
   nhanvien: any;
   phieudat: PhieuDatModel[] = []
   So_luong_phieu_dat = 0
-  constructor(private phieudatService: PhieudatService) { }
+  thongtincuahang: ThongTinCuaHangModel[] = []
+
+  constructor(private phieudatService: PhieudatService, private thongtincuahangService: ThongtincuahangService) { }
 
   ngOnInit(): void {
     this.nhanvien = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -28,9 +32,14 @@ export class SidebarComponent implements OnInit {
       const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
       const subscribe = source.subscribe(val => this.getSLphieudat(val)); 
     })
+    this.thongtincuahangService.getRefeshPage().subscribe(() => {
+      this.getThongTinCuaHang();
+    })
+
     // this.getSLphieudat();
     const source = timer(1000, 5000); // Trên thực tế là 864000000 (1 ngày)
     const subscribe = source.subscribe(val => this.getSLphieudat(val)); 
+    this.getThongTinCuaHang()
   }
 
   getSLphieudat(val) {
@@ -38,5 +47,11 @@ export class SidebarComponent implements OnInit {
       this.phieudat = res.phieudats;
       this.So_luong_phieu_dat = this.phieudat.length
     })
+  }
+
+  getThongTinCuaHang() {
+    this.thongtincuahangService.getThongTinCuaHang().subscribe((res: any) => {
+      this.thongtincuahang = res.cuahangs[0];
+    });
   }
 }

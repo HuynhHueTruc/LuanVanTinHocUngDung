@@ -11,6 +11,8 @@ import { SanPhamModel } from './../../../models/SanPham/sanpham';
 import { KhuyenmaiService } from './../../../services/KhuyenMai/khuyenmai.service';
 import { KhuyenMaiModel } from './../../../models/KhuyenMai/khuyenmai';
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { ThongTinCuaHangModel } from 'src/models/ThongTinCuaHang/thongtincuahang';
+import { ThongtincuahangService } from 'src/services/ThongTinCuaHang/thongtincuahang.service';
 
 @Component({
   selector: 'app-content',
@@ -45,15 +47,25 @@ export class ContentComponent implements OnInit, AfterContentChecked {
   danhmucdaidien: DanhMucNhoModel[] = []
   dscaycanh: SanPhamModel[] = [];
   arrSoLuongBan = 0;
+  thongtincuahang: ThongTinCuaHangModel[] = []
 
 
   constructor(private khuyenmaiService: KhuyenmaiService, private sanphamService: SanphamService, private hoadonbanhangService: HoadonbanhangService, private router: Router,
-    private loaicayService: LoaicayService, private danhmucService: DanhmucService) { }
+    private loaicayService: LoaicayService, private danhmucService: DanhmucService, private cuahangService: ThongtincuahangService) { }
 
   ngOnInit(): void {
 
     this.getLoaiCay();
     this.getdskhuyenmai()
+    this.getthongtincuahang()
+
+  }
+
+
+  getthongtincuahang(){
+    this.cuahangService.getBanner().subscribe((res: any) =>{
+      this.thongtincuahang = res.cuahangs;
+    })
   }
 
   ngAfterContentChecked(): void {

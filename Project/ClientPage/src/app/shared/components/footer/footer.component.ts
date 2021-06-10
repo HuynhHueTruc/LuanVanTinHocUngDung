@@ -11,8 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  thongtincuahang: ThongTinCuaHangModel[] = []
   constructor(private cuahangService: ThongtincuahangService) { }
   ngOnInit(): void {
+    this.getthongtincuahang()
   }
 
+  getthongtincuahang(){
+    this.cuahangService.getBanner().subscribe((res: any) =>{
+      this.thongtincuahang = res.cuahangs;
+    })
+  }
+
+  Facebook(){
+    
+    window.open('https://www.facebook.com/Green-Life-Shop-110685074571195','_blank');
+  }
 }

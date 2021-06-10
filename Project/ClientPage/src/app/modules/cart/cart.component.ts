@@ -43,7 +43,7 @@ export class CartComponent implements OnInit {
   arrSanPhamThanhToan: any;
   sum = 0;
   dsphieudat: PhieuDatModel
-
+  // arrSanPham_ID = [];
   constructor(private giohangService: GiohangService, private router: Router, private sanphamService: SanphamService,
     private khuyenmaiService: KhuyenmaiService, private KHService: KhachhangService, private phieudatService: PhieudatService) { }
 
@@ -139,11 +139,17 @@ export class CartComponent implements OnInit {
   }
 
   XoaTatCa() {
-    this.arrSanPham.splice(0, this.arrSanPham.length);
-    this.giohang[0].San_Pham.splice(0, this.giohang[0].San_Pham.length);
+    for (const i in this.checked){
+      if (this.checked[i]){
+        this.arrSanPham.splice(Number.parseInt(i), 1);
+        this.giohang[0].San_Pham.splice(Number.parseInt(i), 1);
+
+      }
+    }
     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
-    this.checkAll = false
-    document.getElementById('trash').style.display = 'none';
+    this.checkAll = true
+    this.KTCheckedAll()
+    document.getElementById('divbutton').style.display = 'none';
   }
 
 
@@ -209,6 +215,7 @@ export class CartComponent implements OnInit {
     }
     // Mở divbutton khi có checkbox được check
     if (this.lengthchecked > 0) {
+      console.log(this.lengthchecked)
       document.getElementById('divbutton').style.display = 'block';
 
     }

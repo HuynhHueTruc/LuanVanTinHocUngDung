@@ -106,6 +106,7 @@ export class ProductComponent implements OnInit {
   }
   // Lấy danh sách danh mục
   getdsDanhMucNho(ds) {
+    this.subdanhmuc = []
     try {
       this.danhmucService.getListDanhMuc().subscribe((res: any) => {
         this.danhmuc = res.danhmucs;

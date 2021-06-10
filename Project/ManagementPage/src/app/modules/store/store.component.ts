@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
   thongtincuahangmoi: ThongTinCuaHangModel;
   url: any;
   so_dien_thoai: string;
-  arrbanner: any;
+  // arrbanner: any;
 
   thanhpho: string;
   thanhphos: DiaChiModel[] = [];
@@ -33,6 +33,8 @@ export class StoreComponent implements OnInit {
   arrxaphuong: XaPhuongModel[] = [];
   choosefile = false;
   updateimg = false;
+  anh_dai_dien = ''
+  banner = []
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig = {
@@ -70,16 +72,17 @@ export class StoreComponent implements OnInit {
   getThongTinCuaHang() {
     this.thongtincuahangService.getThongTinCuaHang().subscribe((res: any) => {
       this.thongtincuahang = res.cuahangs[0];
-      // this.thongtincuahangmoi = res.cuahang[0]
-      // this.anh_dai_dien = this.thongtincuahang.Anh_dai_dien;
       this.thongtincuahang.Dia_chi = this.thongtincuahang.Dia_chi[0];
-      this.arrbanner = this.thongtincuahang.Banner;
-      // this.shopname = this.thongtincuahang.Ten_cua_hang
+      // this.arrbanner = this.thongtincuahang.Banner;
+      for (const i in this.thongtincuahang.Banner){
+        this.banner.push(this.thongtincuahang.Banner[i].Hinh_anh)
+      }
     });
   }
 
   open_dialog(content_update) {
     this.modalService.open(content_update, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    this.anh_dai_dien = this.thongtincuahang.Anh_dai_dien
   }
 
   // Kiểm tra file có được upload hay không
@@ -87,6 +90,8 @@ export class StoreComponent implements OnInit {
     // const ref = firebase.storage().ref()
     const f = document.querySelector('#photo') as HTMLInputElement;
     const file = f.files[0];
+    this.anh_dai_dien = '../../../assets/' + file.name
+
     // console.log(file)
     if (file !== undefined) {
       document.getElementById('err_upload').style.display = 'none';
@@ -320,17 +325,21 @@ export class StoreComponent implements OnInit {
   }
 
   UpdateImg() {
+    this.banner = []
     const f = document.querySelector('#banner') as HTMLInputElement;
     const file = f.files;
     if (file === undefined) {
       this.updateimg = false
     } else {
       this.updateimg = true
-
+      for (let i = 0; i < 3; i++){
+        this.banner.push('../../../assets/' + file[i].name)
+      }
     }
   }
 
   UploadandSaveBanner() {
+    let count = 1
     const ref = firebase.storage().ref();
     const f = document.querySelector('#banner') as HTMLInputElement;
     const file = f.files;
@@ -352,27 +361,34 @@ export class StoreComponent implements OnInit {
           .then(url => {
             this.url = url;
             this.thongtincuahang.Banner[i].Hinh_anh = url;
-            this.arrbanner = this.thongtincuahang.Banner
+            // this.arrbanner = this.thongtincuahang.Banner
           }
-          );
+          ).then(dt => {
+            if ( count === length){
+              if (this.KiemTraThongTin()) {
+                this.thongtincuahangService.updateThongTinCuaHang(this.thongtincuahang).subscribe(dt => {
+                  window.alert(dt);
+                  this.updateimg = false
+                });
+              } else {
+                alert('Vui lòng nhập đầy đủ thông tin!');
+              }
+            } else{
+              count += 1
+            }
+           
+          });
       }
     }
   }
 
   // cập nhật thông tin cửa hàng
-  CapNhat() {
+ async CapNhat() {
     if (this.updateimg) {
-      this.UploadandSaveBanner();
+     await this.UploadandSaveBanner();
     }
 
-    if (this.KiemTraThongTin()) {
-      this.thongtincuahangService.updateThongTinCuaHang(this.thongtincuahang).subscribe(dt => {
-        window.alert(dt);
-        this.updateimg = false
-      });
-    } else {
-      alert('Vui lòng nhập đầy đủ thông tin!');
-    }
+   
   }
 
     // Hộp thoại xác nhận hủy bỏ tạo mới
