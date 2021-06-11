@@ -142,7 +142,7 @@ a {
   overflow-y: auto;
 }
 
-#submit {
+.submit {
   outline: none;
   border: none;
   background-color: transparent;
@@ -158,4 +158,12 @@ a {
 
 .form-inline {
   width: 340px;
+}
+
+.row-search{
+  width: inherit;
+}
+
+.search{
+  height: 30px;
 }

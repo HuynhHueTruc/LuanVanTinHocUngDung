@@ -6,16 +6,23 @@ import { KhachhangService } from './../../../../services/KhachHang/khachhang.ser
 import { TenDanhMucNhoModel } from '../../../../models/DanhMuc/TenDanhMucNho';
 import { DanhMucNhoModel } from '../../../../models/DanhMuc/DanhMucNho';
 import { DanhmucService } from '../../../../services/DanhMuc/danhmuc.service';
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, DoCheck } from '@angular/core';
 import { DanhMucModel } from '../../../../models/DanhMuc/danhmuc';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+export interface IWindow extends Window {
+  webkitSpeechRecognition: any;
+}
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, AfterContentChecked {
+export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
+  speechRecognition = window['webkitSpeechRecognition'];
+  recognition = new this.speechRecognition()
+
 
   // Link image và Tên người dùng
   linkImgAccount: string;
@@ -61,12 +68,14 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   keysearch = ''
   statuslogin: any
 
+  trainscript = ''
   // Khi chạy constructor thì khởi tạo luôn DanhmucService
   constructor(private danhmucService: DanhmucService, private KHService: KhachhangService, private loaicayService: LoaicayService,
     private router: Router, private route: ActivatedRoute, private sanphamService: SanphamService) { }
 
   ngOnInit(): void {
 
+    let content = ''
     this.getLoaiCay();
     this.geteachDanhMuc();
     this.getdscsanpham();
@@ -82,12 +91,31 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
       this.nameAccount = this.datalogin.Ho_ten;
       // console.log(this.KHService.loggedInAccount);
     }
+
+
+
   }
   // Lấy loại cây làm danh mục
   getLoaiCay() {
     this.loaicayService.getListLoaiCay().subscribe((res: any) => {
       this.loaicays = res.loaicays;
     });
+  }
+
+  ngDoCheck() {
+    this.recognition.continuous = true;
+    this.recognition.interimResults = true;
+    this.recognition.lang = 'vi_VN';
+    this.recognition.onerror = function () {
+      this.recognition.close()
+    }
+    this.recognition.onresult = async function (event) {
+      const current = event.resultIndex
+      const transcript = await event.results[current][0].transcript
+      this.keysearch = transcript
+      const a = document.getElementById('search') as HTMLInputElement;
+      a.value = transcript
+    }
   }
 
   getdscsanpham() {
@@ -220,12 +248,20 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.isLoading = false;
   }
 
-  GoiYTuKhoa() {
+ async GoiYTuKhoa(flag?) {
+  let a = document.getElementById('search') as HTMLInputElement
+  this.keysearch  = a.value
     if (this.keysearch === '') {
       document.getElementById('suggestions-box').style.display = 'none'
     } else {
-      this.SearchByKeyWord()
+     
+     await this.SearchByKeyWord()
+     if (flag === 'voice'){
+       this.onSelectProduct(this.dssanphamsearch[0].Danh_Muc[0])
+     }else
+     {
       document.getElementById('suggestions-box').style.display = 'block'
+     }
     }
   }
 
@@ -243,6 +279,8 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     }
   }
 
+
+
   // Hàm chuyển đổi tiếng Việt sang tiếng Anh
   removeAccents(str) {
     return str.normalize('NFD')
@@ -251,7 +289,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
       ;
   }
 
-// Tìm kiếm theo từ khóa
+  // Tìm kiếm theo từ khóa
   SearchByKeyWord() {
     this.dssanphamsearch = this.dssanpham;
     const text = this.removeAccents(this.keysearch);
@@ -268,5 +306,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     }
   }
 
-
+  Start() {
+    this.recognition.start()
+  }
 }
