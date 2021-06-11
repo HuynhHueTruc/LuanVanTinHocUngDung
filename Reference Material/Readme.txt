@@ -42,6 +42,7 @@ Realtime database and change stream in mongodb: https://www.youtube.com/watch?v=
 Angular doc: https://www.syncfusion.com/succinctly-free-ebooks/angular-succinctly/dev-environment
 Firebase: https://console.firebase.google.com/u/0/project/managementimagesgreenlife/storage/managementimagesgreenlife.appspot.com/files
 Giọng nói : https://www.youtube.com/watch?v=rwB6RqqCmXc
+Paypal: https://www.youtube.com/watch?v=sVSKtnZixJs
 ckfinder:
 https://ckeditor.com/cke4/addon/popup
 https://ckeditor.com/docs/ckeditor4/latest/guide/dev_file_browse_upload.html

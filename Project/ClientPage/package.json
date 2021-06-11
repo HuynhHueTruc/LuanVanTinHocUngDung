@@ -51,6 +51,7 @@
     "ng-otp-input": "^1.7.1",
     "ng2-bootstrap": "^1.6.3",
     "ngx-pagination": "^5.1.0",
+    "ngx-paypal": "^7.0.0",
     "ngx-slick-carousel": "^0.5.1",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.3",

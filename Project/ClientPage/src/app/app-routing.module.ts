@@ -24,6 +24,7 @@ import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { PaypalComponent } from './modules/paypal/paypal.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
         { path: 'product/:_id', component: ProductComponent },
         { path: 'supports', component: SupportsComponent },
         { path: 'service', component: ServiceComponent },
-
+        { path: 'paypal', component: PaypalComponent },
       ]
   },
   {
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
+  
   { path: 'posts', component: PostsComponent },
   {
     path: 'bill_manegement', component: BillManagementComponent, canActivate: [DefautGuard], children:
@@ -65,7 +67,7 @@ const routes: Routes = [
         
       ]
   },
-
+ 
   { path: 'detail/:_id', component: DetailComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '404' }

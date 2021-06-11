@@ -13,6 +13,8 @@ import { GiohangService } from './../../../services/GioHang/giohang.service';
 import { Subscription, Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-checkout',
@@ -42,9 +44,13 @@ export class CheckoutComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
   dropdownSettingsThanhToan: IDropdownSettings;
   private valueFromChildSubscription: Subscription;
+  public payPalConfig?: IPayPalConfig;
+  showSuccess = false
+  showCancel
+  showError
 
   constructor(private giohangService: GiohangService, private khuyenmaiService: KhuyenmaiService, private router: Router, private hinhthucvanchuyenService: HinhthucvanchuyenService,
-    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService) { }
+    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -80,6 +86,7 @@ export class CheckoutComponent implements OnInit {
       };
     }
 
+    this.initConfig();
   }
 
   // Lấy danh sách khuyến mãi
@@ -123,6 +130,11 @@ export class CheckoutComponent implements OnInit {
     this.phuongthucthanhtoanService.getListPhuongThucThanhToan().subscribe((res: any) => {
       this.dsthanhtoan = res.phuongthucthanhtoans;
       this.thanhtoan.push(this.dsthanhtoan[0])
+      for (const i in this.dsthanhtoan){
+        if (this.dsthanhtoan[i].Ten_phuong_thuc === 'Thanh toán trực tiếp'){
+          this.thanhtoan[0] = this.dsthanhtoan[i]
+        }
+      }
     });
   }
 
@@ -142,7 +154,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   // Điều khiển thanh toán
-  onItemSelectThanhToan(item: any) {
+  onItemSelectThanhToan(item: any, content_paypal?) {
+    console.log(item, this.thanhtoan)
+    if (this.thanhtoan[0]._id === '5f7d89b47cc2cc2a04b15745') {
+      // this.phieudat.Trang_thai = 'Đã duyệt'
+      this.modalService.open(content_paypal, { ariaLabelledBy: 'modal-paypal-title', backdrop: 'static', keyboard: false, size: 'lg' });
+    }
     document.getElementById('errThanhToan').style.display = 'none'
   }
 
@@ -267,7 +284,7 @@ export class CheckoutComponent implements OnInit {
     // document.getElementById('luuthanhtoan').style.display = 'none'
   }
 
-  DatHang() {
+  DatHang(content_paypal?) {
     this.phieudat = new PhieuDatModel();
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
     this.phieudat.KhachHang_id = this.datalogin.Khach_hang_id
@@ -286,7 +303,12 @@ export class CheckoutComponent implements OnInit {
       this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
       this.LuuVanChuyen()
     }
-    this.phieudat.Trang_thai = 'Chưa duyệt'
+    if (this.showSuccess){
+      this.phieudat.Trang_thai = 'Đã duyệt'
+
+    }else{
+      this.phieudat.Trang_thai = 'Chưa duyệt'
+    }
     this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
     for (const i in this.arrSanPhamThanhToan) {
       this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
@@ -303,7 +325,7 @@ export class CheckoutComponent implements OnInit {
       }
     }
 
-
+    
     this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
       this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
       alert('Đặt hàng thành công!')
@@ -312,7 +334,81 @@ export class CheckoutComponent implements OnInit {
       this.giohangService.data = null
       this.router.navigateByUrl('/bill_manegement')
     })
+  
   }
 
+  // ThemPhieuDat(){
+  //   this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+  //     this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
+  //     alert('Đặt hàng thành công!')
+  //     this.arrSanPhamThanhToan = []
+  //     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+  //     this.giohangService.data = null
+  //     this.router.navigateByUrl('/bill_manegement')
+  //   })
+  // }
+
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'sb',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: '9.99',
+            breakdown: {
+              item_total: {
+                currency_code: 'EUR',
+                value: '9.99'
+              }
+            }
+          },
+          items: [{
+            name: 'Enterprise Subscription',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'EUR',
+              value: '9.99',
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          this.DatHang()
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        this.showSuccess = true;
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+        this.showCancel = true;
+
+      },
+      onError: err => {
+        console.log('OnError', err);
+        this.showError = true;
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+        // this.resetStatus();
+      },
+    };
+  }
 
 }

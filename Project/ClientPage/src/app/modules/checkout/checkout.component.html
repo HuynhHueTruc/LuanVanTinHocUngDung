@@ -123,7 +123,7 @@
 
         <ng-multiselect-dropdown class="input" name="ngInterestsSelect" style="border: none;" id="changethanhtoan"
           [(ngModel)]="thanhtoan" [settings]="dropdownSettingsThanhToan" [data]="dsthanhtoan"
-          (onSelect)="onItemSelectThanhToan($event)" (onDeSelect)="onItemDeSelectThanhToan($event)">
+          (onSelect)="onItemSelectThanhToan($event, content_paypal)" (onDeSelect)="onItemDeSelectThanhToan($event)">
         </ng-multiselect-dropdown>
         <div class="mess-err ml-1">
           <small id="errThanhToan" class="err text-danger">Bạn chưa chọn phương thức thanh toán! </small>
@@ -185,6 +185,18 @@
       </div>
     </div>
   </div>
-
-
 </div>
+
+
+    <!-- Modal thanh toan Paypal-->
+    <div class="container" id="modals">
+      <ng-template #content_paypal let-modal>
+        <div class="modal-body parent">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Đóng</button>
+        </div>
+      </ng-template>
+
+    </div>
