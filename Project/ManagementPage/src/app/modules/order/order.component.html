@@ -117,9 +117,10 @@
                       </td>
                       <td class="content">{{i + 1}}</td>
                       <td class="content" *ngIf="hienthi">{{eachPhieuDat._id}}</td>
-                      <td class="content">
-
-                        <div class="card dssanpham">
+                      <td class="content ">
+                        <div class="d-flex justify-content-center align-items-center" style="height: max-content;">
+                        <button class="controlcheckbox" (click)="DetailSanPham(i, content_product_detail, eachPhieuDat)"><i class="fas fa-info" style="color: darkcyan;"></i></button></div>
+                        <!-- <div class="card dssanpham">
                           <div class="card-body">
                             <table class="table table-bordered table-hover">
                               <thead>
@@ -140,7 +141,7 @@
                               </tbody>
                             </table>
                           </div>
-                        </div>
+                        </div> -->
 
                       </td>
                       <td class="content">{{eachPhieuDat?.KhachHang_id}}</td>
@@ -207,15 +208,16 @@
       <form #shipFormCreate="ngForm">
         <div class="row">
           <div class="col-sm-6">
-        
+
             <div class="form-group row">
               <div class="col-sm-12">
                 <ng-multiselect-dropdown name="ngKhachHangSelect" [placeholder]="'--- Mã khách hàng ---'"
-                  [(ngModel)]="IDKhachHang" [settings]="dropdownSettingsKhachHang" [data]="dskhachhang" >
+                  [(ngModel)]="IDKhachHang" [settings]="dropdownSettingsKhachHang" [data]="dskhachhang">
                 </ng-multiselect-dropdown>
               </div>
               <div class="mess-err">
-                <small id="errVanChuyen" class="err text-danger" *ngIf="IDKhachHang.length <= 0">Bạn chưa chọn khách hàng! </small>
+                <small id="errVanChuyen" class="err text-danger" *ngIf="IDKhachHang.length <= 0">Bạn chưa chọn khách
+                  hàng! </small>
               </div>
             </div>
 
@@ -273,8 +275,7 @@
                 </div>
 
                 <select id="ward" [(ngModel)]="phieudat.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
-                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
-                  >
+                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3">
                   <option class="item" selected value="">-- Xã/Phường --</option>
                   <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
                     {{eachXaPhuong.name}}</option>
@@ -393,8 +394,7 @@
             <div class="form-group row">
               <div class="col-sm-12">
                 <ng-multiselect-dropdown name="ngShippingSelect" [placeholder]="'--- Vận chuyển ---'"
-                  [(ngModel)]="vanchuyentmp" [settings]="dropdownSettingsVanChuyen" [data]="dshinhthucvanchuyen"
-                  >
+                  [(ngModel)]="vanchuyentmp" [settings]="dropdownSettingsVanChuyen" [data]="dshinhthucvanchuyen">
                 </ng-multiselect-dropdown>
               </div>
               <div class="mess-err">
@@ -443,8 +443,7 @@
                 </div>
 
                 <select id="ward" [(ngModel)]="phieudat.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel"
-                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3"
-                 >
+                  name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth mt-3">
                   <option class="item" selected value="">-- Xã/Phường --</option>
                   <option class="item" *ngFor="let eachXaPhuong of xaphuongs" [value]="eachXaPhuong.name">
                     {{eachXaPhuong.name}}</option>
@@ -538,18 +537,18 @@
           <div class="col-sm-12">
 
             <ng-multiselect-dropdown name="ngDMNSelect" [placeholder]="'--- Tên sản phẩm ---'"
-              [settings]="dropdownSettings" [(ngModel)]="sanphamtmp" [data]="dssanpham"
-             >
+              [settings]="dropdownSettings" [(ngModel)]="sanphamtmp" [data]="dssanpham">
             </ng-multiselect-dropdown>
           </div>
           <div class="mess-err">
-            <small id="SanPham" class="err text-danger" *ngIf="this.sanphamtmp[0] === undefined">Bạn chưa chọn sản phẩm! </small>
+            <small id="SanPham" class="err text-danger" *ngIf="this.sanphamtmp[0] === undefined">Bạn chưa chọn sản phẩm!
+            </small>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
+            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong" [(ngModel)]="So_luong"
+              name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger" *ngIf="So_luong <= 0">Số lượng phải lớn hơn 0</small>
@@ -589,8 +588,8 @@
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
+            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong" [(ngModel)]="So_luong"
+              name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger" *ngIf="So_luong <= 0">Số lượng phải lớn hơn 0</small>
@@ -632,8 +631,8 @@
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
+            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong" [(ngModel)]="So_luong"
+              name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
@@ -677,8 +676,8 @@
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong"
-              [(ngModel)]="So_luong" name="so_luong" placeholder="--- Số lượng ---">
+            <input type="number" #so_luong="ngModel" class="form-control " id="so_luong" [(ngModel)]="So_luong"
+              name="so_luong" placeholder="--- Số lượng ---">
           </div>
           <div class="mess-err">
             <small id="errSoLuong" class="err text-danger">Số lượng phải lớn hơn 0</small>
@@ -727,6 +726,45 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="TaoHoaDonBan()">Tạo hóa đơn</button>
       <button type="button" class="btn btn-secondary" (click)="KhongTaoHoaDon()">Hủy</button>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Dialog chi tiết sản phẩm của phiếu đặt  -->
+<div class="container" id="modals_create_bill">
+  <ng-template #content_product_detail let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-product-detail-title">CHI TIẾT SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+      <div class="card dssanpham">
+        <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Sản phẩm</th>
+                <th class="align-middle">Số lượng</th>
+                <th class="align-middle">Giá bán</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachSanPham of thongtinchitietsanpham; let j = index">
+                <td class="content">{{j + 1}}</td>
+                <td class="content">{{eachSanPham?.Ten_san_pham}}</td>
+                <td class="content" *ngIf="phieudatchitiet.San_Pham[j] !== undefined">
+                  {{phieudatchitiet.San_Pham[j].So_luong}}</td>
+                <td class="content" *ngIf="phieudatchitiet.San_Pham[j] !== undefined">
+                  {{phieudatchitiet.San_Pham[j].Gia_ban | currency: "VND"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Đóng</button>
     </div>
   </ng-template>
 </div>

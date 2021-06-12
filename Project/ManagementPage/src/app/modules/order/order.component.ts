@@ -87,6 +87,8 @@ export class OrderComponent implements OnInit {
   tongphieudat = 0
   dskhuyenmai: KhuyenMaiModel[] = []
   arrgiatrikhuyenmai = []
+  thongtinchitietsanpham = []
+  phieudatchitiet = []
   colors = [{ status: "Chưa duyệt", color: "darkgreen" }, { status: "Đã duyệt", color: "darkblue" },
   { status: "Đang được đóng gói", color: "orange" }, { status: "Xuất kho", color: "orange" }, { status: "Đang vận chuyển", color: "orange" },
   { status: "Đang giao hàng", color: "orange" }, { status: "Giao hàng thành công", color: "darkgreen" }, { status: "Đã hủy", color: "brown" },
@@ -98,9 +100,9 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(btoa("password"));
-    console.log(atob("cGFzc3dvcmQ=")); 
+    console.log(atob("cGFzc3dvcmQ="));
     this.phieudatService.getRefeshPage().subscribe(() => {
-      const getdsphieudat = timer(1000, 5000); 
+      const getdsphieudat = timer(1000, 5000);
       getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
       this.geteachDiaDiem()
       this.getdsKhachHang()
@@ -109,7 +111,7 @@ export class OrderComponent implements OnInit {
       const source = timer(1000, 10000); // Trên thực tế là 864000000 (1 ngày)
       source.subscribe(val => this.TuDongDuyetHoaDon());
     })
-    const getdsphieudat = timer(1000, 5000); 
+    const getdsphieudat = timer(1000, 5000);
     getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
     this.geteachDiaDiem()
     this.getdsKhachHang()
@@ -168,7 +170,7 @@ export class OrderComponent implements OnInit {
     let sanphams = []
     for (const i in this.phieudats) {
       // if ((new Date().getDay() - new Date(this.phieudats[i].Ngay_cap_nhat).getDay() >= 1) && this.phieudats[i].Trang_thai === 'Chưa duyệt') { //thực tế dùng cái này
-        if ((new Date().getTime() > new Date(this.phieudats[i].Ngay_cap_nhat).getTime()) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
+      if ((new Date().getTime() > new Date(this.phieudats[i].Ngay_cap_nhat).getTime()) && this.phieudats[i].Trang_thai === 'Chưa duyệt') {
         this.phieudats[i].Trang_thai = 'Đã duyệt'
         this.phieudatService.CapNhatPhieuDat(this.phieudats[i]).subscribe(dt => { })
         for (const j in this.dssanpham) {
@@ -1210,6 +1212,13 @@ export class OrderComponent implements OnInit {
     this.hienthi = false
     document.getElementById('AnMa').style.display = 'none'
     document.getElementById('HienThiMa').style.display = 'block'
+
+  }
+
+  DetailSanPham(index, content_product_detail, eachPhieuDat) {
+    this.thongtinchitietsanpham = this.thongtinsanpham[index]
+    this.phieudatchitiet = eachPhieuDat
+    this.modalService.open(content_product_detail, { ariaLabelledBy: 'modal-product-detail-title', backdrop: 'static', keyboard: false, size: 'lg' });
 
   }
 }
