@@ -218,7 +218,7 @@
           <label class="col-sm-4 col-form-label">Chú thích:</label>
           <div class="col-sm-8">
             <input type="text" #Chu_thich="ngModel" class="form-control " id="Chu_thich" [(ngModel)]="hoadon.Chu_thich"
-              name="Chu_thich" placeholder=" Enter name note" required>
+              name="Chu_thich" placeholder="Chú thích" required>
           </div>
 
         </div>
@@ -228,7 +228,7 @@
           <div class="col-sm-8">
             <input disabled type="text" [class.is-invalid]="Tong_tien.invalid && Tong_tien.touched" #Tong_tien="ngModel"
               class="form-control " id="Tong_tien" [(ngModel)]="hoadon.Tong_tien" name="Tong_tien"
-              placeholder=" Enter name money" required>
+              placeholder=" Tổng tiền" required>
           </div>
         </div>
       </form>
@@ -311,7 +311,7 @@
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Sản phẩm:</label>
           <div class="col-sm-8">
-            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Product ---'" [(ngModel)]="sanphamtmp"
+            <ng-multiselect-dropdown name="ngProductSelect" [placeholder]="'--- Sản phẩm ---'" [(ngModel)]="sanphamtmp"
               [settings]="dropdownSettings" [data]="dssanpham" (onSelect)="onItemSelect($event, 0)"
               (onSelectAll)="onSelectAll($event, 0)" (onDeSelect)="onItemDeSelect($event, 0)"
               (onDeSelectAll)="onDeSelectAll($event, 0)">

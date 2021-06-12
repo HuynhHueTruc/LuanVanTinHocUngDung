@@ -393,10 +393,19 @@ export class LoginComponent implements OnInit {
     if ((new Date(ngaysinh).getTime() > new Date().getTime())) {
       document.getElementById('errNgaySinh2').style.display = 'block';
       document.getElementById('errNgaySinh').style.display = 'none';
+      document.getElementById('errNgaySinh3').style.display = 'none'
+
       return false;
     } else {
-      document.getElementById('errNgaySinh2').style.display = 'none';
-      return true;
+      if ((new Date().getFullYear() - new Date(ngaysinh).getFullYear()) < 18){
+        document.getElementById('errNgaySinh2').style.display = 'none'
+        document.getElementById('errNgaySinh3').style.display = 'block'
+        return false
+      }else{
+        document.getElementById('errNgaySinh2').style.display = 'none'
+        document.getElementById('errNgaySinh3').style.display = 'none'
+        return true
+      }
     }
 
   }
