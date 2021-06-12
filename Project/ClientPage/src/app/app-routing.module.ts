@@ -24,6 +24,7 @@ import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { MapComponent } from './modules/map/map.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'store', component: StoreComponent },
-  
+  { path: 'map', component: MapComponent},
   { path: 'posts', component: PostsComponent },
   {
     path: 'bill_manegement', component: BillManagementComponent, canActivate: [DefautGuard], children:

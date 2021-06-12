@@ -36,6 +36,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MapComponent } from 'src/app/modules/map/map.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -61,6 +62,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CheckoutComponent,
     OrderTrackingComponent,
     BillManagementComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,

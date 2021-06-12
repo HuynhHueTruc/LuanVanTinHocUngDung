@@ -1,5 +1,4 @@
 import { NotFoundComponent } from './modules/not-found/not-found.component';
-import { ScatterPlotComponent } from './modules/charts/scatter-plot/scatter-plot.component';
 import { AreaComponent } from './modules/charts/area/area.component';
 import { CategoryComponent } from './modules/category/category.component';
 import { OrderComponent } from './modules/order/order.component';
@@ -57,7 +56,6 @@ const routes: Routes = [
                       {path: 'store', component: StoreComponent},
                       {path: 'category', component: CategoryComponent},
                       {path: 'area', component: AreaComponent},
-                      {path: 'scatter_plot', component: ScatterPlotComponent}
 
                     ]
   },

@@ -97,6 +97,8 @@ export class OrderComponent implements OnInit {
     private khachhangService: KhachhangService) { }
 
   ngOnInit(): void {
+    console.log(btoa("password"));
+    console.log(atob("cGFzc3dvcmQ=")); 
     this.phieudatService.getRefeshPage().subscribe(() => {
       const getdsphieudat = timer(1000, 5000); 
       getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
