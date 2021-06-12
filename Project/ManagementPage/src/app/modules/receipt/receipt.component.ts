@@ -44,6 +44,8 @@ export class ReceiptComponent implements OnInit {
   hienthi = false
   p: number = 1
   hoadons: HoaDonNhapHangModel[] = []
+  thongtinchitietsanpham = []
+  phieudatchitiet = []
   constructor(private modalService: NgbModal, private hoadonnhapService: HoadonnhaphangService, private sanphamService: SanphamService, private nhanvienService: NhanvienService) { }
 
   ngOnInit(): void {
@@ -460,6 +462,17 @@ export class ReceiptComponent implements OnInit {
       }
     }
     this.getdsSanPham(this.hoadons)
+  }
+
+  DetailSanPham(index, content_product_detail, eachHoaDon) {
+    console.log('abc')
+    this.thongtinchitietsanpham = this.thongtinsanpham[index]
+    console.log( this.thongtinchitietsanpham)
+
+    this.phieudatchitiet = eachHoaDon
+    console.log(this.phieudatchitiet)
+    this.modalService.open(content_product_detail, { ariaLabelledBy: 'modal-product-detail-title', backdrop: 'static', keyboard: false, size: 'lg' });
+
   }
 
 }

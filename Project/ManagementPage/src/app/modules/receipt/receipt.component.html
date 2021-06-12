@@ -58,7 +58,7 @@
               <div class="row">
                 <div class="col-sm-3">
                   <button (click)="HienThiMa()" class="controlcheckbox" id="HienThiMa">
-                    Hiển thị mã hóa đơn 
+                    Hiển thị mã hóa đơn
                   </button>
                   <button (click)="AnMa()" class="controlcheckbox" id="AnMa">
                     Ẩn mã hóa đơn
@@ -69,7 +69,7 @@
                   <ul id="pagination">
                     <li *ngFor="let item of hoadon | paginate: { itemsPerPage: 5, currentPage: p }"> </li>
                   </ul>
-  
+
                   <pagination-controls (pageChange)="p = $event" (click)="ChuyenTrang(p)"></pagination-controls>
                 </div>
                 <div class="col-sm-3 d-flex justify-content-end">
@@ -77,7 +77,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="card-header button" id="divbutton">
               <button class="controlcheckbox">
                 <i class="fas fa-trash"></i>
@@ -109,7 +109,11 @@
                       <td class="content">{{eachHoaDon.NhanVien_id}}</td>
                       <td class="content" *ngIf="hienthi">{{eachHoaDon._id}}</td>
                       <td class="content">
-                        <div class="form-group d-flex justify-content-center">
+                        <div class="d-flex justify-content-center align-items-center" style="height: max-content;">
+                          <button class="controlcheckbox"
+                            (click)="DetailSanPham(i, content_product_detail, eachHoaDon)"><i class="fas fa-info"
+                              style="color: darkcyan;"></i></button></div>
+                        <!-- <div class="form-group d-flex justify-content-center">
 
                           <div class="card dssanpham">
                             <div class="card-body">
@@ -134,7 +138,7 @@
                             </div>
                           </div>
 
-                        </div>
+                        </div> -->
                       </td>
                       <td class="content">{{eachHoaDon.Chu_thich}}</td>
                       <td class="content">{{eachHoaDon.Tong_tien | currency: "VND"}}</td>
@@ -356,4 +360,42 @@
     </div>
   </ng-template>
 
+</div>
+
+
+<!-- Dialog chi tiết sản phẩm của phiếu đặt  -->
+<div class="container" id="modals_create_bill">
+  <ng-template #content_product_detail let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-product-detail-title">CHI TIẾT SẢN PHẨM</h4>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+      <div class="card dssanpham">
+        <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="content">
+                <th class="align-middle">STT</th>
+                <th class="align-middle">Sản phẩm</th>
+                <th class="align-middle">Số lượng</th>
+                <th class="align-middle">Giá bán</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eachSanPham of thongtinchitietsanpham; let j = index">
+                <td class="content">{{j + 1}}</td>
+                <td class="content">{{eachSanPham.Ten_san_pham}}</td>
+                <td class="content">{{phieudatchitiet.San_Pham[j].So_luong}}</td>
+                <td class="content">{{phieudatchitiet.San_Pham[j].Gia_nhap | currency: "VND"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close')">Đóng</button>
+    </div>
+  </ng-template>
 </div>
