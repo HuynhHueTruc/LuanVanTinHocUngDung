@@ -53,8 +53,11 @@ export class CheckoutComponent implements OnInit {
   dssanpham: SanPhamModel[] = []
   items = [] // Thông tin thanh toán Paypal
   value = 0
+  siteKey: string
   constructor(private giohangService: GiohangService, private khuyenmaiService: KhuyenmaiService, private router: Router, private hinhthucvanchuyenService: HinhthucvanchuyenService,
-    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal, private sanphamService: SanphamService) { }
+    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal, private sanphamService: SanphamService) { 
+      this.siteKey = '6Le84CsbAAAAAERm9Io9rEJF-TxrEy0k2zgt5g4Z'
+    }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -343,7 +346,12 @@ export class CheckoutComponent implements OnInit {
     this.phieudat.San_Pham.splice(0, 1);
   }
 
-  DatHang(content_paypal?) {
+  open_captcha(content_captcha){
+    this.modalService.open(content_captcha, {  backdrop: 'static', keyboard: false});
+  }
+
+  DatHang() {
+   
     this.ThongTinPhieuDat()
     this.KTNull()
     if (this.info) {
@@ -441,4 +449,9 @@ export class CheckoutComponent implements OnInit {
     };
   }
 
+  handleSuccess(e){
+   if (e){
+     this.DatHang()
+   }
+  }
 }

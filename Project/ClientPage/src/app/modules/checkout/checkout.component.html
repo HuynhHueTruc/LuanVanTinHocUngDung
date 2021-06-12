@@ -181,7 +181,7 @@
     </div>
     <div class="row order thanhtoan">
       <div class="col-sm-12 d-flex justify-content-end align-items-center">
-        <button class="p-3  font-weight-bold  themsanpham" (click)="DatHang()">Đặt Hàng</button>
+        <button class="p-3  font-weight-bold  themsanpham" (click)="open_captcha(content_captcha)">Đặt Hàng</button>
       </div>
     </div>
   </div>
@@ -193,6 +193,23 @@
   <ng-template #content_paypal let-modal>
     <div class="modal-body parent">
       <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="HuyThanhToanOnline()">Đóng</button>
+    </div>
+  </ng-template>
+
+</div>
+
+
+<!-- Modal captcha-->
+<div class="container" id="modals">
+  <ng-template #content_captcha let-modal>
+    <div class="modal-body parent d-flex justify-content-center">
+        <ngx-recaptcha2 #captchaElem
+          [siteKey]="siteKey"
+          (success)="handleSuccess(true)">
+        </ngx-recaptcha2>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="HuyThanhToanOnline()">Đóng</button>

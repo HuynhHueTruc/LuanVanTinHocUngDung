@@ -50,6 +50,7 @@
     "ng-multiselect-dropdown": "^0.3.4",
     "ng-otp-input": "^1.7.1",
     "ng2-bootstrap": "^1.6.3",
+    "ngx-captcha": "^9.0.1",
     "ngx-pagination": "^5.1.0",
     "ngx-paypal": "^7.0.0",
     "ngx-slick-carousel": "^0.5.1",

@@ -37,6 +37,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MapComponent } from 'src/app/modules/map/map.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -82,6 +83,7 @@ import { MapComponent } from 'src/app/modules/map/map.component';
     IvyCarouselModule,
     NgxPayPalModule,
     NgbModule,
+    NgxCaptchaModule,
     NgMultiSelectDropDownModule.forRoot()
   ]
 })
