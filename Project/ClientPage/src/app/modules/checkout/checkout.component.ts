@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
   showSuccess = false
   showCancel
   showError
-
+  info = false
   constructor(private giohangService: GiohangService, private khuyenmaiService: KhuyenmaiService, private router: Router, private hinhthucvanchuyenService: HinhthucvanchuyenService,
     private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal) { }
 
@@ -130,8 +130,8 @@ export class CheckoutComponent implements OnInit {
     this.phuongthucthanhtoanService.getListPhuongThucThanhToan().subscribe((res: any) => {
       this.dsthanhtoan = res.phuongthucthanhtoans;
       this.thanhtoan.push(this.dsthanhtoan[0])
-      for (const i in this.dsthanhtoan){
-        if (this.dsthanhtoan[i].Ten_phuong_thuc === 'Thanh toán trực tiếp'){
+      for (const i in this.dsthanhtoan) {
+        if (this.dsthanhtoan[i].Ten_phuong_thuc === 'Thanh toán trực tiếp') {
           this.thanhtoan[0] = this.dsthanhtoan[i]
         }
       }
@@ -140,7 +140,6 @@ export class CheckoutComponent implements OnInit {
 
   // Điều khiển vận chuyển
   onItemSelect(item: any) {
-    document.getElementById('errVanChuyen').style.display = 'none'
     for (const i in this.dsvanchuyen) {
       if (this.dsvanchuyen[i]._id === this.vanchuyen[0]._id) {
         this.giavanchuyen = this.dsvanchuyen[i].Gia
@@ -149,23 +148,19 @@ export class CheckoutComponent implements OnInit {
   }
 
   onItemDeSelect(item: any) {
-    document.getElementById('errVanChuyen').style.display = 'block'
-
+    this.giavanchuyen = 0
   }
 
   // Điều khiển thanh toán
   onItemSelectThanhToan(item: any, content_paypal?) {
-    console.log(item, this.thanhtoan)
     if (this.thanhtoan[0]._id === '5f7d89b47cc2cc2a04b15745') {
       // this.phieudat.Trang_thai = 'Đã duyệt'
-      this.modalService.open(content_paypal, { ariaLabelledBy: 'modal-paypal-title', backdrop: 'static', keyboard: false, size: 'lg' });
+      this.KTThanhToanOnline()
+      console.log(this.info)
+      if (this.info) {
+        this.modalService.open(content_paypal, { ariaLabelledBy: 'modal-paypal-title', backdrop: 'static', keyboard: false, size: 'lg' });
+      }
     }
-    document.getElementById('errThanhToan').style.display = 'none'
-  }
-
-  onItemDeSelectThanhToan(item: any) {
-    document.getElementById('errThanhToan').style.display = 'block'
-
   }
 
   // Chọn khuyến mãi cao nhất của từng sản phẩm
@@ -256,32 +251,57 @@ export class CheckoutComponent implements OnInit {
   }
 
   DoiVanChuyen() {
+    this.vanchuyen = []
     document.getElementById('changevanchuyen1').style.display = 'none'
     document.getElementById('changevanchuyen').style.display = 'block'
-    document.getElementById('doivanchuyen').style.display = 'none'
-    // document.getElementById('luuvanchuyen').style.display = 'block'
   }
 
   DoiThanhToan() {
+    this.thanhtoan =[]
     document.getElementById('changethanhtoan1').style.display = 'none'
     document.getElementById('changethanhtoan').style.display = 'block'
-    document.getElementById('doithanhtoan').style.display = 'none'
-    // document.getElementById('luuthanhtoan').style.display = 'block'
-
   }
 
   LuuVanChuyen() {
     document.getElementById('changevanchuyen1').style.display = 'block'
     document.getElementById('changevanchuyen').style.display = 'none'
     document.getElementById('doivanchuyen').style.display = 'block'
-    // document.getElementById('luuvanchuyen').style.display = 'none'
   }
 
   LuuThanhToan() {
     document.getElementById('changethanhtoan1').style.display = 'block'
     document.getElementById('changethanhtoan').style.display = 'none'
-    document.getElementById('doithanhtoan').style.display = 'block'
-    // document.getElementById('luuthanhtoan').style.display = 'none'
+  }
+
+  KTNull() {
+    if (this.thanhtoan[0] !== undefined && this.vanchuyen[0] !== undefined) {
+      this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
+      this.LuuThanhToan()
+      this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
+      this.LuuVanChuyen()
+      this.info = true
+    }
+    else {
+      alert('Vui lòng chọn đầy đủ thông tin')
+    }
+
+  }
+
+  KTThanhToanOnline() {
+    if (this.vanchuyen[0] === undefined) {
+      alert('Vui lòng chọn hình thức vận chuyển')
+      this.info = false
+
+      for (const i in this.dsthanhtoan) {
+        if (this.dsthanhtoan[i].Ten_phuong_thuc === 'Thanh toán trực tiếp') {
+          this.thanhtoan[0] = this.dsthanhtoan[i]
+        }
+      }
+      document.getElementById('changethanhtoan').style.display = 'none'
+      document.getElementById('changethanhtoan1').style.display = 'block'
+    }else{
+      this.info = true
+    }
   }
 
   DatHang(content_paypal?) {
@@ -291,52 +311,53 @@ export class CheckoutComponent implements OnInit {
     this.phieudat.Ho_ten = this.datalogin.Ho_ten
     this.phieudat.Dia_chi = this.datalogin.Dia_chi
     this.phieudat.So_dien_thoai = this.datalogin.So_dien_thoai
-    if (this.thanhtoan[0] === undefined) {
-      alert('Vui lòng chọn hình thức thanh toán')
-    } else {
-      this.phieudat.ThanhToan_id = this.thanhtoan[0]._id
-      this.LuuThanhToan()
-    }
-    if (this.vanchuyen[0] === undefined) {
-      alert('Vui lòng chọn hình thức vận chuyển')
-    } else {
-      this.phieudat.VanChuyen_id = this.vanchuyen[0]._id
-      this.LuuVanChuyen()
-    }
-    if (this.showSuccess){
-      this.phieudat.Trang_thai = 'Đã duyệt'
+    this.KTNull()
+    if (this.info) {
+      if (this.showSuccess) {
+        this.phieudat.Trang_thai = 'Đã duyệt'
 
-    }else{
-      this.phieudat.Trang_thai = 'Chưa duyệt'
-    }
-    this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
-    for (const i in this.arrSanPhamThanhToan) {
-      this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
-    }
-    this.phieudat.San_Pham.splice(0, 1);
+      } else {
+        this.phieudat.Trang_thai = 'Chưa duyệt'
+      }
+      this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
+      for (const i in this.arrSanPhamThanhToan) {
+        this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
+      }
+      this.phieudat.San_Pham.splice(0, 1);
 
-    if (this.isgiohang) {
-      for (const j in this.giohang[0].San_Pham) {
-        for (const k in this.arrSanPhamThanhToan) {
-          if (this.giohang[0].San_Pham[j].SanPham_id === this.arrSanPhamThanhToan[k]._id) {
-            this.giohang[0].San_Pham.splice(Number.parseInt(j), 1);
+      if (this.isgiohang) {
+        for (const j in this.giohang[0].San_Pham) {
+          for (const k in this.arrSanPhamThanhToan) {
+            if (this.giohang[0].San_Pham[j].SanPham_id === this.arrSanPhamThanhToan[k]._id) {
+              this.giohang[0].San_Pham.splice(Number.parseInt(j), 1);
+            }
           }
         }
       }
+
+      this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
+        this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
+        alert('Đặt hàng thành công!')
+        this.modalService.dismissAll()
+        this.arrSanPhamThanhToan = []
+        this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
+        this.giohangService.data = null
+        this.router.navigateByUrl('/bill_manegement')
+      })
     }
 
-    
-    this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
-      this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
-      alert('Đặt hàng thành công!')
-      this.arrSanPhamThanhToan = []
-      this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
-      this.giohangService.data = null
-      this.router.navigateByUrl('/bill_manegement')
-    })
-  
   }
 
+  HuyThanhToanOnline() {
+    for (const i in this.dsthanhtoan) {
+      if (this.dsthanhtoan[i].Ten_phuong_thuc === 'Thanh toán trực tiếp') {
+        this.thanhtoan[0] = this.dsthanhtoan[i]
+      }
+    }
+    document.getElementById('changethanhtoan').style.display = 'none'
+    document.getElementById('changethanhtoan1').style.display = 'block'
+    this.modalService.dismissAll()
+  }
   // ThemPhieuDat(){
   //   this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
   //     this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()

@@ -279,6 +279,7 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   DemSoSao(index, count) {
+    console.log(this.danhgia)
     this.danhgia[index].So_diem = count
   }
 
@@ -316,11 +317,22 @@ export class OrderTrackingComponent implements OnInit {
       this.danhgia[i].Noi_dung = content_comment
       this.danhgia[i].Hinh_anh.splice(0, 1)
     }
-    this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
-      alert(data)
-      this.modalService.dismissAll()
-      // location.reload()
-    })
+    for (let j = 0; j < this.danhgia.length; j++) {
+      if (this.danhgia[j].So_diem === 0 && this.danhgia[j].Hinh_anh.length <= 0 && this.danhgia[j].Noi_dung === '') {
+        this.danhgia.splice(j, 1)
+        j -= 1
+      }
+    }
+    if (this.danhgia.length > 0) {
+      this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
+        alert(data)
+        this.modalService.dismissAll()
+        // location.reload()
+      })
+    } else {
+      alert('Bạn chưa viết đánh giá nào!')
+    }
+
 
   }
 
@@ -330,13 +342,13 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   HuyDonChoXacNhan() {
-
     this.phieudatService.XoaPhieuDat(this.phieudat._id).subscribe()
-    this.Huy()
+    this.modalService.dismissAll()
+    location.reload()
   }
 
   Huy() {
     this.modalService.dismissAll();
-    location.reload()
+    this.danhgia = []
   }
 }

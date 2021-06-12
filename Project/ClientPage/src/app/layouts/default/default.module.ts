@@ -36,6 +36,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { PaypalComponent } from 'src/app/modules/paypal/paypal.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -80,6 +81,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
     NbCardModule,
     IvyCarouselModule,
     NgxPayPalModule,
+    NgbModule,
     NgMultiSelectDropDownModule.forRoot()
   ]
 })
