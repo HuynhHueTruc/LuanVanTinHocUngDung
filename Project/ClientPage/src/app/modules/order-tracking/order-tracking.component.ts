@@ -279,7 +279,6 @@ export class OrderTrackingComponent implements OnInit {
   }
 
   DemSoSao(index, count) {
-    console.log(this.danhgia)
     this.danhgia[index].So_diem = count
   }
 

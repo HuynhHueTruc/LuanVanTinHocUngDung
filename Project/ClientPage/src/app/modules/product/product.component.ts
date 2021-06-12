@@ -64,15 +64,15 @@ export class ProductComponent implements OnInit {
       for (const i in this.arrsanpham) {
         if (this.arrsanpham.hasOwnProperty) {
           for (const j in this.dshoadonban) {
-            if (this.dshoadonban.hasOwnProperty){
-              for (const h in this.dshoadonban[j].San_Pham){
-                if (this.arrsanpham[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id){
+            if (this.dshoadonban.hasOwnProperty) {
+              for (const h in this.dshoadonban[j].San_Pham) {
+                if (this.arrsanpham[i]._id === this.dshoadonban[j].San_Pham[h].SanPham_id) {
                   count += this.dshoadonban[j].San_Pham[h].So_luong;
                 }
               }
             }
           }
-          this.arrSoLuongBan.push({SanPham_id: this.arrsanpham[i]._id, So_luong_ban: count});
+          this.arrSoLuongBan.push({ SanPham_id: this.arrsanpham[i]._id, So_luong_ban: count });
           count = 0;
         }
       }
@@ -115,8 +115,12 @@ export class ProductComponent implements OnInit {
     return bool;
   }
 
-  ProductDetail(eachSP){
-    this.router.navigateByUrl(`/detail/${eachSP._id}`);
-    // this.isLoading = true;
+  ProductDetail(eachSP) {
+    if (eachSP.So_luong > 0) {
+      this.router.navigateByUrl(`/detail/${eachSP._id}`);
+      // this.isLoading = true;
+    } else {
+      alert('Xin lỗi sản phẩm này đã hết hàng!')
+    }
   }
 }

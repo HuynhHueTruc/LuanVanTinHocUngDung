@@ -151,10 +151,10 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
       this.dsphieudat = res.phieudats;
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          for (const k in this.dscaycanh){
-            if (this.dscaycanh[k]._id === this.dsphieudat[i].San_Pham[j].SanPham_id){
+          for (const k in this.dscaycanh) {
+            if (this.dscaycanh[k]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
               SL = this.dscaycanh[k].So_luong - this.dsphieudat[i].San_Pham[j].So_luong;
-              if (SL <= 0){
+              if (SL <= 0) {
                 this.dscaycanh.splice(Number.parseInt(k), 1);
               }
             }
@@ -213,8 +213,12 @@ export class TypetreeComponent implements AfterViewInit, OnInit, AfterContentChe
 
 
   ProductDetail(eachSP) {
-    this.router.navigateByUrl(`/detail/${eachSP._id}`);
-    this.isLoading = true;
+    if (eachSP.So_luong > 0) {
+      this.router.navigateByUrl(`/detail/${eachSP._id}`);
+      this.isLoading = true;
+    } else {
+      alert('Xin lỗi sản phẩm này đã hết hàng!')
+    }
   }
 
   ngAfterContentChecked(): void {

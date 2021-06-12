@@ -52,6 +52,7 @@ export class SidebarComponent implements OnInit {
   getThongTinCuaHang() {
     this.thongtincuahangService.getThongTinCuaHang().subscribe((res: any) => {
       this.thongtincuahang = res.cuahangs[0];
+      console.log(this.thongtincuahang)
     });
   }
 }

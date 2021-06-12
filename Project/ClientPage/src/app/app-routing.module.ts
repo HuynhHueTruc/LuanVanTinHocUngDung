@@ -24,7 +24,6 @@ import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-import { PaypalComponent } from './modules/paypal/paypal.component';
 
 
 const routes: Routes = [
@@ -41,7 +40,6 @@ const routes: Routes = [
         { path: 'product/:_id', component: ProductComponent },
         { path: 'supports', component: SupportsComponent },
         { path: 'service', component: ServiceComponent },
-        { path: 'paypal', component: PaypalComponent },
       ]
   },
   {

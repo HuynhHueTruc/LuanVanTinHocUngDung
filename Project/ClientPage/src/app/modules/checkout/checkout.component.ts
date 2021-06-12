@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SanphamService } from 'src/services/SanPham/sanpham.service';
 
 @Component({
   selector: 'app-checkout',
@@ -49,8 +50,11 @@ export class CheckoutComponent implements OnInit {
   showCancel
   showError
   info = false
+  dssanpham: SanPhamModel[] = []
+  items = [] // Thông tin thanh toán Paypal
+  value = 0
   constructor(private giohangService: GiohangService, private khuyenmaiService: KhuyenmaiService, private router: Router, private hinhthucvanchuyenService: HinhthucvanchuyenService,
-    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal) { }
+    private phuongthucthanhtoanService: PhuongthucthanhtoanService, private phieudatService: PhieudatService, private modalService: NgbModal, private sanphamService: SanphamService) { }
 
   ngOnInit(): void {
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
@@ -63,6 +67,7 @@ export class CheckoutComponent implements OnInit {
       this.getdsphuongthucthanhtoan();
       this.getdskhuyenmai();
       this.getgiohang()
+      this.getdssanpham()
       this.TongTien()
 
       this.dropdownSettings = {
@@ -87,6 +92,12 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.initConfig();
+  }
+
+  getdssanpham(){
+    this.sanphamService.getListSanPham().subscribe((res: any) =>{
+      this.dssanpham = res.sanphams
+    })
   }
 
   // Lấy danh sách khuyến mãi
@@ -153,11 +164,25 @@ export class CheckoutComponent implements OnInit {
 
   // Điều khiển thanh toán
   onItemSelectThanhToan(item: any, content_paypal?) {
+    this.items.splice(0, this.items.length)
     if (this.thanhtoan[0]._id === '5f7d89b47cc2cc2a04b15745') {
       // this.phieudat.Trang_thai = 'Đã duyệt'
       this.KTThanhToanOnline()
-      console.log(this.info)
       if (this.info) {
+        this.ThongTinPhieuDat()
+        for (const sp in this.phieudat.San_Pham) {
+          for (const j in this.dssanpham){
+            if(this.phieudat.San_Pham[sp].SanPham_id === this.dssanpham[j]._id){
+              this.items.push({name: this.dssanpham[j].Ten_san_pham, quantity: this.phieudat.San_Pham[sp].So_luong, unit_amount: { currency_code: 'USD',
+              value: (this.phieudat.San_Pham[sp].Gia_ban/22946).toFixed(1)}})
+            }
+          }
+        }
+        console.log(this.items)
+        for (const i in this.items){
+          this.value += this.items[i].quantity*this.items[i].unit_amount.value
+        }
+        this.value.toFixed(1)
         this.modalService.open(content_paypal, { ariaLabelledBy: 'modal-paypal-title', backdrop: 'static', keyboard: false, size: 'lg' });
       }
     }
@@ -257,7 +282,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   DoiThanhToan() {
-    this.thanhtoan =[]
+    this.thanhtoan = []
     document.getElementById('changethanhtoan1').style.display = 'none'
     document.getElementById('changethanhtoan').style.display = 'block'
   }
@@ -299,18 +324,27 @@ export class CheckoutComponent implements OnInit {
       }
       document.getElementById('changethanhtoan').style.display = 'none'
       document.getElementById('changethanhtoan1').style.display = 'block'
-    }else{
+    } else {
       this.info = true
     }
   }
 
-  DatHang(content_paypal?) {
+  ThongTinPhieuDat() {
     this.phieudat = new PhieuDatModel();
     this.phieudat.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_ban: 0 }]
     this.phieudat.KhachHang_id = this.datalogin.Khach_hang_id
     this.phieudat.Ho_ten = this.datalogin.Ho_ten
     this.phieudat.Dia_chi = this.datalogin.Dia_chi
     this.phieudat.So_dien_thoai = this.datalogin.So_dien_thoai
+    this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
+    for (const i in this.arrSanPhamThanhToan) {
+      this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
+    }
+    this.phieudat.San_Pham.splice(0, 1);
+  }
+
+  DatHang(content_paypal?) {
+    this.ThongTinPhieuDat()
     this.KTNull()
     if (this.info) {
       if (this.showSuccess) {
@@ -319,12 +353,6 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.phieudat.Trang_thai = 'Chưa duyệt'
       }
-      this.phieudat.Tong_tien = this.tong_tien + this.giavanchuyen
-      for (const i in this.arrSanPhamThanhToan) {
-        this.phieudat.San_Pham.push({ SanPham_id: this.arrSanPhamThanhToan[i]._id, So_luong: this.arrSanPhamThanhToan[i].So_luong, Gia_ban: this.arrSanPhamThanhToan[i].Gia })
-      }
-      this.phieudat.San_Pham.splice(0, 1);
-
       if (this.isgiohang) {
         for (const j in this.giohang[0].San_Pham) {
           for (const k in this.arrSanPhamThanhToan) {
@@ -345,7 +373,6 @@ export class CheckoutComponent implements OnInit {
         this.router.navigateByUrl('/bill_manegement')
       })
     }
-
   }
 
   HuyThanhToanOnline() {
@@ -358,43 +385,25 @@ export class CheckoutComponent implements OnInit {
     document.getElementById('changethanhtoan1').style.display = 'block'
     this.modalService.dismissAll()
   }
-  // ThemPhieuDat(){
-  //   this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
-  //     this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
-  //     alert('Đặt hàng thành công!')
-  //     this.arrSanPhamThanhToan = []
-  //     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
-  //     this.giohangService.data = null
-  //     this.router.navigateByUrl('/bill_manegement')
-  //   })
-  // }
 
   private initConfig(): void {
     this.payPalConfig = {
-      currency: 'EUR',
-      clientId: 'sb',
+      currency: 'USD',
+      clientId: 'AX46LoTcAt--Q6lLrIYagu2CFyN1KrC9cm7qk-v5O3sf6VlKc5s8MzAsG_CvNvFQxzmZNMiAUcOHXrpt',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [{
           amount: {
-            currency_code: 'EUR',
-            value: '9.99',
+            currency_code: 'USD',
+            value: this.value.toString(), // Tổng số sản phẩm * giá tiền
             breakdown: {
               item_total: {
-                currency_code: 'EUR',
-                value: '9.99'
+                currency_code: 'USD',
+                value: this.value.toString() //Tổng số sản phẩm * giá tiền
               }
             }
           },
-          items: [{
-            name: 'Enterprise Subscription',
-            quantity: '1',
-            category: 'DIGITAL_GOODS',
-            unit_amount: {
-              currency_code: 'EUR',
-              value: '9.99',
-            },
-          }]
+          items: this.items
         }]
       },
       advanced: {

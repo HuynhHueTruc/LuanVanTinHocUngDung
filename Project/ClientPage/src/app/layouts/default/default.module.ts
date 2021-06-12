@@ -34,7 +34,6 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { NbThemeModule, NbLayoutModule, NbInputModule, NbTabsetModule, NbCardModule } from '@nebular/theme';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
-import { PaypalComponent } from 'src/app/modules/paypal/paypal.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -62,7 +61,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CheckoutComponent,
     OrderTrackingComponent,
     BillManagementComponent,
-    PaypalComponent
   ],
   imports: [
     CommonModule,
