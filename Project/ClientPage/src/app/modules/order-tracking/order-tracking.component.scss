@@ -12,6 +12,10 @@
   height: 50px;
 }
 
+:host nb-tab {
+  padding: 1.25rem;
+}
+
 #phieudat {
   border: none;
   width: -webkit-fill-available;

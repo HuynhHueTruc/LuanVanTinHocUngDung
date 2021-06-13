@@ -20,7 +20,7 @@ export interface IWindow extends Window {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
-  speechRecognition = window['webkitSpeechRecognition'];
+  speechRecognition = window['webkitSpeechRecognition'] || window['speechRecognition ']  ;
   recognition = new this.speechRecognition()
 
 

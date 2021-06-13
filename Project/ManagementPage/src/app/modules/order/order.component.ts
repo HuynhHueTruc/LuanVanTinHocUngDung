@@ -99,8 +99,8 @@ export class OrderComponent implements OnInit {
     private khachhangService: KhachhangService) { }
 
   ngOnInit(): void {
-    console.log(btoa("password"));
-    console.log(atob("cGFzc3dvcmQ="));
+    // console.log(btoa("password"));
+    // console.log(atob("cGFzc3dvcmQ="));
     this.phieudatService.getRefeshPage().subscribe(() => {
       const getdsphieudat = timer(1000, 5000);
       getdsphieudat.subscribe(val => this.ReloadDSPhieuDat());
@@ -294,14 +294,16 @@ export class OrderComponent implements OnInit {
   async DoiTrangThai(phieudat, index, content_change_status) {
     let sanphams = []
     this.phieudat = phieudat
+    console.log(this.phieudat)
     this.arrgiatrikhuyenmai = []
     if (this.Trang_thai[index] === 'Giao hàng thành công') {
       this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });
     } else {
       phieudat.Trang_thai = this.Trang_thai[index]
       this.phieudatService.CapNhatPhieuDat(phieudat).subscribe(dt => { })
-      for (const j in this.dssanpham) {
-        for (const h in phieudat.San_Pham) {
+      for (const h in phieudat.San_Pham) {
+        for (const j in this.dssanpham) {
+
           if (this.dssanpham[j]._id === phieudat.San_Pham[h].SanPham_id) {
             sanphams.push(this.dssanpham[j])
           }

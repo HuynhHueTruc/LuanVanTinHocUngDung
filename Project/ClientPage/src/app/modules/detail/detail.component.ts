@@ -267,7 +267,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.sum = 0;
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
-console.log(this.dsphieudat)
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
           if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
@@ -295,14 +294,14 @@ console.log(this.dsphieudat)
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong() {
     const sl = document.getElementById('So_luong') as HTMLInputElement;
-
+console.log(this.So_luong)
     this.sum = 0;
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanpham_id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
+          if (this.sanpham_id === this.dsphieudat[i].San_Pham[j].SanPham_id ) {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -311,7 +310,11 @@ console.log(this.dsphieudat)
 
         sl.value = '';
       }else{
-        sl.value = (this.sanphamdetail[0].So_luong -  this.sum).toString();
+        if(this.So_luong <=  (this.sanphamdetail[0].So_luong -  this.sum)){
+          sl.value = this.So_luong.toString()
+        }else{
+          sl.value = (this.sanphamdetail[0].So_luong -  this.sum).toString();
+        }
       }
     })
 
@@ -329,7 +332,7 @@ console.log(this.dsphieudat)
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id ) {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }

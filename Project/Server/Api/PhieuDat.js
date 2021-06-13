@@ -161,6 +161,7 @@ route.post('/phieudat/xoanhieuphieudat', async(req, res) => {
 route.post('/phieudat/guiemailphieudat', async(req, res) => {
     const phieudat = req.body.phieudat;
     const arrgiatrikhuyenmai = req.body.arrgiatrikhuyenmai
+    console.log(phieudat ,arrgiatrikhuyenmai)
     findResult(phieudat, arrgiatrikhuyenmai).then(function(result){ 
         sendMail(phieudat, result, info => {
                     console.log(`Email đã được gửi!`)

@@ -267,6 +267,7 @@ export class CheckoutComponent implements OnInit {
     this.tong_tien = 0;
     this.arrSanPham = []
     this.arrgiatrikhuyenmai = []
+    console.log(this.arrSanPhamThanhToan)
     for (const i in this.arrSanPhamThanhToan) {
       this.arrgiatrikhuyenmai.push(0)
       this.KiemTraSPKhuyenMai(this.arrSanPhamThanhToan[i], i)
@@ -370,9 +371,9 @@ export class CheckoutComponent implements OnInit {
           }
         }
       }
-
+      console.log(this.phieudat, this.arrgiatrikhuyenmai)
       this.phieudatService.ThemPhieuDat(this.phieudat).subscribe(dt => {
-        this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
+       this.phieudatService.GuiEmailPhieuDat(this.phieudat, this.arrgiatrikhuyenmai).subscribe()
         alert('Đặt hàng thành công!')
         this.modalService.dismissAll()
         this.arrSanPhamThanhToan = []
@@ -424,7 +425,7 @@ export class CheckoutComponent implements OnInit {
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then(details => {
-          this.DatHang()
+         
           console.log('onApprove - you can get full order details inside onApprove: ', details);
         });
 
@@ -432,6 +433,7 @@ export class CheckoutComponent implements OnInit {
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         this.showSuccess = true;
+        this.DatHang()
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);

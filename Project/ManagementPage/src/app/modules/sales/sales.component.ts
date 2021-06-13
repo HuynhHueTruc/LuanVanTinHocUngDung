@@ -79,6 +79,7 @@ export class SalesComponent implements OnInit {
 
   // Lấy danh sách danh mục
   getdsDanhMucNho(ds) {
+    this.subdanhmuc = []
     try {
       this.danhmucService.getListDanhMuc().subscribe((res: any) => {
 

@@ -227,20 +227,22 @@ export class ReceiptComponent implements OnInit {
           this.hoadon.San_Pham.splice(Number.parseInt(j), 1)
         }
       }
-      this.hoadonnhapService.ThemHoaDonNhapHang(this.hoadon).subscribe(dt => {
-        if (JSON.stringify(dt) === '"Tạo hóa đơn nhập hàng thành công!"') {
-          this.CapNhatSoLuongSanPham()
-          // this.DongModal();
-          this.modalService.dismissAll()
-        }
-        else {
-          window.alert(dt);
-          this.hoadon.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_nhap: 0 }]
-          this.lstsanpham.splice(0, this.lstsanpham.length)
-          this.modalService.dismissAll()
 
-        }
-      })
+      console.log(this.hoadon)
+      // this.hoadonnhapService.ThemHoaDonNhapHang(this.hoadon).subscribe(dt => {
+      //   if (JSON.stringify(dt) === '"Tạo hóa đơn nhập hàng thành công!"') {
+          this.CapNhatSoLuongSanPham()
+      //     // this.DongModal();
+      //     this.modalService.dismissAll()
+      //   }
+      //   else {
+      //     window.alert(dt);
+      //     this.hoadon.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_nhap: 0 }]
+      //     this.lstsanpham.splice(0, this.lstsanpham.length)
+      //     this.modalService.dismissAll()
+
+      //   }
+      // })
     } else {
       alert('Vui lòng chọn sản phẩm!')
     }
@@ -261,6 +263,7 @@ export class ReceiptComponent implements OnInit {
           }
         }
       }
+      console.log(arr_sp)
       this.sanphamService.CapNhatSoLuongSanPham(arr_sp).subscribe()
 
     })
