@@ -260,7 +260,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
       this.url = this.arrHinhAnh[this.index][this.arr_index].url;
 
     }
-
   }
 
   // Tăng số lượng sản phẩm đặt mua
@@ -268,10 +267,10 @@ export class DetailComponent implements OnInit, AfterContentChecked {
     this.sum = 0;
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;
-
+console.log(this.dsphieudat)
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -303,7 +302,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanpham_id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.sanpham_id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -330,7 +329,7 @@ export class DetailComponent implements OnInit, AfterContentChecked {
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.sanphamdetail[0]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }

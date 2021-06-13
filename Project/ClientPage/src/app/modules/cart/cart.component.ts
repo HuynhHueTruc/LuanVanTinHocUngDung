@@ -264,7 +264,7 @@ export class CartComponent implements OnInit {
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -297,7 +297,7 @@ export class CartComponent implements OnInit {
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
@@ -329,7 +329,7 @@ export class CartComponent implements OnInit {
 
       for (const i in this.dsphieudat) {
         for (const j in this.dsphieudat[i].San_Pham) {
-          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id) {
+          if (this.arrSanPham[index]._id === this.dsphieudat[i].San_Pham[j].SanPham_id && this.dsphieudat[i].Trang_thai !== 'Chưa duyệt' && this.dsphieudat[i].Trang_thai !== 'Giao hàng thất bại') {
             this.sum += this.dsphieudat[i].San_Pham[j].So_luong
           }
         }
