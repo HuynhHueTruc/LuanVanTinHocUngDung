@@ -179,7 +179,7 @@
               <div class="mess-err" *ngIf="form.controls['Ten_dang_nhap'].invalid && (form.controls['Ten_dang_nhap'].dirty || form.controls['Ten_dang_nhap'].touched)">
             
                 <small class="err text-danger" *ngIf="form.controls['Ten_dang_nhap'].errors.pattern"> Tài khoản không có dấu. Độ
-                  dài từ 8 đến 32 ký tự! </small>
+                  dài từ 6 đến 32 ký tự! </small>
               </div>
             </div>
             <div class="form-group row">
@@ -369,12 +369,12 @@
               </div>
               <div class="col-sm-8">
                 <input type="text" class="form-control " id="Ten_dang_nhap" [(ngModel)]="nhanvien.Nhan_vien_id"
-                  name="Ten_dang_nhap" placeholder="Tên đăng nhập" formControlName="Ten_dang_nhap" [pattern]="Ten_dang_nhap_pattern">
+                  name="Ten_dang_nhap" placeholder="Tên đăng nhập" formControlName="Ten_dang_nhap" [pattern]="Ten_dang_nhap_pattern" readonly>
               </div>
               <div class="mess-err" *ngIf="form.controls['Ten_dang_nhap'].invalid && (form.controls['Ten_dang_nhap'].dirty || form.controls['Ten_dang_nhap'].touched)">
             
                 <small class="err text-danger" *ngIf="form.controls['Ten_dang_nhap'].errors.pattern"> Tài khoản không có dấu. Độ
-                  dài từ 8 đến 32 ký tự! </small>
+                  dài từ 6 đến 32 ký tự! </small>
               </div>
             </div>
             <div class="form-group row">

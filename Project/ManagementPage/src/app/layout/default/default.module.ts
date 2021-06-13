@@ -3,8 +3,6 @@ import { AreaComponent } from './../../modules/charts/area/area.component';
 import { CategoryComponent } from './../../modules/category/category.component';
 import { OrderComponent } from './../../modules/order/order.component';
 import { ReceiptComponent } from './../../modules/receipt/receipt.component';
-import { CartComponent } from './../../modules/cart/cart.component';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { ForgotpasswordComponent } from './../../modules/forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './../../modules/changepassword/changepassword.component';
 import { ProfileComponent } from './../../modules/profile/profile.component';
@@ -68,7 +66,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ProfileComponent,
     ChangepasswordComponent,
     ForgotpasswordComponent,
-    CartComponent,
     ReceiptComponent,
     OrderComponent,
     CategoryComponent,

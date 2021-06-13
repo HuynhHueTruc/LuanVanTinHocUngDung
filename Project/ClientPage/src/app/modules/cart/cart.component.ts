@@ -132,20 +132,34 @@ export class CartComponent implements OnInit {
     this.checked.splice(Number.parseInt(index), 1)
     this.lengthchecked = this.checked.length;
     this.lengthdssanpham = this.giohang[0].San_Pham.length;
-    if (this.lengthdssanpham === 0){
+    if (this.lengthdssanpham === 0) {
       this.checkAll = false
       document.getElementById('divbutton').style.display = 'none';
     }
   }
 
-  XoaTatCa() {
-    for (const i in this.checked){
-      if (this.checked[i]){
-        this.arrSanPham.splice(Number.parseInt(i), 1);
-        this.giohang[0].San_Pham.splice(Number.parseInt(i), 1);
 
+
+  XoaTatCa() {
+    const tmp = []
+    for (let i = 0; i < this.checked.length; i++) {
+      if (this.checked[i]) {
+        tmp.push(this.arrSanPham[i])
       }
     }
+    for (const i in tmp) {
+      for (const j in this.arrSanPham){
+        if (tmp[i]._id === this.arrSanPham[j]._id){
+          this.arrSanPham.splice(Number.parseInt(j), 1)
+        }
+      }
+      for (const j in this.giohang[0].San_Pham){
+        if (tmp[i]._id === this.giohang[0].San_Pham[j].SanPham_id){
+          this.giohang[0].San_Pham.splice(Number.parseInt(j), 1)
+        }
+      }
+    }    
+
     this.giohangService.CapNhatGioHang(this.giohang[0]).subscribe()
     this.checkAll = true
     this.KTCheckedAll()
@@ -369,9 +383,9 @@ export class CartComponent implements OnInit {
   }
 
   Checkout() {
-    for (const i in this.arrSanPhamThanhToan){
-      for (const j in this.giohang[0].San_Pham){
-        if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id){
+    for (const i in this.arrSanPhamThanhToan) {
+      for (const j in this.giohang[0].San_Pham) {
+        if (this.arrSanPhamThanhToan[i]._id === this.giohang[0].San_Pham[j].SanPham_id) {
           this.arrSanPhamThanhToan[i].So_luong = this.giohang[0].San_Pham[j].So_luong
         }
       }

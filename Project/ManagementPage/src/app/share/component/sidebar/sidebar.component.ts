@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   nhanvien: any;
   phieudat: PhieuDatModel[] = []
   So_luong_phieu_dat = 0
-  thongtincuahang: ThongTinCuaHangModel[] = []
+  thongtincuahang: ThongTinCuaHangModel
 
   constructor(private phieudatService: PhieudatService, private thongtincuahangService: ThongtincuahangService) { }
 
@@ -52,7 +52,6 @@ export class SidebarComponent implements OnInit {
   getThongTinCuaHang() {
     this.thongtincuahangService.getThongTinCuaHang().subscribe((res: any) => {
       this.thongtincuahang = res.cuahangs[0];
-      console.log(this.thongtincuahang)
     });
   }
 }

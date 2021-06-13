@@ -63,38 +63,38 @@
       </div>
     </div>
 
-   <div class="form-group row" ngModelGroup="Dia_chi">
+    <div class="form-group row" ngModelGroup="Dia_chi">
       <label class="col-sm-4 col-form-label">Địa chỉ:</label>
       <div class="col-sm-8">
         <small>Tỉnh/Thành phố</small>
         <select id="provinces" [(ngModel)]="nhanvien.Dia_chi.Tinh_ThanhPho" #Tinh_ThanhPho="ngModel" name="calc_shipping_provinces" class="form-control form-control-sm border-non setwidth"  (change)="ThanhPho($event, null)" >
-          <option class="item" selected disabled value="">-- Tỉnh/Thành phố --</option>
+          <option class="item"  value="">-- Provinces --</option>
           <option class="item" *ngFor="let eachThanhPho of thanhphos" value= "{{eachThanhPho.name}}">{{eachThanhPho.name}}</option>
         </select>
         <div class="mess-err"  >
-          <small id="mes_tinh_thanhpho" class="err text-danger" *ngIf="nhanvien.Dia_chi.Tinh_ThanhPho === ''"> Bạn chưa chọn Tỉnh/Thành phố! </small>
+          <small id="mes_tinh_thanhpho" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
         </div>
-
+  
         <small>Huyện/Quận</small>
-        <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth"  (change)="QuanHuyen($event)"> <!--(change)="HienThiQuanHuyen_XaPhuong($event,nhanvien.Dia_chi)"-->
-          <option class="item"  value="">-- Huyện/Quận --</option>
+        <select id="districts"  [(ngModel)]="nhanvien.Dia_chi.Huyen_Quan" #Huyen_Quan="ngModel" name="calc_shipping_district" class="form-control form-control-sm border-non setwidth" (change)="HienThiQuanHuyen_XaPhuong($event,nhanvien.Dia_chi)">
+          <option class="item"  value="">-- District --</option>
           <option class="item" *ngFor="let eachQuanHuyen of quanhuyens" value= "{{eachQuanHuyen.name}}">{{eachQuanHuyen.name}}</option>
         </select>
         <div class="mess-err"  >
-          <small id="mes_huyen_quan" class="err text-danger" *ngIf="nhanvien.Dia_chi.Huyen_Quan === ''"> Bạn chưa chọn Huyện/Quận! </small>
+          <small id="mes_huyen_quan" class="err text-danger" style="display: none;"> Bạn chưa chọn Huyện/Quận! </small>
         </div>
-
+  
         <small>Xã/Phường</small>
-        <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth">
-          <option class="item"  value="">-- Xã/Phường --</option>
+        <select id="ward" [(ngModel)]="nhanvien.Dia_chi.Xa_Phuong" #Xa_Phuong="ngModel" name="calc_shipping_ward" class="form-control form-control-sm border-non setwidth"  (change)="XaPhuong(nhanvien.Dia_chi[0])">
+          <option class="item"  value="">-- Ward --</option>
           <option class="item" *ngFor="let eachXaPhuong of xaphuongs" value= "{{eachXaPhuong.name}}">{{eachXaPhuong.name}}</option>
         </select>
-
+  
         <div class="mess-err"  >
-          <small id="mes_xa_phuong" class="errdiachi text-danger" *ngIf="nhanvien.Dia_chi.Xa_Phuong === ''"> Bạn chưa chọn Xã/Phường! </small>
+          <small id="mes_xa_phuong" class="errdiachi text-danger" style="display: none;"> Bạn chưa chọn Xã/Phường! </small>
         </div>
       </div>
-
+  
     </div>
 
     <div class="form-group row">

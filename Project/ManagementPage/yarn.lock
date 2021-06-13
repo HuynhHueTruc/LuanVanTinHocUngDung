@@ -15,7 +15,7 @@
     "@angular-devkit/core" "11.1.2"
     "rxjs" "6.6.3"
 
-"@angular-devkit/build-angular@~0.1101.2":
+"@angular-devkit/build-angular@^0.1101.2":
   "integrity" "sha512-EVJ7kAgy+sMnliCmHwN1niVeM7YaAvTMkF+ahImNfQRSQOW+QJ4F8vjiLtuARC6R02Yc5QPzELTHVPxC4Qll/A=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/build-angular/-/build-angular-0.1101.2.tgz"
   "version" "0.1101.2"

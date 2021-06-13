@@ -82,7 +82,7 @@ export class CustomerComponent implements OnInit {
   khachhangs: KhachHangModel[] = []
   // Đối tượng nhân viên update
   KhachHangUpdate: KhachHangModel[] = [];
-  Ten_dang_nhap_pattern = "^[A-Za-z0-9 _-]{8,32}$"
+  Ten_dang_nhap_pattern = "^[A-Za-z0-9 _-]{6,32}$"
   So_dien_thoai_pattern = "^0[0-9\s.-]{9}"
   CMND_pattern = "[0-9]{9,12}"
   email_pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"

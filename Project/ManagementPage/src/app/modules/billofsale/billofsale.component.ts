@@ -34,6 +34,8 @@ export class BillofsaleComponent implements OnInit {
   hienthi = false
   p: number = 1
   hoadons: HoaDonBanHangModel[] = []
+  thongtinchitietsanpham = []
+  hoadonchitiet = []
   constructor(private modalService: NgbModal, private hoadonbanService: HoadonbanhangService, private sanphamService: SanphamService, private hinhthucvanchuyenService: HinhthucvanchuyenService,
     private phuongthucthanhtoanService: PhuongthucthanhtoanService) { }
 
@@ -212,6 +214,7 @@ export class BillofsaleComponent implements OnInit {
       }
     }
 
+
     this.getdsHinhThucVanChuyen(this.hoadons)
     this.getdsPhuongThucThanhToan(this.hoadons)
     this.getdsSanPham(this.hoadons)
@@ -227,5 +230,12 @@ export class BillofsaleComponent implements OnInit {
         this.arrdiachi.push(this.dsdiachi[dc][0]);
       }
     }
+  }
+
+  DetailSanPham(index, content_product_detail, eachHoaDon) {
+    this.thongtinchitietsanpham = this.thongtinsanpham[index]
+    this.hoadonchitiet = eachHoaDon
+    this.modalService.open(content_product_detail, { ariaLabelledBy: 'modal-product-detail-title', backdrop: 'static', keyboard: false, size: 'lg' });
+
   }
 }

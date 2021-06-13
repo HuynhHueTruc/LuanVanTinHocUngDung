@@ -3,7 +3,6 @@ import { AreaComponent } from './modules/charts/area/area.component';
 import { CategoryComponent } from './modules/category/category.component';
 import { OrderComponent } from './modules/order/order.component';
 import { ReceiptComponent } from './modules/receipt/receipt.component';
-import { CartComponent } from './modules/cart/cart.component';
 import { ForgotpasswordComponent } from './modules/forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './modules/changepassword/changepassword.component';
 import { ProfileComponent } from './modules/profile/profile.component';
@@ -47,7 +46,6 @@ const routes: Routes = [
                       {path: 'customer', component: CustomerComponent},
                       {path: 'shippingtype', component: ShippingtypeComponent},
                       {path: 'billofsale', component: BillofsaleComponent},
-                      {path: 'cart', component: CartComponent},
                       {path: 'sales', component: SalesComponent},
                       {path: 'typeoftree', component: TypeoftreeComponent},
                       {path: 'supplier', component: SupplierComponent},

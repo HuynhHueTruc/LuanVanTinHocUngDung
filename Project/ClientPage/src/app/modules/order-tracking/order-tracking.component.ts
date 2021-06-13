@@ -310,6 +310,7 @@ export class OrderTrackingComponent implements OnInit {
 
   DanhGia() {
     let html;
+    let tmp = []
     for (const i in this.danhgia) {
       html = document.getElementById('txtarea-' + i) as HTMLInputElement
       const content_comment = html.value
@@ -318,10 +319,20 @@ export class OrderTrackingComponent implements OnInit {
     }
     for (let j = 0; j < this.danhgia.length; j++) {
       if (this.danhgia[j].So_diem === 0 && this.danhgia[j].Hinh_anh.length <= 0 && this.danhgia[j].Noi_dung === '') {
-        this.danhgia.splice(j, 1)
-        j -= 1
+        tmp.push(this.danhgia[j])
+        // this.danhgia.splice(j, 1)
+
+        // j -= 1
       }
     }
+    for (const i in tmp){
+      for (const j in this.danhgia){
+        if (tmp[i].SanPham_id === this.danhgia[j].SanPham_id){
+          this.danhgia.splice(Number.parseInt(j), 1)
+        }
+      }
+    }
+
     if (this.danhgia.length > 0) {
       this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
         alert(data)

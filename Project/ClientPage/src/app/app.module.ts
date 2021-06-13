@@ -19,6 +19,13 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+declare module "@angular/core" {
+  interface ModuleWithProviders<T = any> {
+    ngModule: Type<T>;
+    providers?: Provider[];
+  }
+}
+
 @NgModule({
   // Khai báo các component, directive, pile của module này
   declarations: [
