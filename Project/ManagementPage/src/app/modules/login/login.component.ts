@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   LoginNhanVien(){
-
-    this.NVService.DangNhapNhanVien(this.tendangnhap, this.matkhau).subscribe(data => {
+console.log(btoa('12345678'))
+    this.NVService.DangNhapNhanVien(this.tendangnhap,btoa(this.matkhau)).subscribe(data => {
         if (data){
           this.datalogin = data;
         // console.log(data)

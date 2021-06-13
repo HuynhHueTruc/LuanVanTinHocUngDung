@@ -294,7 +294,6 @@ export class DetailComponent implements OnInit, AfterContentChecked {
   // Kiểm tra số lượng nhập vào thẻ input
   KiemTraSoLuong() {
     const sl = document.getElementById('So_luong') as HTMLInputElement;
-console.log(this.So_luong)
     this.sum = 0;
     this.phieudatService.getListPhieuDat().subscribe((res: any) => {
       this.dsphieudat = res.phieudats;

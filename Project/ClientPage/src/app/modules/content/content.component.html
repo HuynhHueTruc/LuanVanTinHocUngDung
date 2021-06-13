@@ -40,7 +40,7 @@
       <carousel [height]="300">
         <div class="carousel-cell" *ngFor="let eachDanhMuc of danhmuckhuyenmais">
           <div style="height: 180px;">
-            <img src="{{eachDanhMuc.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
+            <img src="{{eachDanhMuc?.Hinh_anh}}" class="sale" (click)="ProductDetail(eachDanhMuc)">
           </div>
           <div class="_1jPz8l" *ngIf="KiemTraKhuyeMai(eachDanhMuc)">
             <div class="_3iRehQ _36vTKx _2xY8te shopee-badge">
@@ -52,11 +52,11 @@
           </div>
           <div class="card-body">
             <div class="row d-flex justify-content-center">
-              <h6 class="card-title ">{{eachDanhMuc.Ten_san_pham }}</h6>
+              <h6 class="card-title ">{{eachDanhMuc?.Ten_san_pham }}</h6>
             </div>
             <div class="row d-flex justify-content-center">
               <div class="d-flex justify-content-center mt-2">
-                <p class="giasale">{{eachDanhMuc.Gia - eachDanhMuc.Gia*giatrikhuyenmai | currency: "VND"}}</p>
+                <p class="giasale">{{eachDanhMuc?.Gia - eachDanhMuc?.Gia*giatrikhuyenmai | currency: "VND"}}</p>
               </div>
             </div>
 

@@ -99,7 +99,7 @@ export class OrderComponent implements OnInit {
     private khachhangService: KhachhangService) { }
 
   ngOnInit(): void {
-    // console.log(btoa("password"));
+    // console.log(btoa("12345678"));
     // console.log(atob("cGFzc3dvcmQ="));
     this.phieudatService.getRefeshPage().subscribe(() => {
       const getdsphieudat = timer(1000, 5000);
@@ -294,7 +294,6 @@ export class OrderComponent implements OnInit {
   async DoiTrangThai(phieudat, index, content_change_status) {
     let sanphams = []
     this.phieudat = phieudat
-    console.log(this.phieudat)
     this.arrgiatrikhuyenmai = []
     if (this.Trang_thai[index] === 'Giao hàng thành công') {
       this.modalService.open(content_change_status, { ariaLabelledBy: 'modal-change-status-title', backdrop: 'static', keyboard: false });

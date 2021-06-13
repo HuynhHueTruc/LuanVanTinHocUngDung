@@ -197,7 +197,7 @@ AnPass(idevent){
   DoiMatKhau(){
     if (this.KiemTraUniCode()){
       if (this.XacNhanMatKhauMoi()){
-        this.nhanvien.Mat_khau = this.mat_khau_moi;
+        this.nhanvien.Mat_khau = btoa(this.mat_khau_moi);
         this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
 
             window.alert('Thay đổi mật khẩu thành công!');
@@ -220,7 +220,7 @@ AnPass(idevent){
 
       document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'none';
 
-      this.nhanvien.Mat_khau = this.mat_khau_moi;
+      this.nhanvien.Mat_khau = btoa(this.mat_khau_moi);
       return true;
 
     }else{

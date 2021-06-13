@@ -248,8 +248,9 @@ export class ProfileComponent implements OnInit {
   LuuThayDoi() {
     this.KTNull(this.khachhang);
     if (this.KiemTraThongTin) {
-      this.datalogin.Dia_chi = [this.khachhang.Dia_chi];
       this.datalogin = this.khachhang;
+      this.datalogin.Dia_chi = [this.khachhang.Dia_chi];
+     
       this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
 
         if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {

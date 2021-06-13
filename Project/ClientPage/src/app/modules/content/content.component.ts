@@ -266,6 +266,7 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           }
         }
         this.danhmuckhuyenmais.push(this.danhmuctmp[0])
+
         this.danhmuctmp = []
       }
 
@@ -276,7 +277,6 @@ export class ContentComponent implements OnInit, AfterContentChecked {
           }
         }
       }
-      // console.log(this.sanphambanchays)
     })
   }
 

@@ -38,16 +38,17 @@ export class ProfileComponent implements OnInit {
       this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
       this.nhanvien = new NhanVienModel();
       this.nhanvien = this.datalogin;
-      this.nhanvien.Dia_chi = this.datalogin.Dia_chi;
+      // this.nhanvien.Dia_chi = this.datalogin.Dia_chi;
       this.geteachDiaDiem();
-
+console.log(this.nhanvien)
     })
     this.datalogin = JSON.parse(localStorage.getItem('loggedInAcount'));
     this.nhanvien = new NhanVienModel();
     this.nhanvien = this.datalogin;
-    this.nhanvien.Dia_chi = this.datalogin.Dia_chi;
-    console.log(this.nhanvien.Dia_chi)
+    this.nhanvien.Dia_chi = this.datalogin.Dia_chi[0];
     this.geteachDiaDiem();
+    console.log(this.nhanvien)
+
   }
 
   // Hàm lấy thông tin thành phố
@@ -55,7 +56,6 @@ export class ProfileComponent implements OnInit {
     this.diachiService.getListDiaChi().subscribe((res: any) => {
       this.thanhphos = res;
       this.ThanhPho(null, this.nhanvien.Dia_chi);
-
     });
   }
 
@@ -253,10 +253,14 @@ XaPhuong(diachi?) {
   LuuThayDoi() {
     this.KTNull(this.nhanvien);
     if (this.KiemTraThongTin) {
+
       this.datalogin = this.nhanvien;
+       this.datalogin.Dia_chi = [this.nhanvien.Dia_chi];
       localStorage.setItem('loggedInAcount', JSON.stringify(this.datalogin));
       this.NVService.CapNhatNhanVien(this.nhanvien).subscribe(data_capnhat => {
         if (JSON.stringify(data_capnhat) === '"Cập nhật nhân viên thành công!"') {
+          alert('Cập nhật thành công!')
+          location.reload()
         } else {
           window.alert(data_capnhat);
           this.nhanvien.Dia_chi = this.nhanvien.Dia_chi[0];

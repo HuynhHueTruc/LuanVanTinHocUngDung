@@ -296,7 +296,7 @@ export class LoginComponent implements OnInit {
     const Khach_hang_id = target.querySelector('#firstname').value;
     const Mat_khau = target.querySelector('#password1').value;
 
-    this.KHService.DangNhapKhachHang(Khach_hang_id, Mat_khau).subscribe(data => {
+    this.KHService.DangNhapKhachHang(Khach_hang_id, btoa(Mat_khau)).subscribe(data => {
       if (data) {
         this.dt = data;
         // console.log(this.dt);

@@ -103,12 +103,12 @@ export class ChangepasswordComponent implements OnInit {
   DoiMatKhau() {
     const mkc = JSON.parse(localStorage.getItem('loggedInAcount'));
     if (this.KiemTraUniCode()) {
-      if (mkc.Mat_khau === this.mat_khau_cu) {
+      if (atob(mkc.Mat_khau) === this.mat_khau_cu) {
 
         document.getElementById('err_khong_trung_mat_khau_cu').style.display = 'none';
 
         if (this.XacNhanMatKhauMoi()) {
-          this.khachhang.Mat_khau = this.mat_khau_moi;
+          this.khachhang.Mat_khau = btoa(this.mat_khau_moi);
           this.KHService.CapNhatKhachHang(this.khachhang).subscribe(data_capnhat => {
 
             if (JSON.stringify(data_capnhat) === '"Cập nhật khách hàng thành công!"') {
@@ -134,7 +134,7 @@ export class ChangepasswordComponent implements OnInit {
 
       document.getElementById('err_khong_trung_mat_khau_moi').style.display = 'none';
 
-      this.khachhang.Mat_khau = this.mat_khau_moi;
+      this.khachhang.Mat_khau = btoa(this.mat_khau_moi);
       return true;
 
     } else {
