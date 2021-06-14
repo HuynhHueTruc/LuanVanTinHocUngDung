@@ -282,7 +282,7 @@ export class OrderTrackingComponent implements OnInit {
     this.danhgia[index].So_diem = count
   }
 
-  UploadImg(index) {
+  UL(index) {
     this.imagePath[index] = []
     const ref = firebase.storage().ref();
     const f = document.getElementById('imgcomment-' + index) as HTMLInputElement;
@@ -306,31 +306,37 @@ export class OrderTrackingComponent implements OnInit {
           );
       }
     }
+  }
+  async UploadImg(index) {
+    await this.UL(index)
+    console.log('hihi')
 
   }
 
   DanhGia() {
     let html;
     let tmp = []
+    console.log(this.danhgia)
+
     for (const i in this.danhgia) {
       html = document.getElementById('txtarea-' + i) as HTMLInputElement
       const content_comment = html.value
       this.danhgia[i].Noi_dung = content_comment
       this.danhgia[i].Hinh_anh.splice(0, 1)
     }
-    // for (let j = 0; j < this.danhgia.length; j++) {
-    //   if (this.danhgia[j].So_diem === 0 && this.danhgia[j].Hinh_anh.length <= 0 && this.danhgia[j].Noi_dung === '') {
-    //     tmp.push(this.danhgia[j])
-    //   }
-    // }
-//     for (const i in tmp){
-//       for (const j in this.danhgia){
-//         if (tmp[i].SanPham_id === this.danhgia[j].SanPham_id){
-//           this.danhgia.splice(Number.parseInt(j), 1)
-//         }
-//       }
-//     }
-// console.log(this.danhgia)
+    for (let j = 0; j < this.danhgia.length; j++) {
+      if (this.danhgia[j].So_diem === 0 && this.danhgia[j].Hinh_anh.length <= 0 && this.danhgia[j].Noi_dung === '') {
+        tmp.push(this.danhgia[j])
+      }
+    }
+    for (const i in tmp) {
+      for (const j in this.danhgia) {
+        if (tmp[i].SanPham_id === this.danhgia[j].SanPham_id) {
+          this.danhgia.splice(Number.parseInt(j), 1)
+        }
+      }
+    }
+    // console.log(this.danhgia)
     if (this.danhgia.length > 0) {
       this.sanphamService.DanhGiaSanPham(this.danhgia, this.datalogin.Khach_hang_id, this.flag).subscribe(data => {
         alert(data)

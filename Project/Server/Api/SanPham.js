@@ -113,7 +113,7 @@ route.post('/sanpham/danhgiasanpham', async(req, res) => {
 const arrdanhgia = req.body.danhgia
 const Khach_hang_id = req.body.Khach_hang_id
 const flag = req.body.flag
-console.log(arrdanhgia)
+// console.log(arrdanhgia)
    const Ngay_danh_gia = dateFormat()
    const Ngay_cap_nhat = dateFormat()
    for (const i in arrdanhgia){
@@ -133,7 +133,7 @@ console.log(arrdanhgia)
                 })
             })
            }
-           console.log(data.Danh_gia)
+        //    console.log(data.Danh_gia)
             if (data.Danh_gia[0] === undefined){
                  SanPhamModel.updateOne({
                     _id: arrdanhgia[i].SanPham_id
@@ -151,6 +151,21 @@ console.log(arrdanhgia)
                        }).then(dt =>{
                            console.log(dt)
                        })
+                   }else{
+                       let arr = []
+
+                      if ( Number.parseInt(j + 1) === data.Danh_gia.length){
+                       arr = data.Danh_gia
+                       arr.push({Noi_dung: arrdanhgia[i].Noi_dung, Hinh_anh: arrdanhgia[i].Hinh_anh, KhachHang_id: arrdanhgia[i].KhachHang_id, So_diem: arrdanhgia[i].So_diem})
+
+                          SanPhamModel.updateOne({
+                            _id: arrdanhgia[i].SanPham_id
+                        }, {
+                            Danh_gia: arr
+                            }).then(dt =>{
+                                console.log(dt)
+                            })
+                      }
                    }
                     }
             }
@@ -170,7 +185,7 @@ console.log(arrdanhgia)
 route.post('/sanpham/capnhatsanpham/soluong', async(req, res) => {
     const arrSanPham = req.body;
     const Thoi_gian_cap_nhat = dateFormat();
-  console.log(arrSanPham)
+//   console.log(arrSanPham)
     let length = arrSanPham.length;
     for (let i = 0; i < length; i++){
     SanPhamModel.updateOne({
