@@ -129,16 +129,17 @@ console.log(arrdanhgia)
                 }, {
                     Tich_diem: (data.Tich_diem + 1)
                 }).then(dt => {
-                    
+                  
                 })
             })
            }
+           console.log(data.Danh_gia)
             if (data.Danh_gia[0] === undefined){
                  SanPhamModel.updateOne({
                     _id: arrdanhgia[i].SanPham_id
                 }, {
                     Danh_gia: arrdanhgia[i]
-                    }).then(dt =>{})
+                    }).then(dt =>{  console.log(dt)})
             }else{
                 for (const j in data.Danh_gia){
                    if (data.Danh_gia[j].KhachHang_id === Khach_hang_id){
@@ -148,6 +149,7 @@ console.log(arrdanhgia)
                    }, {
                        Danh_gia: data.Danh_gia
                        }).then(dt =>{
+                           console.log(dt)
                        })
                    }
                     }
@@ -168,7 +170,7 @@ console.log(arrdanhgia)
 route.post('/sanpham/capnhatsanpham/soluong', async(req, res) => {
     const arrSanPham = req.body;
     const Thoi_gian_cap_nhat = dateFormat();
-  
+  console.log(arrSanPham)
     let length = arrSanPham.length;
     for (let i = 0; i < length; i++){
     SanPhamModel.updateOne({

@@ -316,7 +316,7 @@ export class LoginComponent implements OnInit {
   }
 
   DangKy(event) {
-    this.khachhang.Mat_khau = this.mat_khau_moi;
+    this.khachhang.Mat_khau = btoa(this.mat_khau_moi);
     for (const i in this.so_thich) {
 
       this.khachhang.So_thich.push({ Loai_cay: this.so_thich[i]._id })
@@ -324,7 +324,7 @@ export class LoginComponent implements OnInit {
     this.khachhang.So_thich.splice(0, 1)
     this.KTNull(this.khachhang);
 
-    if (this.xac_nhan_mat_khau_moi === this.khachhang.Mat_khau) {
+    if (this.xac_nhan_mat_khau_moi === atob(this.khachhang.Mat_khau)) {
       if (this.KiemTraThongTin && this.KiemTraNgaySinh(this.khachhang.Ngay_sinh)) {
         this.KHService.ThemKhachHang(this.khachhang).subscribe(data_them => {
           if (JSON.stringify(data_them) === '"Tạo tài khoản thành công!"') {

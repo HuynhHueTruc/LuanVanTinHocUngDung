@@ -213,36 +213,43 @@ export class ReceiptComponent implements OnInit {
     }
   }
 
+  KTNull() {
+    if (this.hoadon.San_Pham[0].SanPham_id === '' || this.hoadon.Tong_tien === '' || this.hoadon.NhanVien_id === '') {
+      return false
+    }
+    return true
+  }
   // Thêm hóa đơn
-  ThemHoaDon() {
+  async ThemHoaDon() {
+    let flag = false
     this.getthongtintaikhoan()
     this.hoadon.NhanVien_id = this.taikhoan.Nhan_vien_id
     for (const i in this.lstsanpham) {
       this.hoadon.San_Pham.push({ SanPham_id: this.lstsanpham[i].SanPham_id, So_luong: this.lstsanpham[i].So_luong, Gia_nhap: this.lstsanpham[i].Gia_nhap })
     }
     this.hoadon.San_Pham.splice(0, 1)
-    if (this.hoadon.San_Pham[0].SanPham_id !== '') {
+    if (this.KTNull()) {
       for (const j in this.hoadon.San_Pham) {
         if (this.hoadon.San_Pham[j].SanPham_id === '') {
           this.hoadon.San_Pham.splice(Number.parseInt(j), 1)
         }
       }
+      await this.hoadonnhapService.ThemHoaDonNhapHang(this.hoadon).subscribe(dt => {
+        if (JSON.stringify(dt) === '"Tạo hóa đơn nhập hàng thành công!"') {
+          // this.DongModal();
+          this.modalService.dismissAll()
+          flag = true
+        }
+        else {
+          window.alert(dt);
+          this.hoadon.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_nhap: 0 }]
+          this.lstsanpham.splice(0, this.lstsanpham.length)
+          this.modalService.dismissAll()
 
-      console.log(this.hoadon)
-      // this.hoadonnhapService.ThemHoaDonNhapHang(this.hoadon).subscribe(dt => {
-      //   if (JSON.stringify(dt) === '"Tạo hóa đơn nhập hàng thành công!"') {
-          this.CapNhatSoLuongSanPham()
-      //     // this.DongModal();
-      //     this.modalService.dismissAll()
-      //   }
-      //   else {
-      //     window.alert(dt);
-      //     this.hoadon.San_Pham = [{ SanPham_id: '', So_luong: 0, Gia_nhap: 0 }]
-      //     this.lstsanpham.splice(0, this.lstsanpham.length)
-      //     this.modalService.dismissAll()
+        }
+      })
+      this.CapNhatSoLuongSanPham()
 
-      //   }
-      // })
     } else {
       alert('Vui lòng chọn sản phẩm!')
     }
@@ -263,8 +270,7 @@ export class ReceiptComponent implements OnInit {
           }
         }
       }
-      console.log(arr_sp)
-      this.sanphamService.CapNhatSoLuongSanPham(arr_sp).subscribe()
+      this.sanphamService.CapNhatSoLuongSanPham(arr_sp).subscribe(dt => { })
 
     })
   }
@@ -291,6 +297,7 @@ export class ReceiptComponent implements OnInit {
         this.So_luong = 0
         this.Gia_nhap = 0
         this.modalService.dismissAll()
+
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
       } else {
         alert('Sản phẩm này đã được thêm vào danh sách!')
@@ -468,12 +475,8 @@ export class ReceiptComponent implements OnInit {
   }
 
   DetailSanPham(index, content_product_detail, eachHoaDon) {
-    console.log('abc')
     this.thongtinchitietsanpham = this.thongtinsanpham[index]
-    console.log( this.thongtinchitietsanpham)
-
     this.phieudatchitiet = eachHoaDon
-    console.log(this.phieudatchitiet)
     this.modalService.open(content_product_detail, { ariaLabelledBy: 'modal-product-detail-title', backdrop: 'static', keyboard: false, size: 'lg' });
 
   }

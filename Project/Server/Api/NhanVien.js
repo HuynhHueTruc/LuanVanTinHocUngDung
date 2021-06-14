@@ -347,7 +347,7 @@ async function sendTaiKhoanMail(arruser, callback){
             <h4>Tên đăng nhập: ${arruser[i].Nhan_vien_id}</h4>
             <h4>Mật khẩu: ${arruser[i].Mat_khau}</h4>
             <h4>Hãy thay đổi mật khẩu trước khi sử dụng nhé!</h4>
-            <h4>Bây giờ hãy bắt đầu trãi nghiệm nào http://localhost:5000/login</h4><br>
+            <h4>Bây giờ hãy bắt đầu trãi nghiệm nào http://localhost:4500/login</h4><br>
             <h4>Chúc bạn có những trãi nghiệm thật tốt với GreenLife!</h4><br>
             <h3>GreenLife Shop!</h3>`
         }   

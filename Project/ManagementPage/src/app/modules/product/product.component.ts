@@ -266,6 +266,8 @@ export class ProductComponent implements OnInit {
     this.danhmuctmp = []
     this.noi_dung = ''
     this.UnChecked();
+    this.imagePath = 'https://cdn.iconscout.com/icon/free/png-256/gallery-187-902099.png'
+
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false, size: 'lg' });
     // Gán giá trị rỗng ban đầu
     this.sanpham = new SanPhamModel();
