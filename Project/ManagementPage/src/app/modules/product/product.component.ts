@@ -510,6 +510,7 @@ export class ProductComponent implements OnInit {
       this.sanphamService.CapNhatSanPham(this.sanpham).subscribe(dt => {
         if (JSON.stringify(dt) === '"Cập nhật sản phẩm thành công!"') {
           //  this.DongModal();
+          this.keyword = ''
           this.modalService.dismissAll()
         }
         else {

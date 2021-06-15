@@ -386,9 +386,16 @@ export class StoreComponent implements OnInit {
  async CapNhat() {
     if (this.updateimg) {
      await this.UploadandSaveBanner();
+    }else{
+      if (this.KiemTraThongTin()) {
+        this.thongtincuahangService.updateThongTinCuaHang(this.thongtincuahang).subscribe(dt => {
+          window.alert(dt);
+          this.updateimg = false
+        });
+      } else {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+      }
     }
-
-   
   }
 
     // Hộp thoại xác nhận hủy bỏ tạo mới
