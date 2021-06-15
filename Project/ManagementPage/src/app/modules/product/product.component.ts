@@ -378,7 +378,7 @@ export class ProductComponent implements OnInit {
     const thongtinsanpham = [];
     thongtinsanpham.push(Ten_san_pham, sanpham.Gia, sanpham.Hinh_anh);
     for (const i in thongtinsanpham) {
-      if (Gia > 0 && Gia != null) {
+      if (Gia > 0 && Gia !== null) {
         if (thongtinsanpham.hasOwnProperty(i)) {
           if (thongtinsanpham[i] === undefined || thongtinsanpham[i] === '' || thongtinsanpham[i] === null) {
             window.alert('Hãy nhập đầy đủ thông tin!');
@@ -390,6 +390,7 @@ export class ProductComponent implements OnInit {
         }
       } else {
         document.getElementById('errGia').style.display = 'block'
+        this.KiemTraThongTin = false;
       }
     }
   }
