@@ -103,16 +103,17 @@ export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
   }
 
   ngDoCheck() {
-    this.recognition.continuous = true;
-    this.recognition.interimResults = true;
-    this.recognition.lang = 'vi_VN';
-    this.recognition.onerror = function () {
+    this.recognition.continuous = true; // lắng nghe liên tục
+    this.recognition.interimResults = true; // Kết quả tạm thời
+    this.recognition.lang = 'vi_VN'; // Ngôn ngữ
+    this.recognition.onerror = function () { // ngắt lắng nghe khi lỗi
       this.recognition.close()
     }
     this.recognition.onresult = async function (event) {
       const current = event.resultIndex
-      const transcript = await event.results[current][0].transcript
-      this.keysearch = transcript
+      const transcript = await event.results[current][0].transcript // nhận chuỗi text sau khi đã Speech to Text
+      this.keysearch = transcript 
+      // this.keysearch += ' '
       const a = document.getElementById('search') as HTMLInputElement;
       a.value = transcript
     }
@@ -278,9 +279,6 @@ export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
       this.router.navigate(['/default/product', '5f7d88277cc2cc2a04b1573d']);
     }
   }
-
-
-
   // Hàm chuyển đổi tiếng Việt sang tiếng Anh
   removeAccents(str) {
     return str.normalize('NFD')
@@ -292,14 +290,17 @@ export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
   // Tìm kiếm theo từ khóa
   SearchByKeyWord() {
     this.dssanphamsearch = this.dssanpham;
-    const text = this.removeAccents(this.keysearch);
+    let text = this.removeAccents(this.keysearch);
+    text += ' '
     if (text === '') {
       this.getdscsanpham();
     } else {
       this.dssanphamsearch = this.dssanpham.filter(res => {
-        const tensanpham = this.removeAccents(res.Ten_san_pham);
+        let tensanpham = this.removeAccents(res.Ten_san_pham);
+        tensanpham += ' '
         const tmp2 = text.replace(/·/g, '');
         if (tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
+          console.log(tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase()))
           return tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
         }
       });
