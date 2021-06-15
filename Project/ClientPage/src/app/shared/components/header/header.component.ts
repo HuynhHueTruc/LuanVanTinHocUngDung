@@ -291,16 +291,15 @@ export class HeaderComponent implements OnInit, AfterContentChecked, DoCheck {
   SearchByKeyWord() {
     this.dssanphamsearch = this.dssanpham;
     let text = this.removeAccents(this.keysearch);
-    text += ' '
     if (text === '') {
       this.getdscsanpham();
     } else {
       this.dssanphamsearch = this.dssanpham.filter(res => {
         let tensanpham = this.removeAccents(res.Ten_san_pham);
         tensanpham += ' '
-        const tmp2 = text.replace(/·/g, '');
+        let tmp2 = text.replace(/·/g, '');
+        tmp2 += ' '
         if (tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
-          console.log(tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase()))
           return tensanpham.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
         }
       });

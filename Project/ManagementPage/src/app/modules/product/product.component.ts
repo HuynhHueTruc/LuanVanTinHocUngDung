@@ -199,14 +199,17 @@ export class ProductComponent implements OnInit {
   // Hàm tìm kiếm theo tên hoặc id
   SearchByKeyWord() {
     this.sanphams = this.dssanphamsearch;
-    const text = this.removeAccents(this.keyword);
+    let text = this.removeAccents(this.keyword);
+    // text += ' '
     if (text === '') {
       this.getdsSanPham();
     } else {
       this.sanphams = this.sanphams.filter(res => {
-        const ten = this.removeAccents(res.Ten_san_pham);
+        let ten = this.removeAccents(res.Ten_san_pham);
+        ten += ' '
         const maso = this.removeAccents(res._id);
-        const tmp2 = text.replace(/·/g, '');
+        let tmp2 = text.replace(/·/g, '');
+        tmp2 += ' '
         if (ten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase())) {
           return ten.toLocaleLowerCase().match(tmp2.toLocaleLowerCase());
         } else {
